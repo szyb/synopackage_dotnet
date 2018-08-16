@@ -1,0 +1,21 @@
+<h1>Browse source</h1>
+<p *ngIf="!sources"><em>Loading...</em></p>
+<table class='table' *ngIf="sources">
+    <thead>
+      <tr>
+        <th>name</th>
+        <th>url</th>
+        <th>browse</th>
+        <th>link</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let source of sources">
+        <td>{{ source.name }}</td>
+        <td>{{ source.url }}</td>
+        <td>browse</td>
+        <td *ngIf="source.www != null"><a href='{{ source.www }}' target="_blank">Visit website</a></td>
+        <td *ngIf="source.www == null"><a href='{{ source.url }}' target="_blank">Visit website</a></td>
+      </tr>
+    </tbody>
+  </table>
