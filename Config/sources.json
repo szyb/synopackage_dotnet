@@ -1,0 +1,18 @@
+[
+    {
+        "Active" : true,
+        "Name" : "synocommunity",
+        "Url"  : "https://synocommunity.com",
+        "Www"  : "https://synocommunity.com",
+        "CustomUserAgent": null,
+        "DisabledReason": null,
+        "DisabledDate": null
+    },
+    {
+        "Active": false,
+        "Name" : "synologyitalia",
+        "Url"  : "https://spk.synologyitalia.com",
+        "CustomUserAgent" : null,
+        "DisabledReason": "Does not work"
+    }
+]
