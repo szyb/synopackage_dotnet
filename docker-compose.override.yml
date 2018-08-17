@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  synopackage_dotnet:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"

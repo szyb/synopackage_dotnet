@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  synopackage_dotnet:
+    image: ${DOCKER_REGISTRY}synopackage_dotnet
+    build:
+      context: .
+      dockerfile: src/synopackage_dotnet/Dockerfile
