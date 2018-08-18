@@ -8,6 +8,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>bin\Debug\netcoreapp2.0\synopackage_dotnet.xml</DocumentationFile>
+    <noWarn>1591</noWarn>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="wwwroot\" />
@@ -18,10 +19,12 @@
   <ItemGroup>
     <PackageReference Include="autofac" Version="4.8.1" />
     <PackageReference Include="autofac.extensions.dependencyinjection" Version="4.3.0" />
+    <PackageReference Include="HolopaMir.ExpressMapper" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.1.0" />
     <PackageReference Include="newtonsoft.json" Version="11.0.2" />
+    <PackageReference Include="RestSharp" Version="106.3.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="2.4.0" />
   </ItemGroup>
 </Project>
