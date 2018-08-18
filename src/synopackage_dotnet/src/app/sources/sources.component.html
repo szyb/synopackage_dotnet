@@ -1,5 +1,12 @@
 <h1>Browse source</h1>
-<p *ngIf="!sources"><em>Loading...</em></p>
+<div *ngIf="!sources">
+  <app-wait></app-wait>
+</div>
+<!-- <div *ngIf="!sources" class="row justify-content-md-center" >
+  <div class="col-md-1 " style="margin-top:35px; height:400px;">
+    <i class="animated bounceIn infinite green-text fa fa-gift fa-3x" aria-hidden="true"></i>
+  </div>
+</div> -->
 <table class="table" *ngIf="sources">
     <thead>
       <tr>
