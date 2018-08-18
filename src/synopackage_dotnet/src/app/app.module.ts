@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { SourcesComponent } from './sources/sources.component';
 import { HomeComponent } from './home/home.component';
+import { WaitComponent } from './components/wait/wait.component';
 
 
 
@@ -39,7 +40,8 @@ export const routerConfig: Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
-    SourcesComponent
+    SourcesComponent,
+    WaitComponent
     // DisplayMapComponent
   ],
   imports: [
