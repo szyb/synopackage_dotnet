@@ -34,14 +34,15 @@ namespace synopackage_dotnet
         {
           Version = "v1",
           Title = "synopackage_dotnet API",
-          Description = "A simple example ASP.NET Core Web API",
-          Contact = new Contact { Name = "Juan García Carmona", Email = "d.jgc.it@gmail.com", Url = "https://wisegeckos.com" },
+          Description = "A simple example ASP.NET Core Web API"
         });
         // Set the comments path for the Swagger JSON and UI.
         var basePath = AppContext.BaseDirectory;
         var xmlPath = Path.Combine(basePath, "synopackage_dotnet.xml");
         c.IncludeXmlComments(xmlPath);
       });
+
+      MapperRegistrator.Register();
     }
 
     public void ConfigureContainer(ContainerBuilder builder)
