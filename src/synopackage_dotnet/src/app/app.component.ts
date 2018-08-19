@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { UserSettingsComponent } from './components/user-settings/user-settings.component';
 
 
 @Component({
@@ -8,4 +9,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'synopackage.com';
+
+  @ViewChild(UserSettingsComponent)  basicModal : UserSettingsComponent;
+  showUserSettingsModal() {
+    this.basicModal.showModal();
+  }
 }

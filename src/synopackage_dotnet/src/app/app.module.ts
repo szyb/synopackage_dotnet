@@ -10,6 +10,8 @@ import { AppComponent } from './app.component';
 import { SourcesComponent } from './sources/sources.component';
 import { HomeComponent } from './home/home.component';
 import { WaitComponent } from './components/wait/wait.component';
+import { UserSettingsComponent } from './components/user-settings/user-settings.component';
+import { UserSettingsService } from './components/user-settings/user-settings.service';
 
 
 
@@ -41,7 +43,8 @@ export const routerConfig: Routes = [
     AppComponent,
     HomeComponent,
     SourcesComponent,
-    WaitComponent
+    WaitComponent,
+    UserSettingsComponent
     // DisplayMapComponent
   ],
   imports: [
@@ -51,7 +54,7 @@ export const routerConfig: Routes = [
     RouterModule.forRoot(routerConfig),
     MDBBootstrapModule.forRoot()
   ],
-  providers: [],
+  providers: [UserSettingsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

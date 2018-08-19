@@ -14,12 +14,16 @@
     </ul>
     <ul class="navbar-nav nav-flex-icons">
       <li class="nav-item waves-light" mdbWavesEffect>
+          <a class="nav-link" (click)="showUserSettingsModal()"><i class="fa fa-gear" aria-hidden="true"></i></a>
+      </li>
+      <li class="nav-item waves-light" mdbWavesEffect>
         <a class="nav-link"><i class="fa fa-facebook"></i></a>
       </li>
     </ul>
   </links>
 </mdb-navbar>
 <main>
+  <app-user-settings #basicModal></app-user-settings>
   <div class="container">
     <div class="row pt-5" style="margin-top:35px;">
       <div class="col text-center">
