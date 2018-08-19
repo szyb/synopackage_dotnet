@@ -10,6 +10,11 @@
                 "${workspaceFolder}/synopackage_dotnet.csproj"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "type": "npm",
+            "script": "build",
+            "problemMatcher": []
         }
     ]
 }
