@@ -13,10 +13,11 @@
               <div class="row">
                   <div class="col"><span>Version</span></div>
                   <div class="col">
-                      <div *ngIf="!versions"><span>loading...</span></div>
-                      <select *ngIf="versions" name="userSettingsVersions">
-                          <option *ngFor="let ver of versions">{{ ver.version }}</option>
-                      </select>
+                      <ng-select [items]="versions"
+                        bindLabel="version"
+                        bindValue="version"
+                        [(ngModel)]="selectedVersion">
+                      </ng-select>
                   </div>
               </div>
               <div class="row">

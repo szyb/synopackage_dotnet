@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 // import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { SourcesComponent } from './sources/sources.component';
@@ -51,6 +53,8 @@ export const routerConfig: Routes = [
     BrowserModule,
     CommonModule,
     HttpClientModule,
+    NgSelectModule,
+    FormsModule,
     RouterModule.forRoot(routerConfig),
     MDBBootstrapModule.forRoot()
   ],
