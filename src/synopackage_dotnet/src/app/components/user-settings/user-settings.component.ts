@@ -17,6 +17,7 @@ export class UserSettingsComponent {
   private models: ModelDTO[];
   private selectedVersion: string;
   private selectedModel: string;
+  private selectedIsBeta: boolean;
 
   private errorVersion: string;
   private errorModel: string;
@@ -30,6 +31,7 @@ export class UserSettingsComponent {
         });
         this.selectedVersion = this.userSettingsService.getUserVersion();
         this.selectedModel = this.userSettingsService.getUserModel();
+        this.selectedIsBeta = this.userSettingsService.getUserIsBeta();
   }
 
   @ViewChild(ModalDirective) public basicModal: ModalDirective;
@@ -43,7 +45,7 @@ export class UserSettingsComponent {
     const result2 = this.validateModel(this.selectedModel);
     const result = result1 && result2;
     if (result === true) {
-      this.userSettingsService.saveUserSettings(this.selectedVersion, this.selectedModel);
+      this.userSettingsService.saveUserSettings(this.selectedVersion, this.selectedModel, this.selectedIsBeta);
       this.basicModal.hide();
     }
   }
@@ -77,6 +79,11 @@ export class UserSettingsComponent {
   resetModelError(): void {
     this.errorModel = null;
   }
+
+  // toggleChecked(e): void {
+  //   this.selectedIsBeta = e.target.checked;
+  // }
+
 }
 
 

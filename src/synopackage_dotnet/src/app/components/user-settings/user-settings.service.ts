@@ -1,7 +1,8 @@
 export class UserSettingsService {
-    public saveUserSettings = (version: string, model: string) => {
+    public saveUserSettings = (version: string, model: string, isBeta: boolean) => {
         localStorage.setItem('version', version);
         localStorage.setItem('model', model);
+        localStorage.setItem('isBeta', isBeta.toString());
     }
 
     public getUserVersion(): string {
@@ -10,6 +11,15 @@ export class UserSettingsService {
 
     public getUserModel(): string {
         return localStorage.getItem('model');
+    }
+
+    public getUserIsBeta(): boolean {
+        const isBeta = localStorage.getItem('isBeta');
+        if (isBeta === 'true') {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public isSetup(): boolean {
