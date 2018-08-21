@@ -11,11 +11,11 @@ namespace synopackage_dotnet.Controllers
 {
     ///<summary></summary>
     [Route("api/[controller]")]
-    public class SourceController : Controller
+    public class SourcesController : Controller
     {
         private ISourceService sourceService;
         private ISpkService spkService;
-        public SourceController(ISourceService sourceService, ISpkService spkService)
+        public SourcesController(ISourceService sourceService, ISpkService spkService)
         {
             this.sourceService = sourceService;
             this.spkService = spkService;
