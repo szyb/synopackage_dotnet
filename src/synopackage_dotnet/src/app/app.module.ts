@@ -15,6 +15,7 @@ import { WaitComponent } from './components/wait/wait.component';
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
 import { UserSettingsService } from './components/user-settings/user-settings.service';
 import { DialogComponent } from './components/dialog/dialog.component';
+import { UserSettingsDisplayComponent} from './components/user-settings-display/user-settings-display.component';
 
 
 
@@ -48,6 +49,7 @@ export const routerConfig: Routes = [
     SourcesComponent,
     WaitComponent,
     UserSettingsComponent,
+    UserSettingsDisplayComponent,
     DialogComponent
     // DisplayMapComponent
   ],
