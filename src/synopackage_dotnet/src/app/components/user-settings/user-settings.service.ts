@@ -15,9 +15,10 @@ export class UserSettingsService {
     public isSetup(): boolean {
         const v = localStorage.getItem('version');
         const m = localStorage.getItem('model');
-        if (v === null || m === null)
+        if (v === null || m === null) {
             return false;
-        else
+        } else {
             return true;
+        }
     }
 }

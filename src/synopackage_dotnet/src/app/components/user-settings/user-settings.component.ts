@@ -5,9 +5,6 @@ import { Config } from '../../shared/config';
 import { HttpClient } from '@angular/common/http';
 
 
-
-
-
 @Component({
   selector: 'app-user-settings',
   templateUrl: './user-settings.component.html',
@@ -20,6 +17,9 @@ export class UserSettingsComponent {
   private models: ModelDTO[];
   private selectedVersion: string;
   private selectedModel: string;
+
+  private errorVersion: string;
+  private errorModel: string;
 
   constructor(http: HttpClient, private userSettingsService: UserSettingsService) {
         http.get<VersionDTO[]>(`${Config.apiUrl}Versions/GetAll`).subscribe( result => {
@@ -39,24 +39,43 @@ export class UserSettingsComponent {
   }
 
   save() {
-    this.validateVersion(this.selectedVersion);
-    this.validateModel(this.selectedModel);
-    this.userSettingsService.saveUserSettings(this.selectedVersion, this.selectedModel);
-    this.basicModal.hide();
+    const result1 = this.validateVersion(this.selectedVersion);
+    const result2 = this.validateModel(this.selectedModel);
+    const result = result1 && result2;
+    if (result === true) {
+      this.userSettingsService.saveUserSettings(this.selectedVersion, this.selectedModel);
+      this.basicModal.hide();
+    }
   }
 
-  validateVersion(version: string): void {
+  validateVersion(version: string): boolean {
     const ver = this.versions.find(x => x.version === version);
-    if (ver === null) {
-      throw new Error('Selected version is invalid');
+    if (ver === undefined) {
+      this.errorVersion = 'Selected version is invalid';
+      return false;
+    } else {
+      this.errorVersion = null;
+      return true;
     }
   }
 
-  validateModel(model: string): void {
+  validateModel(model: string): boolean {
     const mod = this.models.find(x => x.name === model);
-    if (mod === null) {
-      throw new Error('Selected model is invalid');
+    if (mod === undefined) {
+      this.errorModel = 'Selected model is invalid';
+      return false;
+    } else {
+      this.errorModel = null;
+      return true;
     }
+  }
+
+  resetVersionError(): void {
+    this.errorVersion = null;
+  }
+
+  resetModelError(): void {
+    this.errorModel = null;
   }
 }
 

@@ -26,55 +26,9 @@
   </links>
 </mdb-navbar>
 <main>
-  <app-user-settings #basicModal></app-user-settings>
   <div class="container">
-    <div class="row pt-5" style="margin-top:35px;">
-      <div class="col text-center">
-        <div style="text-align:center">
-          <h1>
-            Welcome to {{ title }}!
-          </h1>
-          <!-- <img width="300" alt="Angular Logo" class="animated fadeInDownBig" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="> -->
-          <p>I wise gecko told me once: <b>"code doesn't lie!"</b></p>
-
-          <!--Social buttons-->
-          <div class="text-center mb-3">
-
-            <a class="btn-floating btn-small btn-fb waves-light">
-              <i class="fa fa-facebook"> </i>
-            </a>
-            &nbsp;
-            <a class="btn-floating btn-small btn-tw waves-light">
-              <i class="fa fa-twitter"> </i>
-            </a>
-            &nbsp;
-            <a class="btn-floating btn-small btn-gplus waves-light">
-              <i class="fa fa-google-plus"> </i>
-            </a>
-            &nbsp;
-            <a class="btn-floating btn-small btn-li waves-light">
-              <i class="fa fa-linkedin"> </i>
-            </a>
-            &nbsp;
-            <a class="btn-floating btn-small btn-git waves-light">
-              <i class="fa fa-github"> </i>
-            </a>
-            &nbsp;
-            <a class="btn-floating btn-small btn-pin waves-light">
-              <i class="fa fa-pinterest"> </i>
-            </a>
-            &nbsp;
-            <a class="btn-floating btn-small btn-ins waves-light">
-              <i class="fa fa-instagram"> </i>
-            </a>
-
-          </div>
-          <!--/.Social buttons-->
-        </div>
-      </div>
-    </div>
-    
-    <div class="row justify-content-md-center" >
+    <app-user-settings #basicModal></app-user-settings>
+    <div class="row justify-content-md-center " style="margin-top:35px;" >
       <div class="col-md-9 " style="margin-top:35px; height:400px;">
         <router-outlet></router-outlet>
       </div>
