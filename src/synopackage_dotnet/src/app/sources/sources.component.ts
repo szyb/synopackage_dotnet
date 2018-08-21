@@ -11,7 +11,7 @@ export class SourcesComponent {
   public sources: SourceDTO[];
 
   constructor(http: HttpClient) {
-    http.get<SourceDTO[]>(`${Config.apiUrl}BrowseSource/GetList`).subscribe( result => {
+    http.get<SourceDTO[]>(`${Config.apiUrl}Sources/GetList`).subscribe( result => {
       this.sources = result;
     });
     // http.get<SourceDTO[]>(Config.apiUrl + 'api/BrowseSource/GetList').subscribe(result => {
