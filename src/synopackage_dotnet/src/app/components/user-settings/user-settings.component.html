@@ -11,28 +11,39 @@
         <div class="modal-body">
           <div class="container">
               <div class="row">
-                  <div class="col"><span>Version</span></div>
-                  <div class="col">
+                  <div class="col-2"><span>Version</span></div>
+                  <div class="col-8">
                       <ng-select [items]="versions"
-                        bindLabel="version" 
+                        bindLabel="version"
                         bindValue="version"
+                        (change)="resetVersionError()"
                         [required]="true"
                         [clearable]="false"
                         [(ngModel)]="selectedVersion">
                       </ng-select>
                   </div>
               </div>
+              <div class="row" *ngIf="errorVersion">
+                  <div class="col-2"></div>
+                  <div class="col-8"><span class="red-text">{{errorVersion}}</span></div>
+              </div>
               <div class="row">
-                    <div class="col"><span>Model</span></div>
-                    <div class="col">
+                    <div class="col-2"><span>Model</span></div>
+                    <div class="col-8">
                       <ng-select [items]="models"
                         bindLabel="display"
                         bindValue="name"
+                        (change)="resetModelError()"
                         [required]="true"
                         [clearable]="false"
                         [(ngModel)]="selectedModel">
                       </ng-select>
                     </div>
+                    
+                </div>
+                <div class="row" *ngIf="errorModel">
+                    <div class="col-2"></div>
+                    <div class="col-8"><span  class="red-text">{{errorModel}}</span></div>
                 </div>
           </div>    
         </div>

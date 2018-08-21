@@ -15,7 +15,7 @@ export class AppComponent {
 
   }
 
-  @ViewChild(UserSettingsComponent)  basicModal : UserSettingsComponent;
+  @ViewChild(UserSettingsComponent)  basicModal: UserSettingsComponent;
   showUserSettingsModal() {
     this.basicModal.showModal();
   }
