@@ -17,12 +17,16 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class UserSettingsComponent {
   private versions: VersionDTO[];
+  private models: ModelDTO[];
   private selectedVersion: string;
   private selectedModel: string;
 
   constructor(http: HttpClient, private userSettingsService: UserSettingsService) {
         http.get<VersionDTO[]>(`${Config.apiUrl}Versions/GetAll`).subscribe( result => {
           this.versions = result;
+        });
+        http.get<ModelDTO[]>(`${Config.apiUrl}Models/GetAll`).subscribe( result => {
+          this.models = result;
         });
         this.selectedVersion = this.userSettingsService.getUserVersion();
         this.selectedModel = this.userSettingsService.getUserModel();
@@ -36,7 +40,8 @@ export class UserSettingsComponent {
 
   save() {
     this.validateVersion(this.selectedVersion);
-    this.userSettingsService.saveUserSettings(this.selectedVersion, 'DS718+');
+    this.validateModel(this.selectedModel);
+    this.userSettingsService.saveUserSettings(this.selectedVersion, this.selectedModel);
     this.basicModal.hide();
   }
 
@@ -46,6 +51,13 @@ export class UserSettingsComponent {
       throw new Error('Selected version is invalid');
     }
   }
+
+  validateModel(model: string): void {
+    const mod = this.models.find(x => x.name === model);
+    if (mod === null) {
+      throw new Error('Selected model is invalid');
+    }
+  }
 }
 
 
@@ -53,3 +65,10 @@ export class UserSettingsComponent {
 interface VersionDTO {
     version: string;
   }
+
+interface ModelDTO {
+  name: string;
+  arch: string;
+  family: string;
+  display: string;
+}
