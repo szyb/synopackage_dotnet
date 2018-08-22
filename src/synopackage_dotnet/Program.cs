@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Autofac.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
 
 namespace synopackage_dotnet
 {
@@ -26,6 +27,13 @@ namespace synopackage_dotnet
     public static IWebHost BuildWebHost(string[] args) =>
         WebHost.CreateDefaultBuilder(args)
             .ConfigureServices(services => services.AddAutofac())
+            .ConfigureAppConfiguration((builderContext, config) =>
+            {
+              IHostingEnvironment env = builderContext.HostingEnvironment;
+
+              config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
+            })
             .UseStartup<Startup>()
             .Build();
   }
