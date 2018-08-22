@@ -8,6 +8,8 @@ using System.IO;
 using Autofac;
 using Autofac.Builder;
 using synopackage_dotnet.Model.Services;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace synopackage_dotnet
 {
@@ -16,6 +18,14 @@ namespace synopackage_dotnet
   /// </summary>
   public class Startup
   {
+    public IConfiguration configuration { get; set; }
+
+    public Startup(IConfiguration configuration, IHostingEnvironment env)
+    {
+      this.configuration = configuration;
+    }
+
+
     /// <summary>
     /// Configures app the services.
     /// </summary>
@@ -41,6 +51,16 @@ namespace synopackage_dotnet
         var xmlPath = Path.Combine(basePath, "synopackage_dotnet.xml");
         c.IncludeXmlComments(xmlPath);
       });
+
+      //appsettings
+      var appSettingsSection = configuration.GetSection(nameof(AppSettings));
+      services.Configure<AppSettings>(appSettingsSection);
+      services.AddScoped(cfg => cfg.GetService<IOptionsSnapshot<AppSettings>>().Value);
+
+      var appSettings = new AppSettings();
+      new ConfigureFromConfigurationOptions<AppSettings>(appSettingsSection)
+            .Configure(appSettings);
+      services.AddSingleton(new AppSettingsProvider(appSettings));
 
       MapperRegistrator.Register();
     }
