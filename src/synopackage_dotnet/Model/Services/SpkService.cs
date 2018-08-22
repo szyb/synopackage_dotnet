@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Net;
 using ExpressMapper;
 using ExpressMapper.Extensions;
 using RestSharp;
@@ -17,6 +18,10 @@ namespace synopackage_dotnet.Model.Services
         {
             errorMessage = null;
             var client = new RestClient(url);
+            if (!string.IsNullOrEmpty(AppSettingsProvider.AppSettings.ProxyUrl))
+            {
+                client.Proxy = new WebProxy(AppSettingsProvider.AppSettings.ProxyUrl);
+            }
             var request = new RestRequest(Method.POST);
             var unique = $"synology_{arch}_{model}";
 
@@ -42,6 +47,7 @@ namespace synopackage_dotnet.Model.Services
                     spkPackage.Map(package);
                     list.Add(package);
                 }
+                list.Sort();
                 return list;
             }
             errorMessage = response.ErrorMessage;

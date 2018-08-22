@@ -40,6 +40,8 @@ namespace synopackage_dotnet.Controllers
                 true,
                 null,
                 out errorMessage);
+            if (!string.IsNullOrWhiteSpace(errorMessage))
+                throw new Exception(errorMessage);
             return result;
         }
     }
