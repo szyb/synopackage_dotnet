@@ -13,6 +13,7 @@
         "Name" : "synologyitalia",
         "Url"  : "https://spk.synologyitalia.com",
         "CustomUserAgent" : null,
-        "DisabledReason": "Does not work"
+        "DisabledReason": "Does not work",
+        "DisabledDate": "2018-08-21T22:00:00.00Z"
     }
 ]
