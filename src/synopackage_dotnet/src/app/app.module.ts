@@ -13,13 +13,11 @@ import { SourcesComponent } from './sources/sources.component';
 import { HomeComponent } from './home/home.component';
 import { WaitComponent } from './components/wait/wait.component';
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
-import { UserSettingsService } from './components/user-settings/user-settings.service';
+import { UserSettingsService } from './shared/user-settings.service';
 import { DialogComponent } from './components/dialog/dialog.component';
-import { UserSettingsDisplayComponent} from './components/user-settings-display/user-settings-display.component';
+import { UserSettingsDisplayComponent } from './components/user-settings-display/user-settings-display.component';
+import { BrowseSourceComponent } from './browse-source/browse-source.component';
 
-
-
-// import { DisplayMapComponent } from './components/displayMap/displayMap.component';
 
 export const routerConfig: Routes = [
   {
@@ -30,6 +28,10 @@ export const routerConfig: Routes = [
       path: 'sources',
       component: SourcesComponent,
       pathMatch: 'full'
+  },
+  {
+      path: 'browsesource/:name',
+      component: BrowseSourceComponent
   },
   {
       path: '',
@@ -50,6 +52,7 @@ export const routerConfig: Routes = [
     WaitComponent,
     UserSettingsComponent,
     UserSettingsDisplayComponent,
+    BrowseSourceComponent,
     DialogComponent
     // DisplayMapComponent
   ],

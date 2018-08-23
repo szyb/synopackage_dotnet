@@ -1,4 +1,4 @@
-<h1>Browse source</h1>
+<h1>Third party package sources</h1>
 <div *ngIf="!sources">
   <app-wait></app-wait>
 </div>
@@ -20,9 +20,9 @@
       <tr *ngFor="let source of sources">
         <td>{{ source.name }}</td>
         <td>{{ source.url }}</td>
-        <td>browse</td>
-        <td *ngIf="source.www != null"><a href="{{ source.www }}" target="_blank">Visit website1</a></td>
-        <td *ngIf="source.www == null"><a href="{{ source.url }}" target="_blank">Visit website2</a></td>
+        <td><a routerLink="/browsesource/{{source.name}}">browse</a></td>
+        <td *ngIf="source.www != null"><a href="{{ source.www }}" target="_blank">Visit website</a></td>
+        <td *ngIf="source.www == null"><a href="{{ source.url }}" target="_blank">Visit website</a></td>
       </tr>
     </tbody>
   </table>
