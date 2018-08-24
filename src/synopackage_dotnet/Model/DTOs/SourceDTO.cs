@@ -9,7 +9,8 @@ namespace synopackage_dotnet.Model.DTOs
         public string Url {get;set;}
         public string Www {get;set;}
         public string DisabledReason { get; set; }
-        public DateTime? DisabledDate {get; set;}
+        public DateTime? DisabledDate { get; set; }
+        public string CustomUserAgent { get; set; }
 
     }
 }

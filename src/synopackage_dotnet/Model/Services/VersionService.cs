@@ -31,5 +31,13 @@ namespace synopackage_dotnet.Model.Services
             list.Sort();
             return list;
         }
+
+        public VersionDTO GetVersion(string version)
+        {
+            var versionsJson = File.ReadAllText("Config/versions.json");
+            var versions = JsonConvert.DeserializeObject<VersionDTO[]>(versionsJson);
+
+            return versions.Where(p => p.Version == version).FirstOrDefault();
+        }
     }
 }
