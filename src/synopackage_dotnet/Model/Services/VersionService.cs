@@ -34,8 +34,7 @@ namespace synopackage_dotnet.Model.Services
 
         public VersionDTO GetVersion(string version)
         {
-            var versionsJson = File.ReadAllText("Config/versions.json");
-            var versions = JsonConvert.DeserializeObject<VersionDTO[]>(versionsJson);
+            var versions = this.GetAllVersions();
 
             return versions.Where(p => p.Version == version).FirstOrDefault();
         }

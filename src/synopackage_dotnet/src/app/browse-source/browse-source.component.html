@@ -1,1 +1,6 @@
 <h1>Browse source - {{ nameString }}</h1>
+<div *ngIf="!packages"><app-wait></app-wait></div>
+<div *ngFor="let package of packages">
+    <h4>{{ package.name }}</h4>
+    <p>{{ package.description }}</p>
+</div>
