@@ -2,7 +2,7 @@
     {
         "Active" : true,
         "Name" : "synocommunity",
-        "Url"  : "https://synocommunity.com",
+        "Url"  : "https://packages.synocommunity.com",
         "Www"  : "https://synocommunity.com",
         "CustomUserAgent": null,
         "DisabledReason": null,

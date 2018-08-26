@@ -1,18 +1,25 @@
-import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute, ParamMap, Params } from '@angular/router';
 import { switchMap, take } from 'rxjs/operators';
 import { Config } from '../shared/config';
 import { Observable, Subscription } from 'rxjs';
+import { PackageDTO } from '../sources/sources.model';
+import { SourcesService } from '../shared/sources.service';
+import { UserSettingsService } from '../shared/user-settings.service';
 
 @Component({
   selector: 'app-browse-source',
   templateUrl: './browse-source.component.html',
 })
+@Injectable()
 export class BrowseSourceComponent implements OnInit, OnDestroy {
   private name: Observable<string>;
   private nameString: string;
+  private packages: PackageDTO[];
   constructor(private route: ActivatedRoute,
+    private sourcesService: SourcesService,
+    private userSettingsService: UserSettingsService,
     private router: Router) {
   }
 
@@ -24,6 +31,14 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
     this.route.params.pipe(
       take(1)
     ).subscribe((params: Params) => { this.nameString = params['name']; });
+
+    this.sourcesService.getPackagesFromSource(this.nameString,
+      this.userSettingsService.getUserModel(),
+      this.userSettingsService.getUserVersion(),
+      this.userSettingsService.getUserIsBeta()
+    ).pipe(
+      take(1)
+    ).subscribe(val => this.packages = val);
 
   }
   ngOnDestroy(): void {

@@ -25,7 +25,7 @@ export class SourcesService {
         params.model = model;
         params.version = version;
         params.isBeta = isBeta;
-        return this.http.get<PackageDTO[]>(`${Config.apiUrl}Pacakges/GetList${Utils.getQueryParams(params)}`);
+        return this.http.get<PackageDTO[]>(`${Config.apiUrl}Packages/GetList${Utils.getQueryParams(params)}`);
     }
 }
 
