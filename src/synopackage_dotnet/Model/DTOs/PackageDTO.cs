@@ -11,6 +11,7 @@ namespace synopackage_dotnet.Model.DTOs
         public string Description { get; set; }
         public bool IsBeta { get; set; }
         public string DownloadLink { get; set; }
+        public string CachedIconLocation { get; set; }
 
     public int CompareTo(PackageDTO other)
     {

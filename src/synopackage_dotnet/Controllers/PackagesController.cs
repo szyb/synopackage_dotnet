@@ -38,7 +38,8 @@ namespace synopackage_dotnet.Controllers
           if (sourceDto != null && versionDto != null && modelDto != null)
           {
             string errorMessage = null;
-            var packages = this.spkService.GetPackages(sourceDto.Url, 
+            var packages = this.spkService.GetPackages(sourceName,
+              sourceDto.Url, 
               modelDto.Arch, 
               modelDto.Name, 
               versionDto.Major.ToString(), 

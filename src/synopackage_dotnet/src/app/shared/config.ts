@@ -6,4 +6,5 @@ export class Config {
   static title = 'Synopackage';
   static defaultVersion = '"6.2-23739';
   static defaultModel = 'DS218Play';
+  static cacheFolder = 'cache/';
 }
