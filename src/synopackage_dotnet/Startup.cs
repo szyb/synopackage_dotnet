@@ -70,8 +70,9 @@ namespace synopackage_dotnet
             var modelAssembly = typeof(SourceService).Assembly;
 
             builder.RegisterAssemblyTypes(modelAssembly)
-                .Where(t => t.Name.EndsWith("Service"))
+                .Where(t => t.Name.EndsWith("Service") || t.Name=="BackgroundTaskQueue")
                 .AsImplementedInterfaces();
+
         }
 
     /// <summary>

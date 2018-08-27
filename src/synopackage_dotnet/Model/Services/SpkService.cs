@@ -10,11 +10,12 @@ namespace synopackage_dotnet.Model.Services
 {
     public class SpkService : ISpkService
     {
-        public SpkService()
+        private ICacheService cacheService;
+        public SpkService(ICacheService cacheService)
         {
-            
+            this.cacheService = cacheService;
         }
-        public IEnumerable<PackageDTO> GetPackages(string url, string arch, string model, string major, string minor, string build, bool isBeta, string customUserAgent, out string errorMessage)
+        public IEnumerable<PackageDTO> GetPackages(string sourceName, string url, string arch, string model, string major, string minor, string build, bool isBeta, string customUserAgent, out string errorMessage)
         {
             errorMessage = null;
             var client = new RestClient(url);
@@ -38,6 +39,7 @@ namespace synopackage_dotnet.Model.Services
 
             if (response.ResponseStatus == ResponseStatus.Completed && response.Data != null)
             {
+                this.cacheService.ProcessIconsAsync(sourceName, response.Data.Packages);
                 List<PackageDTO> list = new List<PackageDTO>();
                 if (response.Data.Packages == null)
                     return list;
@@ -45,6 +47,7 @@ namespace synopackage_dotnet.Model.Services
                 {
                     PackageDTO package = new PackageDTO();
                     spkPackage.Map(package);
+                    package.CachedIconLocation = cacheService.GetFileNameWithCacheFolder(sourceName, package.Name);
                     list.Add(package);
                 }
                 list.Sort();
