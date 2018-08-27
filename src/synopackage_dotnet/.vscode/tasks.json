@@ -17,14 +17,30 @@
             "problemMatcher": []
         },
         {
-            "type": "typescript",
-            "tsconfig": "tsconfig.app.json",
-            "problemMatcher": [
-                "$tsc"
+            "label": "ng build (dev2)",
+            "group": "build",
+            "command": "ng",
+            "type": "shell",
+            "args": [
+                "build",
+                "--configuration=dev2"
             ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
+            "problemMatcher": "$tsc",
+            "options": {
+                "cwd": "${workspaceFolder}/src/app"
+            }
+        },
+        {
+            "label": "ng build (development)",
+            "group": "build",
+            "command": "ng",
+            "type": "shell",
+            "args": [
+                "build"
+            ],
+            "problemMatcher": "$tsc",
+            "options": {
+                "cwd": "${workspaceFolder}/src/app"
             }
         }
     ]
