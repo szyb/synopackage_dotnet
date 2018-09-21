@@ -38,7 +38,7 @@ namespace synopackage_dotnet.Model.Services
       //   {
 
       //     var data = await client.DownloadDataTaskAsync(new Uri(package.Thumbnail[0]));
-      //     var fileName = GetIconFileNameWithCacheFolder(sourceName, package.Dname);
+      //     var fileName = GetIconFileNameWithCacheFolder(sourceName, package.Name);
       //     SaveIcon(fileName, data);
       //   }
       //   );
@@ -51,7 +51,7 @@ namespace synopackage_dotnet.Model.Services
       {
         if (package.Thumbnail != null && package.Thumbnail.Count > 0)
         {
-          if (ShouldStoreIcon(sourceName, package.Dname))
+          if (ShouldStoreIcon(sourceName, package.Name))
           {
             try
             {
@@ -59,7 +59,7 @@ namespace synopackage_dotnet.Model.Services
               var extension = Path.GetExtension(url);
               var iconBytes = downloadService.DownloadData(package.Thumbnail[0]);
 
-              File.WriteAllBytesAsync(GetIconFileNameWithCacheFolder(sourceName, package.Dname), iconBytes);
+              File.WriteAllBytesAsync(GetIconFileNameWithCacheFolder(sourceName, package.Name), iconBytes);
             }
             catch (Exception ex)
             {
@@ -69,12 +69,12 @@ namespace synopackage_dotnet.Model.Services
         }
         else if (package.Icon != null && package.Icon.Length > 0)
         {
-          if (ShouldStoreIcon(sourceName, package.Dname))
+          if (ShouldStoreIcon(sourceName, package.Name))
           {
             try
             {
               byte[] iconBytes = Convert.FromBase64String(package.Icon);
-              File.WriteAllBytesAsync(GetIconFileNameWithCacheFolder(sourceName, package.Dname), iconBytes);
+              File.WriteAllBytesAsync(GetIconFileNameWithCacheFolder(sourceName, package.Name), iconBytes);
             }
             catch (Exception ex)
             {

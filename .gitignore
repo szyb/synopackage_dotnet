@@ -233,4 +233,4 @@ _Pvt_Extensions
 .fake/
 *.orig
 
-/cache/*
+cache/

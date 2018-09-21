@@ -14,6 +14,16 @@
         "Url": "http://packages.pcloadletter.co.uk"
     },
     {
+        "Active": true,
+        "Name": "cphub",
+        "Url": "https://www.cphub.net"
+    },
+    {
+        "Active": true,
+        "Name": "page81",
+        "Url": "https://packages.page81.net/"
+    },
+    {
         "Active": false,
         "Name": "synologyitalia",
         "Url": "https://spk.synologyitalia.com",
