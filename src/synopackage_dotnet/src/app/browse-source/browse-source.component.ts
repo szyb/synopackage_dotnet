@@ -15,8 +15,8 @@ import { UserSettingsService } from '../shared/user-settings.service';
 @Injectable()
 export class BrowseSourceComponent implements OnInit, OnDestroy {
   private name: Observable<string>;
-  private nameString: string;
-  private packages: PackageDTO[];
+  public nameString: string;
+  public packages: PackageDTO[];
   constructor(private route: ActivatedRoute,
     private sourcesService: SourcesService,
     private userSettingsService: UserSettingsService,
@@ -39,11 +39,11 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
     ).pipe(
       take(1)
     ).subscribe(val => {
-        this.packages = val;
-        this.packages.forEach(element => {
-          element.thumbnailUrl = 'cache/' + element.iconFileName;
-        });
+      this.packages = val;
+      this.packages.forEach(element => {
+        element.thumbnailUrl = 'cache/' + element.iconFileName;
       });
+    });
 
   }
   ngOnDestroy(): void {
