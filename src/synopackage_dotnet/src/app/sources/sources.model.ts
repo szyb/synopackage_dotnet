@@ -7,10 +7,11 @@ export class SourceDTO {
 
 export class PackageDTO {
   name: string;
-  ThumbnailUrl: string;
-  Version: string;
-  Package: string;
-  Description: string;
-  IsBeta: boolean;
-  DownloadLink: string;
+  thumbnailUrl: string;
+  version: string;
+  package: string;
+  description: string;
+  isBeta: boolean;
+  downloadLink: string;
+  iconFileName: string;
 }

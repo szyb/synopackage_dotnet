@@ -1,19 +1,24 @@
 [
     {
-        "Active" : true,
-        "Name" : "synocommunity",
-        "Url"  : "https://packages.synocommunity.com",
-        "Www"  : "https://synocommunity.com",
+        "Active": true,
+        "Name": "synocommunity",
+        "Url": "https://packages.synocommunity.com",
+        "Www": "https://synocommunity.com",
         "CustomUserAgent": null,
         "DisabledReason": null,
         "DisabledDate": null
     },
     {
+        "Active": true,
+        "Name": "pcloadletter",
+        "Url": "http://packages.pcloadletter.co.uk"
+    },
+    {
         "Active": false,
-        "Name" : "synologyitalia",
-        "Url"  : "https://spk.synologyitalia.com",
-        "CustomUserAgent" : null,
-        "DisabledReason": "Does not work",
-        "DisabledDate": "2018-08-21T22:00:00.00Z"
+        "Name": "synologyitalia",
+        "Url": "https://spk.synologyitalia.com",
+        "CustomUserAgent": "\"Mozilla/4.0 (compatible; MSIE 6.1; Windows XP) Synology\"",
+        "DisabledReason": "Does not work (404 error?)",
+        "DisabledDate": "20180920"
     }
 ]

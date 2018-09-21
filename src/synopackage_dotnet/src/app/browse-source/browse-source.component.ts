@@ -38,7 +38,12 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
       this.userSettingsService.getUserIsBeta()
     ).pipe(
       take(1)
-    ).subscribe(val => this.packages = val);
+    ).subscribe(val => {
+        this.packages = val;
+        this.packages.forEach(element => {
+          element.thumbnailUrl = 'cache/' + element.iconFileName;
+        });
+      });
 
   }
   ngOnDestroy(): void {
