@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Net;
 using ExpressMapper;
 using ExpressMapper.Extensions;
+using Newtonsoft.Json;
 using RestSharp;
 using synopackage_dotnet.Model.DTOs;
 using synopackage_dotnet.Model.SPK;
@@ -33,18 +34,39 @@ namespace synopackage_dotnet.Model.Services
         request.AddParameter("major", major);
         request.AddParameter("minor", minor);
         request.AddParameter("build", build);
-        request.AddParameter("pacakge_update_channel", isBeta ? "beta" : "stable");
+        request.AddParameter("package_update_channel", isBeta ? "beta" : "stable");
         request.AddParameter("timezone", "Brussels");
-        request.AddHeader("User-Agent", customUserAgent != null ? customUserAgent : unique);
-        var response = downloadService.Execute<SpkResult>(url, request);
-        if (response.ResponseStatus == ResponseStatus.Completed && response.Data != null)
+        // request.AddHeader("User-Agent", customUserAgent != null ? customUserAgent : unique);
+        var userAgent = customUserAgent != null ? customUserAgent : unique;
+        var response = downloadService.Execute(url, request, userAgent);
+
+        if (response.ResponseStatus == ResponseStatus.Completed && response.StatusCode == HttpStatusCode.OK)
         {
-          result = response.Data;
-          cacheService.SaveSpkResult(sourceName, model, build, isBeta, response.Data);
+          var responseContent = response.Content;
+          if (responseContent != null)
+          {
+            System.IO.File.WriteAllText("cache/out.html", responseContent);
+            responseContent = responseContent.Replace("\\n", "\n");
+            if (responseContent.Contains("\"packages\""))
+            {
+              result = JsonConvert.DeserializeObject<SpkResult>(responseContent);
+            }
+            else
+            {
+              result = new SpkResult();
+              result.Packages = JsonConvert.DeserializeObject<List<SpkPackage>>(responseContent);
+            }
+            if (result != null)
+              cacheService.SaveSpkResult(sourceName, model, build, isBeta, result);
+          }
+          else
+          {
+            result = new SpkResult();
+          }
         }
         else
         {
-          errorMessage = response.ErrorMessage;
+          errorMessage = $"{response.StatusCode.ToString()} {response.ErrorMessage}";
           return null;
         }
       }
