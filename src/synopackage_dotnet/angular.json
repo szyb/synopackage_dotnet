@@ -18,6 +18,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "wwwroot",
+            "deleteOutputPath": false,
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -68,9 +69,6 @@
                   "with": "appsettings.dev2.json"
                 }
               ]
-            },
-            "development": {
-              "deleteOutputPath": false
             }
           }
         },
