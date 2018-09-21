@@ -13,25 +13,25 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class UserSettingsComponent {
-  private versions: VersionDTO[];
-  private models: ModelDTO[];
-  private selectedVersion: string;
-  private selectedModel: string;
-  private selectedIsBeta: boolean;
+  public versions: VersionDTO[];
+  public models: ModelDTO[];
+  public selectedVersion: string;
+  public selectedModel: string;
+  public selectedIsBeta: boolean;
 
-  private errorVersion: string;
-  private errorModel: string;
+  public errorVersion: string;
+  public errorModel: string;
 
   constructor(http: HttpClient, private userSettingsService: UserSettingsService) {
-        http.get<VersionDTO[]>(`${Config.apiUrl}Versions/GetAll`).subscribe( result => {
-          this.versions = result;
-        });
-        http.get<ModelDTO[]>(`${Config.apiUrl}Models/GetAll`).subscribe( result => {
-          this.models = result;
-        });
-        this.selectedVersion = this.userSettingsService.getUserVersion();
-        this.selectedModel = this.userSettingsService.getUserModel();
-        this.selectedIsBeta = this.userSettingsService.getUserIsBeta();
+    http.get<VersionDTO[]>(`${Config.apiUrl}Versions/GetAll`).subscribe(result => {
+      this.versions = result;
+    });
+    http.get<ModelDTO[]>(`${Config.apiUrl}Models/GetAll`).subscribe(result => {
+      this.models = result;
+    });
+    this.selectedVersion = this.userSettingsService.getUserVersion();
+    this.selectedModel = this.userSettingsService.getUserModel();
+    this.selectedIsBeta = this.userSettingsService.getUserIsBeta();
   }
 
   @ViewChild(ModalDirective) public basicModal: ModalDirective;
@@ -89,8 +89,8 @@ export class UserSettingsComponent {
 
 
 interface VersionDTO {
-    version: string;
-  }
+  version: string;
+}
 
 interface ModelDTO {
   name: string;
