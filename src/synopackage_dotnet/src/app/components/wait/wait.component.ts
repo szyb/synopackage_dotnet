@@ -6,8 +6,6 @@ import { Component } from '@angular/core';
   templateUrl: './wait.component.html',
 })
 export class WaitComponent {
- 
   constructor() {
-    
   }
 }

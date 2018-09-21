@@ -43,7 +43,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "with": "src/environments/environment.ts"
                 }
               ],
               "optimization": true,
@@ -55,7 +55,15 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true
+            },
+            "dev2" : {
+              "deleteOutputPath": false,
+              "fileReplacements" : [
+                { "replace": "src/environments/environment.ts", "with": "src/environments/environment.dev2.ts" },
+                { "replace": "appsettings.json", "with": "appsettings.dev2.json" }
+              ]
             }
+
           }
         },
         "serve": {

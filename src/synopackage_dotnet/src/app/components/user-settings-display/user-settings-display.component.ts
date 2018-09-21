@@ -1,5 +1,5 @@
 import { Injectable, Component, OnChanges } from '@angular/core';
-import { UserSettingsService } from '../user-settings/user-settings.service';
+import { UserSettingsService } from '../../shared/user-settings.service';
 
 
 @Component({

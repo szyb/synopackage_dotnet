@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
-import { UserSettingsService } from './components/user-settings/user-settings.service';
+import { UserSettingsService } from './shared/user-settings.service';
 
 
 @Component({
