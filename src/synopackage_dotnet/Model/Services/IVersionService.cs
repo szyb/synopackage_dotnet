@@ -5,5 +5,6 @@ namespace synopackage_dotnet.Model.Services
     public interface IVersionService : IDomainService 
     {
         IEnumerable<VersionDTO> GetAllVersions();
+        VersionDTO GetVersion(string version);
     }
 }

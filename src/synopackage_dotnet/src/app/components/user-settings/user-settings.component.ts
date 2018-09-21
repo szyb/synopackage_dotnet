@@ -1,6 +1,6 @@
 import { Component, ViewChild, Injectable } from '@angular/core';
 import { ModalDirective } from 'angular-bootstrap-md';
-import { UserSettingsService } from './user-settings.service';
+import { UserSettingsService } from '../../shared/user-settings.service';
 import { Config } from '../../shared/config';
 import { HttpClient } from '@angular/common/http';
 

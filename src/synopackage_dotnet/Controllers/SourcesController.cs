@@ -31,7 +31,8 @@ namespace synopackage_dotnet.Controllers
         public IEnumerable<PackageDTO> GetPackagesTest()
         {
             string errorMessage = null;
-            var result = spkService.GetPackages("https://packages.synocommunity.com",
+            var result = spkService.GetPackages("synocommunity",
+                "https://packages.synocommunity.com",
                 "apollolake",
                 "DS718+",
                 "6",

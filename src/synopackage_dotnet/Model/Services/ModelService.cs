@@ -13,8 +13,15 @@ namespace synopackage_dotnet.Model.Services
         {
             var modelsJson = File.ReadAllText("Config/models.json");
             var models = JsonConvert.DeserializeObject<ModelDTO[]>(modelsJson);
-            var list = models.ToList();
-            return list;
+            // var list = models.ToList();
+            return models;
+        }
+
+        public ModelDTO GetModel(string model)
+        {
+            var modelsJson = File.ReadAllText("Config/models.json");
+            var models = JsonConvert.DeserializeObject<ModelDTO[]>(modelsJson);
+            return models.Where(p => p.Name == model).FirstOrDefault();
         }
     }
 }

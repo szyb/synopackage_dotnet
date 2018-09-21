@@ -1,43 +1,38 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark cyan scrolling-navbar ie-nav" [containerInside]="false" >
+<mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark cyan scrolling-navbar ie-nav" [containerInside]="false">
   <logo>
     <a class="logo navbar-brand" href="#"><strong>{{ title }}</strong></a>
   </logo>
   <links>
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
       <li class="nav-item active waves-light" mdbWavesEffect>
-        <a class="nav-link" routerLink="home" >Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" routerLink="home">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active waves-light" mdbWavesEffect>
-        <a class="nav-link" routerLink="sources" >Sources <span class="sr-only">(current)</span></a>
+        <a class="nav-link" routerLink="sources">Sources <span class="sr-only">(current)</span></a>
       </li>
     </ul>
     <div class="navbar-text white-text">
-        <app-user-settings-display></app-user-settings-display>
+      <app-user-settings-display></app-user-settings-display>
     </div>
     <ul class="navbar-nav nav-flex-icons">
       <li class="nav-item waves-light" mdbWavesEffect>
-          <a class="nav-link" (click)="showUserSettingsModal()">
-            <i *ngIf="isSetup()" class="fa fa-gear" aria-hidden="true"></i>
-            <i *ngIf="!isSetup()" class="fa fa-gear yellow-text" aria-hidden="true"></i>
-          </a>
+        <a class="nav-link" (click)="showUserSettingsModal()">
+          <i *ngIf="isSetup()" class="fa fa-gear" aria-hidden="true"></i>
+          <i *ngIf="!isSetup()" class="fa fa-gear yellow-text" aria-hidden="true"></i>
+        </a>
       </li>
       <li class="nav-item waves-light" mdbWavesEffect>
         <a class="nav-link"><i class="fa fa-facebook"></i></a>
       </li>
     </ul>
-    
+
   </links>
 </mdb-navbar>
 <main>
-  <div class="container">
+  <div class="container" style="margin-bottom: 50px;">
     <app-user-settings #basicModal></app-user-settings>
-    <!-- <div class="row">
-      <div class="col">
-        <app-user-settings-display></app-user-settings-display>
-      </div>
-    </div> -->
-    <div class="row justify-content-md-center " style="margin-top:35px;" >
+    <div class="row justify-content-md-center " style="margin-top:35px;">
       <div class="col-md-9 " style="margin-top:35px; height:400px;">
         <router-outlet></router-outlet>
       </div>
@@ -46,114 +41,9 @@
 </main>
 
 <!--Footer-->
-<footer class="page-footer mdb-color text-center text-md-left pt-4 mt-4">
-
-  <!--Footer Links-->
-  <div class="container">
-    <div class="row">
-
-      <!--First column-->
-      <div class="col-md-3 offset-md-1">
-        <h5 class="title">Footer Content </h5>
-        <p>Here you can use rows and columns here to organize your footer content.</p>
-      </div>
-      <!--/.First column-->
-
-      <hr class="hidden-md-up">
-
-      <!--Second column-->
-      <div class="col-md-2 offset-md-1">
-        <h5 class="title">Links</h5>
-        <ul class="list-unstyled">
-          <li>
-            <a href="#!">Link 1</a>
-          </li>
-          <li>
-            <a href="#!">Link 2</a>
-          </li>
-          <li>
-            <a href="#!">Link 3</a>
-          </li>
-          <li>
-            <a href="#!">Link 4</a>
-          </li>
-        </ul>
-      </div>
-      <!--/.Second column-->
-
-      <hr class="hidden-md-up">
-
-      <!--Third column-->
-      <div class="col-md-2">
-        <h5 class="title">Links</h5>
-        <ul class="list-unstyled">
-          <li>
-            <a href="#!">Link 1</a>
-          </li>
-          <li>
-            <a href="#!">Link 2</a>
-          </li>
-          <li>
-            <a href="#!">Link 3</a>
-          </li>
-          <li>
-            <a href="#!">Link 4</a>
-          </li>
-        </ul>
-      </div>
-      <!--/.Third column-->
-
-      <hr class="hidden-md-up">
-
-      <!--Fourth column-->
-      <div class="col-md-2">
-        <h5 class="title">Links</h5>
-        <ul class="list-unstyled">
-          <li>
-            <a href="#!">Link 1</a>
-          </li>
-          <li>
-            <a href="#!">Link 2</a>
-          </li>
-          <li>
-            <a href="#!">Link 3</a>
-          </li>
-          <li>
-            <a href="#!">Link 4</a>
-          </li>
-        </ul>
-      </div>
-      <!--/.Fourth column-->
-
-    </div>
-  </div>
-  <!--/.Footer Links-->
-
-  <hr>
-
-  <!--Call to action-->
-  <!-- <div class="call-to-action text-center py-3">
-    <ul class="list-unstyled list-inline">
-      <li class="list-inline-item">
-        <h5>Register for free</h5>
-      </li>
-      <li class="list-inline-item">
-        <a href="" class="btn btn-danger waves-light btn-rounded" mdbWavesEffect>Sign up!</a>
-      </li>
-    </ul>
-  </div> -->
-  <!--/.Call to action-->
-
-  <hr>
-  <!--Copyright-->
-  <div class="footer-copyright text-center py-3">
-    <div class="container-fluid">
-      © 2018 Copyright:
-      <a href="https://www.synopackage.com"> synopackage_dotnet.com </a>
-
-    </div>
-  </div>
-  <!--/.Copyright-->
-
+<footer class="fixed-bottom footer-copyright blue py-3 text-center text-white">
+  © 2018 Copyright:
+  <a class="text-white" href="https://mdbootstrap.com/material-design-for-bootstrap/"> MDBootstrap.com </a>
 </footer>
+
 <!--/.Footer-->
