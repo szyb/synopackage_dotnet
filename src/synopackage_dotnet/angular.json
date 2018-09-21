@@ -56,14 +56,22 @@
               "vendorChunk": false,
               "buildOptimizer": true
             },
-            "dev2" : {
+            "dev2": {
               "deleteOutputPath": false,
-              "fileReplacements" : [
-                { "replace": "src/environments/environment.ts", "with": "src/environments/environment.dev2.ts" },
-                { "replace": "appsettings.json", "with": "appsettings.dev2.json" }
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev2.ts"
+                },
+                {
+                  "replace": "appsettings.json",
+                  "with": "appsettings.dev2.json"
+                }
               ]
+            },
+            "development": {
+              "deleteOutputPath": false
             }
-
           }
         },
         "serve": {
