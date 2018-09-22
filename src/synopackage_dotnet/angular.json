@@ -58,7 +58,8 @@
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true
+              "buildOptimizer": true,
+              "baseHref": "/synopackage_dotnet/"
             },
             "dev2": {
               "deleteOutputPath": false,
