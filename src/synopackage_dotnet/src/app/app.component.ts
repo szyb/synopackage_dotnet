@@ -10,12 +10,15 @@ import { UserSettingsService } from './shared/user-settings.service';
 })
 export class AppComponent {
   title = 'synopackage.com';
+  public actualYear: string;
 
   constructor(private userSettingsService: UserSettingsService) {
+    const date = new Date();
+    this.actualYear = date.getFullYear().toString();
 
   }
 
-  @ViewChild(UserSettingsComponent)  basicModal: UserSettingsComponent;
+  @ViewChild(UserSettingsComponent) basicModal: UserSettingsComponent;
   showUserSettingsModal() {
     this.basicModal.showModal();
   }

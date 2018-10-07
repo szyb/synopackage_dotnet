@@ -33,7 +33,7 @@
   <div class="container" style="margin-bottom: 50px;">
     <app-user-settings #basicModal></app-user-settings>
     <div class="row justify-content-md-center " style="margin-top:35px;">
-      <div class="col-md-9 " style="margin-top:35px; height:400px;">
+      <div class="col-md-9 " style="margin-top:35px; height:auto;">
         <router-outlet></router-outlet>
       </div>
     </div>
@@ -41,9 +41,14 @@
 </main>
 
 <!--Footer-->
-<footer class="fixed-bottom footer-copyright blue py-3 text-center text-white">
-  © 2018 Copyright:
-  <a class="text-white" href="https://mdbootstrap.com/material-design-for-bootstrap/"> MDBootstrap.com </a>
+<footer class="page-footer font-small fixed-bottom footer-copyright blue py-1 text-center text-white">
+  <div class="container-fluid"><small>xurc 2017 - {{ actualYear }}. Source code can be found on
+      <a href="https://github.com/szyb/synopackage_dotnet" target="_blank">github</a>.
+      Special thanks to jdel for the <a href="https://github.com/jdel/sspks" target="_blank">project</a>. Credits:
+      <a href="https://github.com/restsharp/RestSharp" target="_blank">RestSharp</a>
+      (<a href="https://raw.githubusercontent.com/restsharp/RestSharp/master/LICENSE.txt" target="_blank">license</a>)
+    </small>
+  </div>
 </footer>
 
 <!--/.Footer-->
