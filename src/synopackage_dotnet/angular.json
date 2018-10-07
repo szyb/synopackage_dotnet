@@ -18,14 +18,14 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "wwwroot",
-            "deleteOutputPath": false,
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/web.config"
             ],
             "styles": [
               "node_modules/font-awesome/scss/font-awesome.scss",
@@ -44,7 +44,11 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.ts"
+                  "with": "src/environments/environment.production.ts"
+                },
+                {
+                  "replace": "appsettings.json",
+                  "with": "appsettings.production.json"
                 }
               ],
               "optimization": true,
@@ -55,7 +59,9 @@
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true
+              "buildOptimizer": true,
+              "baseHref": "/synopackage/",
+              "deployUrl": "/synopackage/"
             },
             "dev2": {
               "deleteOutputPath": false,
@@ -69,6 +75,9 @@
                   "with": "appsettings.dev2.json"
                 }
               ]
+            },
+            "development": {
+              "deleteOtputPath": false
             }
           }
         },
@@ -102,7 +111,8 @@
             "scripts": [],
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/web.config"
             ]
           }
         },
