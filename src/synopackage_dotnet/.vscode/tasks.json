@@ -12,6 +12,27 @@
             "problemMatcher": "$msCompile"
         },
         {
+            "label": "publish",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/synopackage_dotnet.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build (production)",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/synopackage_dotnet.csproj",
+                "--configuration=Release"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
             "type": "npm",
             "script": "build",
             "problemMatcher": []
@@ -42,6 +63,20 @@
             "options": {
                 "cwd": "${workspaceFolder}/src/app"
             }
-        }
+        },
+        {
+            "label": "ng build (production)",
+            "group": "build",
+            "command": "ng",
+            "type": "shell",
+            "args": [
+                "build",
+                "--configuration=production"
+            ],
+            "problemMatcher": "$tsc",
+            "options": {
+                "cwd": "${workspaceFolder}/src/app"
+            }
+        },
     ]
 }
