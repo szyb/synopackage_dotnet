@@ -12,6 +12,16 @@
             "problemMatcher": "$msCompile"
         },
         {
+            "label": "publish",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/synopackage_dotnet.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
             "label": "build (production)",
             "command": "dotnet",
             "type": "process",

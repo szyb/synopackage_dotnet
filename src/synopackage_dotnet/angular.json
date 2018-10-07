@@ -24,7 +24,8 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/web.config"
             ],
             "styles": [
               "node_modules/font-awesome/scss/font-awesome.scss",
@@ -59,7 +60,8 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "baseHref": "/synopackage_dotnet/"
+              "baseHref": "/synopackage/",
+              "deployUrl": "/synopackage/"
             },
             "dev2": {
               "deleteOutputPath": false,
@@ -109,7 +111,8 @@
             "scripts": [],
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/web.config"
             ]
           }
         },
