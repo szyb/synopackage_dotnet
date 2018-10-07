@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  restBaseUrl: 'http://localhost:58893/'
+  restBaseUrl: 'http://localhost/synopackage/'
 };
