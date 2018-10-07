@@ -24,5 +24,10 @@ namespace synopackage_dotnet.Controllers
         {
             return versionService.GetAllVersions();
         }
+        [HttpGet("GetDefaultVersion")]
+        public string GetDefaultVersion()
+        {
+            return AppSettingsProvider.AppSettings.DefaultVersion;
+        }
     }
 }
