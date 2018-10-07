@@ -29,29 +29,34 @@ namespace synopackage_dotnet.Controllers
         [HttpGet("GetList")]
         public IEnumerable<PackageDTO> GetList(string sourceName, string model, string version)
         {
-          List<PackageDTO> list = new List<PackageDTO>();
-          var versionDto = this.versionService.GetVersion(version);
-          var sourceDto = this.sourceService.GetSource(sourceName);
-          var modelDto = this.modelService.GetModel(model);
+            List<PackageDTO> list = new List<PackageDTO>();
+            if (model == null)
+                model = AppSettingsProvider.AppSettings.DefaultModel;
+            if (version == null)
+                version = AppSettingsProvider.AppSettings.DefaultVersion;
+
+            var versionDto = this.versionService.GetVersion(version);
+            var sourceDto = this.sourceService.GetSource(sourceName);
+            var modelDto = this.modelService.GetModel(model);
 
 
-          if (sourceDto != null && versionDto != null && modelDto != null)
-          {
-            string errorMessage = null;
-            var packages = this.spkService.GetPackages(sourceName,
-              sourceDto.Url, 
-              modelDto.Arch, 
-              modelDto.Name, 
-              versionDto.Major.ToString(), 
-              versionDto.Minor.ToString(), 
-              versionDto.Build.ToString(), 
-              true, 
-              sourceDto.CustomUserAgent, 
-              out errorMessage );
-            if (string.IsNullOrWhiteSpace(errorMessage))
-              list.AddRange(packages);
-          }
-          return list;
+            if (sourceDto != null && versionDto != null && modelDto != null)
+            {
+                string errorMessage = null;
+                var packages = this.spkService.GetPackages(sourceName,
+                  sourceDto.Url,
+                  modelDto.Arch,
+                  modelDto.Name,
+                  versionDto.Major.ToString(),
+                  versionDto.Minor.ToString(),
+                  versionDto.Build.ToString(),
+                  true,
+                  sourceDto.CustomUserAgent,
+                  out errorMessage);
+                if (string.IsNullOrWhiteSpace(errorMessage))
+                    list.AddRange(packages);
+            }
+            return list;
         }
     }
 }
