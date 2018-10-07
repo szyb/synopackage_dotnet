@@ -7,6 +7,8 @@ import { Observable, Subscription } from 'rxjs';
 import { PackageDTO } from '../sources/sources.model';
 import { SourcesService } from '../shared/sources.service';
 import { UserSettingsService } from '../shared/user-settings.service';
+import { ModelsService } from '../shared/models.service';
+import { VersionsService } from '../shared/versions.service';
 
 @Component({
   selector: 'app-browse-source',
@@ -17,9 +19,12 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
   private name: Observable<string>;
   public nameString: string;
   public packages: PackageDTO[];
+  public areSettingsSet: boolean;
   constructor(private route: ActivatedRoute,
     private sourcesService: SourcesService,
     private userSettingsService: UserSettingsService,
+    private modelsService: ModelsService,
+    private versionsService: VersionsService,
     private router: Router) {
   }
 
@@ -27,7 +32,7 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // this.subscription = this.route.params.subscribe((params: Params) => { this.nameString = params['name']; });
-
+    this.areSettingsSet = this.userSettingsService.isSetup();
     this.route.params.pipe(
       take(1)
     ).subscribe((params: Params) => { this.nameString = params['name']; });

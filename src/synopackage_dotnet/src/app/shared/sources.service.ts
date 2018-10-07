@@ -8,14 +8,13 @@ import { Utils } from './Utils';
 
 @Injectable({
     providedIn: 'root',
-  })
+})
 export class SourcesService {
     constructor(private http: HttpClient, private userSettingsService: UserSettingsService) {
 
     }
 
     public getAllSources(): Observable<SourceDTO[]> {
-        console.log('getAllSources');
         return this.http.get<SourceDTO[]>(`${Config.apiUrl}Sources/GetList`);
     }
 

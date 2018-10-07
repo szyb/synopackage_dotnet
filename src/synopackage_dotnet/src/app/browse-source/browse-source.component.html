@@ -1,4 +1,7 @@
 <h1>Browse source - {{ nameString }}</h1>
+<div *ngIf="!areSettingsSet" class="alert alert-warning" role="alert">User settings are not set. Showing
+    results for default model and version
+</div>
 <div *ngIf="!packages">
     <app-wait></app-wait>
 </div>
