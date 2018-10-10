@@ -58,8 +58,7 @@ namespace synopackage_dotnet.Model.Services
             {
               try
               {
-                bool useSsl = true; //for all by default. When not needed then change for specific source
-                var url = GetValidUrl(package.Thumbnail[0], useSsl);
+                var url = GetValidUrl(package.Thumbnail[0]);
                 var extension = Path.GetExtension(url);
                 var iconBytes = downloadService.DownloadData(url);
 
@@ -177,7 +176,7 @@ namespace synopackage_dotnet.Model.Services
         return false;
       }
     }
-    private string GetValidUrl(string urlCandidate, bool useSsl = false)
+    private string GetValidUrl(string urlCandidate, bool useSsl = true)
     {
       string protocol = useSsl ? "https" : "http";
       if (string.IsNullOrWhiteSpace(urlCandidate))

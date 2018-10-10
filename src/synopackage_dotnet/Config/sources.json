@@ -1,141 +1,141 @@
 [
-    {
-        "Active": true,
-        "Name": "synocommunity",
-        "Url": "https://packages.synocommunity.com",
-        "Www": "https://synocommunity.com",
-        "CustomUserAgent": null,
-        "DisabledReason": null,
-        "DisabledDate": null
-    },
-    {
-        "Active": true,
-        "Name": "cphub",
-        "Url": "https://www.cphub.net"
-    },
-    {
-        "Active": true,
-        "Name": "pcloadletter",
-        "Url": "http://packages.pcloadletter.co.uk"
-    },
-    {
-        "Active": true,
-        "Name": "hildinger",
-        "Url": "http://www.hildinger.us/sspks/"
-    },
-    {
-        "Active": true,
-        "Name": "unzureichende",
-        "Url": "http://spk.unzureichende.info/"
-    },
-    {
-        "Active": true,
-        "Name": "naefmarco",
-        "Url": "http://spk.naefmarco.ch/spkrepo/packages/"
-    },
-    {
-        "Active": true,
-        "Name": "acmenet",
-        "Url": "http://synology.acmenet.ru/"
-    },
-    {
-        "Active": true,
-        "Name": "emby",
-        "Url": "https://synology.emby.media/",
-        "Www": "https://emby.media/community/index.php?/forum/153-synology/"
-    },
-    {
-        "Active": true,
-        "Name": "jdel",
-        "Url": "https://packages.jdel.org/"
-    },
-    {
-        "Active": true,
-        "Name": "dierkse",
-        "Url": "http://syno.dierkse.nl/"
-    },
-    {
-        "Active": true,
-        "Name": "nimloth",
-        "Url": "http://synology.nimloth.pl/"
-    },
-    {
-        "Active": true,
-        "Name": "cambier",
-        "Url": "https://synology.cambier.org/"
-    },
-    {
-        "Active": true,
-        "Name": "synologyitalia",
-        "Url": "https://spk.synologyitalia.com",
-        "CustomUserAgent": "\"Mozilla/4.0 (compatible; MSIE 6.1; Windows XP) Synology\"",
-        "DisabledReason": "Does not work (404 error?)",
-        "DisabledDate": "2018-09-20"
-    },
-    {
-        "Active": true,
-        "Name": "nzbusenet",
-        "Url": "http://synology.nzbusenet.com/"
-    },
-    {
-        "Active": true,
-        "Name": "filebot",
-        "Url": "https://get.filebot.net/syno/"
-    },
-    {
-        "Active": true,
-        "Name": "sysco",
-        "Url": "http://synology.sysco.ch/"
-    },
-    {
-        "Active": true,
-        "Name": "hofrichter",
-        "Url": "https://www.hofrichter.at/sspks/"
-    },
-    {
-        "Active": true,
-        "Name": "diablos-netzwerk",
-        "Url": "http://spk.diablos-netzwerk.de/",
-        "Www": "http://spk.diablos-netzwerk.de/?lang=en"
-    },
-    {
-        "Active": true,
-        "Name": "page81",
-        "Url": "https://packages.page81.net/"
-    },
-    {
-        "Active": false,
-        "Name": "nas-mirror",
-        "Url": "http://spk.nas-mirror.de/spkrepo/packages/",
-        "DisabledDate": "2018-09-20",
-        "DisabledReason": "Domain has expired"
-    },
-    {
-        "Active": false,
-        "Name": "cytec",
-        "Url": "http://cytec.us/spk/",
-        "DisabledDate": "2018-08-28",
-        "DisabledReason": "Domain has expired"
-    },
-    {
-        "Active": false,
-        "Name": "kastner",
-        "Url": "http://jaspr.kastner.wtf/",
-        "DisabledDate": "2018-09-20",
-        "DisabledReason": "Internal Server Error (500)"
-    },
-    {
-        "Active": false,
-        "Name": "nas-mirror",
-        "Url": "http://www.jadahl.com",
-        "DisabledDate": "2018-06-10",
-        "DisabledReason": "TODO"
-    },
-    {
-        "Active": false,
-        "Name": "brigittehelsen",
-        "Url": "http://www.brigittehelsen.be/plexconnect/",
-        "DisabledDate": "2018-05-04",
-        "DisabledReason": "Not a valid repository"
-    }
+  {
+    "Active": true,
+    "Name": "synocommunity",
+    "Url": "https://packages.synocommunity.com",
+    "Www": "https://synocommunity.com",
+    "CustomUserAgent": null,
+    "DisabledReason": null,
+    "DisabledDate": null
+  },
+  {
+    "Active": true,
+    "Name": "cphub",
+    "Url": "https://www.cphub.net"
+  },
+  {
+    "Active": true,
+    "Name": "pcloadletter",
+    "Url": "http://packages.pcloadletter.co.uk"
+  },
+  {
+    "Active": true,
+    "Name": "hildinger",
+    "Url": "http://www.hildinger.us/sspks/"
+  },
+  {
+    "Active": true,
+    "Name": "unzureichende",
+    "Url": "http://spk.unzureichende.info/"
+  },
+  {
+    "Active": false,
+    "Name": "naefmarco",
+    "Url": "http://spk.naefmarco.ch/spkrepo/packages/",
+    "DisabledDate": "2018-10-10",
+    "DisabledReason": "Despite this package server is returning package data, the links for packages leads to spk.nas-mirror.de, which is currently down."
+  },
+  {
+    "Active": true,
+    "Name": "acmenet",
+    "Url": "http://synology.acmenet.ru/"
+  },
+  {
+    "Active": true,
+    "Name": "emby",
+    "Url": "https://synology.emby.media/",
+    "Www": "https://emby.media/community/index.php?/forum/153-synology/"
+  },
+  {
+    "Active": false,
+    "Name": "jdel",
+    "Url": "https://packages.jdel.org/",
+    "DisabledDate": "2018-10-10",
+    "DisabledReason": "Error code: 301 Moved pernamently"
+  },
+  {
+    "Active": true,
+    "Name": "dierkse",
+    "Url": "http://syno.dierkse.nl/"
+  },
+  {
+    "Active": true,
+    "Name": "nimloth",
+    "Url": "http://synology.nimloth.pl/"
+  },
+  {
+    "Active": true,
+    "Name": "cambier",
+    "Url": "https://synology.cambier.org/"
+  },
+  {
+    "Active": true,
+    "Name": "synologyitalia",
+    "Url": "https://spk.synologyitalia.com",
+    "CustomUserAgent": "\"Mozilla/4.0 (compatible; MSIE 6.1; Windows XP) Synology\""
+  },
+  {
+    "Active": true,
+    "Name": "nzbusenet",
+    "Url": "http://synology.nzbusenet.com/"
+  },
+  {
+    "Active": true,
+    "Name": "filebot",
+    "Url": "https://get.filebot.net/syno/"
+  },
+  {
+    "Active": true,
+    "Name": "sysco",
+    "Url": "http://synology.sysco.ch/"
+  },
+  {
+    "Active": true,
+    "Name": "hofrichter",
+    "Url": "https://www.hofrichter.at/sspks/"
+  },
+  {
+    "Active": true,
+    "Name": "diablos-netzwerk",
+    "Url": "http://spk.diablos-netzwerk.de/",
+    "Www": "http://spk.diablos-netzwerk.de/?lang=en"
+  },
+  {
+    "Active": true,
+    "Name": "page81",
+    "Url": "https://packages.page81.net/"
+  },
+  {
+    "Active": true,
+    "Name": "kastner",
+    "Url": "http://jaspr.kastner.wtf/"
+  },
+  {
+    "Active": false,
+    "Name": "nas-mirror",
+    "Url": "http://spk.nas-mirror.de/spkrepo/packages/",
+    "DisabledDate": "2018-09-20",
+    "DisabledReason": "Domain has expired"
+  },
+  {
+    "Active": false,
+    "Name": "cytec",
+    "Url": "http://cytec.us/spk/",
+    "DisabledDate": "2018-08-28",
+    "DisabledReason": "Domain has expired"
+  },
+  {
+    "Active": false,
+    "Name": "jadahl",
+    "Url": "http://www.jadahl.com",
+    "DisabledDate": "2018-06-10",
+    "DisabledReason": "This is not valid SPK repository and you cannot add this url to DSM. This source provides Domoticz packages for DSM and only manual download and install is available."
+  },
+  {
+    "Active": false,
+    "Name": "brigittehelsen",
+    "Url": "http://www.brigittehelsen.be/plexconnect/",
+    "DisabledDate": "2018-05-04",
+    "DisabledReason": "Not a valid repository"
+  }
 ]
