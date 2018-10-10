@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -47,38 +48,41 @@ namespace synopackage_dotnet.Model.Services
 
     public void ProcessIcons(string sourceName, List<SpkPackage> packages)
     {
-      foreach (var package in packages)
+      if (packages != null)
       {
-        if (package.Thumbnail != null && package.Thumbnail.Count > 0)
+        foreach (var package in packages)
         {
-          if (ShouldStoreIcon(sourceName, package.Name))
+          if (package.Thumbnail != null && package.Thumbnail.Count > 0)
           {
-            try
+            if (ShouldStoreIcon(sourceName, package.Name))
             {
-              var url = package.Thumbnail[0];
-              var extension = Path.GetExtension(url);
-              var iconBytes = downloadService.DownloadData(package.Thumbnail[0]);
+              try
+              {
+                var url = GetValidUrl(package.Thumbnail[0]);
+                var extension = Path.GetExtension(url);
+                var iconBytes = downloadService.DownloadData(url);
 
-              File.WriteAllBytesAsync(GetIconFileNameWithCacheFolder(sourceName, package.Name), iconBytes);
-            }
-            catch (Exception ex)
-            {
-              //TODO: log & handle error
+                File.WriteAllBytesAsync(GetIconFileNameWithCacheFolder(sourceName, package.Name), iconBytes);
+              }
+              catch (Exception ex)
+              {
+                //TODO: log & handle error
+              }
             }
           }
-        }
-        else if (package.Icon != null && package.Icon.Length > 0)
-        {
-          if (ShouldStoreIcon(sourceName, package.Name))
+          else if (package.Icon != null && package.Icon.Length > 0)
           {
-            try
+            if (ShouldStoreIcon(sourceName, package.Name))
             {
-              byte[] iconBytes = Convert.FromBase64String(package.Icon);
-              File.WriteAllBytesAsync(GetIconFileNameWithCacheFolder(sourceName, package.Name), iconBytes);
-            }
-            catch (Exception ex)
-            {
-              //TODO: log & handle error
+              try
+              {
+                byte[] iconBytes = Convert.FromBase64String(package.Icon);
+                File.WriteAllBytesAsync(GetIconFileNameWithCacheFolder(sourceName, package.Name), iconBytes);
+              }
+              catch (Exception ex)
+              {
+                //TODO: log & handle error
+              }
             }
           }
         }
@@ -171,6 +175,18 @@ namespace synopackage_dotnet.Model.Services
         }
         return false;
       }
+    }
+    private string GetValidUrl(string urlCandidate, bool useSsl = true)
+    {
+      string protocol = useSsl ? "https" : "http";
+      if (string.IsNullOrWhiteSpace(urlCandidate))
+        return null;
+      else if (urlCandidate.StartsWith("http", true, CultureInfo.InvariantCulture))
+        return urlCandidate;
+      else if (urlCandidate.StartsWith("//"))
+        return $"{protocol}:{urlCandidate}";
+      else
+        return $"{protocol}://{urlCandidate}";
     }
 
 

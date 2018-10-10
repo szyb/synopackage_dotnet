@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Net;
 using ExpressMapper;
@@ -36,6 +37,8 @@ namespace synopackage_dotnet.Model.Services
         request.AddParameter("build", build);
         request.AddParameter("package_update_channel", isBeta ? "beta" : "stable");
         request.AddParameter("timezone", "Brussels");
+
+        url = GetLegacySupportUrl(url, request);
         // request.AddHeader("User-Agent", customUserAgent != null ? customUserAgent : unique);
         var userAgent = customUserAgent != null ? customUserAgent : unique;
         var response = downloadService.Execute(url, request, userAgent);
@@ -66,7 +69,7 @@ namespace synopackage_dotnet.Model.Services
         }
         else
         {
-          errorMessage = $"{response.StatusCode.ToString()} {response.ErrorMessage}";
+          errorMessage = $"{response.StatusDescription} {response.ErrorMessage}";
           return null;
         }
       }
@@ -97,6 +100,20 @@ namespace synopackage_dotnet.Model.Services
         return null;
       }
 
+    }
+
+    private string GetLegacySupportUrl(string url, RestRequest request)
+    {
+      Dictionary<string, string> dictParamValue = new Dictionary<string, string>();
+      request.Parameters.ForEach(item =>
+      {
+        dictParamValue.Add(item.Name, item.Value.ToString());
+      });
+      string urlParams = Utils.GetUrlParameters(dictParamValue);
+      if (url.EndsWith("/"))
+        return $"{url}?{urlParams}";
+      else
+        return $"{url}/?{urlParams}";
     }
   }
 }

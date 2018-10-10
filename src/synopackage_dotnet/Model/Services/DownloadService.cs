@@ -39,7 +39,8 @@ namespace synopackage_dotnet.Model.Services
 
     public byte[] DownloadData(string url)
     {
-      var client = GetClient(url);
+      //act as a regular browser
+      var client = GetClient(url, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36 OPR/56.0.3051.36");
       var request = new RestRequest(Method.GET);
       return client.DownloadData(request);
     }
