@@ -1,13 +1,13 @@
 <h1>Browse source - {{ nameString }}</h1>
 <div *ngIf="!areSettingsSet" class="alert alert-warning" role="alert">User settings are not set. Showing
-    results for default model and version
+  results for default model and version
 </div>
 <div *ngIf="!packages">
-    <app-wait></app-wait>
+  <app-wait></app-wait>
 </div>
-<div *ngFor="let package of packages">
-    <div class="logo"><img src="{{ package.thumbnailUrl }}" alt="{{ package.name }}" /></div>
-    <h4>{{ package.name }}</h4>
-    <p>{{ package.description }}</p>
-    <a href="{{ package.downloadLink }}">download</a>
+<div *ngFor="let package of packages" class="blue-gradient z-depth-2 rounded mb-1 pd-3">
+  <img src="{{ package.thumbnailUrl }}" alt="{{ package.name }}" width="72" height="72" class="float-left py-1 pr-2 pl-1" />
+  <h4>{{ package.name }}</h4>
+  <a href="{{ package.downloadLink }}">download</a>
+  <p class="pd-2 px-2">{{ package.description }}</p>
 </div>
