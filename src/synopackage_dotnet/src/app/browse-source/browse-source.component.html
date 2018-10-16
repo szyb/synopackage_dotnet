@@ -1,3 +1,7 @@
+<nav class="breadcrumb">
+  <a class="breadcrumb-item" routerLink="/sources">Sources</a>
+  <span class="breadcrumb-item active">{{ nameString }}</span>
+</nav>
 <h1>Browse source - {{ nameString }}</h1>
 <div *ngIf="!areSettingsSet" class="alert alert-warning" role="alert">User settings are not set. Showing
   results for default model and version

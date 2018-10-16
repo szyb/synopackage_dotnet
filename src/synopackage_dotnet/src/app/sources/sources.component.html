@@ -1,3 +1,6 @@
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">Sources</span>
+</nav>
 <h1>Third party package sources</h1>
 <div *ngIf="!sources">
   <app-wait></app-wait>
@@ -7,7 +10,7 @@
     <i class="animated bounceIn infinite green-text fa fa-gift fa-3x" aria-hidden="true"></i>
   </div>
 </div> -->
-<h3>Active repositiories:</h3>
+<h3 *ngIf="sources">Active repositiories:</h3>
 <table class="table" *ngIf="sources">
   <thead>
     <tr>
@@ -21,13 +24,13 @@
     <tr *ngFor="let source of activeSources">
       <td>{{ source.name }}</td>
       <td>{{ source.url }}</td>
-      <td><a routerLink="/browsesource/{{source.name}}">browse</a></td>
+      <td><a routerLink="/sources/{{source.name}}">browse</a></td>
       <td *ngIf="source.www != null"><a href="{{ source.www }}" target="_blank">Visit website</a></td>
       <td *ngIf="source.www == null"><a href="{{ source.url }}" target="_blank">Visit website</a></td>
     </tr>
   </tbody>
 </table>
-<h3>Inactive repositiories:</h3>
+<h3 *ngIf="sources">Inactive repositiories:</h3>
 <table class="table" *ngIf="sources">
   <thead>
     <tr>
