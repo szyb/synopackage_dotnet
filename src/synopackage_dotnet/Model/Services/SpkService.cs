@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using ExpressMapper;
 using ExpressMapper.Extensions;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using RestSharp;
 using synopackage_dotnet.Model.DTOs;
@@ -14,14 +15,17 @@ namespace synopackage_dotnet.Model.Services
   {
     private ICacheService cacheService;
     private IDownloadService downloadService;
-    public SpkService(ICacheService cacheService, IDownloadService downloadService)
+
+    private ILogger<SpkService> logger;
+    public SpkService(ICacheService cacheService, IDownloadService downloadService, ILogger<SpkService> logger)
     {
       this.cacheService = cacheService;
       this.downloadService = downloadService;
+      this.logger = logger;
     }
-    public IEnumerable<PackageDTO> GetPackages(string sourceName, string url, string arch, string model, string major, string minor, string build, bool isBeta, string customUserAgent, out string errorMessage)
+    public SourceServerResponseDTO GetPackages(string sourceName, string url, string arch, string model, string major, string minor, string build, bool isBeta, string customUserAgent)
     {
-      errorMessage = null;
+      string errorMessage = null;
       var cacheResult = cacheService.GetSpkResponseFromCache(sourceName, model, build, isBeta);
       SpkResult result = null;
       if (cacheResult.Result == false)
@@ -64,13 +68,16 @@ namespace synopackage_dotnet.Model.Services
           }
           else
           {
+            // return new SourceServerResponseDTO(false, "Response from server is null or empty", null);
+            logger.LogWarning($"No data for url: {url}");
             result = new SpkResult();
           }
         }
         else
         {
           errorMessage = $"{response.StatusDescription} {response.ErrorMessage}";
-          return null;
+          logger.LogError($"Error getting response for url: {url}: {errorMessage}");
+          return new SourceServerResponseDTO(false, errorMessage, null);
         }
       }
       else
@@ -83,7 +90,9 @@ namespace synopackage_dotnet.Model.Services
         this.cacheService.ProcessIcons(sourceName, result.Packages);
         List<PackageDTO> list = new List<PackageDTO>();
         if (result.Packages == null)
-          return list;
+        {
+          return new SourceServerResponseDTO(true, null, null);
+        }
         foreach (var spkPackage in result.Packages)
         {
           PackageDTO package = new PackageDTO();
@@ -92,12 +101,12 @@ namespace synopackage_dotnet.Model.Services
           list.Add(package);
         }
         list.Sort();
-        return list;
+        return new SourceServerResponseDTO(true, null, list);
       }
       else
       {
         errorMessage = "Spk result is empty";
-        return null;
+        return new SourceServerResponseDTO(false, errorMessage, null);
       }
 
     }

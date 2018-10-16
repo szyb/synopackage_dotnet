@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { UserSettingsService } from './user-settings.service';
 import { HttpClient } from '@angular/common/http';
-import { SourceDTO, PackageDTO, SourcesDTO } from '../sources/sources.model';
+import { SourceDTO, PackageDTO, SourcesDTO, SourceServerResponseDTO } from '../sources/sources.model';
 import { Config } from './config';
 import { Utils } from './Utils';
 
@@ -18,13 +18,13 @@ export class SourcesService {
     return this.http.get<SourcesDTO>(`${Config.apiUrl}Sources/GetAllSources`);
   }
 
-  public getPackagesFromSource(sourceName: string, model: string, version: string, isBeta: boolean): Observable<PackageDTO[]> {
+  public getPackagesFromSource(sourceName: string, model: string, version: string, isBeta: boolean): Observable<SourceServerResponseDTO> {
     const params = new SourceBrowseDTO();
     params.sourceName = sourceName;
     params.model = model;
     params.version = version;
     params.isBeta = isBeta;
-    return this.http.get<PackageDTO[]>(`${Config.apiUrl}Packages/GetList${Utils.getQueryParams(params)}`);
+    return this.http.get<SourceServerResponseDTO>(`${Config.apiUrl}Packages/GetSourceServerResponse${Utils.getQueryParams(params)}`);
   }
 }
 
