@@ -25,23 +25,23 @@ export const routerConfig: Routes = [
     component: HomeComponent
   },
   {
-      path: 'sources',
-      component: SourcesComponent,
-      pathMatch: 'full'
+    path: 'sources',
+    component: SourcesComponent,
+    pathMatch: 'full'
   },
   {
-      path: 'browsesource/:name',
-      component: BrowseSourceComponent
+    path: 'sources/:name',
+    component: BrowseSourceComponent
   },
   {
-      path: '',
-      redirectTo: '/home',
-      pathMatch: 'full'
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full'
   },
   {
-      path: '**',
-      redirectTo: '/home',
-      pathMatch: 'full'
+    path: '**',
+    redirectTo: '/home',
+    pathMatch: 'full'
   }
 ];
 @NgModule({
@@ -68,4 +68,4 @@ export const routerConfig: Routes = [
   providers: [UserSettingsService],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
