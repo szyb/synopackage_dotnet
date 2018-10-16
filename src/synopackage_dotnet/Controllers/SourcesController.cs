@@ -9,41 +9,42 @@ using synopackage_dotnet.Model.Services;
 
 namespace synopackage_dotnet.Controllers
 {
-    ///<summary></summary>
-    [Route("api/[controller]")]
-    public class SourcesController : Controller
+  ///<summary></summary>
+  [Route("api/[controller]")]
+  public class SourcesController : Controller
+  {
+    private ISourceService sourceService;
+    private ISpkService spkService;
+    public SourcesController(ISourceService sourceService, ISpkService spkService)
     {
-        private ISourceService sourceService;
-        private ISpkService spkService;
-        public SourcesController(ISourceService sourceService, ISpkService spkService)
-        {
-            this.sourceService = sourceService;
-            this.spkService = spkService;
-        }
-
-        
-        [HttpGet("GetList")]
-        public IEnumerable<SourceDTO> GetList()
-        {
-            return sourceService.GetList();
-        }
-        [HttpGet("GetPackages")]
-        public IEnumerable<PackageDTO> GetPackagesTest()
-        {
-            string errorMessage = null;
-            var result = spkService.GetPackages("synocommunity",
-                "https://packages.synocommunity.com",
-                "apollolake",
-                "DS718+",
-                "6",
-                "2", 
-                "23739",
-                true,
-                null,
-                out errorMessage);
-            if (!string.IsNullOrWhiteSpace(errorMessage))
-                throw new Exception(errorMessage);
-            return result;
-        }
+      this.sourceService = sourceService;
+      this.spkService = spkService;
     }
+
+
+    [HttpGet("GetAllSources")]
+    public SourcesDTO GetAllSources()
+    {
+      return sourceService.GetAllSources();
+    }
+
+    [HttpGet("GetPackages")]
+    public IEnumerable<PackageDTO> GetPackagesTest()
+    {
+      string errorMessage = null;
+      var result = spkService.GetPackages("synocommunity",
+          "https://packages.synocommunity.com",
+          "apollolake",
+          "DS718+",
+          "6",
+          "2",
+          "23739",
+          true,
+          null,
+          out errorMessage);
+      if (!string.IsNullOrWhiteSpace(errorMessage))
+        throw new Exception(errorMessage);
+      return result;
+    }
+  }
 }
