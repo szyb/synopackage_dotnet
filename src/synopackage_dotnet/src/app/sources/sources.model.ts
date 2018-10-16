@@ -3,6 +3,12 @@ export class SourceDTO {
   name: string;
   url: string;
   www: string;
+  disabledReason: string;
+}
+
+export class SourcesDTO {
+  activeSources: SourceDTO[];
+  inActiveSources: SourceDTO[];
 }
 
 export class PackageDTO {
