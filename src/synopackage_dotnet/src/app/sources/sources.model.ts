@@ -3,6 +3,12 @@ export class SourceDTO {
   name: string;
   url: string;
   www: string;
+  disabledReason: string;
+}
+
+export class SourcesDTO {
+  activeSources: SourceDTO[];
+  inActiveSources: SourceDTO[];
 }
 
 export class PackageDTO {
@@ -14,4 +20,10 @@ export class PackageDTO {
   isBeta: boolean;
   downloadLink: string;
   iconFileName: string;
+}
+
+export class SourceServerResponseDTO {
+  result: boolean;
+  errorMessage: string;
+  packages: PackageDTO[];
 }

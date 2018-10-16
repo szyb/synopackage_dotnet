@@ -10,6 +10,8 @@ using Autofac.Builder;
 using synopackage_dotnet.Model.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Logging;
+using Serilog.Extensions.Logging;
 
 namespace synopackage_dotnet
 {
@@ -80,8 +82,14 @@ namespace synopackage_dotnet
     /// </summary>
     /// <param name="app">The application.</param>
     /// <param name="env">The hosting environment</param>
-    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+    /// <param name="loggerFactory">The logger factory</param>
+    public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
     {
+      loggerFactory
+       .AddConsole()
+       .AddDebug()
+       .AddFile("..\\Logs\\synopackage-{Date}.log");
+
       if (env.IsDevelopment())
       {
         app.UseDeveloperExceptionPage();
