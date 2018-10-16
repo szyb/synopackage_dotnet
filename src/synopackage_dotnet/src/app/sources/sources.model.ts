@@ -21,3 +21,9 @@ export class PackageDTO {
   downloadLink: string;
   iconFileName: string;
 }
+
+export class SourceServerResponseDTO {
+  result: boolean;
+  errorMessage: string;
+  packages: PackageDTO[];
+}

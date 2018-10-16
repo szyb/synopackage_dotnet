@@ -9,7 +9,11 @@
         "build",
         "${workspaceFolder}/synopackage_dotnet.csproj"
       ],
-      "problemMatcher": "$msCompile"
+      "problemMatcher": "$msCompile",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
     },
     {
       "label": "publish",
