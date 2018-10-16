@@ -60,8 +60,8 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "baseHref": "/synopackage/",
-              "deployUrl": "/synopackage/"
+              "baseHref": "/",
+              "deployUrl": "/"
             },
             "dev2": {
               "deleteOutputPath": false,
