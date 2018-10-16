@@ -2,8 +2,14 @@
 <div *ngIf="!areSettingsSet" class="alert alert-warning" role="alert">User settings are not set. Showing
   results for default model and version
 </div>
-<div *ngIf="!packages">
+<div *ngIf="!isResponseArrived">
   <app-wait></app-wait>
+</div>
+<div *ngIf="isError">
+  <p class="alert alert-danger">{{ errorMessage }}</p>
+</div>
+<div *ngIf="noPackages">
+  <p class="alert alert-success">No results found</p>
 </div>
 <div *ngFor="let package of packages" class="blue-gradient z-depth-2 rounded mb-1 pd-3">
   <img src="{{ package.thumbnailUrl }}" alt="{{ package.name }}" width="72" height="72" class="float-left py-1 pr-2 pl-1" />

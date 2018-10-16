@@ -27,24 +27,5 @@ namespace synopackage_dotnet.Controllers
     {
       return sourceService.GetAllSources();
     }
-
-    [HttpGet("GetPackages")]
-    public IEnumerable<PackageDTO> GetPackagesTest()
-    {
-      string errorMessage = null;
-      var result = spkService.GetPackages("synocommunity",
-          "https://packages.synocommunity.com",
-          "apollolake",
-          "DS718+",
-          "6",
-          "2",
-          "23739",
-          true,
-          null,
-          out errorMessage);
-      if (!string.IsNullOrWhiteSpace(errorMessage))
-        throw new Exception(errorMessage);
-      return result;
-    }
   }
 }
