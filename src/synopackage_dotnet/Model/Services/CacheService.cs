@@ -6,6 +6,7 @@ using System.Net;
 using System.Text;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Hosting.Internal;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using synopackage_dotnet.Model.DTOs;
 using synopackage_dotnet.Model.SPK;
@@ -15,16 +16,18 @@ namespace synopackage_dotnet.Model.Services
   public class CacheService : ICacheService
   {
     IDownloadService downloadService;
+    ILogger<CacheService> logger;
     private readonly string defaultIconExtension = "png";
     private readonly string defaultCacheExtension = "cache";
 
-    public CacheService(IDownloadService downloadService)
+    public CacheService(IDownloadService downloadService, ILogger<CacheService> logger)
     {
       if (!Directory.Exists(AppSettingsProvider.AppSettings.FrontendCacheFolder))
         Directory.CreateDirectory(AppSettingsProvider.AppSettings.FrontendCacheFolder);
       if (!Directory.Exists(AppSettingsProvider.AppSettings.BackendCacheFolder))
         Directory.CreateDirectory(AppSettingsProvider.AppSettings.BackendCacheFolder);
       this.downloadService = downloadService;
+      this.logger = logger;
     }
 
     public void ProcessIconsAsync(string sourceName, List<SpkPackage> packages)
@@ -66,7 +69,7 @@ namespace synopackage_dotnet.Model.Services
               }
               catch (Exception ex)
               {
-                //TODO: log & handle error
+                logger.LogError(ex, "ProcessIcons - could not download or store icon");
               }
             }
           }
@@ -81,7 +84,7 @@ namespace synopackage_dotnet.Model.Services
               }
               catch (Exception ex)
               {
-                //TODO: log & handle error
+                logger.LogError(ex, "ProcessIcons - could not convert icon from base 64 or store error");
               }
             }
           }
@@ -103,7 +106,7 @@ namespace synopackage_dotnet.Model.Services
       }
       catch (Exception ex)
       {
-        //TODO: log error
+        logger.LogError(ex, "SaveSpkResult - could not save SPK response to cache");
         return false;
       }
     }
@@ -142,7 +145,7 @@ namespace synopackage_dotnet.Model.Services
         }
         catch (Exception ex)
         {
-          //TODO: log
+          logger.LogError(ex, "GetSpkResponseFromCache - could not get SPK response from cache");
           res.Result = false;
           return res;
         }

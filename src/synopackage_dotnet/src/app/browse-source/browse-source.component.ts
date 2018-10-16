@@ -4,7 +4,7 @@ import { Router, ActivatedRoute, ParamMap, Params } from '@angular/router';
 import { switchMap, take } from 'rxjs/operators';
 import { Config } from '../shared/config';
 import { Observable, Subscription } from 'rxjs';
-import { PackageDTO } from '../sources/sources.model';
+import { PackageDTO, SourceServerResponseDTO } from '../sources/sources.model';
 import { SourcesService } from '../shared/sources.service';
 import { UserSettingsService } from '../shared/user-settings.service';
 import { ModelsService } from '../shared/models.service';
@@ -19,7 +19,13 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
   private name: Observable<string>;
   public nameString: string;
   public packages: PackageDTO[];
+  public response: SourceServerResponseDTO;
+  public isResponseArrived: boolean;
+  public isError: boolean;
+  public result: boolean;
+  public errorMessage: string;
   public areSettingsSet: boolean;
+  public noPackages: boolean;
   constructor(private route: ActivatedRoute,
     private sourcesService: SourcesService,
     private userSettingsService: UserSettingsService,
@@ -33,6 +39,9 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
   ngOnInit() {
     // this.subscription = this.route.params.subscribe((params: Params) => { this.nameString = params['name']; });
     this.areSettingsSet = this.userSettingsService.isSetup();
+    this.isResponseArrived = false;
+    this.isError = false;
+    this.noPackages = false;
     this.route.params.pipe(
       take(1)
     ).subscribe((params: Params) => { this.nameString = params['name']; });
@@ -44,10 +53,20 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
     ).pipe(
       take(1)
     ).subscribe(val => {
-      this.packages = val;
-      this.packages.forEach(element => {
-        element.thumbnailUrl = 'cache/' + element.iconFileName;
-      });
+      this.response = val;
+      this.result = this.response.result;
+      this.errorMessage = this.response.errorMessage;
+      this.isError = !this.result;
+      this.packages = this.response.packages;
+      if (this.result && (this.packages == null || this.packages.length === 0)) {
+        this.noPackages = true;
+      }
+      if (this.response.packages != null) {
+        this.packages.forEach(element => {
+          element.thumbnailUrl = 'cache/' + element.iconFileName;
+        });
+      }
+      this.isResponseArrived = true;
     });
 
   }
