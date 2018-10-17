@@ -6,6 +6,7 @@ export class SearchResultDTO {
   isValid: boolean;
   errorMessage: string;
   count: number;
+  noPackages: boolean;
   packages: PackageDTO[];
   response: SourceServerResponseDTO;
 }

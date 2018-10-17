@@ -83,12 +83,10 @@ export class SearchComponent implements OnInit, OnDestroy {
       this.isSearchPerformed = false;
       this.searchResult.forEach(item => {
         item.isSearchEnded = false;
+        item.noPackages = false;
       });
     }
     if (this.searchResult != null) {
-
-
-
       this.searchResult.forEach(item => {
         this.sourcesService.getPackagesFromSource(item.name,
           this.userSettingsService.getUserModel(),
@@ -104,7 +102,7 @@ export class SearchComponent implements OnInit, OnDestroy {
             item.errorMessage = val.errorMessage;
             item.isSearchEnded = true;
             if (item.isValid && (item.packages == null || item.packages.length === 0)) {
-              // this.noPackages = true;
+              item.noPackages = true;
             }
             if (item.packages != null) {
               item.packages.forEach(element => {
