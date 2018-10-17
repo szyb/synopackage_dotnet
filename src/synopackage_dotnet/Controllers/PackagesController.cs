@@ -27,7 +27,7 @@ namespace synopackage_dotnet.Controllers
     }
 
     [HttpGet("GetSourceServerResponse")]
-    public SourceServerResponseDTO GetSourceServerResponse(string sourceName, string model, string version, bool isBeta)
+    public SourceServerResponseDTO GetSourceServerResponse(string sourceName, string model, string version, bool isBeta, string keyword = null)
     {
       SourceServerResponseDTO response = null;
       if (model == null)
@@ -39,7 +39,6 @@ namespace synopackage_dotnet.Controllers
       var sourceDto = this.sourceService.GetSource(sourceName);
       var modelDto = this.modelService.GetModel(model);
 
-
       if (sourceDto != null && versionDto != null && modelDto != null)
       {
         response = this.spkService.GetPackages(sourceName,
@@ -50,7 +49,8 @@ namespace synopackage_dotnet.Controllers
           versionDto.Minor.ToString(),
           versionDto.Build.ToString(),
           isBeta,
-          sourceDto.CustomUserAgent);
+          sourceDto.CustomUserAgent,
+          keyword);
       }
       else
       {
