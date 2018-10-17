@@ -24,11 +24,16 @@
 </div>
 <div *ngIf="isSearchPerformed">
   <div *ngFor="let result of searchResult">
-    <h3>{{ result.name }}</h3>
+    <blockquote class="blockquote bq-primary">
+      <p class="bq-title">{{ result.name }}</p>
+    </blockquote>
     <div *ngIf="!result.isSearchEnded">
       <app-wait></app-wait>
     </div>
     <div *ngIf="result.isSearchEnded">
+      <div *ngIf="result.noPackages">
+        <p class="alert alert-success">No results found</p>
+      </div>
       <div *ngFor="let package of result.packages" class="blue-gradient z-depth-2 rounded mb-1 pd-3">
         <img src="{{ package.thumbnailUrl }}" alt="{{ package.name }}" width="72" height="72" class="float-left py-1 pr-2 pl-1" />
         <h4>{{ package.name }}</h4>
