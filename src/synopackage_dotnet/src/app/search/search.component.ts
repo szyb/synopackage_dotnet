@@ -25,9 +25,9 @@ export class SearchComponent implements OnInit, OnDestroy {
     private router: Router) {
   }
 
-  private isSearchPerformed: boolean;
-  private sources: SourceLiteDTO[];
-  private searchResult: SearchResultDTO[];
+  public isSearchPerformed: boolean;
+  public sources: SourceLiteDTO[];
+  public searchResult: SearchResultDTO[];
   private subscription: Subscription;
   public keyword: string;
 
