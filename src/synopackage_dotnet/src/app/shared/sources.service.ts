@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { UserSettingsService } from './user-settings.service';
 import { HttpClient } from '@angular/common/http';
-import { SourceDTO, PackageDTO, SourcesDTO, SourceServerResponseDTO } from '../sources/sources.model';
+import { SourceDTO, PackageDTO, SourcesDTO, SourceServerResponseDTO, SourceLiteDTO } from '../sources/sources.model';
 import { Config } from './config';
 import { Utils } from './Utils';
 
@@ -25,6 +25,10 @@ export class SourcesService {
     params.version = version;
     params.isBeta = isBeta;
     return this.http.get<SourceServerResponseDTO>(`${Config.apiUrl}Packages/GetSourceServerResponse${Utils.getQueryParams(params)}`);
+  }
+
+  public getAllActiveSources(): Observable<SourceLiteDTO[]> {
+    return this.http.get<SourceLiteDTO[]>(`${Config.apiUrl}Sources/GetAllActiveSources`);
   }
 }
 
