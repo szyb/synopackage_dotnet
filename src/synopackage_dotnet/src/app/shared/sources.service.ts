@@ -18,12 +18,13 @@ export class SourcesService {
     return this.http.get<SourcesDTO>(`${Config.apiUrl}Sources/GetAllSources`);
   }
 
-  public getPackagesFromSource(sourceName: string, model: string, version: string, isBeta: boolean): Observable<SourceServerResponseDTO> {
+  public getPackagesFromSource(sourceName: string, model: string, version: string, isBeta: boolean, keyword: string): Observable<SourceServerResponseDTO> {
     const params = new SourceBrowseDTO();
     params.sourceName = sourceName;
     params.model = model;
     params.version = version;
     params.isBeta = isBeta;
+    params.keyword = keyword;
     return this.http.get<SourceServerResponseDTO>(`${Config.apiUrl}Packages/GetSourceServerResponse${Utils.getQueryParams(params)}`);
   }
 
@@ -37,4 +38,5 @@ export class SourceBrowseDTO {
   model: string;
   version: string;
   isBeta: boolean;
+  keyword: string;
 }
