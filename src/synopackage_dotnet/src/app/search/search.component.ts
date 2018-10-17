@@ -84,6 +84,10 @@ export class SearchComponent implements OnInit, OnDestroy {
       this.searchResult.forEach(item => {
         item.isSearchEnded = false;
         item.noPackages = false;
+        item.packages = null;
+        item.errorMessage = null;
+        item.isValid = false;
+        item.response = null;
       });
     }
     if (this.searchResult != null) {
