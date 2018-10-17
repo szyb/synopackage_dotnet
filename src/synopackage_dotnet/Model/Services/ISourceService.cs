@@ -8,5 +8,6 @@ namespace synopackage_dotnet.Model.Services
     SourcesDTO GetAllSources();
     bool ValidateSource(string source);
     SourceDTO GetSource(string source);
+    IEnumerable<SourceLiteDTO> GetAllActiveSources();
   }
 }

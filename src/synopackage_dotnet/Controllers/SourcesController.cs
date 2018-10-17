@@ -27,5 +27,11 @@ namespace synopackage_dotnet.Controllers
     {
       return sourceService.GetAllSources();
     }
+
+    [HttpGet("GetAllActiveSources")]
+    public IEnumerable<SourceLiteDTO> GetAllActiveSources()
+    {
+      return sourceService.GetAllActiveSources();
+    }
   }
 }

@@ -1,0 +1,24 @@
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">Search</span>
+</nav>
+<h1>Search</h1>
+<div *ngIf="!sources">
+  <app-wait></app-wait>
+</div>
+<div *ngIf="sources">
+  <form>
+    <div class="row">
+      <div class="col-md-9">
+        <div class="md-form form-sm">
+          <input mdbInputDirective type="text" id="searchForm" class="form-control">
+          <label for="searchForm" class="">Keyword</label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="md-form form-group">
+          <a mdbBtn color="primary" size="lg" class="waves-light" mdbWavesEffect>Search</a>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

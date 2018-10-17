@@ -56,5 +56,24 @@ namespace synopackage_dotnet.Model.Services
       }
       return result;
     }
+
+    public IEnumerable<SourceLiteDTO> GetAllActiveSources()
+    {
+      List<SourceLiteDTO> list = new List<SourceLiteDTO>();
+      var sourcesJson = File.ReadAllText("Config/sources.json");
+      var sources = JsonConvert.DeserializeObject<SourceDTO[]>(sourcesJson);
+
+      var result = sources
+        .Where(item => item.Active)
+        .ToList()
+        .ConvertAll<SourceLiteDTO>(delegate (SourceDTO s)
+        {
+          SourceLiteDTO sl = new SourceLiteDTO();
+          sl.Name = s.Name;
+          return new SourceLiteDTO() { Name = s.Name };
+        });
+
+      return result;
+    }
   }
 }
