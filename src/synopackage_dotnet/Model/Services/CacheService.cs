@@ -53,6 +53,7 @@ namespace synopackage_dotnet.Model.Services
     {
       if (packages != null)
       {
+        byte[] defaultIconBytes = null;
         foreach (var package in packages)
         {
           if (package.Thumbnail != null && package.Thumbnail.Count > 0)
@@ -63,9 +64,19 @@ namespace synopackage_dotnet.Model.Services
               {
                 var url = GetValidUrl(package.Thumbnail[0]);
                 var extension = Path.GetExtension(url);
-                var iconBytes = downloadService.DownloadData(url);
-
-                File.WriteAllBytesAsync(GetIconFileNameWithCacheFolder(sourceName, package.Name), iconBytes);
+                byte[] iconBytes = null;
+                if (ShouldDownloadIcon(sourceName, url))
+                  iconBytes = downloadService.DownloadData(url);
+                if (IsValidIcon(iconBytes))
+                {
+                  File.WriteAllBytesAsync(GetIconFileNameWithCacheFolder(sourceName, package.Name), iconBytes);
+                }
+                else
+                {
+                  if (defaultIconBytes == null)
+                    defaultIconBytes = File.ReadAllBytes("wwwroot/assets/package.png"); //TODO: assets folder should be in appsettings
+                  File.WriteAllBytesAsync(GetIconFileNameWithCacheFolder(sourceName, package.Name), defaultIconBytes);
+                }
               }
               catch (Exception ex)
               {
@@ -89,6 +100,56 @@ namespace synopackage_dotnet.Model.Services
             }
           }
         }
+      }
+    }
+
+    private bool ShouldDownloadIcon(string sourceName, string url)
+    {
+      //performance improvement for synologyitalia (downloading one icon is taking too much time and eventually it fails)
+      if (sourceName == "synologyitalia" && url != null && url.Contains("piwik"))
+        return false;
+      else
+        return true;
+    }
+
+    private bool IsValidIcon(byte[] iconBytes)
+    {
+      if (iconBytes == null)
+        return false;
+      //PNG
+      if (iconBytes.Length >= 8
+        && iconBytes[0] == 137
+        && iconBytes[1] == 80
+        && iconBytes[2] == 78
+        && iconBytes[3] == 71
+        && iconBytes[4] == 13
+        && iconBytes[5] == 10
+        && iconBytes[6] == 26
+        && iconBytes[7] == 10)
+        return true;
+      //GIF
+      else if (iconBytes.Length >= 3
+        && iconBytes[0] == char.GetNumericValue('G')
+        && iconBytes[1] == char.GetNumericValue('I')
+        && iconBytes[2] == char.GetNumericValue('F')
+        )
+        return true;
+      //JFIF  
+      else if (iconBytes.Length >= 4
+        && iconBytes[0] == char.GetNumericValue('J')
+        && iconBytes[1] == char.GetNumericValue('F')
+        && iconBytes[2] == char.GetNumericValue('I')
+        && iconBytes[3] == char.GetNumericValue('F')
+        )
+        return true;
+      else
+      {
+        return false;
+        // var content = System.Text.Encoding.UTF8.GetString(iconBytes);
+        // if (content.Contains("piwik.org")) //a hack for one invalid icon from synologyitalia
+        //   return false;
+        // else
+        //   return true;
       }
     }
 
