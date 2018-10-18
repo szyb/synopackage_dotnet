@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, OnDestroy, Injectable } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy, Injectable, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute, ParamMap, Params } from '@angular/router';
 import { switchMap, take } from 'rxjs/operators';
@@ -9,6 +9,7 @@ import { SourcesService } from '../shared/sources.service';
 import { UserSettingsService } from '../shared/user-settings.service';
 import { ModelsService } from '../shared/models.service';
 import { VersionsService } from '../shared/versions.service';
+import { PackageInfoComponent } from '../components/package-info/package-info.component';
 
 @Component({
   selector: 'app-browse-source',
@@ -35,6 +36,9 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
   }
 
   private subscription: Subscription;
+
+  @ViewChild(PackageInfoComponent)
+  PackageInfoComponent: PackageInfoComponent;
 
   ngOnInit() {
     // this.subscription = this.route.params.subscribe((params: Params) => { this.nameString = params['name']; });

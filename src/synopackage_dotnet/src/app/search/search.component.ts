@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, OnDestroy, Injectable } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy, Injectable, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute, ParamMap, Params } from '@angular/router';
 import { switchMap, take } from 'rxjs/operators';
@@ -10,6 +10,7 @@ import { UserSettingsService } from '../shared/user-settings.service';
 import { ModelsService } from '../shared/models.service';
 import { VersionsService } from '../shared/versions.service';
 import { SearchResultDTO } from './search.model';
+import { PackageInfoComponent } from '../components/package-info/package-info.component';
 
 @Component({
   selector: 'app-search',
@@ -31,6 +32,9 @@ export class SearchComponent implements OnInit, OnDestroy {
   public searchResult: SearchResultDTO[];
   private subscription: Subscription;
   public keyword: string;
+
+  @ViewChild(PackageInfoComponent)
+  PackageInfoComponent: PackageInfoComponent;
 
   ngOnInit() {
     this.searchResult = [];
