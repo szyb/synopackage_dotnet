@@ -46,6 +46,9 @@ export class SearchComponent implements OnInit, OnDestroy {
     });
   }
 
+  onEnter() {
+    this.performSearch();
+  }
 
   performSearch() {
     if (this.isSearchPerformed) {
