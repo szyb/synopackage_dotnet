@@ -23,7 +23,7 @@ namespace synopackage_dotnet.Model.Services
       this.downloadService = downloadService;
       this.logger = logger;
     }
-    public SourceServerResponseDTO GetPackages(string sourceName, string url, string arch, string model, string major, string minor, string build, bool isBeta, string customUserAgent)
+    public SourceServerResponseDTO GetPackages(string sourceName, string url, string arch, string model, string major, string minor, string build, bool isBeta, string customUserAgent, string keyword = null)
     {
       string errorMessage = null;
       var cacheResult = cacheService.GetSpkResponseFromCache(sourceName, model, build, isBeta);
@@ -52,7 +52,7 @@ namespace synopackage_dotnet.Model.Services
           var responseContent = response.Content;
           if (responseContent != null)
           {
-            System.IO.File.WriteAllText("cache/out.html", responseContent);
+            // System.IO.File.WriteAllText("cache/out.html", responseContent);
             responseContent = responseContent.Replace("\\n", "\n");
             if (responseContent.Contains("\"packages\""))
             {
@@ -68,7 +68,6 @@ namespace synopackage_dotnet.Model.Services
           }
           else
           {
-            // return new SourceServerResponseDTO(false, "Response from server is null or empty", null);
             logger.LogWarning($"No data for url: {url}");
             result = new SpkResult();
           }
@@ -95,10 +94,13 @@ namespace synopackage_dotnet.Model.Services
         }
         foreach (var spkPackage in result.Packages)
         {
-          PackageDTO package = new PackageDTO();
-          spkPackage.Map(package);
-          package.IconFileName = cacheService.GetIconFileName(sourceName, package.Name);
-          list.Add(package);
+          if (string.IsNullOrWhiteSpace(keyword) || KeywordExists(keyword, spkPackage))
+          {
+            PackageDTO package = new PackageDTO();
+            spkPackage.Map(package);
+            package.IconFileName = cacheService.GetIconFileName(sourceName, package.Name);
+            list.Add(package);
+          }
         }
         list.Sort();
         return new SourceServerResponseDTO(true, null, list);
@@ -108,7 +110,21 @@ namespace synopackage_dotnet.Model.Services
         errorMessage = "Spk result is empty";
         return new SourceServerResponseDTO(false, errorMessage, null);
       }
+    }
 
+    private bool KeywordExists(string keyword, SpkPackage spkPackage)
+    {
+      if (string.IsNullOrWhiteSpace(keyword))
+        return true;
+      if (spkPackage == null)
+        return false;
+      if (spkPackage.Name != null && spkPackage.Name.Contains(keyword, StringComparison.InvariantCultureIgnoreCase))
+        return true;
+      if (spkPackage.Dname != null && spkPackage.Dname.Contains(keyword, StringComparison.InvariantCultureIgnoreCase))
+        return true;
+      if (spkPackage.Desc != null && spkPackage.Desc.Contains(keyword, StringComparison.InvariantCultureIgnoreCase))
+        return true;
+      return false;
     }
 
     private string GetLegacySupportUrl(string url, RestRequest request)
