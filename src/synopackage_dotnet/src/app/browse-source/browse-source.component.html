@@ -2,7 +2,10 @@
   <a class="breadcrumb-item" routerLink="/sources">Sources</a>
   <span class="breadcrumb-item active">{{ nameString }}</span>
 </nav>
-<h1>Browse source - {{ nameString }}</h1>
+<h1>Browse source</h1>
+<blockquote class="blockquote bq-primary">
+  <p class="bq-title">{{ nameString }}</p>
+</blockquote>
 <div *ngIf="!areSettingsSet" class="alert alert-warning" role="alert">User settings are not set. Showing
   results for default model and version
 </div>
