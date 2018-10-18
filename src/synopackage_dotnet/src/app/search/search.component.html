@@ -5,6 +5,9 @@
 <div *ngIf="!sources">
   <app-wait></app-wait>
 </div>
+<div *ngIf="!areSettingsSet" class="alert alert-warning" role="alert">User settings are not set. Search results will be
+  for default model and version
+</div>
 <div *ngIf="sources">
   <form>
     <div class="row">
