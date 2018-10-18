@@ -17,6 +17,8 @@ import { UserSettingsService } from './shared/user-settings.service';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { UserSettingsDisplayComponent } from './components/user-settings-display/user-settings-display.component';
 import { BrowseSourceComponent } from './browse-source/browse-source.component';
+import { SearchComponent } from './search/search.component';
+import { PackageInfoComponent } from './components/package-info/package-info.component';
 
 
 export const routerConfig: Routes = [
@@ -32,6 +34,10 @@ export const routerConfig: Routes = [
   {
     path: 'sources/:name',
     component: BrowseSourceComponent
+  },
+  {
+    path: 'search',
+    component: SearchComponent
   },
   {
     path: '',
@@ -53,6 +59,8 @@ export const routerConfig: Routes = [
     UserSettingsComponent,
     UserSettingsDisplayComponent,
     BrowseSourceComponent,
+    SearchComponent,
+    PackageInfoComponent,
     DialogComponent
     // DisplayMapComponent
   ],

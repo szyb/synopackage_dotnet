@@ -1,0 +1,50 @@
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">Search</span>
+</nav>
+<h1>Search</h1>
+<div *ngIf="!sources">
+  <app-wait></app-wait>
+</div>
+<div *ngIf="!areSettingsSet" class="alert alert-warning" role="alert">User settings are not set. Search results will be
+  for default model and version
+</div>
+<div *ngIf="sources">
+  <form>
+    <div class="row">
+      <div class="col-md-10">
+        <div class="md-form form-sm">
+          <input mdbInputDirective type="search" id="searchForm" class="form-control" [(ngModel)]="keyword" name="keyword"
+            (keyup.enter)="$event.target.blur(); onEnter()" [mdbValidate]="false" maxLength="300" />
+          <label for="searchForm" class="">Keyword</label>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="md-form form-group float-right">
+          <a mdbBtn color="primary" size="lg" class="waves-light" (click)="performSearch()" mdbWavesEffect>Search</a>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div *ngIf="isSearchPerformed">
+  <div *ngFor="let result of searchResult">
+    <blockquote class="blockquote bq-primary">
+      <a class="bq-title" routerLink="/sources/{{result.name}}">{{result.name}}</a>
+    </blockquote>
+    <div *ngIf="!result.isSearchEnded">
+      <app-wait></app-wait>
+    </div>
+    <div *ngIf="result.isSearchEnded">
+      <div *ngIf="result.noPackages">
+        <p class="alert alert-success">No results found</p>
+      </div>
+      <div *ngFor="let package of result.packages" class="blue-gradient z-depth-2 rounded mb-1 pd-3">
+        <app-package-info [package]="package"></app-package-info>
+      </div>
+      <!-- <div *ngFor="let pack of result.packages">
+        {{ pack.name }}
+      </div> -->
+    </div>
+  </div>
+
+</div>

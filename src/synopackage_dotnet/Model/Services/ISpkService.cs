@@ -4,7 +4,7 @@ namespace synopackage_dotnet.Model.Services
 {
   public interface ISpkService : IDomainService
   {
-    SourceServerResponseDTO GetPackages(string sourceName, string url, string arch, string model, string major, string minor, string build, bool isBeta, string customUserAgent);
+    SourceServerResponseDTO GetPackages(string sourceName, string url, string arch, string model, string major, string minor, string build, bool isBeta, string customUserAgent, string keyword = null);
 
   }
 }
