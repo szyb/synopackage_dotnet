@@ -26,6 +26,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   public isSearchPerformed: boolean;
+  public areSettingsSet: boolean;
   public sources: SourceLiteDTO[];
   public searchResult: SearchResultDTO[];
   private subscription: Subscription;
@@ -33,6 +34,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.searchResult = [];
+    this.areSettingsSet = this.userSettingsService.isSetup();
     this.sourcesService.getAllActiveSources().subscribe(result => {
       this.sources = result;
       this.sources.forEach(item => {
@@ -42,39 +44,6 @@ export class SearchComponent implements OnInit, OnDestroy {
         this.searchResult.push(sr);
       });
     });
-
-    // this.subscription = this.route.params.subscribe((params: Params) => { this.nameString = params['name']; });
-    // this.areSettingsSet = this.userSettingsService.isSetup();
-    // this.isResponseArrived = false;
-    // this.isError = false;
-    // this.noPackages = false;
-    // this.route.params.pipe(
-    //   take(1)
-    // ).subscribe((params: Params) => { this.nameString = params['name']; });
-
-    // this.sourcesService.getPackagesFromSource(this.nameString,
-    //   this.userSettingsService.getUserModel(),
-    //   this.userSettingsService.getUserVersion(),
-    //   this.userSettingsService.getUserIsBeta()
-    // ).pipe(
-    //   take(1)
-    // ).subscribe(val => {
-    //   this.response = val;
-    //   this.result = this.response.result;
-    //   this.errorMessage = this.response.errorMessage;
-    //   this.isError = !this.result;
-    //   this.packages = this.response.packages;
-    //   if (this.result && (this.packages == null || this.packages.length === 0)) {
-    //     this.noPackages = true;
-    //   }
-    //   if (this.response.packages != null) {
-    //     this.packages.forEach(element => {
-    //       element.thumbnailUrl = 'cache/' + element.iconFileName;
-    //     });
-    //   }
-    //   this.isResponseArrived = true;
-    // });
-
   }
 
 
