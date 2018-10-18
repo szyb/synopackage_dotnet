@@ -11,7 +11,7 @@ namespace synopackage_dotnet.Controllers
 {
   ///<summary></summary>
   [Route("api/[controller]")]
-  public class PackagesController : Controller
+  public class PackagesController : BaseController
   {
     private ISpkService spkService;
     private ISourceService sourceService;
@@ -29,6 +29,10 @@ namespace synopackage_dotnet.Controllers
     [HttpGet("GetSourceServerResponse")]
     public SourceServerResponseDTO GetSourceServerResponse(string sourceName, string model, string version, bool isBeta, string keyword = null)
     {
+      ValidateStringParameter(nameof(sourceName), sourceName, 100);
+      ValidateStringParameter(nameof(model), model, 100);
+      ValidateStringParameter(nameof(version), version, 100);
+      ValidateStringParameter(nameof(keyword), keyword, 300);
       SourceServerResponseDTO response = null;
       if (model == null)
         model = AppSettingsProvider.AppSettings.DefaultModel;

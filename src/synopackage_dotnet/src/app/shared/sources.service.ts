@@ -18,7 +18,8 @@ export class SourcesService {
     return this.http.get<SourcesDTO>(`${Config.apiUrl}Sources/GetAllSources`);
   }
 
-  public getPackagesFromSource(sourceName: string, model: string, version: string, isBeta: boolean, keyword: string): Observable<SourceServerResponseDTO> {
+  public getPackagesFromSource(sourceName: string, model: string, version: string, isBeta: boolean, keyword: string):
+    Observable<SourceServerResponseDTO> {
     const params = new SourceBrowseDTO();
     params.sourceName = sourceName;
     params.model = model;

@@ -11,15 +11,15 @@
 <div *ngIf="sources">
   <form>
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-10">
         <div class="md-form form-sm">
           <input mdbInputDirective type="search" id="searchForm" class="form-control" [(ngModel)]="keyword" name="keyword"
-            (keyup.enter)="onEnter()" />
+            (keyup.enter)="onEnter()" [mdbValidate]="false" maxLength="300" />
           <label for="searchForm" class="">Keyword</label>
         </div>
       </div>
-      <div class="col-md-3">
-        <div class="md-form form-group">
+      <div class="col-md-2">
+        <div class="md-form form-group float-right">
           <a mdbBtn color="primary" size="lg" class="waves-light" (click)="performSearch()" mdbWavesEffect>Search</a>
         </div>
       </div>
