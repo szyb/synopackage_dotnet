@@ -1,4 +1,5 @@
-import { Injectable, Component, OnChanges } from '@angular/core';
+import { Injectable, Component, OnChanges, Input } from '@angular/core';
+import { PackageDTO } from 'src/app/sources/sources.model';
 
 
 @Component({
@@ -8,6 +9,9 @@ import { Injectable, Component, OnChanges } from '@angular/core';
 
 @Injectable()
 export class PackageInfoComponent {
+
+  @Input()
+  public package: PackageDTO;
 
   constructor() {
   }

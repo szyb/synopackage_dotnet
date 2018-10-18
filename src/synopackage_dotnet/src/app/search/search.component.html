@@ -39,10 +39,7 @@
         <p class="alert alert-success">No results found</p>
       </div>
       <div *ngFor="let package of result.packages" class="blue-gradient z-depth-2 rounded mb-1 pd-3">
-        <img src="{{ package.thumbnailUrl }}" alt="{{ package.name }}" width="72" height="72" class="float-left py-1 pr-2 pl-1" />
-        <h4>{{ package.name }}</h4>
-        <a href="{{ package.downloadLink }}">download</a>
-        <p class="pd-2 px-2">{{ package.description }}</p>
+        <app-package-info [package]="package"></app-package-info>
       </div>
       <!-- <div *ngFor="let pack of result.packages">
         {{ pack.name }}
