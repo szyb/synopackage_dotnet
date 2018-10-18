@@ -15,6 +15,7 @@ import { PackageInfoComponent } from '../components/package-info/package-info.co
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
+  styleUrls: ['./search.component.scss']
 })
 @Injectable()
 export class SearchComponent implements OnInit, OnDestroy {
