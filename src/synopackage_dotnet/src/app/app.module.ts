@@ -19,6 +19,7 @@ import { UserSettingsDisplayComponent } from './components/user-settings-display
 import { BrowseSourceComponent } from './browse-source/browse-source.component';
 import { SearchComponent } from './search/search.component';
 import { PackageInfoComponent } from './components/package-info/package-info.component';
+import { ParametersComponent } from './components/parameters/parameters.component';
 
 
 export const routerConfig: Routes = [
@@ -61,6 +62,7 @@ export const routerConfig: Routes = [
     BrowseSourceComponent,
     SearchComponent,
     PackageInfoComponent,
+    ParametersComponent,
     DialogComponent
     // DisplayMapComponent
   ],
