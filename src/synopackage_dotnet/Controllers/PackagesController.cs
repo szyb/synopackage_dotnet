@@ -49,16 +49,15 @@ namespace synopackage_dotnet.Controllers
           sourceDto.Url,
           modelDto.Arch,
           modelDto.Name,
-          versionDto.Major.ToString(),
-          versionDto.Minor.ToString(),
-          versionDto.Build.ToString(),
+          versionDto,
           isBeta,
           sourceDto.CustomUserAgent,
           keyword);
       }
       else
       {
-        response = new SourceServerResponseDTO(false, "Given parameters are not valid", null);
+        ParametersDTO parameters = new ParametersDTO(sourceName, model, version, isBeta);
+        response = new SourceServerResponseDTO(false, "Given parameters are not valid", parameters, null);
       }
       return response;
     }

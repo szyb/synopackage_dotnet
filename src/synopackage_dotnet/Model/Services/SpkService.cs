@@ -23,10 +23,11 @@ namespace synopackage_dotnet.Model.Services
       this.downloadService = downloadService;
       this.logger = logger;
     }
-    public SourceServerResponseDTO GetPackages(string sourceName, string url, string arch, string model, string major, string minor, string build, bool isBeta, string customUserAgent, string keyword = null)
+    public SourceServerResponseDTO GetPackages(string sourceName, string url, string arch, string model, VersionDTO versionDto, bool isBeta, string customUserAgent, string keyword = null)
     {
       string errorMessage = null;
-      var cacheResult = cacheService.GetSpkResponseFromCache(sourceName, model, build, isBeta);
+      ParametersDTO parameters = new ParametersDTO(sourceName, model, versionDto, isBeta);
+      var cacheResult = cacheService.GetSpkResponseFromCache(sourceName, model, versionDto.Build.ToString(), isBeta);
       SpkResult result = null;
       if (cacheResult.Result == false)
       {
@@ -36,9 +37,9 @@ namespace synopackage_dotnet.Model.Services
         request.AddParameter("language", "enu");
         request.AddParameter("unique", unique);
         request.AddParameter("arch", arch);
-        request.AddParameter("major", major);
-        request.AddParameter("minor", minor);
-        request.AddParameter("build", build);
+        request.AddParameter("major", versionDto.Major.ToString());
+        request.AddParameter("minor", versionDto.Minor.ToString());
+        request.AddParameter("build", versionDto.Build.ToString());
         request.AddParameter("package_update_channel", isBeta ? "beta" : "stable");
         request.AddParameter("timezone", "Brussels");
 
@@ -64,7 +65,7 @@ namespace synopackage_dotnet.Model.Services
               result.Packages = JsonConvert.DeserializeObject<List<SpkPackage>>(responseContent);
             }
             if (result != null)
-              cacheService.SaveSpkResult(sourceName, model, build, isBeta, result);
+              cacheService.SaveSpkResult(sourceName, model, versionDto.Build.ToString(), isBeta, result);
           }
           else
           {
@@ -76,7 +77,7 @@ namespace synopackage_dotnet.Model.Services
         {
           errorMessage = $"{response.StatusDescription} {response.ErrorMessage}";
           logger.LogError($"Error getting response for url: {url}: {errorMessage}");
-          return new SourceServerResponseDTO(false, errorMessage, null);
+          return new SourceServerResponseDTO(false, errorMessage, parameters, null);
         }
       }
       else
@@ -90,7 +91,7 @@ namespace synopackage_dotnet.Model.Services
         List<PackageDTO> list = new List<PackageDTO>();
         if (result.Packages == null)
         {
-          return new SourceServerResponseDTO(true, null, null);
+          return new SourceServerResponseDTO(true, null, parameters, null);
         }
         foreach (var spkPackage in result.Packages)
         {
@@ -103,12 +104,12 @@ namespace synopackage_dotnet.Model.Services
           }
         }
         list.Sort();
-        return new SourceServerResponseDTO(true, null, list);
+        return new SourceServerResponseDTO(true, null, parameters, list);
       }
       else
       {
         errorMessage = "Spk result is empty";
-        return new SourceServerResponseDTO(false, errorMessage, null);
+        return new SourceServerResponseDTO(false, errorMessage, parameters, null);
       }
     }
 
