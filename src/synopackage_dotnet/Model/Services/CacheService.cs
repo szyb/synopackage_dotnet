@@ -129,17 +129,17 @@ namespace synopackage_dotnet.Model.Services
         return true;
       //GIF
       else if (iconBytes.Length >= 3
-        && iconBytes[0] == char.GetNumericValue('G')
-        && iconBytes[1] == char.GetNumericValue('I')
-        && iconBytes[2] == char.GetNumericValue('F')
+        && iconBytes[0] == Encoding.ASCII.GetBytes("G")[0]
+        && iconBytes[1] == Encoding.ASCII.GetBytes("I")[0]
+        && iconBytes[2] == Encoding.ASCII.GetBytes("F")[0]
         )
         return true;
       //JFIF  
-      else if (iconBytes.Length >= 4
-        && iconBytes[0] == char.GetNumericValue('J')
-        && iconBytes[1] == char.GetNumericValue('F')
-        && iconBytes[2] == char.GetNumericValue('I')
-        && iconBytes[3] == char.GetNumericValue('F')
+      else if (iconBytes.Length >= 10
+        && iconBytes[6] == Encoding.ASCII.GetBytes("J")[0]
+        && iconBytes[7] == Encoding.ASCII.GetBytes("F")[0]
+        && iconBytes[8] == Encoding.ASCII.GetBytes("I")[0]
+        && iconBytes[9] == Encoding.ASCII.GetBytes("F")[0]
         )
         return true;
       else
