@@ -11,6 +11,7 @@ import { ModelsService } from '../shared/models.service';
 import { VersionsService } from '../shared/versions.service';
 import { SearchResultDTO } from './search.model';
 import { PackageInfoComponent } from '../components/package-info/package-info.component';
+import { ParametersDTO } from '../shared/model';
 
 @Component({
   selector: 'app-search',
@@ -33,6 +34,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   public searchResult: SearchResultDTO[];
   private subscription: Subscription;
   public keyword: string;
+  public parameters: ParametersDTO;
 
   @ViewChild(PackageInfoComponent)
   PackageInfoComponent: PackageInfoComponent;
@@ -58,6 +60,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   performSearch() {
     if (this.isSearchPerformed) {
       this.isSearchPerformed = false;
+      this.parameters = null;
       this.searchResult.forEach(item => {
         item.isSearchEnded = false;
         item.noPackages = false;
@@ -89,6 +92,9 @@ export class SearchComponent implements OnInit, OnDestroy {
               item.packages.forEach(element => {
                 element.thumbnailUrl = 'cache/' + element.iconFileName;
               });
+            }
+            if (this.parameters == null) {
+              this.parameters = val.parameters;
             }
           });
       });
