@@ -7,14 +7,14 @@ import { Config } from './config';
 import { Utils } from './Utils';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class VersionsService {
-    constructor(private http: HttpClient) {
+  constructor(private http: HttpClient) {
 
-    }
+  }
 
-    public getDefaultVersion(): Observable<string> {
-        return this.http.get<string>(`${Config.apiUrl}Versions/GetDefaultVersion`);
-    }
+  public getDefaultVersion(): Observable<string> {
+    return this.http.get<string>(`${Config.apiUrl}Versions/GetDefaultVersion`, { responseType: 'text' as 'json' });
+  }
 }

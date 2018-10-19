@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { SourceDTO, PackageDTO, SourcesDTO, SourceServerResponseDTO, SourceLiteDTO } from '../sources/sources.model';
 import { Config } from './config';
 import { Utils } from './Utils';
+import { ParametersDTO } from './model';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +21,7 @@ export class SourcesService {
 
   public getPackagesFromSource(sourceName: string, model: string, version: string, isBeta: boolean, keyword: string):
     Observable<SourceServerResponseDTO> {
-    const params = new SourceBrowseDTO();
+    const params = new ParametersDTO();
     params.sourceName = sourceName;
     params.model = model;
     params.version = version;
@@ -32,12 +33,4 @@ export class SourcesService {
   public getAllActiveSources(): Observable<SourceLiteDTO[]> {
     return this.http.get<SourceLiteDTO[]>(`${Config.apiUrl}Sources/GetAllActiveSources`);
   }
-}
-
-export class SourceBrowseDTO {
-  sourceName: string;
-  model: string;
-  version: string;
-  isBeta: boolean;
-  keyword: string;
 }
