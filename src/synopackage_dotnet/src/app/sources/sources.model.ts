@@ -1,3 +1,4 @@
+import { ParametersDTO } from '../shared/model';
 
 export class SourceDTO {
   name: string;
@@ -29,6 +30,7 @@ export class PackageDTO {
 export class SourceServerResponseDTO {
   result: boolean;
   errorMessage: string;
+  parameters: ParametersDTO;
   packages: PackageDTO[];
 }
 

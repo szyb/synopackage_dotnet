@@ -10,6 +10,7 @@ import { UserSettingsService } from '../shared/user-settings.service';
 import { ModelsService } from '../shared/models.service';
 import { VersionsService } from '../shared/versions.service';
 import { PackageInfoComponent } from '../components/package-info/package-info.component';
+import { ParametersDTO } from '../shared/model';
 
 @Component({
   selector: 'app-browse-source',
@@ -27,6 +28,7 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
   public errorMessage: string;
   public areSettingsSet: boolean;
   public noPackages: boolean;
+  public parameters: ParametersDTO;
   constructor(private route: ActivatedRoute,
     private sourcesService: SourcesService,
     private userSettingsService: UserSettingsService,
@@ -42,13 +44,20 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // this.subscription = this.route.params.subscribe((params: Params) => { this.nameString = params['name']; });
+
+
     this.areSettingsSet = this.userSettingsService.isSetup();
     this.isResponseArrived = false;
     this.isError = false;
     this.noPackages = false;
+    this.parameters = new ParametersDTO();
     this.route.params.pipe(
       take(1)
-    ).subscribe((params: Params) => { this.nameString = params['name']; });
+    ).subscribe((params: Params) => {
+      this.nameString = params['name'];
+    });
+
+
 
     this.sourcesService.getPackagesFromSource(this.nameString,
       this.userSettingsService.getUserModel(),
@@ -63,6 +72,7 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
       this.errorMessage = this.response.errorMessage;
       this.isError = !this.result;
       this.packages = this.response.packages;
+      this.parameters = this.response.parameters;
       if (this.result && (this.packages == null || this.packages.length === 0)) {
         this.noPackages = true;
       }
