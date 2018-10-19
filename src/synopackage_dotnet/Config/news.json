@@ -1,0 +1,7 @@
+[
+  {
+    "Date": "2018-10-19",
+    "Title": "Title test",
+    "Body": "This is a message with a <a [routerLink]='/sources'>link</a>"
+  }
+]
