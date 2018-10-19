@@ -29,7 +29,7 @@
 <div *ngIf="isSearchPerformed">
   <div *ngFor="let result of searchResult">
     <blockquote class="blockquote bq-primary">
-      <a class="bq-title" routerLink="/sources/{{result.name}}">{{result.name}}</a>
+      <a class="bq-title" routerLink="/sources/{{result.name}}">{{result.name}}</a><span class="px-2">({{result.count}})</span>
       <app-parameters [parameters]="parameters" [showSourceName]="0"></app-parameters>
     </blockquote>
     <div *ngIf="!result.isSearchEnded">
