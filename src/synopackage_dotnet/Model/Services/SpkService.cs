@@ -26,7 +26,7 @@ namespace synopackage_dotnet.Model.Services
     public SourceServerResponseDTO GetPackages(string sourceName, string url, string arch, string model, VersionDTO versionDto, bool isBeta, string customUserAgent, string keyword = null)
     {
       string errorMessage = null;
-      ParametersDTO parameters = new ParametersDTO(sourceName, model, versionDto, isBeta);
+      ParametersDTO parameters = new ParametersDTO(sourceName, model, versionDto, isBeta, keyword);
       var cacheResult = cacheService.GetSpkResponseFromCache(sourceName, model, versionDto.Build.ToString(), isBeta);
       SpkResult result = null;
       if (cacheResult.Result == false)
