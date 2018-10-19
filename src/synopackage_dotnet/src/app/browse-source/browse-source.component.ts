@@ -29,6 +29,7 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
   public areSettingsSet: boolean;
   public noPackages: boolean;
   public parameters: ParametersDTO;
+  public count: number;
   constructor(private route: ActivatedRoute,
     private sourcesService: SourcesService,
     private userSettingsService: UserSettingsService,
@@ -51,6 +52,7 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
     this.isError = false;
     this.noPackages = false;
     this.parameters = new ParametersDTO();
+    this.count = 0;
     this.route.params.pipe(
       take(1)
     ).subscribe((params: Params) => {
@@ -77,6 +79,7 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
         this.noPackages = true;
       }
       if (this.response.packages != null) {
+        this.count = this.response.packages.length;
         this.packages.forEach(element => {
           element.thumbnailUrl = 'cache/' + element.iconFileName;
         });

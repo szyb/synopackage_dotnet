@@ -4,7 +4,7 @@
 </nav>
 <h1>Browse source</h1>
 <blockquote class="blockquote bq-primary">
-  <p class="bq-title">{{ nameString }}</p>
+  <span class="bq-title">{{ nameString }}</span><span class="px-2">({{ count }})</span>
   <div *ngIf="isResponseArrived">
     <app-parameters [parameters]="parameters" [showSourceName]="0"></app-parameters>
   </div>

@@ -68,6 +68,7 @@ export class SearchComponent implements OnInit, OnDestroy {
         item.errorMessage = null;
         item.isValid = false;
         item.response = null;
+        item.count = 0;
       });
     }
     if (this.searchResult != null) {
@@ -89,6 +90,7 @@ export class SearchComponent implements OnInit, OnDestroy {
               item.noPackages = true;
             }
             if (item.packages != null) {
+              item.count = item.packages.length;
               item.packages.forEach(element => {
                 element.thumbnailUrl = 'cache/' + element.iconFileName;
               });
