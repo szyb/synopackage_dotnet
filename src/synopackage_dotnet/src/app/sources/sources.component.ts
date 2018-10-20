@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Config } from '../shared/config';
 import { SourceDTO, SourcesDTO } from './sources.model';
 import { SourcesService } from '../shared/sources.service';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -15,7 +16,8 @@ export class SourcesComponent {
   public activeSources: SourceDTO[];
   public inActiveSources: SourceDTO[];
 
-  constructor(http: HttpClient, private sourcesService: SourcesService) {
+  constructor(http: HttpClient, private sourcesService: SourcesService, private titleService: Title) {
+    this.titleService.setTitle('Sources - synopackage.com');
     this.sourcesService.getAllSources().subscribe(result => {
       this.activeSources = result.activeSources;
       this.inActiveSources = result.inActiveSources;
