@@ -12,6 +12,7 @@ import { VersionsService } from '../shared/versions.service';
 import { SearchResultDTO } from './search.model';
 import { PackageInfoComponent } from '../components/package-info/package-info.component';
 import { ParametersDTO } from '../shared/model';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-search',
@@ -25,7 +26,9 @@ export class SearchComponent implements OnInit, OnDestroy {
     private userSettingsService: UserSettingsService,
     private modelsService: ModelsService,
     private versionsService: VersionsService,
+    private titleService: Title,
     private router: Router) {
+    this.titleService.setTitle('Search - synopackage.com');
   }
 
   public isSearchPerformed: boolean;
