@@ -27,12 +27,16 @@ namespace synopackage_dotnet.Controllers
     }
 
     [HttpGet("GetSourceServerResponse")]
-    public SourceServerResponseDTO GetSourceServerResponse(string sourceName, string model, string version, bool isBeta, string keyword = null)
+    public IActionResult GetSourceServerResponse([FromQuery]string sourceName, [FromQuery]string model, [FromQuery]string version, [FromQuery]bool isBeta, [FromQuery]string keyword = null)
     {
-      ValidateStringParameter(nameof(sourceName), sourceName, 100);
-      ValidateStringParameter(nameof(model), model, 100);
-      ValidateStringParameter(nameof(version), version, 100);
-      ValidateStringParameter(nameof(keyword), keyword, 300);
+      var validation = ValidateStringParameter(nameof(sourceName), sourceName, 100);
+      if (!string.IsNullOrWhiteSpace(validation)) return BadRequest(validation);
+      validation = ValidateStringParameter(nameof(model), model, 100);
+      if (!string.IsNullOrWhiteSpace(validation)) return BadRequest(validation);
+      validation = ValidateStringParameter(nameof(version), version, 100);
+      if (!string.IsNullOrWhiteSpace(validation)) return BadRequest(validation);
+      validation = ValidateStringParameter(nameof(keyword), keyword, 300);
+      if (!string.IsNullOrWhiteSpace(validation)) return BadRequest(validation);
       SourceServerResponseDTO response = null;
       if (model == null)
         model = AppSettingsProvider.AppSettings.DefaultModel;
@@ -59,7 +63,7 @@ namespace synopackage_dotnet.Controllers
         ParametersDTO parameters = new ParametersDTO(sourceName, model, version, isBeta, keyword);
         response = new SourceServerResponseDTO(false, "Given parameters are not valid", parameters, null);
       }
-      return response;
+      return new ObjectResult(response);
     }
   }
 }
