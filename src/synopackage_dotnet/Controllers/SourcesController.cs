@@ -23,9 +23,9 @@ namespace synopackage_dotnet.Controllers
 
 
     [HttpGet("GetAllSources")]
-    public SourcesDTO GetAllSources()
+    public IActionResult GetAllSources()
     {
-      return sourceService.GetAllSources();
+      return new ObjectResult(sourceService.GetAllSources());
     }
 
     [HttpGet("GetAllActiveSources")]

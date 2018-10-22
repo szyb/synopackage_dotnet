@@ -26,9 +26,9 @@ namespace synopackage_dotnet.Controllers
     }
 
     [HttpGet("GetDefaultModel")]
-    public string GetDefaultModel()
+    public IActionResult GetDefaultModel()
     {
-      return AppSettingsProvider.AppSettings.DefaultModel;
+      return new ObjectResult(AppSettingsProvider.AppSettings.DefaultModel);
     }
   }
 }
