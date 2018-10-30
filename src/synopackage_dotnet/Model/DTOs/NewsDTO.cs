@@ -9,5 +9,9 @@ namespace synopackage_dotnet.Model.DTOs
     public DateTime Date { get; set; }
     public string Title { get; set; }
     public string Body { get; set; }
+    public string RouterLinkDescription { get; set; }
+    public string RouterLink { get; set; }
+    public string ExternalLinkDescription { get; set; }
+    public string ExternalLink { get; set; }
   }
 }
