@@ -2,7 +2,11 @@
   {
     "Date": "2018-10-30",
     "Title": "Synopackage ver. 2.0",
-    "Body": "This is a new version of synopackage.com. The project was completly rewritten from PHP to .NET Core 2.1, Angular 6 and Typescript (whoever cares). Below you can find link to issues. Feel free to contribute! ",
+    "Body": [
+      "This is a new version of synopackage.com. The project was completly rewritten from PHP to .NET Core 2.1, Angular 6 and Typescript (whoever cares). Below you can find link to issues. Feel free to contribute!",
+      "The breaking change is that you need to provide your settings first (DSM version and model). If you don't do this the results will be shown for default version and model. Currently defaults are: 6.2.1 and DS218Play, but that may change in the future.",
+      "Enjoy!"
+    ],
     "RouterLinkDescription": null,
     "RouterLink": null,
     "ExternalLinkDescription": "Github issues",
