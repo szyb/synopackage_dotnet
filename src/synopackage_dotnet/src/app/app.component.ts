@@ -26,18 +26,28 @@ export class AppComponent implements OnInit {
   loadScript() {
     if (environment.useGoogleAnalytics) {
       const node = document.createElement('script');
-      node.src = `https://www.googletagmanager.com/gtag/js?id=` + environment.googleAnalyticsCode;
+      // node.src = `https://www.googletagmanager.com/gtag/js?id=` + environment.googleAnalyticsCode;
+      node.src = `https://www.google-analytics.com/analytics.js`;
       node.type = 'text/javascript';
       node.async = true;
       node.charset = 'utf-8';
       document.getElementsByTagName('head')[0].appendChild(node);
 
-      const node2 = document.createElement('script');
-      node2.text = `window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+      const node3 = document.createElement('script');
+      node3.src = `assets/autotrack.js`;
+      node3.type = 'text/javascript';
+      node3.async = true;
+      node3.charset = 'utf-8';
+      document.getElementsByTagName('head')[0].appendChild(node3);
 
-      gtag('config', '` + environment.googleAnalyticsCode + `');
+      const node2 = document.createElement('script');
+      node2.text = `window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', '` + environment.googleAnalyticsCode + `', 'auto');
+      // Replace the following lines with the plugins you want to use.
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
       `;
       document.getElementsByTagName('head')[0].appendChild(node2);
     }
