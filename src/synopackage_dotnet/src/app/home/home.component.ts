@@ -10,7 +10,7 @@ import { NewsService } from '../shared/news.service';
 
 export class HomeComponent implements OnInit {
 
-  private news: NewsDTO;
+  public news: NewsDTO;
 
 
   constructor(private titleService: Title, private newsService: NewsService) {
