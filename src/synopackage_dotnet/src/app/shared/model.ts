@@ -17,7 +17,7 @@ export class ParametersDTO {
 export class NewsDTO {
   public date: Date;
   public title: string;
-  public body: string;
+  public body: string[];
   public routerLinkDescription: string;
   public routerLink: string;
   public externalLinkDescription: string;

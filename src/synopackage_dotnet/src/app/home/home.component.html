@@ -15,8 +15,8 @@
       <span style="font-size: 0.8rem">{{ n.date }}</span>
     </blockquote>
     <div class="rounded border px-2 py-2">
-      <span class="">{{ n.body }}</span>
-      <div class="">
+      <p *ngFor="let b of n.body">{{ b }}</p>
+      <div>
         <a *ngIf="n.routerLinkDescription" [routerLink]="n.routerLink">{{n.routerLinkDescription}}</a>
         <a *ngIf="n.externalLinkDescription" href="{{n.externalLink}}" target="_blank">{{n.externalLinkDescription}}</a>
       </div>
