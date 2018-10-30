@@ -25,7 +25,8 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/web.config"
+              "src/web.config",
+              "src/sitemap.xml"
             ],
             "styles": [
               "node_modules/font-awesome/scss/font-awesome.scss",
@@ -112,7 +113,8 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/web.config"
+              "src/web.config",
+              "src/sitemap.xml"
             ]
           }
         },
