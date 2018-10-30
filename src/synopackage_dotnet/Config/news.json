@@ -1,7 +1,11 @@
 [
   {
-    "Date": "2018-10-19",
-    "Title": "Title test",
-    "Body": "This is a message with a <a [routerLink]='/sources'>link</a>"
+    "Date": "2018-10-30",
+    "Title": "Synopackage ver. 2.0",
+    "Body": "This is a new version of synopackage.com. The project was completly rewritten from PHP to .NET Core 2.1, Angular 6 and Typescript (whoever cares). Below you can find link to issues. Feel free to contribute! ",
+    "RouterLinkDescription": null,
+    "RouterLink": null,
+    "ExternalLinkDescription": "Github issues",
+    "ExternalLink": "https://github.com/szyb/synopackage_dotnet/issues"
   }
 ]
