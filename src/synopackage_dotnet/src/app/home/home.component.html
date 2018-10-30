@@ -2,6 +2,24 @@
   <span class="breadcrumb-item active">Home</span>
 </nav>
 <h1>Home</h1>
-<p class="alert alert-warning"> This is a very early stage of new synopackage website.If you find any issues please do
+<!-- <p class="alert alert-warning"> This is a very early stage of new synopackage website.If you find any issues please do
   not hesitate to contact via
-  github <a href="https://github.com/szyb/synopackage_dotnet/issues" target="_blank">issues</a></p>
+  github <a href="https://github.com/szyb/synopackage_dotnet/issues" target="_blank">issues</a></p> -->
+<div *ngIf="!news">
+  <app-wait></app-wait>
+</div>
+<div *ngFor="let n of news">
+  <div class="pb-3">
+    <blockquote class="blockquote bq-primary">
+      <p class="bq-title">{{ n.title }}</p>
+      <span style="font-size: 0.8rem">{{ n.date }}</span>
+    </blockquote>
+    <div class="rounded border px-2 py-2">
+      <p *ngFor="let b of n.body">{{ b }}</p>
+      <div>
+        <a *ngIf="n.routerLinkDescription" [routerLink]="n.routerLink">{{n.routerLinkDescription}}</a>
+        <a *ngIf="n.externalLinkDescription" href="{{n.externalLink}}" target="_blank">{{n.externalLinkDescription}}</a>
+      </div>
+    </div>
+  </div>
+</div>
