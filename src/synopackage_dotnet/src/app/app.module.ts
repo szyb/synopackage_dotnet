@@ -41,6 +41,22 @@ export const routerConfig: Routes = [
     component: SearchComponent
   },
   {
+    path: 'search/keyword/:keyword',
+    component: SearchComponent
+  },
+  {
+    path: 'search/keyword/:keyword/model/:model',
+    component: SearchComponent
+  },
+  {
+    path: 'search/keyword/:keyword/model/:model/version/:version',
+    component: SearchComponent
+  },
+  {
+    path: 'search/keyword/:keyword/model/:model/version/:version/channel/:channel',
+    component: SearchComponent
+  },
+  {
     path: '',
     redirectTo: '/home',
     pathMatch: 'full'

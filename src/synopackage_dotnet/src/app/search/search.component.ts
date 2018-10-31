@@ -38,11 +38,40 @@ export class SearchComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   public keyword: string;
   public parameters: ParametersDTO;
+  private keywordParam: string;
+  private modelParam: string;
+  private versionParam: string;
+  private channelParam: string;
 
   @ViewChild(PackageInfoComponent)
   PackageInfoComponent: PackageInfoComponent;
 
   ngOnInit() {
+    let areParamsSet = false;
+    this.route.params.pipe(
+      take(1)
+    ).subscribe((params: Params) => {
+      this.keywordParam = params['keyword'];
+      this.modelParam = params['model'];
+      this.versionParam = params['version'];
+      this.channelParam = params['channel'];
+      console.log(this.keywordParam);
+      console.log(this.modelParam);
+      console.log(this.versionParam);
+      console.log(this.channelParam);
+      if (this.keywordParam != null ||
+        this.modelParam != null ||
+        this.versionParam != null ||
+        this.channelParam != null) {
+        areParamsSet = true;
+      }
+      if (this.keywordParam != null) {
+        this.keyword = this.keywordParam;
+      }
+
+      // this.nameString = params['name'];
+      // this.titleService.setTitle('Browse source - ' + this.nameString + ' - synopackage.com');
+    });
     this.searchResult = [];
     this.areSettingsSet = this.userSettingsService.isSetup();
     this.sourcesService.getAllActiveSources().subscribe(result => {
@@ -53,10 +82,29 @@ export class SearchComponent implements OnInit, OnDestroy {
         sr.isSearchEnded = false;
         this.searchResult.push(sr);
       });
+      if (areParamsSet) {
+        console.log('perform search from link');
+        this.performSearch();
+      }
     });
   }
 
+  clearLinkParams() {
+    console.log('clear link params');
+    this.keywordParam = null;
+    this.modelParam = null;
+    this.versionParam = null;
+    this.channelParam = null;
+    this.router.navigate(['/search/keyword', this.keyword]);
+  }
+
+  onSearchButton() {
+    this.clearLinkParams();
+    this.performSearch();
+  }
+
   onEnter() {
+    this.clearLinkParams();
     this.performSearch();
   }
 
@@ -74,13 +122,19 @@ export class SearchComponent implements OnInit, OnDestroy {
         item.count = 0;
       });
     }
+    const model = this.modelParam != null ? this.modelParam : this.userSettingsService.getUserModel();
+    const version = this.versionParam != null ? this.versionParam : this.userSettingsService.getUserVersion();
+    const channel = this.channelParam === 'beta' ? true : false;
+    const keywordForSearch = this.keywordParam != null ? this.keywordParam : this.keyword;
+
     if (this.searchResult != null) {
       this.searchResult.forEach(item => {
         this.sourcesService.getPackagesFromSource(item.name,
-          this.userSettingsService.getUserModel(),
-          this.userSettingsService.getUserVersion(),
-          this.userSettingsService.getUserIsBeta(),
-          this.keyword
+          model,
+          version,
+          channel,
+          keywordForSearch
+          // this.keyword
         )
           .pipe(
             take(1)
