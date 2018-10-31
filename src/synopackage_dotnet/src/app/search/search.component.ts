@@ -55,10 +55,6 @@ export class SearchComponent implements OnInit, OnDestroy {
       this.modelParam = params['model'];
       this.versionParam = params['version'];
       this.channelParam = params['channel'];
-      console.log(this.keywordParam);
-      console.log(this.modelParam);
-      console.log(this.versionParam);
-      console.log(this.channelParam);
       if (this.keywordParam != null ||
         this.modelParam != null ||
         this.versionParam != null ||
@@ -68,9 +64,6 @@ export class SearchComponent implements OnInit, OnDestroy {
       if (this.keywordParam != null) {
         this.keyword = this.keywordParam;
       }
-
-      // this.nameString = params['name'];
-      // this.titleService.setTitle('Browse source - ' + this.nameString + ' - synopackage.com');
     });
     this.searchResult = [];
     this.areSettingsSet = this.userSettingsService.isSetup();
@@ -83,14 +76,12 @@ export class SearchComponent implements OnInit, OnDestroy {
         this.searchResult.push(sr);
       });
       if (areParamsSet) {
-        console.log('perform search from link');
         this.performSearch();
       }
     });
   }
 
   clearLinkParams() {
-    console.log('clear link params');
     this.keywordParam = null;
     this.modelParam = null;
     this.versionParam = null;
@@ -126,7 +117,9 @@ export class SearchComponent implements OnInit, OnDestroy {
     const version = this.versionParam != null ? this.versionParam : this.userSettingsService.getUserVersion();
     const channel = this.channelParam === 'beta' ? true : false;
     const keywordForSearch = this.keywordParam != null ? this.keywordParam : this.keyword;
-
+    if (keywordForSearch != null && keywordForSearch !== '') {
+      this.titleService.setTitle('Search for "' + keywordForSearch + '" - synopackage.com');
+    }
     if (this.searchResult != null) {
       this.searchResult.forEach(item => {
         this.sourcesService.getPackagesFromSource(item.name,
@@ -134,7 +127,6 @@ export class SearchComponent implements OnInit, OnDestroy {
           version,
           channel,
           keywordForSearch
-          // this.keyword
         )
           .pipe(
             take(1)
