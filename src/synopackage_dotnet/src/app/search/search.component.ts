@@ -115,7 +115,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
     const model = this.modelParam != null ? this.modelParam : this.userSettingsService.getUserModel();
     const version = this.versionParam != null ? this.versionParam : this.userSettingsService.getUserVersion();
-    const channel = this.channelParam === 'beta' ? true : false;
+    const channel = this.channelParam === 'beta' ? true : this.userSettingsService.getUserIsBeta();
     const keywordForSearch = this.keywordParam != null ? this.keywordParam : this.keyword;
     if (keywordForSearch != null && keywordForSearch !== '') {
       this.titleService.setTitle('Search for "' + keywordForSearch + '" - synopackage.com');
