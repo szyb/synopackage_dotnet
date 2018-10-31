@@ -20,7 +20,7 @@
       </div>
       <div class="col-md-2">
         <div class="md-form form-group float-right">
-          <a mdbBtn color="primary" size="lg" class="waves-light" (click)="performSearch()" mdbWavesEffect>Search</a>
+          <a mdbBtn color="primary" size="lg" class="waves-light" (click)="onSearchButton()" mdbWavesEffect>Search</a>
         </div>
       </div>
     </div>
@@ -38,6 +38,9 @@
     <div *ngIf="result.isSearchEnded">
       <div *ngIf="result.noPackages">
         <p class="alert alert-success">No results found</p>
+      </div>
+      <div *ngIf="result.errorMessage">
+        <p class="alert alert-danger">{{result.errorMessage}}</p>
       </div>
       <div *ngFor="let package of result.packages" class="blue-gradient z-depth-2 rounded mb-1 pd-3">
         <app-package-info [package]="package"></app-package-info>
