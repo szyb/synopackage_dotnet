@@ -67,7 +67,7 @@ export class SearchComponent implements OnInit, OnDestroy {
         areParamsSet = true;
       }
       if (this.keywordParam != null) {
-        this.keyword = this.keywordParam;
+        this.keyword = this.keywordParam.substring(0, 300);
       }
     });
     this.searchResult = [];
@@ -118,10 +118,21 @@ export class SearchComponent implements OnInit, OnDestroy {
         item.count = 0;
       });
     }
-    const model = this.modelParam != null ? this.modelParam : this.userSettingsService.getUserModel();
-    const version = this.versionParam != null ? this.versionParam : this.userSettingsService.getUserVersion();
+    let model = this.modelParam != null ? this.modelParam : this.userSettingsService.getUserModel();
+    let version = this.versionParam != null ? this.versionParam : this.userSettingsService.getUserVersion();
     const channel = this.channelParam === 'beta' ? true : this.userSettingsService.getUserIsBeta();
-    const keywordForSearch = this.keywordParam != null ? this.keywordParam : this.keyword;
+    let keywordForSearch = this.keywordParam != null ? this.keywordParam : this.keyword;
+    if (model != null) {
+      model = model.substring(0, 100);
+    }
+    if (version != null) {
+      version = version.substring(0, 100);
+    }
+    if (keywordForSearch != null) {
+      keywordForSearch = keywordForSearch.substring(0, 300);
+      console.log('cut');
+      console.log(keywordForSearch.length);
+    }
 
     this.generateSearchLinks(keywordForSearch, model, version, channel);
 
