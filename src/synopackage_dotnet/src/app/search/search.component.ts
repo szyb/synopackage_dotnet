@@ -33,6 +33,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   public isSearchLinkCollapsed = false;
+  public linksAvailable = false;
   public shortLink: string;
   public fullLink: string;
 
@@ -91,7 +92,11 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.modelParam = null;
     this.versionParam = null;
     this.channelParam = null;
-    this.router.navigate(['/search/keyword', this.keyword]);
+    if (this.keyword != null && this.keyword !== '') {
+      this.router.navigate(['/search/keyword', this.keyword]);
+    } else {
+      this.router.navigate(['/search']);
+    }
   }
 
   onSearchButton() {
@@ -171,9 +176,17 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   generateSearchLinks(keyword: string, model: string, version: string, channel: boolean) {
-    this.shortLink = `${Config.baseUrl}search/keyword/` + keyword;
-    const channelString = channel === false ? 'stable' : 'beta';
-    this.fullLink = `${Config.baseUrl}search/keyword/` + keyword + '/model/' + model + '/version/' + version + '/channel/' + channelString;
+    if (keyword != null && keyword !== '') {
+      this.linksAvailable = true;
+      this.shortLink = `${Config.baseUrl}search/keyword/` + keyword;
+      const channelString = channel === false ? 'stable' : 'beta';
+      this.fullLink = `${Config.baseUrl}search/keyword/` + keyword + '/model/'
+        + model + '/version/' + version + '/channel/' + channelString;
+    } else {
+      this.linksAvailable = false;
+      this.shortLink = 'unavailable for wildcard search';
+      this.fullLink = 'unavailable for wildcard search';
+    }
   }
 
   ngOnDestroy(): void {

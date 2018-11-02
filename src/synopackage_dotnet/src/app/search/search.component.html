@@ -33,11 +33,13 @@
       <tbody>
         <tr>
           <td scope="row">Short link:</td>
-          <td><span>{{shortLink}} <a href="{{shortLink}}" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a></span></td>
+          <td><span>{{shortLink}} <a *ngIf="linksAvailable" href="{{shortLink}}" target="_blank"><i class="fa fa-external-link"
+                  aria-hidden="true"></i></a></span></td>
         </tr>
         <tr>
           <td scope="row">Full link:</td>
-          <td><span>{{fullLink}} <a href="{{fullLink}}" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a></span></td>
+          <td><span>{{fullLink}} <a *ngIf="linksAvailable" href="{{fullLink}}" target="_blank"><i class="fa fa-external-link"
+                  aria-hidden="true"></i></a></span></td>
         </tr>
       </tbody>
     </table>
