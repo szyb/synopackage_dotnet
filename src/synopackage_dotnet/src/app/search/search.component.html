@@ -20,11 +20,28 @@
       </div>
       <div class="col-md-2">
         <div class="md-form form-group float-right">
-          <a mdbBtn color="primary" size="lg" class="waves-light" (click)="performSearch()" mdbWavesEffect>Search</a>
+          <a mdbBtn color="primary" size="lg" class="waves-light" (click)="onSearchButton()" mdbWavesEffect>Search</a>
         </div>
       </div>
     </div>
   </form>
+</div>
+<div *ngIf="isSearchPerformed" class="py-2">
+  <span>Share results <i class="fa fa-share-alt" aria-hidden="true" (click)="link.toggle()"></i></span>
+  <div mdbCollapse [collapse]="isSearchLinkCollapsed" #link="bs-collapse" class="pr-2 pl-1">
+    <table class="table">
+      <tbody>
+        <tr>
+          <td scope="row">Short link:</td>
+          <td><span>{{shortLink}} <a href="{{shortLink}}" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a></span></td>
+        </tr>
+        <tr>
+          <td scope="row">Full link:</td>
+          <td><span>{{fullLink}} <a href="{{fullLink}}" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a></span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 <div *ngIf="isSearchPerformed">
   <div *ngFor="let result of searchResult">
@@ -38,6 +55,9 @@
     <div *ngIf="result.isSearchEnded">
       <div *ngIf="result.noPackages">
         <p class="alert alert-success">No results found</p>
+      </div>
+      <div *ngIf="result.errorMessage">
+        <p class="alert alert-danger">{{result.errorMessage}}</p>
       </div>
       <div *ngFor="let package of result.packages" class="blue-gradient z-depth-2 rounded mb-1 pd-3">
         <app-package-info [package]="package"></app-package-info>
