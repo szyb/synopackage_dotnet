@@ -130,8 +130,6 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
     if (keywordForSearch != null) {
       keywordForSearch = keywordForSearch.substring(0, 300);
-      console.log('cut');
-      console.log(keywordForSearch.length);
     }
 
     this.generateSearchLinks(keywordForSearch, model, version, channel);
