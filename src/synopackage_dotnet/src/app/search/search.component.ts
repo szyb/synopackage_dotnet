@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, OnDestroy, Injectable, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy, Injectable, ViewChild, ViewChildren } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute, ParamMap, Params } from '@angular/router';
 import { switchMap, take } from 'rxjs/operators';
@@ -13,6 +13,7 @@ import { SearchResultDTO } from './search.model';
 import { PackageInfoComponent } from '../components/package-info/package-info.component';
 import { ParametersDTO } from '../shared/model';
 import { Title } from '@angular/platform-browser';
+import { CollapseDirective } from 'angular-bootstrap-md';
 
 @Component({
   selector: 'app-search',
@@ -30,6 +31,10 @@ export class SearchComponent implements OnInit, OnDestroy {
     private router: Router) {
     this.titleService.setTitle('Search - synopackage.com');
   }
+
+  public isSearchLinkCollapsed = false;
+  public shortLink: string;
+  public fullLink: string;
 
   public isSearchPerformed: boolean;
   public areSettingsSet: boolean;
@@ -117,6 +122,9 @@ export class SearchComponent implements OnInit, OnDestroy {
     const version = this.versionParam != null ? this.versionParam : this.userSettingsService.getUserVersion();
     const channel = this.channelParam === 'beta' ? true : this.userSettingsService.getUserIsBeta();
     const keywordForSearch = this.keywordParam != null ? this.keywordParam : this.keyword;
+
+    this.generateSearchLinks(keywordForSearch, model, version, channel);
+
     if (keywordForSearch != null && keywordForSearch !== '') {
       this.titleService.setTitle('Search for "' + keywordForSearch + '" - synopackage.com');
     }
@@ -151,6 +159,12 @@ export class SearchComponent implements OnInit, OnDestroy {
       });
       this.isSearchPerformed = true;
     }
+  }
+
+  generateSearchLinks(keyword: string, model: string, version: string, channel: boolean) {
+    this.shortLink = `${Config.baseUrl}search/keyword/` + keyword;
+    const channelString = channel === false ? 'stable' : 'beta';
+    this.fullLink = `${Config.baseUrl}search/keyword/` + keyword + '/model/' + model + '/version/' + version + '/channel/' + channelString;
   }
 
   ngOnDestroy(): void {
