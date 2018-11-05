@@ -15,14 +15,15 @@ namespace synopackage_dotnet.Model.Services
   {
     private ICacheService cacheService;
     private IDownloadService downloadService;
-
     private ILogger<SpkService> logger;
+
     public SpkService(ICacheService cacheService, IDownloadService downloadService, ILogger<SpkService> logger)
     {
       this.cacheService = cacheService;
       this.downloadService = downloadService;
       this.logger = logger;
     }
+
     public SourceServerResponseDTO GetPackages(string sourceName, string url, string arch, string model, VersionDTO versionDto, bool isBeta, string customUserAgent, string keyword = null)
     {
       string errorMessage = null;
@@ -31,47 +32,15 @@ namespace synopackage_dotnet.Model.Services
       SpkResult result = null;
       if (cacheResult.Result == false)
       {
-        var request = new RestRequest(Method.POST);
-        var unique = $"synology_{arch}_{model}";
+        string finalUrl;
+        string userAgent;
+        RestRequest request = PrepareRequest(url, arch, model, versionDto, isBeta, customUserAgent, out userAgent, out finalUrl);
 
-        request.AddParameter("language", "enu");
-        request.AddParameter("unique", unique);
-        request.AddParameter("arch", arch);
-        request.AddParameter("major", versionDto.Major.ToString());
-        request.AddParameter("minor", versionDto.Minor.ToString());
-        request.AddParameter("build", versionDto.Build.ToString());
-        request.AddParameter("package_update_channel", isBeta ? "beta" : "stable");
-        request.AddParameter("timezone", "Brussels");
-
-        url = GetLegacySupportUrl(url, request);
-        // request.AddHeader("User-Agent", customUserAgent != null ? customUserAgent : unique);
-        var userAgent = customUserAgent != null ? customUserAgent : unique;
-        var response = downloadService.Execute(url, request, userAgent);
+        var response = downloadService.Execute(finalUrl, request, userAgent);
 
         if (response.ResponseStatus == ResponseStatus.Completed && response.StatusCode == HttpStatusCode.OK)
         {
-          var responseContent = response.Content;
-          if (responseContent != null)
-          {
-            // System.IO.File.WriteAllText("cache/out.html", responseContent);
-            responseContent = responseContent.Replace("\\n", "\n");
-            if (responseContent.Contains("\"packages\""))
-            {
-              result = JsonConvert.DeserializeObject<SpkResult>(responseContent);
-            }
-            else
-            {
-              result = new SpkResult();
-              result.Packages = JsonConvert.DeserializeObject<List<SpkPackage>>(responseContent);
-            }
-            if (result != null)
-              cacheService.SaveSpkResult(sourceName, model, versionDto.Build.ToString(), isBeta, result);
-          }
-          else
-          {
-            logger.LogWarning($"No data for url: {url}");
-            result = new SpkResult();
-          }
+          result = ParseResponse(sourceName, url, model, versionDto, isBeta, response);
         }
         else
         {
@@ -87,30 +56,83 @@ namespace synopackage_dotnet.Model.Services
 
       if (result != null)
       {
-        this.cacheService.ProcessIcons(sourceName, result.Packages);
-        List<PackageDTO> list = new List<PackageDTO>();
-        if (result.Packages == null)
-        {
-          return new SourceServerResponseDTO(true, null, parameters, null);
-        }
-        foreach (var spkPackage in result.Packages)
-        {
-          if (string.IsNullOrWhiteSpace(keyword) || KeywordExists(keyword, spkPackage))
-          {
-            PackageDTO package = new PackageDTO();
-            spkPackage.Map(package);
-            package.IconFileName = cacheService.GetIconFileName(sourceName, package.Name);
-            list.Add(package);
-          }
-        }
-        list.Sort();
-        return new SourceServerResponseDTO(true, null, parameters, list);
+        return GenerateResult(sourceName, keyword, parameters, result);
       }
       else
       {
         errorMessage = "Spk result is empty";
         return new SourceServerResponseDTO(false, errorMessage, parameters, null);
       }
+    }
+
+    private SourceServerResponseDTO GenerateResult(string sourceName, string keyword, ParametersDTO parameters, SpkResult result)
+    {
+      this.cacheService.ProcessIcons(sourceName, result.Packages);
+      List<PackageDTO> list = new List<PackageDTO>();
+      if (result.Packages == null)
+      {
+        return new SourceServerResponseDTO(true, null, parameters, null);
+      }
+      foreach (var spkPackage in result.Packages)
+      {
+        if (string.IsNullOrWhiteSpace(keyword) || KeywordExists(keyword, spkPackage))
+        {
+          PackageDTO package = new PackageDTO();
+          spkPackage.Map(package);
+          package.IconFileName = cacheService.GetIconFileName(sourceName, package.Name);
+          list.Add(package);
+        }
+      }
+      list.Sort();
+      return new SourceServerResponseDTO(true, null, parameters, list);
+    }
+
+    private SpkResult ParseResponse(string sourceName, string url, string model, VersionDTO versionDto, bool isBeta, IRestResponse response)
+    {
+      SpkResult result;
+      var responseContent = response.Content;
+      if (responseContent != null)
+      {
+        responseContent = responseContent.Replace("\\n", "\n");
+        if (responseContent.Contains("\"packages\""))
+        {
+          result = JsonConvert.DeserializeObject<SpkResult>(responseContent);
+        }
+        else
+        {
+          result = new SpkResult();
+          result.Packages = JsonConvert.DeserializeObject<List<SpkPackage>>(responseContent);
+        }
+        if (result != null)
+          cacheService.SaveSpkResult(sourceName, model, versionDto.Build.ToString(), isBeta, result);
+      }
+      else
+      {
+        logger.LogWarning($"No data for url: {url}");
+        result = new SpkResult();
+      }
+
+      return result;
+    }
+
+    private RestRequest PrepareRequest(string url, string arch, string model, VersionDTO versionDto, bool isBeta, string customUserAgent, out string userAgent, out string finalUrl)
+    {
+      var request = new RestRequest(Method.POST);
+      var unique = $"synology_{arch}_{model}";
+
+      request.AddParameter("language", "enu");
+      request.AddParameter("unique", unique);
+      request.AddParameter("arch", arch);
+      request.AddParameter("major", versionDto.Major.ToString());
+      request.AddParameter("minor", versionDto.Minor.ToString());
+      request.AddParameter("build", versionDto.Build.ToString());
+      request.AddParameter("package_update_channel", isBeta ? "beta" : "stable");
+      request.AddParameter("timezone", "Brussels");
+
+      finalUrl = GetLegacySupportUrl(url, request);
+      userAgent = customUserAgent != null ? customUserAgent : unique;
+
+      return request;
     }
 
     private bool KeywordExists(string keyword, SpkPackage spkPackage)

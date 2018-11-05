@@ -1,8 +1,5 @@
 import { Subject } from 'rxjs';
 import { Injectable, OnInit } from '@angular/core';
-import { ModelsService } from './models.service';
-import { VersionsService } from './versions.service';
-import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -12,8 +9,7 @@ export class UserSettingsService implements OnInit {
   protected subject = new Subject();
   public events = this.subject.asObservable();
 
-  constructor(private modelsService: ModelsService,
-    private versionsService: VersionsService) {
+  constructor() {
   }
 
   ngOnInit() {

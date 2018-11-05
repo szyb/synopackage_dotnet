@@ -9,7 +9,9 @@ namespace synopackage_dotnet
   {
     public static string CleanFileName(string fileName)
     {
-      return Path.GetInvalidFileNameChars().Aggregate(fileName, (current, c) => current.Replace(c.ToString(), "_"));
+      return Path
+        .GetInvalidFileNameChars()
+        .Aggregate(fileName, (current, c) => current.Replace(c.ToString(), "_"));
     }
 
     public static string GetUrlParameters(Dictionary<string, string> parameters)

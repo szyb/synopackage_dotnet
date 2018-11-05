@@ -1,10 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-// import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 
@@ -80,7 +79,6 @@ export const routerConfig: Routes = [
     PackageInfoComponent,
     ParametersComponent,
     DialogComponent
-    // DisplayMapComponent
   ],
   imports: [
     BrowserModule,

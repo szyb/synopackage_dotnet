@@ -1,6 +1,5 @@
-import { Component, Inject, Injectable } from '@angular/core';
+import { Component, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Config } from '../shared/config';
 import { SourceDTO, SourcesDTO } from './sources.model';
 import { SourcesService } from '../shared/sources.service';
 import { Title } from '@angular/platform-browser';
@@ -24,10 +23,4 @@ export class SourcesComponent {
       this.sources = result;
     });
   }
-  // http.get<SourceDTO[]>(`${Config.apiUrl}Sources/GetList`).subscribe( result => {
-  //   this.sources = result;
-  // });
-  // http.get<SourceDTO[]>(Config.apiUrl + 'api/BrowseSource/GetList').subscribe(result => {
-  //   this.sources = result;
-  // }, error => console.error(error));
 }
