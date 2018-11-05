@@ -79,11 +79,6 @@ export class UserSettingsComponent {
   resetModelError(): void {
     this.errorModel = null;
   }
-
-  // toggleChecked(e): void {
-  //   this.selectedIsBeta = e.target.checked;
-  // }
-
 }
 
 

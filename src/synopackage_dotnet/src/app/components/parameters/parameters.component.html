@@ -1,9 +1,6 @@
 <div *ngIf="parameters">
   <table mdbTable>
     <tbody>
-      <!-- <tr mdbTableCol>
-        <td colspan="2"><span class="blue-text">Parameters</span></td>
-      </tr> -->
       <tr mdbTableRow *ngIf="showSourceName">
         <td scope="row" class="px-2"><span>Source name:</span></td>
         <td><span>{{ parameters.sourceName }}</span></td>

@@ -1,4 +1,4 @@
-import { Injectable, Component, OnChanges } from '@angular/core';
+import { Injectable, Component } from '@angular/core';
 import { UserSettingsService } from '../../shared/user-settings.service';
 
 
@@ -13,12 +13,11 @@ export class UserSettingsDisplayComponent {
   private selectedModel: string;
   private selectedIsBeta: boolean;
   private stableOrBeta: string;
-//  private lastIsSetup: boolean;
 
   constructor(private userSettingsService: UserSettingsService) {
     this.userSettingsService.events.subscribe(
-     () => {
-       this.init();
+      () => {
+        this.init();
       }
     );
     this.init();

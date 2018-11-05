@@ -1,14 +1,11 @@
-import { Component, Inject, OnInit, OnDestroy, Injectable, ViewChild } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Router, ActivatedRoute, ParamMap, Params } from '@angular/router';
-import { switchMap, take } from 'rxjs/operators';
+import { Component, OnInit, OnDestroy, Injectable, ViewChild } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { take } from 'rxjs/operators';
 import { Config } from '../shared/config';
 import { Observable, Subscription } from 'rxjs';
 import { PackageDTO, SourceServerResponseDTO } from '../sources/sources.model';
 import { SourcesService } from '../shared/sources.service';
 import { UserSettingsService } from '../shared/user-settings.service';
-import { ModelsService } from '../shared/models.service';
-import { VersionsService } from '../shared/versions.service';
 import { PackageInfoComponent } from '../components/package-info/package-info.component';
 import { ParametersDTO } from '../shared/model';
 import { Title } from '@angular/platform-browser';
@@ -34,8 +31,6 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute,
     private sourcesService: SourcesService,
     private userSettingsService: UserSettingsService,
-    private modelsService: ModelsService,
-    private versionsService: VersionsService,
     private titleService: Title,
     private router: Router) {
     this.titleService.setTitle('Browse source - synopackage.com');
@@ -85,7 +80,7 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
       if (this.response.packages != null) {
         this.count = this.response.packages.length;
         this.packages.forEach(element => {
-          element.thumbnailUrl = 'cache/' + element.iconFileName;
+          element.thumbnailUrl = Config.cacheFolder + element.iconFileName;
         });
       }
       this.isResponseArrived = true;
