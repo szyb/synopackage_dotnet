@@ -9,13 +9,6 @@ namespace synopackage_dotnet.Model.Services
 {
   public class SourceService : ISourceService
   {
-    // public IEnumerable<SourceDTO> GetList()
-    // {
-    //   var sourcesJson = File.ReadAllText("Config/sources.json");
-    //   var sources = JsonConvert.DeserializeObject<SourceDTO[]>(sourcesJson);
-    //   return sources;
-    // }
-
     public SourcesDTO GetAllSources()
     {
       var sourcesJson = File.ReadAllText("Config/sources.json");
