@@ -11,7 +11,7 @@ import { ParametersDTO } from './model';
   providedIn: 'root',
 })
 export class SourcesService {
-  constructor(private http: HttpClient, private userSettingsService: UserSettingsService) {
+  constructor(private http: HttpClient) {
 
   }
 

@@ -1,19 +1,15 @@
-import { Component, Inject, OnInit, OnDestroy, Injectable, ViewChild, ViewChildren } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, OnDestroy, Injectable, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap, Params } from '@angular/router';
-import { switchMap, take } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { Config } from '../shared/config';
-import { Observable, Subscription } from 'rxjs';
-import { PackageDTO, SourceServerResponseDTO, SourceLiteDTO } from '../sources/sources.model';
+import { Subscription } from 'rxjs';
+import { SourceLiteDTO } from '../sources/sources.model';
 import { SourcesService } from '../shared/sources.service';
 import { UserSettingsService } from '../shared/user-settings.service';
-import { ModelsService } from '../shared/models.service';
-import { VersionsService } from '../shared/versions.service';
 import { SearchResultDTO } from './search.model';
 import { PackageInfoComponent } from '../components/package-info/package-info.component';
 import { ParametersDTO } from '../shared/model';
 import { Title } from '@angular/platform-browser';
-import { CollapseDirective } from 'angular-bootstrap-md';
 
 @Component({
   selector: 'app-search',
@@ -25,8 +21,6 @@ export class SearchComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute,
     private sourcesService: SourcesService,
     private userSettingsService: UserSettingsService,
-    private modelsService: ModelsService,
-    private versionsService: VersionsService,
     private titleService: Title,
     private router: Router) {
     this.titleService.setTitle('Search - synopackage.com');
@@ -123,19 +117,8 @@ export class SearchComponent implements OnInit, OnDestroy {
         item.count = 0;
       });
     }
-    let model = this.modelParam != null ? this.modelParam : this.userSettingsService.getUserModel();
-    let version = this.versionParam != null ? this.versionParam : this.userSettingsService.getUserVersion();
-    const channel = this.channelParam === 'beta' ? true : this.userSettingsService.getUserIsBeta();
-    let keywordForSearch = this.keywordParam != null ? this.keywordParam : this.keyword;
-    if (model != null) {
-      model = model.substring(0, 100);
-    }
-    if (version != null) {
-      version = version.substring(0, 100);
-    }
-    if (keywordForSearch != null) {
-      keywordForSearch = keywordForSearch.substring(0, 300);
-    }
+
+    const { keywordForSearch, model, version, channel } = this.getParameters();
 
     this.generateSearchLinks(keywordForSearch, model, version, channel);
 
@@ -163,7 +146,7 @@ export class SearchComponent implements OnInit, OnDestroy {
             if (item.packages != null) {
               item.count = item.packages.length;
               item.packages.forEach(element => {
-                element.thumbnailUrl = 'cache/' + element.iconFileName;
+                element.thumbnailUrl = Config.cacheFolder + element.iconFileName;
               });
             }
             if (this.parameters == null) {
@@ -173,6 +156,23 @@ export class SearchComponent implements OnInit, OnDestroy {
       });
       this.isSearchPerformed = true;
     }
+  }
+
+  private getParameters() {
+    let model = this.modelParam != null ? this.modelParam : this.userSettingsService.getUserModel();
+    let version = this.versionParam != null ? this.versionParam : this.userSettingsService.getUserVersion();
+    const channel = this.channelParam === 'beta' ? true : this.userSettingsService.getUserIsBeta();
+    let keywordForSearch = this.keywordParam != null ? this.keywordParam : this.keyword;
+    if (model != null) {
+      model = model.substring(0, 100);
+    }
+    if (version != null) {
+      version = version.substring(0, 100);
+    }
+    if (keywordForSearch != null) {
+      keywordForSearch = keywordForSearch.substring(0, 300);
+    }
+    return { keywordForSearch, model, version, channel };
   }
 
   generateSearchLinks(keyword: string, model: string, version: string, channel: boolean) {
