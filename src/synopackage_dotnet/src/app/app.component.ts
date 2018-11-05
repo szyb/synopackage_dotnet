@@ -26,7 +26,6 @@ export class AppComponent implements OnInit {
   loadScript() {
     if (environment.useGoogleAnalytics) {
       const node = document.createElement('script');
-      // node.src = `https://www.googletagmanager.com/gtag/js?id=` + environment.googleAnalyticsCode;
       node.src = `https://www.google-analytics.com/analytics.js`;
       node.type = 'text/javascript';
       node.async = true;

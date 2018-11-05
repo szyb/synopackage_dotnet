@@ -145,11 +145,6 @@ namespace synopackage_dotnet.Model.Services
       else
       {
         return false;
-        // var content = System.Text.Encoding.UTF8.GetString(iconBytes);
-        // if (content.Contains("piwik.org")) //a hack for one invalid icon from synologyitalia
-        //   return false;
-        // else
-        //   return true;
       }
     }
 
