@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "^6.0.2",
     "@angular/router": "^6.0.2",
     "@ng-select/ng-select": "^2.5.0",
+    "@trademe/ng-defer-load": "^2.0.0",
     "angular-bootstrap-md": "^6.1.1",
     "chart.js": "^2.5.0",
     "core-js": "^2.5.4",
