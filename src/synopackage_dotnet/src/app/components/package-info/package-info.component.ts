@@ -9,6 +9,7 @@ import { PackageDTO } from 'src/app/sources/sources.model';
 
 @Injectable()
 export class PackageInfoComponent {
+  public showIcon = false;
 
   @Input()
   public package: PackageDTO;
