@@ -43,6 +43,9 @@ export class SearchComponent implements OnInit, OnDestroy {
   private versionParam: string;
   private channelParam: string;
 
+  public expandIcon = 'fa-eye';
+  public collapseIcon = 'fa-eye-slash';
+
   @ViewChild(PackageInfoComponent)
   PackageInfoComponent: PackageInfoComponent;
 
@@ -115,6 +118,7 @@ export class SearchComponent implements OnInit, OnDestroy {
         item.isValid = false;
         item.response = null;
         item.count = 0;
+        item.isCollapsed = false;
       });
     }
 
@@ -140,6 +144,7 @@ export class SearchComponent implements OnInit, OnDestroy {
             item.isValid = val.result;
             item.errorMessage = val.errorMessage;
             item.isSearchEnded = true;
+            item.isCollapsed = true;
             if (item.isValid && (item.packages == null || item.packages.length === 0)) {
               item.noPackages = true;
             }
@@ -192,6 +197,17 @@ export class SearchComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.subscription === null) {
       this.subscription.unsubscribe();
+    }
+  }
+
+  toggleIcon($event) {
+
+    if (event.srcElement.classList.contains(this.expandIcon)) {
+      event.srcElement.classList.remove(this.expandIcon);
+      event.srcElement.classList.add(this.collapseIcon);
+    } else {
+      event.srcElement.classList.remove(this.collapseIcon);
+      event.srcElement.classList.add(this.expandIcon);
     }
   }
 }
