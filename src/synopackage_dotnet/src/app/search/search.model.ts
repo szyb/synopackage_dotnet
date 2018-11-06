@@ -9,4 +9,5 @@ export class SearchResultDTO {
   noPackages: boolean;
   packages: PackageDTO[];
   response: SourceServerResponseDTO;
+  isCollapsed: boolean;
 }
