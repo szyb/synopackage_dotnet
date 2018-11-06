@@ -61,8 +61,13 @@
       <div *ngIf="result.errorMessage">
         <p class="alert alert-danger">{{result.errorMessage}}</p>
       </div>
-      <div *ngFor="let package of result.packages" class="blue-gradient z-depth-2 rounded mb-1 pd-3">
-        <app-package-info [package]="package"></app-package-info>
+      <div *ngIf="!result.noPackages" class="container pb-4">
+        <span class="float-right"><i class="fa {{expandIcon}}" aria-hidden="true" (click)="toggleIcon($event); hideResult.toggle()"></i></span>
+      </div>
+      <div mdbCollapse [collapse]="result.isCollapsed" #hideResult="bs-collapse" class="pr-2 pl-1">
+        <div *ngFor="let package of result.packages" class="blue-gradient z-depth-2 rounded mb-1 pd-3">
+          <app-package-info [package]="package"></app-package-info>
+        </div>
       </div>
     </div>
   </div>
