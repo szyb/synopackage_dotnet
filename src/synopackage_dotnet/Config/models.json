@@ -903,5 +903,10 @@
     "Name": "DS1618+",
     "Arch": "denverton",
     "Family": "x86_64"
+  },
+  {
+    "Name": "DS119j",
+    "Arch": "armada37xx",
+    "Family": "arm64"
   }
 ]
