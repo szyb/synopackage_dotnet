@@ -907,6 +907,6 @@
   {
     "Name": "DS119j",
     "Arch": "armada37xx",
-    "Family": "arm64"
+    "Family": "armv8"
   }
 ]
