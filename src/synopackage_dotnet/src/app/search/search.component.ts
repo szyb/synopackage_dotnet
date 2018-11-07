@@ -64,7 +64,7 @@ export class SearchComponent implements OnInit, OnDestroy {
         this.channelParam != null) {
         areParamsSet = true;
       }
-      if (this.keywordParam != null) {
+      if (this.keywordParam != null && this.keywordParam !== '*') {
         this.keyword = this.keywordParam.substring(0, 300);
       }
     });
@@ -167,7 +167,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     let model = this.modelParam != null ? this.modelParam : this.userSettingsService.getUserModel();
     let version = this.versionParam != null ? this.versionParam : this.userSettingsService.getUserVersion();
     const channel = this.channelParam === 'beta' ? true : this.userSettingsService.getUserIsBeta();
-    let keywordForSearch = this.keywordParam != null ? this.keywordParam : this.keyword;
+    let keywordForSearch = this.keywordParam != null && this.keywordParam !== '*' ? this.keywordParam : this.keyword;
     if (model != null) {
       model = model.substring(0, 100);
     }
@@ -187,10 +187,17 @@ export class SearchComponent implements OnInit, OnDestroy {
       const channelString = channel === false ? 'stable' : 'beta';
       this.fullLink = `${Config.baseUrl}search/keyword/` + keyword + '/model/'
         + model + '/version/' + version + '/channel/' + channelString;
+    } else if (keyword === '' || keyword === '*' || keyword === undefined) {
+      this.linksAvailable = true;
+      this.shortLink = `${Config.baseUrl}search/keyword/*`;
+      const channelString = channel === false ? 'stable' : 'beta';
+      this.fullLink = `${Config.baseUrl}search/keyword/*/model/`
+        + model + '/version/' + version + '/channel/' + channelString;
+
     } else {
       this.linksAvailable = false;
-      this.shortLink = 'unavailable for wildcard search';
-      this.fullLink = 'unavailable for wildcard search';
+      this.shortLink = 'unavailable';
+      this.fullLink = 'unavailable';
     }
   }
 
