@@ -1,5 +1,19 @@
 [
   {
+    "Date": "2018-11-07",
+    "Title": "Support for new device DS119j",
+    "Body": [
+      "Today we add DS119j to the model list, so now it is possible to search for packages to this device.",
+      "However there are not many packages for this device at the moment, but the number will grow with time. We found only two sources that have packages compiled to DS119j (nimloth and emby). Other servers shows either noarch packages or shows packages that probably won't work on this device (cphub and synologyitalia). Let's hope synocommunity will serve their packages for this device soon!",
+      "More information available at the link below.",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": null,
+    "RouterLink": null,
+    "ExternalLinkDescription": "Please add DS119J support: armada37xx architecture",
+    "ExternalLink": "https://github.com/SynoCommunity/spksrc/issues/3477"
+  },
+  {
     "Date": "2018-10-30",
     "Title": "Synopackage ver. 2.0",
     "Body": [
