@@ -50,21 +50,21 @@ namespace synopackage_dotnet.Model.Services
       return result;
     }
 
-    public IEnumerable<SourceLiteDTO> GetAllActiveSources()
+    public IEnumerable<SourceDTO> GetAllActiveSources()
     {
-      List<SourceLiteDTO> list = new List<SourceLiteDTO>();
+      List<SourceDTO> list = new List<SourceDTO>();
       var sourcesJson = File.ReadAllText("Config/sources.json");
       var sources = JsonConvert.DeserializeObject<SourceDTO[]>(sourcesJson);
 
       var result = sources
         .Where(item => item.Active)
-        .ToList()
-        .ConvertAll<SourceLiteDTO>(delegate (SourceDTO s)
-        {
-          SourceLiteDTO sl = new SourceLiteDTO();
-          sl.Name = s.Name;
-          return new SourceLiteDTO() { Name = s.Name };
-        });
+        .ToList();
+
+      result.ForEach(item =>
+      {
+        if (string.IsNullOrWhiteSpace(item.Www))
+          item.Www = item.Url;
+      });
 
       return result;
     }

@@ -12,6 +12,12 @@ export class ParametersComponent implements OnInit, OnDestroy {
   public parameters: ParametersDTO;
 
   @Input()
+  public url: string;
+
+  @Input()
+  public www: string;
+
+  @Input()
   public showSourceName: boolean;
 
   constructor() {
