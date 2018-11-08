@@ -12,10 +12,6 @@ export class SourcesDTO {
   inActiveSources: SourceDTO[];
 }
 
-export class SourceLiteDTO {
-  name: string;
-}
-
 export class PackageDTO {
   name: string;
   thumbnailUrl: string;

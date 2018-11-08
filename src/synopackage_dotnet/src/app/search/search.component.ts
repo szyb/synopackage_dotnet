@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, ParamMap, Params } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { Config } from '../shared/config';
 import { Subscription } from 'rxjs';
-import { SourceLiteDTO } from '../sources/sources.model';
+import { SourceDTO } from '../sources/sources.model';
 import { SourcesService } from '../shared/sources.service';
 import { UserSettingsService } from '../shared/user-settings.service';
 import { SearchResultDTO } from './search.model';
@@ -33,7 +33,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   public isSearchPerformed: boolean;
   public areSettingsSet: boolean;
-  public sources: SourceLiteDTO[];
+  public sources: SourceDTO[];
   public searchResult: SearchResultDTO[];
   private subscription: Subscription;
   public keyword: string;
@@ -75,6 +75,8 @@ export class SearchComponent implements OnInit, OnDestroy {
       this.sources.forEach(item => {
         const sr = new SearchResultDTO();
         sr.name = item.name;
+        sr.url = item.url;
+        sr.www = item.www;
         sr.isSearchEnded = false;
         this.searchResult.push(sr);
       });
