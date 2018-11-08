@@ -5,6 +5,10 @@
         <td scope="row" class="px-2"><span>Source name:</span></td>
         <td><span>{{ parameters.sourceName }}</span></td>
       </tr>
+      <tr mdbTableRow *ngIf="url">
+        <td scope="row" class="px-2"><span>Url:</span></td>
+        <td><span>{{url}}<a href="{{www}}" target="_blank">&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></a></span></td>
+      </tr>
       <tr mdbTableRow *ngIf="parameters.model">
         <td scope="row" class="px-2"><span>Model:</span></td>
         <td><span>{{ parameters.model }}</span></td>

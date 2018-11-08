@@ -47,9 +47,9 @@
 </div>
 <div *ngIf="isSearchPerformed">
   <div *ngFor="let result of searchResult">
-    <blockquote class="blockquote bq-primary">
+    <blockquote class="blockquote bq-primary inline">
       <a class="bq-title" routerLink="/sources/{{result.name}}">{{result.name}}</a><span class="px-2">({{result.count}})</span>
-      <app-parameters [parameters]="parameters" [showSourceName]="0"></app-parameters>
+      <app-parameters [parameters]="parameters" [showSourceName]="0" [url]="result.url" [www]="result.www"></app-parameters>
     </blockquote>
     <div *ngIf="!result.isSearchEnded">
       <app-wait></app-wait>
