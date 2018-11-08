@@ -61,7 +61,7 @@
       <div *ngIf="result.errorMessage">
         <p class="alert alert-danger">{{result.errorMessage}}</p>
       </div>
-      <div *ngIf="!result.noPackages" class="container pb-4">
+      <div *ngIf="!result.noPackages && !result.errorMessage" class="container pb-4">
         <span class="float-right"><i class="fa {{expandIcon}}" aria-hidden="true" (click)="toggleIcon($event); hideResult.toggle()"></i></span>
       </div>
       <div mdbCollapse [collapse]="result.isCollapsed" #hideResult="bs-collapse" class="pr-2 pl-1">
