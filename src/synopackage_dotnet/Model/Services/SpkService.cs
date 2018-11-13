@@ -8,6 +8,8 @@ using Newtonsoft.Json;
 using RestSharp;
 using synopackage_dotnet.Model.DTOs;
 using synopackage_dotnet.Model.SPK;
+using Serilog.Extensions.Logging;
+using Serilog.Context;
 
 namespace synopackage_dotnet.Model.Services
 {
@@ -27,44 +29,47 @@ namespace synopackage_dotnet.Model.Services
     public SourceServerResponseDTO GetPackages(string sourceName, string url, string arch, string model, VersionDTO versionDto, bool isBeta, string customUserAgent, string keyword = null)
     {
       string errorMessage = null;
-      ParametersDTO parameters = new ParametersDTO(sourceName, model, versionDto, isBeta, keyword);
-      logger.LogInformation("GetPackages parameters : {0}", Utils.GetParameterString(parameters));
-      var cacheResult = cacheService.GetSpkResponseFromCache(sourceName, model, versionDto.Build.ToString(), isBeta);
-      SpkResult result = null;
-      if (cacheResult.Result == false)
+      using (Serilog.Context.LogContext.PushProperty(Consts.SpkQueryContext, "true"))
       {
-        string finalUrl;
-        string userAgent;
-        RestRequest request = PrepareRequest(url, arch, model, versionDto, isBeta, customUserAgent, out userAgent, out finalUrl);
-
-        var response = downloadService.Execute(finalUrl, request, userAgent);
-
-        if (response.ResponseStatus == ResponseStatus.Completed && response.StatusCode == HttpStatusCode.OK)
+        ParametersDTO parameters = new ParametersDTO(sourceName, model, versionDto, isBeta, keyword);
+        logger.LogInformation("GetPackages parameters : {0}", Utils.GetParameterString(parameters));
+        var cacheResult = cacheService.GetSpkResponseFromCache(sourceName, model, versionDto.Build.ToString(), isBeta);
+        SpkResult result = null;
+        if (cacheResult.Result == false)
         {
-          result = ParseResponse(sourceName, url, model, versionDto, isBeta, response);
-          logger.LogInformation("GetPackages from server: {0}", Utils.GetParameterString(parameters));
+          string finalUrl;
+          string userAgent;
+          RestRequest request = PrepareRequest(url, arch, model, versionDto, isBeta, customUserAgent, out userAgent, out finalUrl);
+
+          var response = downloadService.Execute(finalUrl, request, userAgent);
+
+          if (response.ResponseStatus == ResponseStatus.Completed && response.StatusCode == HttpStatusCode.OK)
+          {
+            result = ParseResponse(sourceName, url, model, versionDto, isBeta, response);
+            logger.LogInformation("GetPackages from server: {0}", Utils.GetParameterString(parameters));
+          }
+          else
+          {
+            errorMessage = $"{response.StatusDescription} {response.ErrorMessage}";
+            logger.LogError($"Error getting response for url: {url}: {errorMessage}");
+            return new SourceServerResponseDTO(false, errorMessage, parameters, null);
+          }
         }
         else
         {
-          errorMessage = $"{response.StatusDescription} {response.ErrorMessage}";
-          logger.LogError($"Error getting response for url: {url}: {errorMessage}");
+          result = cacheResult.SpkResult;
+          logger.LogInformation("GetPackages from cache : {0}", Utils.GetParameterString(parameters));
+        }
+
+        if (result != null)
+        {
+          return GenerateResult(sourceName, keyword, parameters, result);
+        }
+        else
+        {
+          errorMessage = "Spk result is empty";
           return new SourceServerResponseDTO(false, errorMessage, parameters, null);
         }
-      }
-      else
-      {
-        result = cacheResult.SpkResult;
-        logger.LogInformation("GetPackages from cache : {0}", Utils.GetParameterString(parameters));
-      }
-
-      if (result != null)
-      {
-        return GenerateResult(sourceName, keyword, parameters, result);
-      }
-      else
-      {
-        errorMessage = "Spk result is empty";
-        return new SourceServerResponseDTO(false, errorMessage, parameters, null);
       }
     }
 
