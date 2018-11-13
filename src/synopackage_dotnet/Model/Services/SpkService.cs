@@ -28,6 +28,7 @@ namespace synopackage_dotnet.Model.Services
     {
       string errorMessage = null;
       ParametersDTO parameters = new ParametersDTO(sourceName, model, versionDto, isBeta, keyword);
+      logger.LogInformation("GetPackages parameters : {0}", Utils.GetParameterString(parameters));
       var cacheResult = cacheService.GetSpkResponseFromCache(sourceName, model, versionDto.Build.ToString(), isBeta);
       SpkResult result = null;
       if (cacheResult.Result == false)
@@ -41,6 +42,7 @@ namespace synopackage_dotnet.Model.Services
         if (response.ResponseStatus == ResponseStatus.Completed && response.StatusCode == HttpStatusCode.OK)
         {
           result = ParseResponse(sourceName, url, model, versionDto, isBeta, response);
+          logger.LogInformation("GetPackages from server: {0}", Utils.GetParameterString(parameters));
         }
         else
         {
@@ -52,6 +54,7 @@ namespace synopackage_dotnet.Model.Services
       else
       {
         result = cacheResult.SpkResult;
+        logger.LogInformation("GetPackages from cache : {0}", Utils.GetParameterString(parameters));
       }
 
       if (result != null)

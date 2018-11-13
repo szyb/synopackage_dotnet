@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using synopackage_dotnet.Model.DTOs;
 using synopackage_dotnet.Model.Services;
@@ -17,13 +18,15 @@ namespace synopackage_dotnet.Controllers
     private ISourceService sourceService;
     private IVersionService versionService;
     private IModelService modelService;
+    private readonly ILogger<PackagesController> logger;
 
-    public PackagesController(ISpkService spkService, ISourceService sourceService, IVersionService versionService, IModelService modelService)
+    public PackagesController(ISpkService spkService, ISourceService sourceService, IVersionService versionService, IModelService modelService, ILogger<PackagesController> logger)
     {
       this.spkService = spkService;
       this.sourceService = sourceService;
       this.versionService = versionService;
       this.modelService = modelService;
+      this.logger = logger;
     }
 
     [HttpGet("GetSourceServerResponse")]
