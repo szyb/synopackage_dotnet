@@ -197,6 +197,8 @@ namespace synopackage_dotnet.Model.Services
           var deserializedData = JsonConvert.DeserializeObject<SpkResult>(content);
           res.Result = true;
           res.SpkResult = deserializedData;
+          res.CacheDate = fi.LastAccessTime;
+          res.CacheOld = ts.TotalSeconds;
           return res;
         }
         catch (Exception ex)
