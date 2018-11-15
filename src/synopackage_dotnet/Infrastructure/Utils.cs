@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 using synopackage_dotnet.Model.DTOs;
 
 namespace synopackage_dotnet
@@ -30,9 +31,10 @@ namespace synopackage_dotnet
       return result;
     }
 
-    public static string GetParameterString(ParametersDTO parameters)
+    public static string GetSearchLogEntryString(SearchLogEntryDTO logEntry)
     {
-      return parameters.ToString();
+      var serializedData = JsonConvert.SerializeObject(logEntry, Formatting.None);
+      return serializedData;
     }
   }
 }

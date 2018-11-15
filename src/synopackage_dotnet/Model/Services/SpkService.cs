@@ -10,6 +10,7 @@ using synopackage_dotnet.Model.DTOs;
 using synopackage_dotnet.Model.SPK;
 using Serilog.Extensions.Logging;
 using Serilog.Context;
+using synopackage_dotnet.Model.Enums;
 
 namespace synopackage_dotnet.Model.Services
 {
@@ -28,11 +29,17 @@ namespace synopackage_dotnet.Model.Services
 
     public SourceServerResponseDTO GetPackages(string sourceName, string url, string arch, string model, VersionDTO versionDto, bool isBeta, string customUserAgent, string keyword = null)
     {
-      string errorMessage = null;
       using (Serilog.Context.LogContext.PushProperty(Consts.SpkQueryContext, "true"))
       {
+        ExecutionTime et = new ExecutionTime();
+
+        string errorMessage = null;
         ParametersDTO parameters = new ParametersDTO(sourceName, model, versionDto, isBeta, keyword);
-        logger.LogInformation("GetPackages parameters : {0}", Utils.GetParameterString(parameters));
+        SearchLogEntryDTO logEntry = new SearchLogEntryDTO(parameters);
+        logEntry.RequestType = RequestType.NotSpecified;
+        logger.LogInformation(Utils.GetSearchLogEntryString(logEntry));
+        logEntry.LogType = LogType.Result;
+        et.Start();
         var cacheResult = cacheService.GetSpkResponseFromCache(sourceName, model, versionDto.Build.ToString(), isBeta);
         SpkResult result = null;
         if (cacheResult.Result == false)
@@ -45,8 +52,8 @@ namespace synopackage_dotnet.Model.Services
 
           if (response.ResponseStatus == ResponseStatus.Completed && response.StatusCode == HttpStatusCode.OK)
           {
+            logEntry.ResultFrom = ResultFrom.Server;
             result = ParseResponse(sourceName, url, model, versionDto, isBeta, response);
-            logger.LogInformation("GetPackages from server: {0}", Utils.GetParameterString(parameters));
           }
           else
           {
@@ -54,20 +61,29 @@ namespace synopackage_dotnet.Model.Services
             logger.LogError($"Error getting response for url: {url}: {errorMessage}");
             return new SourceServerResponseDTO(false, errorMessage, parameters, null);
           }
+
         }
         else
         {
           result = cacheResult.SpkResult;
-          logger.LogInformation("GetPackages from cache : {0}", Utils.GetParameterString(parameters));
+          logEntry.ResultFrom = ResultFrom.Cache;
+          logEntry.CacheOld = cacheResult.CacheOld;
         }
 
         if (result != null)
         {
-          return GenerateResult(sourceName, keyword, parameters, result);
+          var finalResult = GenerateResult(sourceName, keyword, parameters, result);
+          et.Stop();
+          logEntry.ExecutionTime = et.GetDiff();
+          logger.LogInformation(Utils.GetSearchLogEntryString(logEntry));
+          return finalResult;
         }
         else
         {
           errorMessage = "Spk result is empty";
+          et.Stop();
+          logEntry.ExecutionTime = et.GetDiff();
+          logger.LogWarning("Spk result is empty {0}", Utils.GetSearchLogEntryString(logEntry));
           return new SourceServerResponseDTO(false, errorMessage, parameters, null);
         }
       }
