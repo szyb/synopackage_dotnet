@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using synopackage_dotnet.Model.DTOs;
 using synopackage_dotnet.Model.Services;
@@ -17,17 +18,19 @@ namespace synopackage_dotnet.Controllers
     private ISourceService sourceService;
     private IVersionService versionService;
     private IModelService modelService;
+    private readonly ILogger<PackagesController> logger;
 
-    public PackagesController(ISpkService spkService, ISourceService sourceService, IVersionService versionService, IModelService modelService)
+    public PackagesController(ISpkService spkService, ISourceService sourceService, IVersionService versionService, IModelService modelService, ILogger<PackagesController> logger)
     {
       this.spkService = spkService;
       this.sourceService = sourceService;
       this.versionService = versionService;
       this.modelService = modelService;
+      this.logger = logger;
     }
 
     [HttpGet("GetSourceServerResponse")]
-    public IActionResult GetSourceServerResponse([FromQuery]string sourceName, [FromQuery]string model, [FromQuery]string version, [FromQuery]bool isBeta, [FromQuery]string keyword = null)
+    public IActionResult GetSourceServerResponse([FromQuery]string sourceName, [FromQuery]string model, [FromQuery]string version, [FromQuery]bool isBeta, [FromQuery]string keyword, [FromQuery]bool isSearch)
     {
       var validation = ValidateStringParameter(nameof(sourceName), sourceName, 100);
       if (!string.IsNullOrWhiteSpace(validation)) return BadRequest(validation);
@@ -56,6 +59,7 @@ namespace synopackage_dotnet.Controllers
           versionDto,
           isBeta,
           sourceDto.CustomUserAgent,
+          isSearch,
           keyword);
       }
       else

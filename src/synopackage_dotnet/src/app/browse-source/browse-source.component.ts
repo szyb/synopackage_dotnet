@@ -64,7 +64,8 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
       this.userSettingsService.getUserModel(),
       this.userSettingsService.getUserVersion(),
       this.userSettingsService.getUserIsBeta(),
-      null
+      null,
+      false
     ).pipe(
       take(1)
     ).subscribe(val => {
