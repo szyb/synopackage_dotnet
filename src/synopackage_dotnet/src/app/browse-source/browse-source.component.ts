@@ -27,6 +27,8 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
   public areSettingsSet: boolean;
   public noPackages: boolean;
   public parameters: ParametersDTO;
+  public sourceUrl: string;
+  public sourceWww: string;
   public count: number;
   constructor(private route: ActivatedRoute,
     private sourcesService: SourcesService,
@@ -50,6 +52,7 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
     this.isError = false;
     this.noPackages = false;
     this.parameters = new ParametersDTO();
+
     this.count = 0;
     this.route.params.pipe(
       take(1)
@@ -58,6 +61,13 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
       this.titleService.setTitle('Browse source - ' + this.nameString + ' - synopackage.com');
     });
 
+    this.sourcesService.getSource(this.nameString)
+      .pipe(
+        take(1)
+      ).subscribe(val => {
+        this.sourceUrl = val.url;
+        this.sourceWww = val.www;
+      });
 
 
     this.sourcesService.getPackagesFromSource(this.nameString,
