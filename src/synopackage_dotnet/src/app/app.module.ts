@@ -20,6 +20,7 @@ import { BrowseSourceComponent } from './browse-source/browse-source.component';
 import { SearchComponent } from './search/search.component';
 import { PackageInfoComponent } from './components/package-info/package-info.component';
 import { ParametersComponent } from './components/parameters/parameters.component';
+import { CreditsComponent } from './credits/credits.component';
 
 
 export const routerConfig: Routes = [
@@ -57,6 +58,10 @@ export const routerConfig: Routes = [
     component: SearchComponent
   },
   {
+    path: 'credits',
+    component: CreditsComponent
+  },
+  {
     path: '',
     redirectTo: '/home',
     pathMatch: 'full'
@@ -79,7 +84,8 @@ export const routerConfig: Routes = [
     SearchComponent,
     PackageInfoComponent,
     ParametersComponent,
-    DialogComponent
+    DialogComponent,
+    CreditsComponent
   ],
   imports: [
     BrowserModule,
