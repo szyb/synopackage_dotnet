@@ -33,5 +33,11 @@ namespace synopackage_dotnet.Controllers
     {
       return sourceService.GetAllActiveSources();
     }
+
+    [HttpGet("GetSource")]
+    public SourceDTO GetSource([FromQuery]string sourceName)
+    {
+      return sourceService.GetSource(sourceName);
+    }
   }
 }
