@@ -9,21 +9,21 @@ namespace synopackage_dotnet.Model.Services
 {
   public class ModelService : IModelService
   {
+    private readonly string configFile = "Config/models.json";
 
+    private IEnumerable<ModelDTO> GetAllInternal()
+    {
+      var modelsJson = File.ReadAllText(configFile);
+      return JsonConvert.DeserializeObject<ModelDTO[]>(modelsJson);
+    }
     public IEnumerable<ModelDTO> GetAll()
     {
-      var modelsJson = File.ReadAllText("Config/models.json");
-      var models = JsonConvert.DeserializeObject<ModelDTO[]>(modelsJson);
-      // var list = models.ToList();
-      return models;
+      return GetAllInternal();
     }
 
     public ModelDTO GetModel(string model)
     {
-      var modelsJson = File.ReadAllText("Config/models.json");
-      var models = JsonConvert.DeserializeObject<ModelDTO[]>(modelsJson);
-
-      return models.SingleOrDefault(item => item.Name.Equals(model, StringComparison.CurrentCultureIgnoreCase));
+      return GetAllInternal().SingleOrDefault(item => item.Name.Equals(model, StringComparison.CurrentCultureIgnoreCase));
     }
   }
 }
