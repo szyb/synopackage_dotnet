@@ -1,0 +1,14 @@
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">Credits</span>
+</nav>
+<h1>Credits</h1>
+<blockquote class="blockquote bq-primary">
+  <p class="bq-title">Third party libraries</p>
+</blockquote>
+
+<div *ngFor="let entry of libraries" class="rounded border px-2 py-2 my-3 blue-gradient z-depth-2">
+  <p><i class="fa fa-briefcase fa-2x green-text p-2" aria-hidden="true"></i> <a href="{{entry.projectUrl}}" target="_blank"><span
+        class="fa-2x">{{entry.name}}</span></a></p>
+  <p>{{entry.description}}</p>
+  <a href="{{entry.licenseUrl}}" target="_blank">License</a>
+</div>
