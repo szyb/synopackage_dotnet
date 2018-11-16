@@ -7,11 +7,17 @@ namespace synopackage_dotnet.Model.Services
 {
   public class NewsService : INewsService
   {
+    private readonly string configFile = "Config/news.json";
+
+    private IEnumerable<NewsDTO> GetNewsInternal()
+    {
+      var newsJson = File.ReadAllText(configFile);
+      return JsonConvert.DeserializeObject<NewsDTO[]>(newsJson);
+
+    }
     public IEnumerable<NewsDTO> GetNews()
     {
-      var newsJson = File.ReadAllText("Config/news.json");
-      var news = JsonConvert.DeserializeObject<NewsDTO[]>(newsJson);
-      return news;
+      return GetNewsInternal();
     }
   }
 }

@@ -10,9 +10,10 @@ namespace synopackage_dotnet.Model.Services
 {
   public class SourceService : ISourceService
   {
+    private readonly string configFile = "Config/sources.json";
     private SourceDTO[] GetAllSourcesInternal()
     {
-      var sourcesJson = File.ReadAllText("Config/sources.json");
+      var sourcesJson = File.ReadAllText(configFile);
       var sources = JsonConvert.DeserializeObject<SourceDTO[]>(sourcesJson);
       Parallel.ForEach(sources, item =>
       {

@@ -6,7 +6,6 @@ namespace synopackage_dotnet.Model.Services
 {
   public interface ICacheService : IDomainService
   {
-    void ProcessIconsAsync(string sourceName, List<SpkPackage> packages);
     void ProcessIcons(string sourceName, List<SpkPackage> packages);
     string GetIconFileName(string sourceName, string packageName);
     string GetIconFileNameWithCacheFolder(string sourceName, string packageName);

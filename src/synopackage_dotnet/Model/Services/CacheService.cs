@@ -30,25 +30,6 @@ namespace synopackage_dotnet.Model.Services
       this.logger = logger;
     }
 
-    public void ProcessIconsAsync(string sourceName, List<SpkPackage> packages)
-    {
-      throw new NotImplementedException();
-      // BackgroundTaskQueue queue = new BackgroundTaskQueue();
-      // WebClient client = new WebClient();
-
-      // foreach (var package in packages)
-      // {
-      //   queue.QueueBackgroundWorkItem(async token =>
-      //   {
-
-      //     var data = await client.DownloadDataTaskAsync(new Uri(package.Thumbnail[0]));
-      //     var fileName = GetIconFileNameWithCacheFolder(sourceName, package.Name);
-      //     SaveIcon(fileName, data);
-      //   }
-      //   );
-      // }
-    }
-
     public void ProcessIcons(string sourceName, List<SpkPackage> packages)
     {
       if (packages != null)
