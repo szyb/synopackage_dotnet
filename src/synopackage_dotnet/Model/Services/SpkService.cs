@@ -27,7 +27,7 @@ namespace synopackage_dotnet.Model.Services
       this.logger = logger;
     }
 
-    public SourceServerResponseDTO GetPackages(string sourceName, string url, string arch, string model, VersionDTO versionDto, bool isBeta, string customUserAgent, string keyword = null)
+    public SourceServerResponseDTO GetPackages(string sourceName, string url, string arch, string model, VersionDTO versionDto, bool isBeta, string customUserAgent, bool isSearch, string keyword = null)
     {
       using (Serilog.Context.LogContext.PushProperty(Consts.SpkQueryContext, "true"))
       {
@@ -36,7 +36,8 @@ namespace synopackage_dotnet.Model.Services
         string errorMessage = null;
         ParametersDTO parameters = new ParametersDTO(sourceName, model, versionDto, isBeta, keyword);
         SearchLogEntryDTO logEntry = new SearchLogEntryDTO(parameters);
-        logEntry.RequestType = RequestType.NotSpecified;
+        logEntry.RequestType = isSearch ? RequestType.Search : RequestType.Browse;
+        logEntry.LogType = LogType.Parameters;
         logger.LogInformation(Utils.GetSearchLogEntryString(logEntry));
         logEntry.LogType = LogType.Result;
         et.Start();

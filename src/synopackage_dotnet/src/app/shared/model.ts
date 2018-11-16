@@ -5,6 +5,7 @@ export class ParametersDTO {
   version: string;
   isBeta: boolean;
   keyword: string;
+  isSearch: boolean;
   public channel(): string {
     if (this.isBeta) {
       return 'Beta';
