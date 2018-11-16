@@ -30,7 +30,7 @@ namespace synopackage_dotnet.Controllers
     }
 
     [HttpGet("GetSourceServerResponse")]
-    public IActionResult GetSourceServerResponse([FromQuery]string sourceName, [FromQuery]string model, [FromQuery]string version, [FromQuery]bool isBeta, [FromQuery]string keyword = null)
+    public IActionResult GetSourceServerResponse([FromQuery]string sourceName, [FromQuery]string model, [FromQuery]string version, [FromQuery]bool isBeta, [FromQuery]string keyword, [FromQuery]bool isSearch)
     {
       var validation = ValidateStringParameter(nameof(sourceName), sourceName, 100);
       if (!string.IsNullOrWhiteSpace(validation)) return BadRequest(validation);
@@ -59,6 +59,7 @@ namespace synopackage_dotnet.Controllers
           versionDto,
           isBeta,
           sourceDto.CustomUserAgent,
+          isSearch,
           keyword);
       }
       else
