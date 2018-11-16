@@ -10,9 +10,10 @@ namespace synopackage_dotnet.Model.Services
 {
   public class VersionService : IVersionService
   {
+    private readonly string configFile = "Config/versions.json";
     public IEnumerable<VersionDTO> GetAllVersions()
     {
-      var versionsJson = File.ReadAllText("Config/versions.json");
+      var versionsJson = File.ReadAllText(configFile);
       var versions = JsonConvert.DeserializeObject<VersionDTO[]>(versionsJson);
       Regex regex = new Regex(@"^(?<major>\d)\.(?<minor>\d)(\.(?<micro>\d)){0,1}\-(?<build>(\d){1,5})$");
       foreach (var version in versions)
