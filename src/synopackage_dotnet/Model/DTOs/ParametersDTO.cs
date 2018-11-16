@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace synopackage_dotnet.Model.DTOs
 {
   public class ParametersDTO
@@ -24,6 +26,17 @@ namespace synopackage_dotnet.Model.DTOs
       this.Version = version;
       this.IsBeta = isBeta;
       this.Keyword = keyword;
+    }
+
+    public override string ToString()
+    {
+      StringBuilder sb = new StringBuilder();
+      sb.Append($"SourceName={this.SourceName};");
+      sb.Append($"Model={this.Model};");
+      sb.Append($"Version={this.Version};");
+      sb.Append($"IsBeta={this.IsBeta};");
+      sb.Append($"Keyword={this.Keyword};");
+      return sb.ToString();
     }
   }
 }

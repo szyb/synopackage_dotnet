@@ -137,7 +137,8 @@ export class SearchComponent implements OnInit, OnDestroy {
           model,
           version,
           channel,
-          keywordForSearch
+          keywordForSearch,
+          true
         )
           .pipe(
             take(1)

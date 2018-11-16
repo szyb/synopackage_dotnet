@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Logging;
 using Serilog.Extensions.Logging;
+using Serilog;
 
 namespace synopackage_dotnet
 {
@@ -85,10 +86,10 @@ namespace synopackage_dotnet
     /// <param name="loggerFactory">The logger factory</param>
     public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
     {
-      loggerFactory
-       .AddConsole()
-       .AddDebug()
-       .AddFile("..\\Logs\\synopackage-{Date}.log");
+      var logger = new LoggerConfiguration()
+            .ReadFrom.Configuration(configuration)
+            .CreateLogger();
+      loggerFactory.AddSerilog(logger);
 
       if (env.IsDevelopment())
       {
