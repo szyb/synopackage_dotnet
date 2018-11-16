@@ -29,7 +29,14 @@ namespace synopackage_dotnet.Model.Services
       var sourcesJson = File.ReadAllText("Config/sources.json");
       var sources = JsonConvert.DeserializeObject<SourceDTO[]>(sourcesJson);
 
-      return sources.Where(p => p.Name == source).FirstOrDefault();
+
+      var result = sources.Where(p => p.Name == source).FirstOrDefault();
+      if (result != null)
+      {
+        if (string.IsNullOrWhiteSpace(result.Www))
+          result.Www = result.Url;
+      }
+      return result;
     }
 
 

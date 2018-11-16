@@ -33,4 +33,11 @@ export class SourcesService {
   public getAllActiveSources(): Observable<SourceDTO[]> {
     return this.http.get<SourceDTO[]>(`${Config.apiUrl}Sources/GetAllActiveSources`);
   }
+
+  public getSource(sourceName: string): Observable<SourceDTO> {
+    const params: any = {
+      sourceName: sourceName
+    };
+    return this.http.get<SourceDTO>(`${Config.apiUrl}Sources/GetSource${Utils.getQueryParams(params)}`);
+  }
 }
