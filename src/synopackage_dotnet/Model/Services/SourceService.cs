@@ -4,39 +4,37 @@ using Newtonsoft.Json;
 using synopackage_dotnet.Model.DTOs;
 using System.Linq;
 using System;
+using System.Threading.Tasks;
 
 namespace synopackage_dotnet.Model.Services
 {
   public class SourceService : ISourceService
   {
-    public SourcesDTO GetAllSources()
+    private SourceDTO[] GetAllSourcesInternal()
     {
       var sourcesJson = File.ReadAllText("Config/sources.json");
       var sources = JsonConvert.DeserializeObject<SourceDTO[]>(sourcesJson);
-      return PrepareSources(sources);
+      Parallel.ForEach(sources, item =>
+      {
+        if (string.IsNullOrWhiteSpace(item.Www))
+          item.Www = item.Url;
+      });
+      return sources;
+    }
+
+    public SourcesDTO GetAllSources()
+    {
+      return PrepareSources(GetAllSourcesInternal());
     }
 
     public bool ValidateSource(string source)
     {
-      var sourcesJson = File.ReadAllText("Config/sources.json");
-      var sources = JsonConvert.DeserializeObject<SourceDTO[]>(sourcesJson);
-
-      return sources.Where(p => p.Name == source) == null ? false : true;
+      return GetAllSourcesInternal().Where(p => p.Name == source) == null ? false : true;
     }
 
     public SourceDTO GetSource(string source)
     {
-      var sourcesJson = File.ReadAllText("Config/sources.json");
-      var sources = JsonConvert.DeserializeObject<SourceDTO[]>(sourcesJson);
-
-
-      var result = sources.Where(p => p.Name == source).FirstOrDefault();
-      if (result != null)
-      {
-        if (string.IsNullOrWhiteSpace(result.Www))
-          result.Www = result.Url;
-      }
-      return result;
+      return GetAllSourcesInternal().Where(p => p.Name == source).FirstOrDefault();
     }
 
 
@@ -59,19 +57,8 @@ namespace synopackage_dotnet.Model.Services
 
     public IEnumerable<SourceDTO> GetAllActiveSources()
     {
-      List<SourceDTO> list = new List<SourceDTO>();
-      var sourcesJson = File.ReadAllText("Config/sources.json");
-      var sources = JsonConvert.DeserializeObject<SourceDTO[]>(sourcesJson);
-
-      var result = sources
-        .Where(item => item.Active)
-        .ToList();
-
-      result.ForEach(item =>
-      {
-        if (string.IsNullOrWhiteSpace(item.Www))
-          item.Www = item.Url;
-      });
+      var result = GetAllSourcesInternal()
+        .Where(item => item.Active);
 
       return result;
     }
