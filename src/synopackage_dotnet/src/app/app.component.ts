@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
 export class AppComponent implements OnInit {
   title = 'synopackage.com';
   public actualYear: string;
+  public version: string;
 
   constructor(private userSettingsService: UserSettingsService) {
     const date = new Date();
@@ -54,6 +55,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.version = environment.version;
     this.loadScript();
   }
 
