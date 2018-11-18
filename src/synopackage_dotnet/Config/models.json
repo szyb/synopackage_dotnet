@@ -105,11 +105,6 @@
     "Family": "armadaxp"
   },
   {
-    "Name": "RS214",
-    "Arch": "armadaxp",
-    "Family": "armadaxp"
-  },
-  {
     "Name": "RS814",
     "Arch": "armadaxp",
     "Family": "armadaxp"
@@ -500,22 +495,12 @@
     "Family": "ppc"
   },
   {
-    "Name": "DS408",
-    "Arch": "ppc853x",
-    "Family": "ppc"
-  },
-  {
     "Name": "DS409+",
     "Arch": "ppc853x",
     "Family": "ppc"
   },
   {
     "Name": "DS410",
-    "Arch": "ppc853x",
-    "Family": "ppc"
-  },
-  {
-    "Name": "DS508",
     "Arch": "ppc853x",
     "Family": "ppc"
   },
@@ -532,16 +517,6 @@
   {
     "Name": "RS409(RP)+",
     "Arch": "ppc853x",
-    "Family": "ppc"
-  },
-  {
-    "Name": "DS408",
-    "Arch": "ppc854x",
-    "Family": "ppc"
-  },
-  {
-    "Name": "DS508",
-    "Arch": "ppc854x",
     "Family": "ppc"
   },
   {
@@ -816,11 +791,6 @@
   },
   {
     "Name": "DS2411+",
-    "Arch": "x86",
-    "Family": "x86_64"
-  },
-  {
-    "Name": "DS3615xs",
     "Arch": "x86",
     "Family": "x86_64"
   },
