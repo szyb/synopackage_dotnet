@@ -20,6 +20,8 @@
   <ItemGroup>
     <PackageReference Include="autofac" Version="4.8.1" />
     <PackageReference Include="autofac.extensions.dependencyinjection" Version="4.3.0" />
+    <PackageReference Include="Autofac.Extras.DynamicProxy" Version="4.5.0" />
+    <PackageReference Include="Castle.Core" Version="4.3.1" />
     <PackageReference Include="HolopaMir.ExpressMapper" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="2.1.0" />
