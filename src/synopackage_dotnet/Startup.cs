@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Logging;
 using Serilog.Extensions.Logging;
 using Serilog;
+using Autofac.Extras.DynamicProxy;
 
 namespace synopackage_dotnet
 {
@@ -74,7 +75,10 @@ namespace synopackage_dotnet
 
       builder.RegisterAssemblyTypes(modelAssembly)
           .Where(t => t.Name.EndsWith("Service") || t.Name == "BackgroundTaskQueue")
-          .AsImplementedInterfaces();
+          .AsImplementedInterfaces()
+          .EnableInterfaceInterceptors()
+          .InterceptedBy(typeof(TryCatchInterceptor));
+      builder.RegisterType(typeof(TryCatchInterceptor)).AsSelf();
 
     }
 
