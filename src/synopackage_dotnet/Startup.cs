@@ -77,8 +77,10 @@ namespace synopackage_dotnet
           .Where(t => t.Name.EndsWith("Service") || t.Name == "BackgroundTaskQueue")
           .AsImplementedInterfaces()
           .EnableInterfaceInterceptors()
-          .InterceptedBy(typeof(TryCatchInterceptor));
+          .InterceptedBy(typeof(TryCatchInterceptor))
+          .InterceptedBy(typeof(LoggingInterceptor));
       builder.RegisterType(typeof(TryCatchInterceptor)).AsSelf();
+      builder.RegisterType(typeof(LoggingInterceptor)).AsSelf();
 
     }
 
