@@ -29,64 +29,61 @@ namespace synopackage_dotnet.Model.Services
 
     public SourceServerResponseDTO GetPackages(string sourceName, string url, string arch, string model, VersionDTO versionDto, bool isBeta, string customUserAgent, bool isSearch, string keyword = null)
     {
-      using (Serilog.Context.LogContext.PushProperty(Consts.SpkQueryContext, "true"))
+      ExecutionTime et = new ExecutionTime();
+
+      string errorMessage = null;
+      ParametersDTO parameters = new ParametersDTO(sourceName, model, versionDto, isBeta, keyword);
+      SearchLogEntryDTO logEntry = new SearchLogEntryDTO(parameters);
+      logEntry.RequestType = isSearch ? RequestType.Search : RequestType.Browse;
+      logEntry.LogType = LogType.Parameters;
+      logger.LogInformation(Utils.GetSearchLogEntryString(logEntry));
+      logEntry.LogType = LogType.Result;
+      et.Start();
+      var cacheResult = cacheService.GetSpkResponseFromCache(sourceName, model, versionDto.Build.ToString(), isBeta);
+      SpkResult result = null;
+      if (cacheResult.Result == false)
       {
-        ExecutionTime et = new ExecutionTime();
+        string finalUrl;
+        string userAgent;
+        RestRequest request = PrepareRequest(url, arch, model, versionDto, isBeta, customUserAgent, out userAgent, out finalUrl);
 
-        string errorMessage = null;
-        ParametersDTO parameters = new ParametersDTO(sourceName, model, versionDto, isBeta, keyword);
-        SearchLogEntryDTO logEntry = new SearchLogEntryDTO(parameters);
-        logEntry.RequestType = isSearch ? RequestType.Search : RequestType.Browse;
-        logEntry.LogType = LogType.Parameters;
-        logger.LogInformation(Utils.GetSearchLogEntryString(logEntry));
-        logEntry.LogType = LogType.Result;
-        et.Start();
-        var cacheResult = cacheService.GetSpkResponseFromCache(sourceName, model, versionDto.Build.ToString(), isBeta);
-        SpkResult result = null;
-        if (cacheResult.Result == false)
+        var response = downloadService.Execute(finalUrl, request, userAgent);
+
+        if (response.ResponseStatus == ResponseStatus.Completed && response.StatusCode == HttpStatusCode.OK)
         {
-          string finalUrl;
-          string userAgent;
-          RestRequest request = PrepareRequest(url, arch, model, versionDto, isBeta, customUserAgent, out userAgent, out finalUrl);
-
-          var response = downloadService.Execute(finalUrl, request, userAgent);
-
-          if (response.ResponseStatus == ResponseStatus.Completed && response.StatusCode == HttpStatusCode.OK)
-          {
-            logEntry.ResultFrom = ResultFrom.Server;
-            result = ParseResponse(sourceName, url, model, versionDto, isBeta, response);
-          }
-          else
-          {
-            errorMessage = $"{response.StatusDescription} {response.ErrorMessage}";
-            logger.LogError($"Error getting response for url: {url}: {errorMessage}");
-            return new SourceServerResponseDTO(false, errorMessage, parameters, null);
-          }
-
+          logEntry.ResultFrom = ResultFrom.Server;
+          result = ParseResponse(sourceName, url, model, versionDto, isBeta, response);
         }
         else
         {
-          result = cacheResult.SpkResult;
-          logEntry.ResultFrom = ResultFrom.Cache;
-          logEntry.CacheOld = cacheResult.CacheOld;
-        }
-
-        if (result != null)
-        {
-          var finalResult = GenerateResult(sourceName, keyword, parameters, result);
-          et.Stop();
-          logEntry.ExecutionTime = et.GetDiff();
-          logger.LogInformation(Utils.GetSearchLogEntryString(logEntry));
-          return finalResult;
-        }
-        else
-        {
-          errorMessage = "Spk result is empty";
-          et.Stop();
-          logEntry.ExecutionTime = et.GetDiff();
-          logger.LogWarning("Spk result is empty {0}", Utils.GetSearchLogEntryString(logEntry));
+          errorMessage = $"{response.StatusDescription} {response.ErrorMessage}";
+          logger.LogError($"Error getting response for url: {url}: {errorMessage}");
           return new SourceServerResponseDTO(false, errorMessage, parameters, null);
         }
+
+      }
+      else
+      {
+        result = cacheResult.SpkResult;
+        logEntry.ResultFrom = ResultFrom.Cache;
+        logEntry.CacheOld = cacheResult.CacheOld;
+      }
+
+      if (result != null)
+      {
+        var finalResult = GenerateResult(sourceName, keyword, parameters, result);
+        et.Stop();
+        logEntry.ExecutionTime = et.GetDiff();
+        logger.LogInformation(Utils.GetSearchLogEntryString(logEntry));
+        return finalResult;
+      }
+      else
+      {
+        errorMessage = "Spk result is empty";
+        et.Stop();
+        logEntry.ExecutionTime = et.GetDiff();
+        logger.LogWarning("Spk result is empty {0}", Utils.GetSearchLogEntryString(logEntry));
+        return new SourceServerResponseDTO(false, errorMessage, parameters, null);
       }
     }
 
