@@ -24,3 +24,12 @@ export class NewsDTO {
   public externalLinkDescription: string;
   public externalLink: string;
 }
+
+export class ChangelogDTO {
+  public version: string;
+  public date: Date;
+  public new: string[];
+  public improved: string[];
+  public fixed: string[];
+  public removedSources: string;
+}

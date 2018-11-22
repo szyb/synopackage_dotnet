@@ -21,6 +21,7 @@ import { SearchComponent } from './search/search.component';
 import { PackageInfoComponent } from './components/package-info/package-info.component';
 import { ParametersComponent } from './components/parameters/parameters.component';
 import { CreditsComponent } from './credits/credits.component';
+import { ChangelogComponent } from './changelog/changelog.component';
 
 
 export const routerConfig: Routes = [
@@ -62,6 +63,10 @@ export const routerConfig: Routes = [
     component: CreditsComponent
   },
   {
+    path: 'changelog',
+    component: ChangelogComponent
+  },
+  {
     path: '',
     redirectTo: '/home',
     pathMatch: 'full'
@@ -85,7 +90,8 @@ export const routerConfig: Routes = [
     PackageInfoComponent,
     ParametersComponent,
     DialogComponent,
-    CreditsComponent
+    CreditsComponent,
+    ChangelogComponent
   ],
   imports: [
     BrowserModule,
