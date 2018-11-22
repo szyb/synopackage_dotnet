@@ -16,6 +16,7 @@ namespace synopackage_dotnet.Model.Services
       var modelsJson = File.ReadAllText(configFile);
       return JsonConvert.DeserializeObject<ModelDTO[]>(modelsJson);
     }
+
     public IEnumerable<ModelDTO> GetAll()
     {
       return GetAllInternal();
