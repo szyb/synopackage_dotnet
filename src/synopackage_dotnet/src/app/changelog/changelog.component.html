@@ -1,0 +1,41 @@
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">Changelog</span>
+</nav>
+<h1>Changelog</h1>
+<div *ngIf="!changelogs">
+  <app-wait></app-wait>
+</div>
+<div *ngFor="let c of changelogs">
+  <div class="pb-3">
+    <blockquote class="blockquote bq-primary">
+      <p class="bq-title">Version {{ c.version }}</p>
+      <span style="font-size: 0.8rem">{{ c.date }}</span>
+    </blockquote>
+    <div class="rounded border px-2 py-2">
+      <div *ngIf="c.new.length!=0">
+        <span class="green-text"><strong>New:</strong></span>
+        <ul>
+          <li *ngFor="let item of c.new">{{item}}</li>
+        </ul>
+      </div>
+      <div *ngIf="c.improved.length!=0">
+        <span class="green-text"><strong>Improved:</strong></span>
+        <ul>
+          <li *ngFor="let item of c.improved">{{item}}</li>
+        </ul>
+      </div>
+      <div *ngIf="c.fixed.length!=0">
+        <span class="green-text"><strong>Fixed:</strong></span>
+        <ul>
+          <li *ngFor="let item of c.fixed">{{item}}</li>
+        </ul>
+      </div>
+      <div *ngIf="c.removedSources.length!=0">
+        <span class="green-text"><strong>Removed sources:</strong></span>
+        <ul>
+          <li *ngFor="let item of c.removedSources">{{item}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
