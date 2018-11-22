@@ -39,7 +39,7 @@ export class DownloadDialogComponent {
   }
 
   download() {
-    window.location.href = this.link;
+    document.location.href = this.link;
     this.downloadModal.hide();
   }
 
