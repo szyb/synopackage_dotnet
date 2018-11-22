@@ -83,5 +83,19 @@
         "cwd": "${workspaceFolder}/src/app"
       }
     },
+    {
+      "label": "ng build (test)",
+      "group": "build",
+      "command": "ng",
+      "type": "shell",
+      "args": [
+        "build",
+        "--configuration=test"
+      ],
+      "problemMatcher": "$tsc",
+      "options": {
+        "cwd": "${workspaceFolder}/src/app"
+      }
+    },
   ]
 }
