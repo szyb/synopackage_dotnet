@@ -1,5 +1,7 @@
 import { Component, ViewChild, Injectable, Input } from '@angular/core';
 import { ModalDirective } from 'angular-bootstrap-md';
+import { SourcesService } from 'src/app/shared/sources.service';
+import { PackageDTO } from 'src/app/sources/sources.model';
 
 
 @Component({
@@ -9,37 +11,24 @@ import { ModalDirective } from 'angular-bootstrap-md';
 
 @Injectable()
 export class DownloadDialogComponent {
+  public dialogShown = false;
 
   @Input()
-  public link: string;
+  public package: PackageDTO;
 
-  @Input()
-  public packageName: string;
-
-  @Input()
-  public packageIconLocation: string;
-
-  @Input()
-  public packageIsBeta: boolean;
-
-  @Input()
-  public packageVersion: string;
-
-  @Input()
-  public packageDescription: string;
-
-
-  constructor() {
+  constructor(private sourcesService: SourcesService) {
   }
 
   @ViewChild(ModalDirective) public downloadModal: ModalDirective;
 
   showModal = () => {
+    this.dialogShown = true;
     this.downloadModal.show();
   }
 
   download() {
-    document.location.href = this.link;
+    this.sourcesService.downloadRequest(this.package.downloadLink, this.package.sourceName, this.package.name);
+    document.location.href = this.package.downloadLink;
     this.downloadModal.hide();
   }
 

@@ -9,5 +9,8 @@ namespace synopackage_dotnet.Model.Services
     bool ValidateSource(string source);
     SourceDTO GetSource(string source);
     IEnumerable<SourceDTO> GetAllActiveSources();
+
+    [Logging(Consts.DownloadRequestContext, "true")]
+    void DownloadRequest(DownloadRequestDTO downloadRequest);
   }
 }

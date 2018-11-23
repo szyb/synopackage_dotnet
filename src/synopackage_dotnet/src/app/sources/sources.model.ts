@@ -21,6 +21,8 @@ export class PackageDTO {
   isBeta: boolean;
   downloadLink: string;
   iconFileName: string;
+  sourceName: string;
+  showImage = false;
 }
 
 export class SourceServerResponseDTO {

@@ -10,15 +10,14 @@ import { DownloadDialogComponent } from '../download-dialog/download-dialog.comp
 
 @Injectable()
 export class PackageInfoComponent {
-  public showIcon = false;
+
+  @Input()
+  public package: PackageDTO;
 
   @ViewChild(DownloadDialogComponent) downloadDialog: DownloadDialogComponent;
   showDownloadDialogModal() {
     this.downloadDialog.showModal();
   }
-
-  @Input()
-  public package: PackageDTO;
 
   constructor() {
   }
