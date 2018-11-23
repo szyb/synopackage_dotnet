@@ -69,5 +69,24 @@ namespace synopackage_dotnet.Controllers
       }
       return new ObjectResult(response);
     }
+
+    [HttpPost("DownloadRequest")]
+    public IActionResult DownloadRequest([FromBody]DownloadRequestDTO downloadRequest)
+    {
+      if (downloadRequest == null)
+        return new BadRequestResult();
+
+      var validation = ValidateStringParameter(nameof(downloadRequest.RequestUrl), downloadRequest.RequestUrl, 1500);
+      if (!string.IsNullOrWhiteSpace(validation)) { logger.LogError(validation); return new BadRequestResult(); }
+      validation = ValidateStringParameter(nameof(downloadRequest.SourceName), downloadRequest.SourceName, 100);
+      if (!string.IsNullOrWhiteSpace(validation)) { logger.LogError(validation); return new BadRequestResult(); }
+      validation = ValidateStringParameter(nameof(downloadRequest.PackageName), downloadRequest.PackageName, 100);
+      if (!string.IsNullOrWhiteSpace(validation)) { logger.LogError(validation); return new BadRequestResult(); }
+
+      sourceService.DownloadRequest(downloadRequest);
+      return new NoContentResult();
+    }
   }
+
+
 }

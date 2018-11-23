@@ -4,7 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { SourceDTO, SourcesDTO, SourceServerResponseDTO } from '../sources/sources.model';
 import { Config } from './config';
 import { Utils } from './Utils';
-import { ParametersDTO } from './model';
+import { ParametersDTO, DownloadRequestDTO } from './model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -39,5 +40,16 @@ export class SourcesService {
       sourceName: sourceName
     };
     return this.http.get<SourceDTO>(`${Config.apiUrl}Sources/GetSource${Utils.getQueryParams(params)}`);
+  }
+
+  public downloadRequest(requestUrl: string, sourceName: string, packageName: string) {
+    console.log('downloadRequest');
+    const request = new DownloadRequestDTO();
+    request.requestUrl = requestUrl;
+    request.sourceName = sourceName;
+    request.packageName = packageName;
+    const body = JSON.stringify(request);
+    return this.http.post(`${Config.apiUrl}Packages/DownloadRequest`, body, { observe: 'response' })
+      .pipe(map(response => response.status === 204));
   }
 }
