@@ -1,5 +1,6 @@
-import { Injectable, Component, OnChanges, Input } from '@angular/core';
+import { Injectable, Component, OnChanges, Input, ViewChild } from '@angular/core';
 import { PackageDTO } from 'src/app/sources/sources.model';
+import { DownloadDialogComponent } from '../download-dialog/download-dialog.component';
 
 
 @Component({
@@ -9,10 +10,14 @@ import { PackageDTO } from 'src/app/sources/sources.model';
 
 @Injectable()
 export class PackageInfoComponent {
-  public showIcon = false;
 
   @Input()
   public package: PackageDTO;
+
+  @ViewChild(DownloadDialogComponent) downloadDialog: DownloadDialogComponent;
+  showDownloadDialogModal() {
+    this.downloadDialog.showModal();
+  }
 
   constructor() {
   }

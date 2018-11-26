@@ -33,3 +33,9 @@ export class ChangelogDTO {
   public fixed: string[];
   public removedSources: string;
 }
+
+export class DownloadRequestDTO {
+  public requestUrl: string;
+  public sourceName: string;
+  public packageName: string;
+}
