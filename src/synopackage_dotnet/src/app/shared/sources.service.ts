@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SourceDTO, SourcesDTO, SourceServerResponseDTO } from '../sources/sources.model';
 import { Config } from './config';
 import { Utils } from './Utils';
@@ -42,14 +42,15 @@ export class SourcesService {
     return this.http.get<SourceDTO>(`${Config.apiUrl}Sources/GetSource${Utils.getQueryParams(params)}`);
   }
 
-  public downloadRequest(requestUrl: string, sourceName: string, packageName: string) {
-    console.log('downloadRequest');
+  public downloadRequest(requestUrl: string, sourceName: string, packageName: string): Observable<boolean> {
     const request = new DownloadRequestDTO();
     request.requestUrl = requestUrl;
     request.sourceName = sourceName;
     request.packageName = packageName;
     const body = JSON.stringify(request);
-    return this.http.post(`${Config.apiUrl}Packages/DownloadRequest`, body, { observe: 'response' })
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post(`${Config.apiUrl}Packages/DownloadRequest`, body, { headers: headers, observe: 'response' })
       .pipe(map(response => response.status === 204));
+
   }
 }
