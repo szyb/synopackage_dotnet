@@ -2,6 +2,7 @@ import { Component, ViewChild, Injectable, Input } from '@angular/core';
 import { ModalDirective } from 'angular-bootstrap-md';
 import { SourcesService } from 'src/app/shared/sources.service';
 import { PackageDTO } from 'src/app/sources/sources.model';
+import { take } from 'rxjs/operators';
 
 
 @Component({
@@ -27,9 +28,18 @@ export class DownloadDialogComponent {
   }
 
   download() {
-    this.sourcesService.downloadRequest(this.package.downloadLink, this.package.sourceName, this.package.name);
-    document.location.href = this.package.downloadLink;
-    this.downloadModal.hide();
+    const result = this.sourcesService.downloadRequest(this.package.downloadLink, this.package.sourceName, this.package.name);
+    result.pipe(
+      take(1)
+    ).subscribe(item => {
+      if (item) {
+        document.location.href = this.package.downloadLink;
+      } else {
+        alert('The package could not be downloaded');
+      }
+      this.downloadModal.hide();
+    });
+
   }
 
 }
