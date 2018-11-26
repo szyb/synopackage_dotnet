@@ -102,6 +102,7 @@ namespace synopackage_dotnet.Model.Services
           PackageDTO package = new PackageDTO();
           spkPackage.Map(package);
           package.IconFileName = cacheService.GetIconFileName(sourceName, package.Name);
+          package.SourceName = sourceName;
           list.Add(package);
         }
       }

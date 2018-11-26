@@ -22,6 +22,7 @@ import { PackageInfoComponent } from './components/package-info/package-info.com
 import { ParametersComponent } from './components/parameters/parameters.component';
 import { CreditsComponent } from './credits/credits.component';
 import { ChangelogComponent } from './changelog/changelog.component';
+import { DownloadDialogComponent } from './components/download-dialog/download-dialog.component';
 
 
 export const routerConfig: Routes = [
@@ -91,7 +92,8 @@ export const routerConfig: Routes = [
     ParametersComponent,
     DialogComponent,
     CreditsComponent,
-    ChangelogComponent
+    ChangelogComponent,
+    DownloadDialogComponent
   ],
   imports: [
     BrowserModule,
