@@ -1,8 +1,10 @@
 [
   {
     "version": "0.1.5",
-    "date": "2018-11-22",
+    "date": "2018-11-26",
     "new": [
+      "Confirm dialog when attempting to download package",
+      "Source server spk.unzureichende.info is back to active sources",
       "Changelog page introduced"
     ],
     "improved": [],

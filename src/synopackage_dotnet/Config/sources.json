@@ -24,11 +24,9 @@
     "Url": "http://www.hildinger.us/sspks/"
   },
   {
-    "Active": false,
+    "Active": true,
     "Name": "unzureichende",
-    "Url": "http://spk.unzureichende.info/",
-    "DisabledDate": "2018-11-02",
-    "DisabledReason": "Connection refused"
+    "Url": "http://spk.unzureichende.info/"
   },
   {
     "Active": false,
