@@ -7,6 +7,7 @@
       "However there are not many packages for this device at the moment, but the number will grow with time. We found only two sources that have packages compiled to DS119j (nimloth and emby). Other servers shows either noarch packages or shows packages that probably won't work on this device (cphub and synologyitalia). Let's hope synocommunity will serve their packages for this device soon!",
       "More information available at the link below.",
       "2018-11-16 EDIT: for DS119j packages from cphub & synologyitalia are valid as they are not specific to any architecture (noarch)",
+      "2018-11-30 EDIT: Good news! Synocommunity supports now armada37xx architecture, so there are new packages available for DS119j!",
       "Enjoy!"
     ],
     "RouterLinkDescription": null,
