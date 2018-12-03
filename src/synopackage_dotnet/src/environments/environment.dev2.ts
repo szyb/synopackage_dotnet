@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   useGoogleAnalytics: false,
   googleAnalyticsCode: null,
-  restBaseUrl: 'http://localhost:58893/',
+  restBaseUrl: null,
   version: require('../../package.json').version
 };
 
