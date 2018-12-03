@@ -97,5 +97,19 @@
         "cwd": "${workspaceFolder}/src/app"
       }
     },
+    {
+      "label": "ng build (docker)",
+      "group": "build",
+      "command": "ng",
+      "type": "shell",
+      "args": [
+        "build",
+        "--configuration=docker"
+      ],
+      "problemMatcher": "$tsc",
+      "options": {
+        "cwd": "${workspaceFolder}/src/app"
+      }
+    },
   ]
 }
