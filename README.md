@@ -33,3 +33,16 @@ VS Code extensions:
 1. C#
 2. TSLint
 3. ESLint
+
+## Docker instructions
+To create docker image:
+
+1. Go to `src\synopackage_dotnet\src` folder and run `ng build --configuration=test`
+2. Go to root folder
+3. Run `docker-compose build` (this can take a while)
+4. When it's done run: `run_in_docker.bat` or `docker run -d -p 8080:80 --name synopackage synopackage_dotnet`
+5. visit website at `http://localhost:8080`
+
+Limitations:
+1. For now there is no support for system proxy (the website will work only in 'no proxy' host environment)
+2. TODO: add environment `docker` and run ng build for this enviroment to the dockerfile.
