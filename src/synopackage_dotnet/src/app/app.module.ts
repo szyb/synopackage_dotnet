@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
@@ -23,7 +23,11 @@ import { ParametersComponent } from './components/parameters/parameters.componen
 import { CreditsComponent } from './credits/credits.component';
 import { ChangelogComponent } from './changelog/changelog.component';
 import { DownloadDialogComponent } from './components/download-dialog/download-dialog.component';
+import { AppLoadService } from './shared/app-load.service';
 
+export function init_app(appLoadService: AppLoadService) {
+  return () => appLoadService.initializeApp();
+}
 
 export const routerConfig: Routes = [
   {
@@ -105,7 +109,7 @@ export const routerConfig: Routes = [
     RouterModule.forRoot(routerConfig),
     MDBBootstrapModule.forRoot()
   ],
-  providers: [UserSettingsService],
+  providers: [UserSettingsService, AppLoadService, { provide: APP_INITIALIZER, useFactory: init_app, deps: [AppLoadService], multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
