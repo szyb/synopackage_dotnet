@@ -22,6 +22,7 @@ export class AppLoadService {
           url = url.concat('/');
           environment.restBaseUrl = url;
           Config.apiUrl = environment.restBaseUrl.concat('api/');
+          console.log('API Url is set');
         }
         resolve();
       }, 3000);
