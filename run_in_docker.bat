@@ -1,1 +1,1 @@
-docker run -d -p 8080:80 --name synopackage synopackage_dotnet
+docker run -d -p 8080:80 --name synopackage -e "ASPNETCORE_ENVIRONMENT=docker" synopackage_dotnet
