@@ -16,7 +16,10 @@ RUN curl -SL "https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-lin
 COPY src/synopackage_dotnet/ ./synopackage_dotnet/
 RUN cd synopackage_dotnet \
   && dotnet restore \
-  && npm install
+  && npm install \
+  && npm rebuild node-sass \
+  && cd src \
+  && ng build --configuration=test
 
 RUN cd synopackage_dotnet \
   && dotnet publish -c Release -o out
