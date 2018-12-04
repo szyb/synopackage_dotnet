@@ -1,5 +1,17 @@
 [
   {
+    "version": "0.2.0",
+    "date": "2018-12-04",
+    "new": [
+      "Milestone 0.2 completed",
+      "Docker image is ready. More info soon on home page",
+      "Add license information: Apache 2.0. More info in git repository"
+    ],
+    "improved": [],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
     "version": "0.1.5",
     "date": "2018-11-26",
     "new": [

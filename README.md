@@ -12,12 +12,13 @@ OR
 
 1. Clone or fork repository
 2. `cd src/synopackage_dotnet/src/`
-3. `ng build`
-4. `cd ..`
-5. `dotnet restore`
-6. `dotnet build`
-7. `dotnet run`
-8. in browser `http://localhost:58893`
+3. `npm install`
+4. `ng build`
+5. `cd ..`
+6. `dotnet restore`
+7. `dotnet build`
+8. `dotnet run`
+9. in browser `http://localhost:58893`
 
 ### Custom dev environment
 
@@ -26,8 +27,8 @@ If you need own development environment, you can add yours. See "dev2" configura
 
 ## Prerequisites
 
-1. Node.js (version 10.x)
-2. .NET CORE 2.1.6
+1. Installed Node.js (version 10.x)
+2. .NET CORE 2.1.6 SDK
 
 VS Code extensions:
 1. C#
