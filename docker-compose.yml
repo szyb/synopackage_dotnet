@@ -5,4 +5,4 @@ services:
     image: ${DOCKER_REGISTRY}synopackage_dotnet
     build:
       context: .
-      dockerfile: src/synopackage_dotnet/Dockerfile
+      dockerfile: Dockerfile
