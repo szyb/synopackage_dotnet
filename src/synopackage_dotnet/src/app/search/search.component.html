@@ -27,7 +27,7 @@
   </form>
 </div>
 <div *ngIf="isSearchPerformed" class="py-2">
-  <span>Share results <i class="fa fa-share-alt" aria-hidden="true" (click)="link.toggle()"></i></span>
+  <span>Share results <i class="fa fa-share-alt" aria-hidden="true" (click)="link.toggle()" style="cursor: pointer;"></i></span>
   <div mdbCollapse [collapse]="isSearchLinkCollapsed" #link="bs-collapse" class="pr-2 pl-1">
     <table class="table">
       <tbody>
