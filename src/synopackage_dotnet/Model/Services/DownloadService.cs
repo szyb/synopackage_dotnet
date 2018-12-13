@@ -1,5 +1,6 @@
 using System;
 using System.Net;
+using System.Threading;
 using Microsoft.Extensions.Logging;
 using RestSharp;
 
@@ -17,14 +18,23 @@ namespace synopackage_dotnet.Model.Services
     private RestClient GetClient(string url, string userAgent = null)
     {
       var client = new RestClient(url);
-      if (!string.IsNullOrEmpty(AppSettingsProvider.AppSettings.ProxyUrl))
-      {
-        client.Proxy = new WebProxy(AppSettingsProvider.AppSettings.ProxyUrl);
-      }
+
+      SetupProxy(client);
+
       if (userAgent != null)
         client.UserAgent = userAgent;
       client.Timeout = AppSettingsProvider.AppSettings.DownloadTimeoutInSeconds * 1000;
       return client;
+    }
+
+    private static void SetupProxy(RestClient client)
+    {
+      var httpProxy = Environment.GetEnvironmentVariable("http_proxy");
+      if (!string.IsNullOrWhiteSpace(httpProxy))
+      {
+        client.Proxy = new WebProxy(httpProxy);
+        client.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
+      }
     }
 
     public IRestResponse Execute(string url, RestRequest request, string userAgent = null)
