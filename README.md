@@ -39,5 +39,5 @@ To create docker image:
 4. visit website at `http://your_host_domain:8080` (i.e. `http://localhost:8080` if you run image on your local machine)
 
 ### Proxy settings for docker
-When proxy is needed then use environment variables `http_proxy` and add it in command when running container, i.e.
+When proxy is needed then use environment variables `http_proxy` and add it to command when running container, i.e.
 `docker run -d -p 8080:80 --name synopackage -e "ASPNETCORE_ENVIRONMENT=docker" -e "http_proxy=10.0.0.1:3128" synopackage_dotnet`
