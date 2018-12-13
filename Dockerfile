@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:2.1-sdk as build-env
+FROM microsoft/dotnet:2.1.500-sdk as build-env
 WORKDIR /app
 
 # Setup node
@@ -26,7 +26,7 @@ RUN cd synopackage_dotnet \
   && dotnet publish -c Release -o out
 
 # build runtime image
-FROM microsoft/dotnet:2.1-aspnetcore-runtime
+FROM microsoft/dotnet:2.1.6-aspnetcore-runtime
 WORKDIR /app
 
 # Setup node
