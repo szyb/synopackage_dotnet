@@ -20,11 +20,6 @@ OR
 8. `dotnet run`
 9. in browser `http://localhost:58893`
 
-### Custom dev environment
-
-If you need own development environment, you can add yours. See "dev2" configuration, which uses proxy.
-
-
 ## Prerequisites
 
 1. Installed Node.js (version 10.x)
@@ -43,5 +38,6 @@ To create docker image:
 3. When it's done run: `run_in_docker.bat` or `docker run -d -p 8080:80 --name synopackage -e "ASPNETCORE_ENVIRONMENT=docker" synopackage_dotnet`
 4. visit website at `http://your_host_domain:8080` (i.e. `http://localhost:8080` if you run image on your local machine)
 
-Limitations:
-1. For now there is no support for system proxy (the website will work only in 'no proxy' host environment)
+### Proxy settings for docker
+When proxy is needed then use environment variables `http_proxy` and add them in command when running container, i.e.
+`docker run -d -p 8080:80 --name synopackage -e "ASPNETCORE_ENVIRONMENT=docker" -e "http_proxy=10.0.0.1:3128" synopackage_dotnet`
