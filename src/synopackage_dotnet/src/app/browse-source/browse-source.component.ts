@@ -30,6 +30,14 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
   public sourceUrl: string;
   public sourceWww: string;
   public count: number;
+  public isSearchLinkCollapsed = false;
+  public linksAvailable = false;
+  public shortLink: string;
+  public fullLink: string;
+  private keywordParam: string;
+  private modelParam: string;
+  private versionParam: string;
+  private channelParam: string;
   constructor(private route: ActivatedRoute,
     private sourcesService: SourcesService,
     private userSettingsService: UserSettingsService,
@@ -59,6 +67,10 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
     ).subscribe((params: Params) => {
       this.nameString = params['name'];
       this.titleService.setTitle('Browse source - ' + this.nameString + ' - synopackage.com');
+      this.keywordParam = params['keyword'];
+      this.modelParam = params['model'];
+      this.versionParam = params['version'];
+      this.channelParam = params['channel'];
     });
 
     this.sourcesService.getSource(this.nameString)
@@ -68,13 +80,13 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
         this.sourceUrl = val.url;
         this.sourceWww = val.www;
       });
-
+    const { keywordForSearch, model, version, channel } = this.getParameters();
 
     this.sourcesService.getPackagesFromSource(this.nameString,
-      this.userSettingsService.getUserModel(),
-      this.userSettingsService.getUserVersion(),
-      this.userSettingsService.getUserIsBeta(),
-      null,
+      model,
+      version,
+      channel,
+      keywordForSearch,
       false
     ).pipe(
       take(1)
@@ -95,12 +107,51 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
         });
       }
       this.isResponseArrived = true;
+      this.generateSearchLinks(this.nameString, keywordForSearch, model, version, channel);
     });
+  }
 
+  private getParameters() {
+    let model = this.modelParam != null ? this.modelParam : this.userSettingsService.getUserModel();
+    let version = this.versionParam != null ? this.versionParam : this.userSettingsService.getUserVersion();
+    const channel = this.channelParam === 'beta' ? true : this.userSettingsService.getUserIsBeta();
+    let keywordForSearch = this.keywordParam != null && this.keywordParam !== '*' ? this.keywordParam : null;
+    if (model != null) {
+      model = model.substring(0, 100);
+    }
+    if (version != null) {
+      version = version.substring(0, 100);
+    }
+    if (keywordForSearch != null) {
+      keywordForSearch = keywordForSearch.substring(0, 300);
+    }
+    return { keywordForSearch, model, version, channel };
+  }
+
+  generateSearchLinks(sourceName: string, keyword: string, model: string, version: string, channel: boolean) {
+    if (keyword != null && keyword !== '') {
+      this.linksAvailable = true;
+      this.shortLink = `${Config.baseUrl}sources/` + sourceName + `/keyword/` + keyword;
+      const channelString = channel === false ? 'stable' : 'beta';
+      this.fullLink = `${Config.baseUrl}sources/` + sourceName + `/keyword/` + keyword + '/model/'
+        + model + '/version/' + version + '/channel/' + channelString;
+    } else if (keyword === '' || keyword === '*' || keyword === undefined || keyword === null) {
+      this.linksAvailable = true;
+      this.shortLink = `${Config.baseUrl}sources/` + sourceName + `/keyword/*`;
+      const channelString = channel === false ? 'stable' : 'beta';
+      this.fullLink = `${Config.baseUrl}sources/` + sourceName + `/keyword/*/model/`
+        + model + '/version/' + version + '/channel/' + channelString;
+
+    } else {
+      this.linksAvailable = false;
+      this.shortLink = 'unavailable';
+      this.fullLink = 'unavailable';
+    }
   }
   ngOnDestroy(): void {
     if (this.subscription === null) {
       this.subscription.unsubscribe();
     }
   }
+
 }
