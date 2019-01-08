@@ -190,7 +190,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       const channelString = channel === false ? 'stable' : 'beta';
       this.fullLink = `${Config.baseUrl}search/keyword/` + keyword + '/model/'
         + model + '/version/' + version + '/channel/' + channelString;
-    } else if (keyword === '' || keyword === '*' || keyword === undefined) {
+    } else if (keyword === '' || keyword === '*' || keyword === undefined || keyword === null) {
       this.linksAvailable = true;
       this.shortLink = `${Config.baseUrl}search/keyword/*`;
       const channelString = channel === false ? 'stable' : 'beta';
