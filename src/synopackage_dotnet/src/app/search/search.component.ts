@@ -91,6 +91,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.modelParam = null;
     this.versionParam = null;
     this.channelParam = null;
+    this.parameters = null;
     if (this.keyword != null && this.keyword !== '') {
       this.router.navigate(['/search/keyword', this.keyword]);
     } else {
@@ -126,7 +127,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     const { keywordForSearch, model, version, channel } = this.getParameters();
 
-    this.generateSearchLinks(keywordForSearch, model, version, channel);
+
 
     if (keywordForSearch != null && keywordForSearch !== '') {
       this.titleService.setTitle('Search for "' + keywordForSearch + '" - synopackage.com');
@@ -159,6 +160,7 @@ export class SearchComponent implements OnInit, OnDestroy {
             }
             if (this.parameters == null) {
               this.parameters = val.parameters;
+              this.generateSearchLinks(keywordForSearch, model, version, channel);
             }
           });
       });
@@ -184,6 +186,12 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   generateSearchLinks(keyword: string, model: string, version: string, channel: boolean) {
+    if (model === null && this.parameters != null) {
+      model = this.parameters.model;
+    }
+    if (version === null && this.parameters != null) {
+      version = this.parameters.version;
+    }
     if (keyword != null && keyword !== '') {
       this.linksAvailable = true;
       this.shortLink = `${Config.baseUrl}search/keyword/` + keyword;
