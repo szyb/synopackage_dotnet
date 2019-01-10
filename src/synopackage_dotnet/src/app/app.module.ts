@@ -44,6 +44,22 @@ export const routerConfig: Routes = [
     component: BrowseSourceComponent
   },
   {
+    path: 'sources/:name/keyword/:keyword',
+    component: BrowseSourceComponent
+  },
+  {
+    path: 'sources/:name/keyword/:keyword/model/:model',
+    component: BrowseSourceComponent
+  },
+  {
+    path: 'sources/:name/keyword/:keyword/model/:model/version/:version',
+    component: BrowseSourceComponent
+  },
+  {
+    path: 'sources/:name/keyword/:keyword/model/:model/version/:version/channel/:channel',
+    component: BrowseSourceComponent
+  },
+  {
     path: 'search',
     component: SearchComponent
   },
