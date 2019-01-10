@@ -9,6 +9,8 @@ import { UserSettingsService } from '../shared/user-settings.service';
 import { PackageInfoComponent } from '../components/package-info/package-info.component';
 import { ParametersDTO } from '../shared/model';
 import { Title } from '@angular/platform-browser';
+import { ModelsService } from '../shared/models.service';
+import { VersionsService } from '../shared/versions.service';
 
 @Component({
   selector: 'app-browse-source',
@@ -129,6 +131,12 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
   }
 
   generateSearchLinks(sourceName: string, keyword: string, model: string, version: string, channel: boolean) {
+    if (model === null && this.parameters != null) {
+      model = this.parameters.model;
+    }
+    if (version === null && this.parameters != null) {
+      version = this.parameters.version;
+    }
     if (keyword != null && keyword !== '') {
       this.linksAvailable = true;
       this.shortLink = `${Config.baseUrl}sources/` + sourceName + `/keyword/` + keyword;
