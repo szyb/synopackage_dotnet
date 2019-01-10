@@ -194,16 +194,16 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
     if (keyword != null && keyword !== '') {
       this.linksAvailable = true;
-      this.shortLink = `${Config.baseUrl}search/keyword/` + keyword;
+      this.shortLink = `${Config.baseUrl}search/keyword/` + encodeURIComponent(keyword);
       const channelString = channel === false ? 'stable' : 'beta';
-      this.fullLink = `${Config.baseUrl}search/keyword/` + keyword + '/model/'
-        + model + '/version/' + version + '/channel/' + channelString;
+      this.fullLink = `${Config.baseUrl}search/keyword/` + encodeURIComponent(keyword) + '/model/'
+        + encodeURIComponent(model) + '/version/' + encodeURIComponent(version) + '/channel/' + channelString;
     } else if (keyword === '' || keyword === '*' || keyword === undefined || keyword === null) {
       this.linksAvailable = true;
       this.shortLink = `${Config.baseUrl}search/keyword/*`;
       const channelString = channel === false ? 'stable' : 'beta';
       this.fullLink = `${Config.baseUrl}search/keyword/*/model/`
-        + model + '/version/' + version + '/channel/' + channelString;
+        + encodeURIComponent(model) + '/version/' + encodeURIComponent(version) + '/channel/' + channelString;
 
     } else {
       this.linksAvailable = false;
