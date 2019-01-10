@@ -9,8 +9,6 @@ import { UserSettingsService } from '../shared/user-settings.service';
 import { PackageInfoComponent } from '../components/package-info/package-info.component';
 import { ParametersDTO } from '../shared/model';
 import { Title } from '@angular/platform-browser';
-import { ModelsService } from '../shared/models.service';
-import { VersionsService } from '../shared/versions.service';
 
 @Component({
   selector: 'app-browse-source',
