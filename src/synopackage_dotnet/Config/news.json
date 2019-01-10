@@ -1,5 +1,19 @@
 [
   {
+    "Date": "2019-01-10",
+    "Title": "New feature: share link to the source",
+    "Body": [
+      "From now on you can use share link directly to source server page with parameters like model, version and even keyword.",
+      "The format is https://search.synopackge.com/sources/[sourcename]/keyword/[k]/model/[m]/version/[v]/channel/[c]",
+      "Where [k] keyword (could be *), [m] model (device), [v] version (with build numer, i.e. 6.2.1-23824), [c] channel (beta or stable). The order of parameters is important.",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": null,
+    "RouterLink": null,
+    "ExternalLinkDescription": null,
+    "ExternalLink": null
+  },
+  {
     "Date": "2018-11-07",
     "Title": "Support for new device DS119j",
     "Body": [
