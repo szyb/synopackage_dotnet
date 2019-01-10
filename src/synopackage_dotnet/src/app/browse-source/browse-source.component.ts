@@ -137,16 +137,16 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
     }
     if (keyword != null && keyword !== '') {
       this.linksAvailable = true;
-      this.shortLink = `${Config.baseUrl}sources/` + sourceName + `/keyword/` + keyword;
+      this.shortLink = `${Config.baseUrl}sources/` + encodeURIComponent(sourceName) + `/keyword/` + encodeURIComponent(keyword);
       const channelString = channel === false ? 'stable' : 'beta';
-      this.fullLink = `${Config.baseUrl}sources/` + sourceName + `/keyword/` + keyword + '/model/'
-        + model + '/version/' + version + '/channel/' + channelString;
+      this.fullLink = `${Config.baseUrl}sources/` + encodeURIComponent(sourceName) + `/keyword/` + encodeURIComponent(keyword) + '/model/'
+        + encodeURIComponent(model) + '/version/' + encodeURIComponent(version) + '/channel/' + channelString;
     } else if (keyword === '' || keyword === '*' || keyword === undefined || keyword === null) {
       this.linksAvailable = true;
-      this.shortLink = `${Config.baseUrl}sources/` + sourceName + `/keyword/*`;
+      this.shortLink = `${Config.baseUrl}sources/` + encodeURIComponent(sourceName) + `/keyword/*`;
       const channelString = channel === false ? 'stable' : 'beta';
-      this.fullLink = `${Config.baseUrl}sources/` + sourceName + `/keyword/*/model/`
-        + model + '/version/' + version + '/channel/' + channelString;
+      this.fullLink = `${Config.baseUrl}sources/` + encodeURIComponent(sourceName) + `/keyword/*/model/`
+        + encodeURIComponent(model) + '/version/' + encodeURIComponent(version) + '/channel/' + channelString;
 
     } else {
       this.linksAvailable = false;

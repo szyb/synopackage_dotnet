@@ -1,5 +1,23 @@
 [
   {
+    "version": "0.2.1",
+    "date": "2019-01-10",
+    "new": [
+      "Share link for browse source page",
+      "Support for proxy on host environment (via http_proxy variable)"
+    ],
+    "improved": [
+      "Footer update",
+      "Search page: hand pointer over the \"share icon\"",
+      "Docker changes"
+    ],
+    "fixed": [
+      "Search page: fix broken share link when user did not provide own model & version",
+      "Fix broken link when model contains \"/\""
+    ],
+    "removedSources": []
+  },
+  {
     "version": "0.2.0",
     "date": "2018-12-04",
     "new": [
