@@ -24,6 +24,7 @@ import { CreditsComponent } from './credits/credits.component';
 import { ChangelogComponent } from './changelog/changelog.component';
 import { DownloadDialogComponent } from './components/download-dialog/download-dialog.component';
 import { AppLoadService } from './shared/app-load.service';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 export function init_app(appLoadService: AppLoadService) {
   return () => appLoadService.initializeApp();
@@ -88,6 +89,10 @@ export const routerConfig: Routes = [
     component: ChangelogComponent
   },
   {
+    path: 'privacy-policy',
+    component: PrivacyPolicyComponent
+  },
+  {
     path: '',
     redirectTo: '/home',
     pathMatch: 'full'
@@ -113,7 +118,8 @@ export const routerConfig: Routes = [
     DialogComponent,
     CreditsComponent,
     ChangelogComponent,
-    DownloadDialogComponent
+    DownloadDialogComponent,
+    PrivacyPolicyComponent
   ],
   imports: [
     BrowserModule,
