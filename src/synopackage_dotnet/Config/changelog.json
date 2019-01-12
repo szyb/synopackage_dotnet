@@ -1,5 +1,18 @@
 [
   {
+    "version": "0.2.2",
+    "date": "2019-01-12",
+    "new": [
+      "Add Privacy Policy (link in the footer)"
+    ],
+    "improved": [
+      "Dockerfile uses volume. Updated instructions in README.md on github",
+      "Search page: add hand pointer over the colapse/expand icon"
+    ],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
     "version": "0.2.1",
     "date": "2019-01-10",
     "new": [
