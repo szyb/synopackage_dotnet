@@ -27,7 +27,7 @@ export class PrivacyPolicyComponent implements OnInit {
       {
         title: 'We also store query logs',
         // tslint:disable-next-line:max-line-length
-        description: 'We do want to know what devices are in use. Those logs are stored anonymously, so <b>we do not store your IP nor any other your personal information</b>. However your IP might be colleted by the hosting web server, which is outside our jurisdiction.'
+        description: 'We do want to know what devices are in use. Those logs are stored anonymously, so <b>we do not store your IP nor any other your personal information</b>. However your IP might be collected by the hosting web server, which is outside our jurisdiction.'
       },
       {
         title: 'We also use statistics',
