@@ -878,5 +878,25 @@
     "Name": "DS119j",
     "Arch": "armada37xx",
     "Family": "armv8"
+  },
+  {
+    "Name": "DS1019+",
+    "Arch": "apollolake",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "DS2419+",
+    "Arch": "denverton",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "DS1819+",
+    "Arch": "denverton",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS1619xs+",
+    "Arch": "broadwell",
+    "Family": "x86_64"
   }
 ]
