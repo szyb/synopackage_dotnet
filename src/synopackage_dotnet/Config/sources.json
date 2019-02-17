@@ -106,11 +106,9 @@
     "Url": "https://packages.page81.net/"
   },
   {
-    "Active": false,
+    "Active": true,
     "Name": "kastner",
-    "Url": "http://jaspr.kastner.wtf/",
-    "DisabledDate": "2018-11-16",
-    "DisabledReason": "Server is down"
+    "Url": "http://jaspr.kastner.wtf/"
   },
   {
     "Active": false,
