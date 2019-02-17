@@ -8,44 +8,55 @@
 <blockquote *ngIf="sources" class="blockquote bq-primary">
   <p class="bq-title">Active repositiories:</p>
 </blockquote>
-<table class="table" *ngIf="sources">
-  <thead>
-    <tr>
-      <th>name</th>
-      <th>url</th>
-      <th>browse</th>
-      <th>link</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let source of activeSources">
-      <td>{{ source.name }}</td>
-      <td>{{ source.url }}</td>
-      <td><a routerLink="/sources/{{source.name}}">browse</a></td>
-      <td *ngIf="source.www != null"><a href="{{ source.www }}" target="_blank">Visit website</a></td>
-      <td *ngIf="source.www == null"><a href="{{ source.url }}" target="_blank">Visit website</a></td>
-    </tr>
-  </tbody>
-</table>
-<blockquote *ngIf="sources" class="blockquote bq-primary">
+<div class="row border-bottom" *ngIf="sources">
+  <div class="d-inline-block d-sm-none font-weight-bold">url / browse</div>
+  <div class="d-none d-md-inline-block          col-md-3 font-weight-bold">name</div>
+  <div class="d-none d-sm-inline-block col-sm-9 col-md-6 font-weight-bold">url</div>
+  <div class="d-none d-sm-inline-block col-sm-2 col-md-2 font-weight-bold">browse</div>
+  <div class="d-none d-sm-inline-block col-sm-1 col-md-1 font-weight-bold">link</div>
+</div>
+<div *ngIf="sources">
+  <div class="row" *ngFor="let source of activeSources">
+    <div class="d-inline-block d-sm-none mt-1"><a routerLink="/sources/{{source.name}}">{{ source.url }}</a></div>
+    <div class="d-none d-md-inline-block          col-md-3 mt-1">{{ source.name }}</div>
+    <div class="d-none d-sm-inline-block col-sm-9 col-md-6 mt-1">{{ source.url }}</div>
+    <div class="d-none d-sm-inline-block col-sm-2 col-md-2 mt-1">
+      <a routerLink="/sources/{{source.name}}">browse</a>
+    </div>
+    <div class="d-none d-sm-inline-block col-sm-1 col-md-1 mt-1" *ngIf="source.www != null">
+      <a href="{{ source.www }}" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>
+    </div>
+    <div class="d-none d-sm-inline-block col-sm-1 col-md-1" *ngIf="source.www == null">
+      <a href="{{ source.url }}" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>
+    </div>
+  </div>
+</div>
+<blockquote *ngIf="inActiveSources" class="blockquote bq-primary mt-3">
   <p class="bq-title">Inactive repositiories:</p>
 </blockquote>
-<table class="table" *ngIf="sources">
-  <thead>
-    <tr>
-      <th>name</th>
-      <th>url</th>
-      <th>link</th>
-      <th>Disabled reason</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let source of inActiveSources">
-      <td>{{ source.name }}</td>
-      <td>{{ source.url }}</td>
-      <td *ngIf="source.www != null"><a href="{{ source.www }}" target="_blank">Visit website</a></td>
-      <td *ngIf="source.www == null"><a href="{{ source.url }}" target="_blank">Visit website</a></td>
-      <td>{{ source.disabledReason }}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="row border-bottom" *ngIf="inActiveSources">
+  <div class="d-inline-block d-sm-none mt-1 font-weight-bold">url</div>
+  <div class="d-none d-md-inline-block           col-md-3 col-lg-2 mt-1 font-weight-bold">name</div>
+  <div class="d-none d-sm-inline-block col-sm-11 col-md-8 col-lg-5 col-xl-4 mt-1 font-weight-bold">url</div>
+  <div class="d-none d-lg-inline-block                    col-lg-4 col-xl-5 mt-1 font-weight-bold">disabled reason</div>
+  <div class="d-none d-sm-inline-block col-sm-1  col-md-1 mt-1 font-weight-bold">link</div>
+</div>
+<div *ngIf="inActiveSources">
+  <div class="row" *ngFor="let source of inActiveSources">
+    <div class="d-inline-block d-sm-none mt-1" *ngIf="source.www != null">
+      <a href="{{ source.www }}" target="_blank">{{ source.url }}</a>
+    </div>
+    <div class="d-inline-block d-sm-none mt-1" *ngIf="source.www == null">
+      <a href="{{ source.url }}" target="_blank">{{ source.url }}</a>
+    </div>
+    <div class="d-none d-md-inline-block           col-md-3 col-lg-2 mt-1">{{ source.name }}</div>
+    <div class="d-none d-sm-inline-block col-sm-11 col-md-8 col-lg-5 col-xl-4 mt-1">{{ source.url }}</div>
+    <div class="d-none d-lg-inline-block                    col-lg-4 col-xl-5 mt-1">{{ source.disabledReason }}</div>
+    <div class="d-none d-sm-inline-block col-sm-1  col-md-1 mt-1" *ngIf="source.www != null">
+      <a href="{{ source.www }}" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>
+    </div>
+    <div class="d-none d-sm-inline-block col-sm-1  col-md-1" *ngIf="source.www == null">
+      <a href="{{ source.url }}" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>
+    </div>
+  </div>
+</div>
