@@ -1,5 +1,19 @@
 [
   {
+    "version": "0.2.3",
+    "date": "2019-02-17",
+    "new": [
+      "Source http://jaspr.kastner.wtf/ is back to active"
+    ],
+    "improved": [
+      "Navbar menu: active page is highlighted",
+      "Navbar menu: better responsive",
+      "Sources page: better responisive layout"
+    ],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
     "version": "0.2.2",
     "date": "2019-01-12",
     "new": [
