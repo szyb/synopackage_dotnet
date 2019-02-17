@@ -1,11 +1,7 @@
-<div class="container">
-  <div class="row">
-    <div class="col align-self-end" *ngIf="!isSetup()">
-      <span class="white-text">Please configure your settings first <i class="animated bounceIn infinite fa fa-arrow-circle-right yellow-text" aria-hidden="true"></i></span>
-    </div>
-    <div class="col align-self-end" *ngIf="isSetup()">
-      <span class="white-text align-self-end">{{ selectedModel }}, DSM:{{ selectedVersion }} {{ stableOrBeta }}</span>
-    </div>
-  </div>
+<div class=" align-self-end" *ngIf="!isSetup()">
+  <span class="white-text">Please configure your settings first <i
+      class="animated bounceIn infinite fa fa-arrow-circle-right yellow-text" aria-hidden="true"></i></span>
 </div>
-
+<div class=" align-self-end" *ngIf="isSetup()">
+  <span class="white-text align-self-end">{{ selectedModel }}, DSM:{{ selectedVersion }} {{ stableOrBeta }}</span>
+</div>
