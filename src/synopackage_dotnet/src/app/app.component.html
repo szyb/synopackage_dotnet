@@ -1,17 +1,18 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark cyan scrolling-navbar ie-nav" [containerInside]="false">
+<mdb-navbar SideClass="navbar fixed-top navbar-expand-md navbar-dark cyan scrolling-navbar ie-nav"
+  [containerInside]="false">
   <logo>
     <a class="logo navbar-brand" href="#"><strong>{{ title }}</strong></a>
   </logo>
   <links>
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
-      <li class="nav-item active waves-light" mdbWavesEffect>
+      <li class="nav-item waves-light" mdbWavesEffect routerLinkActive="active">
         <a class="nav-link" routerLink="home">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item active waves-light" mdbWavesEffect>
+      <li class="nav-item waves-light" mdbWavesEffect routerLinkActive="active">
         <a class="nav-link" routerLink="sources">Sources <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item active waves-light" mdbWavesEffect>
+      <li class="nav-item waves-light" mdbWavesEffect routerLinkActive="active">
         <a class="nav-link" routerLink="search">Search <span class="sr-only">(current)</span></a>
       </li>
     </ul>
@@ -26,7 +27,8 @@
         </a>
       </li>
       <li class="nav-item waves-light" mdbWavesEffect>
-        <a class="nav-link" href="https://www.facebook.com/synopackage/" target="_blank"><i class="fa fa-facebook"></i></a>
+        <a class="nav-link" href="https://www.facebook.com/synopackage/" target="_blank"><i
+            class="fa fa-facebook"></i></a>
       </li>
     </ul>
 
@@ -35,8 +37,8 @@
 <main>
   <div class="container" style="margin-bottom: 50px;">
     <app-user-settings #basicModal></app-user-settings>
-    <div class="row justify-content-md-center " style="margin-top:35px;">
-      <div class="col-md-9 " style="margin-top:35px; height:auto;">
+    <div class="row justify-content-center " style="margin-top:35px;">
+      <div class="col-10" style="margin-top:35px; height:auto;">
         <router-outlet></router-outlet>
       </div>
     </div>
@@ -47,7 +49,8 @@
 <footer class="page-footer font-small fixed-bottom footer-copyright blue py-1 text-center text-white">
   <div class="container-fluid"><small>szyb 2017 - {{ actualYear }}. Source code can be found on
       <a href="https://github.com/szyb/synopackage_dotnet" target="_blank">github</a>.
-      Special thanks to jdel for the <a href="https://github.com/jdel/sspks" target="_blank">project</a>. <a routerLink="credits">Credits
+      Special thanks to jdel for the <a href="https://github.com/jdel/sspks" target="_blank">project</a>. <a
+        routerLink="credits">Credits
         &amp; third party libraries.</a><span> Our <a routerLink="privacy-policy">Privacy Policy</a>. </span><span>
         Version: <a routerLink="changelog">{{version}}</a></span>
 
