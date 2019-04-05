@@ -1,5 +1,17 @@
 [
   {
+    "Date": "2019-04-05",
+    "Title": "New DSM version is available",
+    "Body": [
+      "We've just added new version of DSM: 6.2.2-24922",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": null,
+    "RouterLink": null,
+    "ExternalLinkDescription": "DSM 6.2.2-24922 release notes",
+    "ExternalLink": "https://www.synology.com/en-us/releaseNote/DS718+"
+  },
+  {
     "Date": "2019-02-14",
     "Title": "New models available",
     "Body": [
