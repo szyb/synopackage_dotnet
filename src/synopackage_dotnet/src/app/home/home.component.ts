@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NewsDTO } from '../shared/model';
 import { Title } from '@angular/platform-browser';
 import { NewsService } from '../shared/news.service';
 
@@ -10,18 +9,12 @@ import { NewsService } from '../shared/news.service';
 
 export class HomeComponent implements OnInit {
 
-  public news: NewsDTO;
 
-
-  constructor(private titleService: Title, private newsService: NewsService) {
+  constructor(private titleService: Title) {
     this.titleService.setTitle('Home - synopackage.com');
   }
 
   ngOnInit(): void {
-    this.newsService.getNews()
-      .subscribe(val => {
-        this.news = val;
-      });
   }
 
 }
