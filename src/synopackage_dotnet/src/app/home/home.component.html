@@ -2,3 +2,89 @@
   <span class="breadcrumb-item active">Home</span>
 </nav>
 <h1>Home</h1>
+<div class="home_info">This is a search engine for third-party packages to Synology's DSM. Perform your first search
+  now!</div>
+<form>
+  <div class="row">
+    <div class="col-md-10">
+      <div class="md-form form-sm">
+        <input mdbInputDirective type="search" id="searchForm" class="form-control" [(ngModel)]="keyword" name="keyword"
+          (keyup.enter)="$event.target.blur(); onEnter()" [mdbValidate]="false" maxLength="300" />
+        <label for="searchForm" class="">Keyword</label>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="md-form form-group float-right">
+        <a mdbBtn color="primary" size="lg" class="waves-light" (click)="onSearchButton()" mdbWavesEffect>Search</a>
+      </div>
+    </div>
+  </div>
+</form>
+<div class="features mb-3">Other features & info</div>
+<div class="container">
+  <div class="card-deck mb-3 text-center">
+    <div class="card mb-4 p-0 box-shadow col-12 col-md-6 col-lg-4">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">List of active repositories</h4>
+      </div>
+      <div class="card-body d-flex flex-column">
+        <p>The list of active repositories is keeping up-to-date. Get the link and add it to
+          your DSM!</p>
+        <a mdbBtn color="primary" size="lg" class="mt-auto btn btn-lg btn-block btn-outline-primary"
+          (click)="onBrowseButton()" mdbWavesEffect>Show list</a>
+      </div>
+    </div>
+    <div class="card mb-4 p-0 box-shadow col-12 col-md-6 col-lg-4">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">Browse single server</h4>
+      </div>
+      <div class="card-body d-flex flex-column">
+        <p>Browse third-party server for packages to your device</p>
+        <a mdbBtn color="primary" size="lg" class="mt-auto btn btn-lg btn-block btn-outline-primary"
+          (click)="onBrowseButton()" mdbWavesEffect>Show servers</a>
+      </div>
+    </div>
+    <div class="card mb-4 p-0 box-shadow col-12 col-md-6 col-lg-4">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">Set your device & version</h4>
+      </div>
+      <div class="card-body d-flex flex-column">
+        <p>Search results are personalized to your device and DSM version. Click the settings to setup your preferences.
+        </p>
+        <a mdbBtn color="primary" size="lg" class="mt-auto btn btn-lg btn-block btn-outline-primary"
+          (click)="onSettingsButton()" mdbWavesEffect>Settings</a>
+      </div>
+    </div>
+    <!-- <div class="card col-md-4 col-sm-12">
+      <div class="feature_name">Browse single server</div>
+      <div class="feature_description">Browse third-party server for packages to your device</div>
+      <form>
+        <div class="text-center">
+          <a mdbBtn color="primary" size="lg" class="w-75 mx-auto waves-light" (click)="onBrowseButton()"
+            mdbWavesEffect>Check this out</a>
+        </div>
+      </form>
+    </div>
+    <div class="card col-md-4 col-sm-12">
+      <div class="feature_name">List of active repositories</div>
+      <div class="feature_description">The list of active repositories is keeping up-to-date. Get the link and add it to
+        your DSM!</div>
+      <form>
+        <div class="text-center">
+          <a mdbBtn color="primary" size="lg" class="w-75 mx-auto waves-light" (click)="onBrowseButton()"
+            mdbWavesEffect>Show me!</a>
+        </div>
+      </form>
+    </div>
+    <div class="card col-md-4 col-sm-12">
+      <div class="feature_name">Credits</div>
+      <div class="feature_description">See all credits & privacy policy</div>
+      <form>
+        <div class="text-center">
+          <a mdbBtn color="primary" size="lg" class="w-75  mx-auto waves-light" (click)="onBrowseButton()"
+            mdbWavesEffect>Show me!</a>
+        </div>
+      </form>
+    </div> -->
+  </div>
+</div>
