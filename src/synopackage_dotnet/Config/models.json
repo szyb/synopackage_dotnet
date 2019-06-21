@@ -898,5 +898,10 @@
     "Name": "RS1619xs+",
     "Arch": "broadwell",
     "Family": "x86_64"
+  },
+  {
+    "Name": "DS419Slim",
+    "Arch": "armada38x",
+    "Family": "armada38x"
   }
 ]
