@@ -23,29 +23,28 @@
 <div class="features mb-3">Other features & info</div>
 <div class="container">
   <div class="card-deck mb-3 text-center">
-    <div class="col-12 col-md-4">
+    <div class="col-12 col-md-4 d-flex">
       <div class="card box-shadow">
         <div class="card-header">List of active repositories</div>
         <div class="card-body d-flex flex-column">
-          <div class="card-text">The list of active repositories is keeping up-to-date. Get the link and add it to
+          <div class="card-text mb-2">The list of active repositories is keeping up-to-date. Get the link and add it to
             your DSM!</div>
+
           <a mdbBtn color="primary" size="lg" class="mt-auto btn btn-lg btn-block btn-outline-primary"
-            (click)="onBrowseButton()" mdbWavesEffect>Show
-            list</a>
-          <!-- <button type="button" class="mt-auto btn btn-lg btn-block btn-outline-primary">Show list</button> -->
+            (click)="onSourcesButton()" mdbWavesEffect>Show list</a>
         </div>
 
       </div>
     </div>
-    <div class="col-12 col-md-4">
+    <div class="col-12 col-md-4 d-flex">
       <div class="card box-shadow">
         <div class="card-header">Browse single server</div>
         <div class="card-body d-flex flex-column">
 
-          <div class="card-text">Browse third-party server for packages to your device</div>
+          <div class="card-text mb-2">Browse third-party server for packages to your device. See the best third-party
+            server packages:</div>
           <a mdbBtn color="primary" size="lg" class="mt-auto btn btn-lg btn-block btn-outline-primary"
-            (click)="onBrowseButton()" mdbWavesEffect>Show
-            list</a>
+            (click)="onBrowseButton()" mdbWavesEffect>Browse server</a>
         </div>
       </div>
     </div>
@@ -53,51 +52,13 @@
       <div class="card box-shadow">
         <div class="card-header">Set your device & version</div>
         <div class="card-body d-flex flex-column">
-          <div class="card-text">Search results are personalized to your device and DSM version. Click the settings to
-            setup your preferences.</div>
+          <div class="card-text mb-2">Search results are personalized to your device and DSM version. Click the settings
+            to setup your preferences.</div>
           <a mdbBtn color="primary" size="lg" class="mt-auto btn btn-lg btn-block btn-outline-primary"
-            (click)="onBrowseButton()" mdbWavesEffect>Show
-            list</a>
+            (click)="onSettingsButton()" mdbWavesEffect>Settings</a>
         </div>
 
       </div>
     </div>
   </div>
 </div>
-<!-- <div class="container">
-  <div class="card-deck mb-3 text-center">
-    <div class="card mb-4 p-0 box-shadow col-12 col-md-6 col-lg-4">
-      <div class="card-header">
-        <h4 class="my-0 font-weight-normal">List of active repositories</h4>
-      </div>
-      <div class="card-body d-flex flex-column">
-        <p>The list of active repositories is keeping up-to-date. Get the link and add it to
-          your DSM!</p>
-        <a mdbBtn color="primary" size="lg" class="mt-auto btn btn-lg btn-block btn-outline-primary"
-          (click)="onBrowseButton()" mdbWavesEffect>Show list</a>
-      </div>
-    </div>
-    <div class="card mb-4 p-0 box-shadow col-12 col-md-6 col-lg-4">
-      <div class="card-header">
-        <h4 class="my-0 font-weight-normal">Browse single server</h4>
-      </div>
-      <div class="card-body d-flex flex-column">
-        <p>Browse third-party server for packages to your device</p>
-        <a mdbBtn color="primary" size="lg" class="mt-auto btn btn-lg btn-block btn-outline-primary"
-          (click)="onBrowseButton()" mdbWavesEffect>Show servers</a>
-      </div>
-    </div>
-    <div class="card mb-4 p-0 box-shadow col-12 col-md-6 col-lg-4">
-      <div class="card-header">
-        <h4 class="my-0 font-weight-normal">Set your device & version</h4>
-      </div>
-      <div class="card-body d-flex flex-column">
-        <p>Search results are personalized to your device and DSM version. Click the settings to setup your preferences.
-        </p>
-        <a mdbBtn color="primary" size="lg" class="mt-auto btn btn-lg btn-block btn-outline-primary"
-          (click)="onSettingsButton()" mdbWavesEffect>Settings</a>
-      </div>
-    </div> -->
-
-<!-- </div> -->
-<!-- </div> -->
