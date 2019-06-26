@@ -24,11 +24,19 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/search/keyword', this.keyword]);
   }
 
-  onBrowseButton() {
+  onSourcesButton() {
     this.router.navigate(['/sources']);
+  }
+
+  onBrowseButton() {
+    this.router.navigate(['/sources/synocommunity']);
   }
 
   onSettingsButton() {
     console.log('TODO');
+  }
+
+  onEnter() {
+    this.onSearchButton();
   }
 }
