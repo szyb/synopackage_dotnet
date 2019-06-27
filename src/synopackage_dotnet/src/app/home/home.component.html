@@ -20,42 +20,44 @@
     </div>
   </div>
 </form>
+<app-user-settings #basicModal></app-user-settings>
 <div class="features mb-3">Other features & info</div>
 <div class="container">
   <div class="card-deck mb-3 text-center">
-    <div class="col-12 col-md-4 d-flex">
+    <div class="col-12 col-md-6 col-lg-4 d-flex">
       <div class="card box-shadow">
-        <div class="card-header">List of active repositories</div>
+        <div class="card-header py-2 py-md-3 py-lg-2">List of active repositories</div>
         <div class="card-body d-flex flex-column">
           <div class="card-text mb-2">The list of active repositories is keeping up-to-date. Get the link and add it to
             your DSM!</div>
 
           <a mdbBtn color="primary" size="lg" class="mt-auto btn btn-lg btn-block btn-outline-primary"
-            (click)="onSourcesButton()" mdbWavesEffect>Show list</a>
+            (click)="onSourcesButton()" mdbWavesEffect>Show the list</a>
         </div>
 
       </div>
     </div>
-    <div class="col-12 col-md-4 d-flex">
+    <div class="col-12 col-md-6 col-lg-4 pt-md-0 pt-3 d-flex">
       <div class="card box-shadow">
-        <div class="card-header">Browse single server</div>
+        <div class="card-header py-2 py-md-1 py-lg-2">Browse third-party servers</div>
         <div class="card-body d-flex flex-column">
 
-          <div class="card-text mb-2">Browse third-party server for packages to your device. See the best third-party
-            server packages:</div>
+          <div class="card-text mb-2">Browse third-party server for packages to your device. Have a look on our
+            recommended third-party package server (synocommunity):</div>
           <a mdbBtn color="primary" size="lg" class="mt-auto btn btn-lg btn-block btn-outline-primary"
             (click)="onBrowseButton()" mdbWavesEffect>Browse server</a>
         </div>
       </div>
     </div>
-    <div class="col-12 col-md-4">
+    <div class="col-12 col-lg-4 col-md-12 pt-lg-0 pt-3 d-flex">
       <div class="card box-shadow">
-        <div class="card-header">Set your device & version</div>
+        <div class="card-header py-2">Set your device & version</div>
         <div class="card-body d-flex flex-column">
           <div class="card-text mb-2">Search results are personalized to your device and DSM version. Click the settings
             to setup your preferences.</div>
           <a mdbBtn color="primary" size="lg" class="mt-auto btn btn-lg btn-block btn-outline-primary"
-            (click)="onSettingsButton()" mdbWavesEffect>Settings</a>
+            (click)="onSettingsButton()" mdbWavesEffect>Setup Settings</a>
+
         </div>
 
       </div>

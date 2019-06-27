@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { UserSettingsComponent } from '../components/user-settings/user-settings.component';
+import { UserSettingsService } from '../shared/user-settings.service';
 
 @Component({
   selector: 'app-home',
@@ -12,9 +14,15 @@ export class HomeComponent implements OnInit {
 
   public keyword: string;
 
-  constructor(private titleService: Title,
+  constructor(private userSettingsService: UserSettingsService,
+    private titleService: Title,
     private router: Router) {
     this.titleService.setTitle('Home - synopackage.com');
+  }
+
+  @ViewChild(UserSettingsComponent) basicModal: UserSettingsComponent;
+  showUserSettingsModal() {
+    this.basicModal.showModal();
   }
 
   ngOnInit(): void {
@@ -33,7 +41,7 @@ export class HomeComponent implements OnInit {
   }
 
   onSettingsButton() {
-    console.log('TODO');
+    this.showUserSettingsModal();
   }
 
   onEnter() {
