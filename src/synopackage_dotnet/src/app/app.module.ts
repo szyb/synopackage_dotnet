@@ -25,6 +25,7 @@ import { ChangelogComponent } from './changelog/changelog.component';
 import { DownloadDialogComponent } from './components/download-dialog/download-dialog.component';
 import { AppLoadService } from './shared/app-load.service';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { NewsComponent } from './news/news.component';
 
 export function init_app(appLoadService: AppLoadService) {
   return () => appLoadService.initializeApp();
@@ -34,6 +35,10 @@ export const routerConfig: Routes = [
   {
     path: 'home',
     component: HomeComponent
+  },
+  {
+    path: 'news',
+    component: NewsComponent
   },
   {
     path: 'sources',
@@ -107,6 +112,7 @@ export const routerConfig: Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
+    NewsComponent,
     SourcesComponent,
     WaitComponent,
     UserSettingsComponent,

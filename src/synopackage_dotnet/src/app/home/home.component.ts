@@ -1,27 +1,50 @@
-import { Component, OnInit } from '@angular/core';
-import { NewsDTO } from '../shared/model';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { NewsService } from '../shared/news.service';
+import { Router } from '@angular/router';
+import { UserSettingsComponent } from '../components/user-settings/user-settings.component';
+import { UserSettingsService } from '../shared/user-settings.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
+  styleUrls: ['home.component.css']
 })
 
 export class HomeComponent implements OnInit {
 
-  public news: NewsDTO;
+  public keyword: string;
 
-
-  constructor(private titleService: Title, private newsService: NewsService) {
+  constructor(private userSettingsService: UserSettingsService,
+    private titleService: Title,
+    private router: Router) {
     this.titleService.setTitle('Home - synopackage.com');
   }
 
-  ngOnInit(): void {
-    this.newsService.getNews()
-      .subscribe(val => {
-        this.news = val;
-      });
+  @ViewChild(UserSettingsComponent) basicModal: UserSettingsComponent;
+  showUserSettingsModal() {
+    this.basicModal.showModal();
   }
 
+  ngOnInit(): void {
+  }
+
+  onSearchButton() {
+    this.router.navigate(['/search/keyword', this.keyword]);
+  }
+
+  onSourcesButton() {
+    this.router.navigate(['/sources']);
+  }
+
+  onBrowseButton() {
+    this.router.navigate(['/sources/synocommunity']);
+  }
+
+  onSettingsButton() {
+    this.showUserSettingsModal();
+  }
+
+  onEnter() {
+    this.onSearchButton();
+  }
 }
