@@ -2,20 +2,64 @@
   <span class="breadcrumb-item active">Home</span>
 </nav>
 <h1>Home</h1>
-<div *ngIf="!news">
-  <app-wait></app-wait>
-</div>
-<div *ngFor="let n of news">
-  <div class="pb-3">
-    <blockquote class="blockquote bq-primary">
-      <p class="bq-title">{{ n.title }}</p>
-      <span style="font-size: 0.8rem">{{ n.date }}</span>
-    </blockquote>
-    <div class="rounded border px-2 py-2">
-      <p *ngFor="let b of n.body">{{ b }}</p>
-      <div>
-        <a *ngIf="n.routerLinkDescription" [routerLink]="n.routerLink">{{n.routerLinkDescription}}</a>
-        <a *ngIf="n.externalLinkDescription" href="{{n.externalLink}}" target="_blank">{{n.externalLinkDescription}}</a>
+<div class="home_info">This is a search engine for third-party packages to Synology's DSM. Perform your search
+  now!</div>
+<form>
+  <div class="row">
+    <div class="col-md-10">
+      <div class="md-form form-sm">
+        <input mdbInputDirective type="search" id="searchForm" class="form-control" [(ngModel)]="keyword" name="keyword"
+          (keyup.enter)="$event.target.blur(); onEnter()" [mdbValidate]="false" maxLength="300" />
+        <label for="searchForm" class="">Keyword</label>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="md-form form-group float-right">
+        <a mdbBtn color="primary" size="lg" class="waves-light" (click)="onSearchButton()" mdbWavesEffect>Search</a>
+      </div>
+    </div>
+  </div>
+</form>
+<app-user-settings #basicModal></app-user-settings>
+<div class="features mb-3">Other features & info</div>
+<div class="container">
+  <div class="card-deck mb-3 text-center">
+    <div class="col-12 col-md-6 col-lg-4 d-flex">
+      <div class="card box-shadow">
+        <div class="card-header py-2 py-md-3 py-lg-2">List of active repositories</div>
+        <div class="card-body d-flex flex-column">
+          <div class="card-text mb-2">The list of active repositories is keeping up-to-date. Get the link and add it to
+            your DSM!</div>
+
+          <a mdbBtn color="primary" size="lg" class="mt-auto btn btn-lg btn-block btn-outline-primary"
+            (click)="onSourcesButton()" mdbWavesEffect>Show the list</a>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-4 pt-md-0 pt-3 d-flex">
+      <div class="card box-shadow">
+        <div class="card-header py-2 py-md-1 py-lg-2">Browse third-party servers</div>
+        <div class="card-body d-flex flex-column">
+
+          <div class="card-text mb-2">Browse third-party server for packages to your device. Have a look on our
+            recommended third-party package server (synocommunity):</div>
+          <a mdbBtn color="primary" size="lg" class="mt-auto btn btn-lg btn-block btn-outline-primary"
+            (click)="onBrowseButton()" mdbWavesEffect>Browse server</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-lg-4 col-md-12 pt-lg-0 pt-3 d-flex">
+      <div class="card box-shadow">
+        <div class="card-header py-2">Set your device & version</div>
+        <div class="card-body d-flex flex-column">
+          <div class="card-text mb-2">Search results are personalized to your device and DSM version. Click the settings
+            to setup your preferences.</div>
+          <a mdbBtn color="primary" size="lg" class="mt-auto btn btn-lg btn-block btn-outline-primary"
+            (click)="onSettingsButton()" mdbWavesEffect>Setup Settings</a>
+
+        </div>
+
       </div>
     </div>
   </div>
