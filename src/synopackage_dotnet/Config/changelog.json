@@ -1,5 +1,17 @@
 [
   {
+    "version": "0.3.0",
+    "date": "2019-06-30",
+    "new": [
+      "New home page: now you can perform search directly from home page",
+      "News are moved to other page",
+      "New model DS419Slim is available for search"
+    ],
+    "improved": [],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
     "version": "0.2.3",
     "date": "2019-02-17",
     "new": [

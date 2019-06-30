@@ -1,5 +1,18 @@
 [
   {
+    "Date": "2019-06-30",
+    "Title": "New version of synopackage.com",
+    "Body": [
+      "Now you can perform search directly from home page. News now are moved to other page (you can find it in menu)",
+      "Milestone 0.3 is completed! Now we will work on new milestone 0.4.",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": null,
+    "RouterLink": null,
+    "ExternalLinkDescription": null,
+    "ExternalLink": null
+  },
+  {
     "Date": "2019-06-21",
     "Title": "New model DS419Slim is avaliable",
     "Body": [
