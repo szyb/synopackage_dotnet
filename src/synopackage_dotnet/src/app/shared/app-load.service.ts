@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import 'rxjs/add/operator/toPromise';
+
 import { environment } from 'src/environments/environment';
 import { Config } from './config';
 
