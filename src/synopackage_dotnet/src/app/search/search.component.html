@@ -13,8 +13,8 @@
     <div class="row">
       <div class="col-md-10">
         <div class="md-form form-sm">
-          <input mdbInputDirective type="search" id="searchForm" class="form-control" [(ngModel)]="keyword" name="keyword"
-            (keyup.enter)="$event.target.blur(); onEnter()" [mdbValidate]="false" maxLength="300" />
+          <input mdbInputDirective type="search" id="searchForm" class="form-control" [(ngModel)]="keyword"
+            name="keyword" (keyup.enter)="$event.target.blur(); onEnter()" [mdbValidate]="false" maxLength="300" />
           <label for="searchForm" class="">Keyword</label>
         </div>
       </div>
@@ -27,19 +27,20 @@
   </form>
 </div>
 <div *ngIf="isSearchPerformed" class="py-2">
-  <span>Share results <i class="fa fa-share-alt" aria-hidden="true" (click)="link.toggle()" style="cursor: pointer;"></i></span>
-  <div mdbCollapse [collapse]="isSearchLinkCollapsed" #link="bs-collapse" class="pr-2 pl-1">
+  <span>Share results <i class="fa fa-share-alt" aria-hidden="true" (click)="link.toggle()"
+      style="cursor: pointer;"></i></span>
+  <div mdbCollapse [isCollapsed]="isSearchLinkCollapsed" #link="bs-collapse" class="pr-2 pl-1">
     <table class="table">
       <tbody>
         <tr>
           <td scope="row">Short link:</td>
-          <td><span>{{shortLink}} <a *ngIf="linksAvailable" href="{{shortLink}}" target="_blank"><i class="fa fa-external-link"
-                  aria-hidden="true"></i></a></span></td>
+          <td><span>{{shortLink}} <a *ngIf="linksAvailable" href="{{shortLink}}" target="_blank"><i
+                  class="fa fa-external-link" aria-hidden="true"></i></a></span></td>
         </tr>
         <tr>
           <td scope="row">Full link:</td>
-          <td><span>{{fullLink}} <a *ngIf="linksAvailable" href="{{fullLink}}" target="_blank"><i class="fa fa-external-link"
-                  aria-hidden="true"></i></a></span></td>
+          <td><span>{{fullLink}} <a *ngIf="linksAvailable" href="{{fullLink}}" target="_blank"><i
+                  class="fa fa-external-link" aria-hidden="true"></i></a></span></td>
         </tr>
       </tbody>
     </table>
@@ -48,8 +49,10 @@
 <div *ngIf="isSearchPerformed">
   <div *ngFor="let result of searchResult">
     <blockquote class="blockquote bq-primary inline">
-      <a class="bq-title" routerLink="/sources/{{result.name}}">{{result.name}}</a><span class="px-2">({{result.count}})</span>
-      <app-parameters [parameters]="parameters" [showSourceName]="0" [url]="result.url" [www]="result.www"></app-parameters>
+      <a class="bq-title" routerLink="/sources/{{result.name}}">{{result.name}}</a><span
+        class="px-2">({{result.count}})</span>
+      <app-parameters [parameters]="parameters" [showSourceName]="0" [url]="result.url" [www]="result.www">
+      </app-parameters>
     </blockquote>
     <div *ngIf="!result.isSearchEnded">
       <app-wait></app-wait>
@@ -62,9 +65,10 @@
         <p class="alert alert-danger">{{result.errorMessage}}</p>
       </div>
       <div *ngIf="!result.noPackages && !result.errorMessage" class="container pb-4">
-        <span class="float-right"><i class="fa {{expandIcon}}" style="cursor: pointer;" aria-hidden="true" (click)="toggleIcon($event); hideResult.toggle()"></i></span>
+        <span class="float-right"><i class="fa {{expandIcon}}" style="cursor: pointer;" aria-hidden="true"
+            (click)="toggleIcon($event); hideResult.toggle()"></i></span>
       </div>
-      <div mdbCollapse [collapse]="result.isCollapsed" #hideResult="bs-collapse" class="pr-2 pl-1">
+      <div mdbCollapse [isCollapsed]="result.isCollapsed" #hideResult="bs-collapse" class="pr-2 pl-1">
         <div *ngFor="let package of result.packages" class="blue-gradient z-depth-2 rounded mb-1 pd-3">
           <app-package-info [package]="package"></app-package-info>
         </div>
