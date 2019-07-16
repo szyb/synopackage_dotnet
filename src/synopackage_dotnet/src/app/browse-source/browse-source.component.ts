@@ -30,7 +30,7 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
   public sourceUrl: string;
   public sourceWww: string;
   public count: number;
-  public isSearchLinkCollapsed = false;
+  public isSearchLinkCollapsed = true;
   public linksAvailable = false;
   public shortLink: string;
   public fullLink: string;
