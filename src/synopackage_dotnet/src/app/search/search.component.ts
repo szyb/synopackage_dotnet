@@ -26,7 +26,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.titleService.setTitle('Search - synopackage.com');
   }
 
-  public isSearchLinkCollapsed = false;
+  public isSearchLinkCollapsed = true;
   public linksAvailable = false;
   public shortLink: string;
   public fullLink: string;
@@ -121,7 +121,7 @@ export class SearchComponent implements OnInit, OnDestroy {
         item.isValid = false;
         item.response = null;
         item.count = 0;
-        item.isCollapsed = false;
+        item.isCollapsed = true;
       });
     }
 
@@ -148,7 +148,7 @@ export class SearchComponent implements OnInit, OnDestroy {
             item.isValid = val.result;
             item.errorMessage = val.errorMessage;
             item.isSearchEnded = true;
-            item.isCollapsed = true;
+            item.isCollapsed = false;
             if (item.isValid && (item.packages == null || item.packages.length === 0)) {
               item.noPackages = true;
             }
