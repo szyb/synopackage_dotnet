@@ -4,6 +4,7 @@ import { ParametersDTO } from '../../shared/model';
 @Component({
   selector: 'app-parameters',
   templateUrl: './parameters.component.html',
+  styleUrls: ['./parameters.component.scss']
 })
 @Injectable()
 export class ParametersComponent implements OnInit, OnDestroy {

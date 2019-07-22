@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 import { DeferLoadModule } from '@trademe/ng-defer-load';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { SourcesComponent } from './sources/sources.component';
@@ -134,6 +135,7 @@ export const routerConfig: Routes = [
     NgSelectModule,
     FormsModule,
     DeferLoadModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(routerConfig),
     MDBBootstrapModule.forRoot()
   ],
