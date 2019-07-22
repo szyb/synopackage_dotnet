@@ -23,7 +23,7 @@ RUN curl -SL "https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-lin
   && tar -xzf "nodejs.tar.gz" -C /usr/local --strip-components=1 \
   && rm nodejs.tar.gz \
   && ln -s /usr/local/bin/node /usr/local/bin/nodejs\
-  && npm i -g @angular/cli@6.0.8 
+  && npm i -g @angular/cli@7.3.9
 
 # Copy csproj and restore as distinct layers
 #COPY src/synopackage_dotnet/ ./synopackage_dotnet/
@@ -55,7 +55,7 @@ RUN curl -SL "https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-lin
   && tar -xzf "nodejs.tar.gz" -C /usr/local --strip-components=1 \
   && rm nodejs.tar.gz \
   && ln -s /usr/local/bin/node /usr/local/bin/nodejs\
-  && npm i -g @angular/cli@6.0.8
+  && npm i -g @angular/cli@7.3.9
 
 COPY --from=build-env /app/out .
 
