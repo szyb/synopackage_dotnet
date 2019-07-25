@@ -3,7 +3,7 @@
 </nav>
 <h1>Privacy Policy</h1>
 
-<div *ngFor="let entry of privacyPolicies" class="rounded border px-2 py-2 my-3 blue-gradient z-depth-2">
+<div *ngFor="let entry of privacyPolicies" class="rounded border px-2 py-2 my-3 cloudy-knoxville-gradient z-depth-2">
   <p><i class="fa fa-check-square-o fa-2x green-text p-2" aria-hidden="true"></i>
     <span class="fa-2x">{{entry.title}}</span></p>
   <div [innerHTML]="entry.description"></div>
