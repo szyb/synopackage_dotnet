@@ -11,7 +11,8 @@ ENV NODE_DOWNLOAD_SHA b4b5d8f73148dcf277df413bb16827be476f4fa117cbbec2aaabc8cc0a
 COPY . .
 RUN rm -rf wwwroot \
   && rm src/environments/environment.*.ts \
-  && rm appsettings.*.json
+  && rm appsettings.*.json \
+  && rm global.json
 
 COPY src/environments/environment.ts src/environments
 COPY src/environments/environment.docker.ts src/environments
