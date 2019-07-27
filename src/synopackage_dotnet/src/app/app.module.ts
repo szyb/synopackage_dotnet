@@ -27,6 +27,7 @@ import { DownloadDialogComponent } from './components/download-dialog/download-d
 import { AppLoadService } from './shared/app-load.service';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { NewsComponent } from './news/news.component';
+import { InfoComponent } from './info/info.component';
 
 export function init_app(appLoadService: AppLoadService) {
   return () => appLoadService.initializeApp();
@@ -87,15 +88,19 @@ export const routerConfig: Routes = [
     component: SearchComponent
   },
   {
-    path: 'credits',
+    path: 'info',
+    component: InfoComponent
+  },
+  {
+    path: 'info/credits',
     component: CreditsComponent
   },
   {
-    path: 'changelog',
+    path: 'info/changelog',
     component: ChangelogComponent
   },
   {
-    path: 'privacy-policy',
+    path: 'info/privacy-policy',
     component: PrivacyPolicyComponent
   },
   {
@@ -126,7 +131,8 @@ export const routerConfig: Routes = [
     CreditsComponent,
     ChangelogComponent,
     DownloadDialogComponent,
-    PrivacyPolicyComponent
+    PrivacyPolicyComponent,
+    InfoComponent
   ],
   imports: [
     BrowserModule,
