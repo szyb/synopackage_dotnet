@@ -8,8 +8,10 @@
 </blockquote>
 
 <div *ngFor="let entry of libraries" class="rounded border px-2 py-2 my-3 cloudy-knoxville-gradient z-depth-2">
-  <p><i class="fa fa-briefcase fa-2x green-text p-2" aria-hidden="true"></i> <a href="{{entry.projectUrl}}"
-      target="_blank"><span class="fa-2x">{{entry.name}}</span></a></p>
+  <p>
+    <mdb-icon fas icon="toolbox" class="green-text p-2" size="2x" aria-hidden="true"></mdb-icon>
+    <a href="{{entry.projectUrl}}" target="_blank"><span class="fa-2x">{{entry.name}}</span></a>
+  </p>
   <p>{{entry.description}}</p>
   <a href="{{entry.licenseUrl}}" target="_blank">License</a>
 </div>
