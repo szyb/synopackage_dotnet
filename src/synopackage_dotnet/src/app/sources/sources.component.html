@@ -24,10 +24,14 @@
       <a routerLink="/sources/{{source.name}}">browse</a>
     </div>
     <div class="d-none d-sm-inline-block col-sm-1 col-md-1 mt-1" *ngIf="source.www != null">
-      <a href="{{ source.www }}" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>
+      <a href="{{ source.www }}" target="_blank">
+        <mdb-icon fas icon="external-link-alt" aria-hidden="true"></mdb-icon>
+      </a>
     </div>
     <div class="d-none d-sm-inline-block col-sm-1 col-md-1" *ngIf="source.www == null">
-      <a href="{{ source.url }}" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>
+      <a href="{{ source.url }}" target="_blank">
+        <mdb-icon fas icon="external-link-alt" aria-hidden="true"></mdb-icon>
+      </a>
     </div>
   </div>
 </div>
@@ -53,10 +57,14 @@
     <div class="d-none d-sm-inline-block col-sm-11 col-md-8 col-lg-5 col-xl-4 mt-1">{{ source.url }}</div>
     <div class="d-none d-lg-inline-block                    col-lg-4 col-xl-5 mt-1">{{ source.disabledReason }}</div>
     <div class="d-none d-sm-inline-block col-sm-1  col-md-1 mt-1" *ngIf="source.www != null">
-      <a href="{{ source.www }}" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>
+      <a href="{{ source.www }}" target="_blank">
+        <mdb-icon fas icon="external-link-alt" aria-hidden="true"></mdb-icon>
+      </a>
     </div>
     <div class="d-none d-sm-inline-block col-sm-1  col-md-1" *ngIf="source.www == null">
-      <a href="{{ source.url }}" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>
+      <a href="{{ source.url }}" target="_blank">
+        <mdb-icon fas icon="external-link-alt" aria-hidden="true"></mdb-icon>
+      </a>
     </div>
   </div>
 </div>

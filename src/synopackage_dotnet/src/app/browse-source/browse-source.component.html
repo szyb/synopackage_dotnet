@@ -22,20 +22,22 @@
   <p class="alert alert-success">No results found</p>
 </div>
 <div *ngIf="isResponseArrived && !isError" class="py-2">
-  <span>Share results <i class="fa fa-share-alt" aria-hidden="true" (click)="link.toggle()"
-      style="cursor: pointer;"></i></span>
+  <span>Share results <mdb-icon fas icon="share-alt" class="cursor-pointer" (click)="link.toggle()" aria-hidden="true">
+    </mdb-icon></span>
   <div mdbCollapse [isCollapsed]="isSearchLinkCollapsed" #link="bs-collapse" class="pr-2 pl-1">
     <table class="table">
       <tbody>
         <tr>
           <td scope="row">Short link:</td>
-          <td><span>{{shortLink}} <a *ngIf="linksAvailable" href="{{shortLink}}" target="_blank"><i
-                  class="fa fa-external-link" aria-hidden="true"></i></a></span></td>
+          <td><span>{{shortLink}} <a *ngIf="linksAvailable" href="{{shortLink}}" target="_blank">
+                <mdb-icon fas icon="external-link-alt" aria-hidden="true"></mdb-icon>
+              </a></span></td>
         </tr>
         <tr>
           <td scope="row">Full link:</td>
-          <td><span>{{fullLink}} <a *ngIf="linksAvailable" href="{{fullLink}}" target="_blank"><i
-                  class="fa fa-external-link" aria-hidden="true"></i></a></span></td>
+          <td><span>{{fullLink}} <a *ngIf="linksAvailable" href="{{fullLink}}" target="_blank">
+                <mdb-icon fas icon="external-link-alt" aria-hidden="true"></mdb-icon>
+              </a></span></td>
         </tr>
       </tbody>
     </table>
