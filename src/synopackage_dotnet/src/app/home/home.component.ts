@@ -29,7 +29,8 @@ export class HomeComponent implements OnInit {
   }
 
   onSearchButton() {
-    this.router.navigate(['/search/keyword', this.keyword]);
+    const keywordRouter = this.keyword == null ? '*' : this.keyword;
+    this.router.navigate(['/search/keyword', keywordRouter]);
   }
 
   onSourcesButton() {

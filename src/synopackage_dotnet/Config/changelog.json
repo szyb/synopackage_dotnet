@@ -1,5 +1,19 @@
 [
   {
+    "version": "0.4.0",
+    "date": "2019-07-30",
+    "new": [
+      "New model: DS620Slim",
+      "Update to .NET Core 2.2 & Angular 7",
+      "New info page"
+    ],
+    "improved": [
+      "Minimal footer information"
+    ],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
     "version": "0.3.0",
     "date": "2019-06-30",
     "new": [

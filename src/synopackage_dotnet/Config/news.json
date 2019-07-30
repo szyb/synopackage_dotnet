@@ -1,5 +1,19 @@
 [
   {
+    "Date": "2019-07-30",
+    "Title": "Changes under the hood (v. 0.4.0)",
+    "Body": [
+      "To whom it may concern: Now page is running on .NET Core 2.2 runtime and Angular 7! We also updated many related packages.",
+      "There might be a slight visual difference between old version of the page and current, but it should work the same.",
+      "This is also the first step to upgrade Angular to version 8, however this task can wait a bit as we depend on updating other packages.",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": null,
+    "RouterLink": null,
+    "ExternalLinkDescription": null,
+    "ExternalLink": null
+  },
+  {
     "Date": "2019-06-30",
     "Title": "New version of synopackage.com",
     "Body": [

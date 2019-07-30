@@ -903,5 +903,10 @@
     "Name": "DS419Slim",
     "Arch": "armada38x",
     "Family": "armada38x"
+  },
+  {
+    "Name": "DS620Slim",
+    "Arch": "apollolake",
+    "Family": "x86_64"
   }
 ]

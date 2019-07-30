@@ -30,14 +30,12 @@ export class AppComponent implements OnInit {
       node.src = `https://www.google-analytics.com/analytics.js`;
       node.type = 'text/javascript';
       node.async = true;
-      node.charset = 'utf-8';
       document.getElementsByTagName('head')[0].appendChild(node);
 
       const node3 = document.createElement('script');
       node3.src = `assets/autotrack.js`;
       node3.type = 'text/javascript';
       node3.async = true;
-      node3.charset = 'utf-8';
       document.getElementsByTagName('head')[0].appendChild(node3);
 
       const node2 = document.createElement('script');
