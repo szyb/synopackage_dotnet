@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Injectable, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap, Params } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { Config } from '../shared/config';
 import { Subscription } from 'rxjs';
@@ -26,7 +26,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.titleService.setTitle('Search - synopackage.com');
   }
 
-  public isSearchLinkCollapsed = false;
+  public isSearchLinkCollapsed = true;
   public linksAvailable = false;
   public shortLink: string;
   public fullLink: string;
@@ -43,8 +43,8 @@ export class SearchComponent implements OnInit, OnDestroy {
   private versionParam: string;
   private channelParam: string;
 
-  public expandIcon = 'fa-eye';
-  public collapseIcon = 'fa-eye-slash';
+  public expandIcon = 'fa fa-eye';
+  public collapseIcon = 'fa fa-eye-slash';
 
   @ViewChild(PackageInfoComponent)
   PackageInfoComponent: PackageInfoComponent;
@@ -121,7 +121,7 @@ export class SearchComponent implements OnInit, OnDestroy {
         item.isValid = false;
         item.response = null;
         item.count = 0;
-        item.isCollapsed = false;
+        item.isCollapsed = true;
       });
     }
 
@@ -148,7 +148,7 @@ export class SearchComponent implements OnInit, OnDestroy {
             item.isValid = val.result;
             item.errorMessage = val.errorMessage;
             item.isSearchEnded = true;
-            item.isCollapsed = true;
+            item.isCollapsed = false;
             if (item.isValid && (item.packages == null || item.packages.length === 0)) {
               item.noPackages = true;
             }
@@ -218,14 +218,15 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
   }
 
-  toggleIcon($event) {
-
-    if (event.srcElement.classList.contains(this.expandIcon)) {
-      event.srcElement.classList.remove(this.expandIcon);
-      event.srcElement.classList.add(this.collapseIcon);
+  getIcon(isCollapsed) {
+    if (isCollapsed) {
+      return this.collapseIcon;
     } else {
-      event.srcElement.classList.remove(this.collapseIcon);
-      event.srcElement.classList.add(this.expandIcon);
+      return this.expandIcon;
     }
+  }
+
+  changeState(result: any) {
+    result.isCollapsed = !result.isCollapsed;
   }
 }

@@ -1,11 +1,14 @@
 <nav class="breadcrumb">
+  <a class="breadcrumb-item" routerLink="/info">Info</a>
   <span class="breadcrumb-item active">Privacy policy</span>
 </nav>
 <h1>Privacy Policy</h1>
 
-<div *ngFor="let entry of privacyPolicies" class="rounded border px-2 py-2 my-3 blue-gradient z-depth-2">
-  <p><i class="fa fa-check-square-o fa-2x green-text p-2" aria-hidden="true"></i>
-    <span class="fa-2x">{{entry.title}}</span></p>
+<div *ngFor="let entry of privacyPolicies" class="rounded border px-2 py-2 my-3 cloudy-knoxville-gradient z-depth-2">
+  <p>
+    <mdb-icon far icon="check-square" size="2x" class="green-text" aria-hidden="true"></mdb-icon>
+    <span class="fa-2x pl-1">{{entry.title}}</span>
+  </p>
   <div [innerHTML]="entry.description"></div>
   <div *ngIf="entry.link">
     <a href="{{entry.link}}" target="_blank">{{entry.linkDescription}}</a>

@@ -1,29 +1,30 @@
 <div *ngIf="parameters">
-  <table mdbTable>
+  <table mdbTable borderless="true">
     <tbody>
       <tr mdbTableRow *ngIf="showSourceName">
-        <td scope="row" class="px-2"><span>Source name:</span></td>
-        <td><span>{{ parameters.sourceName }}</span></td>
+        <td scope="row" class="px-2 py-0 captionColumn"><span>Source name:</span></td>
+        <td class="py-0"><span>{{ parameters.sourceName }}</span></td>
       </tr>
       <tr mdbTableRow *ngIf="url">
-        <td scope="row" class="px-2"><span>Url:</span></td>
-        <td><span>{{url}}<a href="{{www}}" target="_blank">&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></a></span></td>
+        <td scope="row" class="px-2 py-0 captionColumn"><span>Url:</span></td>
+        <td class="py-0"><span>{{url}}<a href="{{www}}" target="_blank">&nbsp;<mdb-icon fas icon="external-link-alt"
+                aria-hidden="true"></mdb-icon></a></span></td>
       </tr>
       <tr mdbTableRow *ngIf="parameters.model">
-        <td scope="row" class="px-2"><span>Model:</span></td>
-        <td><span>{{ parameters.model }}</span></td>
+        <td scope="row" class="px-2 py-0 captionColumn"><span>Model:</span></td>
+        <td class="py-0"><span>{{ parameters.model }}</span></td>
       </tr>
       <tr mdbTableRow *ngIf="parameters.version">
-        <td scope="row" class="px-2"><span>Version:</span></td>
-        <td><span>{{ parameters.version }}</span></td>
+        <td scope="row" class="px-2 py-0 captionColumn"><span>Version:</span></td>
+        <td class="py-0"><span>{{ parameters.version }}</span></td>
       </tr>
       <tr mdbTableRow>
-        <td scope="row" class="px-2"><span>Channel:</span></td>
-        <td><span>{{ getChannel(parameters.isBeta) }}</span></td>
+        <td scope="row" class="px-2 py-0 captionColumn"><span>Channel:</span></td>
+        <td class="py-0"><span>{{ getChannel(parameters.isBeta) }}</span></td>
       </tr>
-      <tr mdbTableRow *ngIf="parameters.keyword">
-        <td scope="row" class="px-2"><span>Keyword:</span></td>
-        <td><span>{{ parameters.keyword }}</span></td>
+      <tr mdbTableRow *ngIf="parameters.keyword captionColumn">
+        <td scope="row" class="px-2 py-0"><span>Keyword:</span></td>
+        <td class="py-0"><span>{{ parameters.keyword }}</span></td>
       </tr>
     </tbody>
   </table>

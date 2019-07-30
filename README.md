@@ -23,7 +23,7 @@ OR
 ## Prerequisites
 
 1. Installed Node.js (version 10.x)
-2. .NET CORE 2.1.6 SDK
+2. .NET CORE 2.2.300 SDK
 
 VS Code extensions:
 1. C#

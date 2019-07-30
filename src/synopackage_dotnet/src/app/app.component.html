@@ -25,13 +25,19 @@
     <ul class="navbar-nav nav-flex-icons">
       <li class="nav-item waves-light" mdbWavesEffect>
         <a class="nav-link" (click)="showUserSettingsModal()">
-          <i *ngIf="isSetup()" class="fa fa-gear" aria-hidden="true"></i>
-          <i *ngIf="!isSetup()" class="fa fa-gear yellow-text" aria-hidden="true"></i>
+          <mdb-icon *ngIf="isSetup()" fas icon="cog" aria-hidden="true"></mdb-icon>
+          <mdb-icon *ngIf="!isSetup()" fas icon="cog" class="yellow-text" aria-hidden="true"></mdb-icon>
         </a>
       </li>
       <li class="nav-item waves-light" mdbWavesEffect>
-        <a class="nav-link" href="https://www.facebook.com/synopackage/" target="_blank"><i
-            class="fa fa-facebook"></i></a>
+        <a class="nav-link" routerLink="info">
+          <mdb-icon fas icon="info-circle" aria-hidden="true"></mdb-icon>
+        </a>
+      </li>
+      <li class="nav-item waves-light" mdbWavesEffect>
+        <a class="nav-link" href="https://www.facebook.com/synopackage/" target="_blank">
+          <mdb-icon fab icon="facebook-f"></mdb-icon>
+        </a>
       </li>
     </ul>
 
@@ -49,15 +55,9 @@
 </main>
 
 <!--Footer-->
-<footer class="page-footer font-small fixed-bottom footer-copyright blue py-1 text-center text-white">
-  <div class="container-fluid"><small>szyb 2017 - {{ actualYear }}. Source code can be found on
-      <a href="https://github.com/szyb/synopackage_dotnet" target="_blank">github</a>.
-      Special thanks to jdel for the <a href="https://github.com/jdel/sspks" target="_blank">project</a>. <a
-        routerLink="credits">Credits
-        &amp; third party libraries.</a><span> Our <a routerLink="privacy-policy">Privacy Policy</a>. </span><span>
-        Version: <a routerLink="changelog">{{version}}</a></span>
-
-    </small>
+<footer class="page-footer font-small fixed-bottom footer-copyright blue py-0 text-center text-white">
+  <div class="container-fluid">
+    <small>szyb 2017 - {{ actualYear }}. Version: <a routerLink="info/changelog">{{version}}</a></small>
   </div>
 </footer>
 

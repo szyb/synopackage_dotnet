@@ -1,0 +1,23 @@
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  background: transparent;
+}
+
+li:last-child {
+  border: none;
+}
+
+li a {
+  text-decoration: none;
+  color: #000;
+  background: transparent;
+}
+
+li a:hover {
+  background: #05a3ec;
+}

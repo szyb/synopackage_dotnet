@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:2.1.500-sdk as build-env
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2 as build-env
 WORKDIR /app
 
 
@@ -11,7 +11,8 @@ ENV NODE_DOWNLOAD_SHA b4b5d8f73148dcf277df413bb16827be476f4fa117cbbec2aaabc8cc0a
 COPY . .
 RUN rm -rf wwwroot \
   && rm src/environments/environment.*.ts \
-  && rm appsettings.*.json
+  && rm appsettings.*.json \
+  && rm global.json
 
 COPY src/environments/environment.ts src/environments
 COPY src/environments/environment.docker.ts src/environments
@@ -23,7 +24,7 @@ RUN curl -SL "https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-lin
   && tar -xzf "nodejs.tar.gz" -C /usr/local --strip-components=1 \
   && rm nodejs.tar.gz \
   && ln -s /usr/local/bin/node /usr/local/bin/nodejs\
-  && npm i -g @angular/cli@6.0.8 
+  && npm i -g @angular/cli@7.3.9
 
 # Copy csproj and restore as distinct layers
 #COPY src/synopackage_dotnet/ ./synopackage_dotnet/
@@ -37,7 +38,7 @@ RUN dotnet restore \
 RUN dotnet publish -c Release -o out
 
 # build runtime image
-FROM microsoft/dotnet:2.1.6-aspnetcore-runtime
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2
 WORKDIR /app
 
 ENV ASPNETCORE_ENVIRONMENT docker
@@ -55,7 +56,7 @@ RUN curl -SL "https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-lin
   && tar -xzf "nodejs.tar.gz" -C /usr/local --strip-components=1 \
   && rm nodejs.tar.gz \
   && ln -s /usr/local/bin/node /usr/local/bin/nodejs\
-  && npm i -g @angular/cli@6.0.8
+  && npm i -g @angular/cli@7.3.9
 
 COPY --from=build-env /app/out .
 
