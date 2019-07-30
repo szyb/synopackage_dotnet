@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -8,4 +9,7 @@ import { Component } from '@angular/core';
 })
 
 export class InfoComponent {
+  constructor(private titleService: Title) {
+    this.titleService.setTitle('Info - synopackage.com');
+  }
 }
