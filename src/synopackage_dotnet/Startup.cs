@@ -14,6 +14,8 @@ using Microsoft.Extensions.Logging;
 using Serilog.Extensions.Logging;
 using Serilog;
 using Autofac.Extras.DynamicProxy;
+using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 namespace synopackage_dotnet
 {
@@ -24,7 +26,7 @@ namespace synopackage_dotnet
   {
     public IConfiguration configuration { get; set; }
 
-    public Startup(IConfiguration configuration, IHostingEnvironment env)
+    public Startup(IConfiguration configuration, IWebHostEnvironment env)
     {
       this.configuration = configuration;
     }
@@ -44,17 +46,19 @@ namespace synopackage_dotnet
 
       services.AddSwaggerGen(c =>
       {
-        c.SwaggerDoc("v1", new Info
+        c.SwaggerDoc("v1", new OpenApiInfo
         {
           Version = "v1",
           Title = "synopackage_dotnet API",
-          Description = "A simple example ASP.NET Core Web API"
+          Description = "search.synopackage.com API"
         });
         // Set the comments path for the Swagger JSON and UI.
         // var basePath = AppContext.BaseDirectory;
         //       var xmlPath = Path.Combine(basePath, "synopackage_dotnet.xml");
         //       c.IncludeXmlComments(xmlPath);
       });
+
+
 
       //appsettings
       var appSettingsSection = configuration.GetSection(nameof(AppSettings));
@@ -90,7 +94,7 @@ namespace synopackage_dotnet
     /// <param name="app">The application.</param>
     /// <param name="env">The hosting environment</param>
     /// <param name="loggerFactory">The logger factory</param>
-    public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
     {
       var logger = new LoggerConfiguration()
             .ReadFrom.Configuration(configuration)
@@ -115,10 +119,16 @@ namespace synopackage_dotnet
       });
       app.UseStaticFiles();
       app.UseSpaStaticFiles();
-      app.UseMvc(routes =>
+      app.UseRouting();
+      app.UseEndpoints(endpoints =>
       {
-        routes.MapRoute(name: "default", template: "{controller}/{action=index}/{id}");
+        endpoints.MapControllers();
       });
+
+      // app.UseMvc(routes =>
+      // {
+      //   routes.MapRoute(name: "default", template: "{controller}/{action=index}/{id}");
+      // });
 
       // CORS
       app.UseCors(config =>
@@ -131,10 +141,10 @@ namespace synopackage_dotnet
 
         spa.Options.SourcePath = "wwwroot";
 
-        if (env.IsDevelopment())
-        {
-          spa.UseAngularCliServer(npmScript: "start");
-        }
+        // if (env.IsDevelopment())
+        // {
+        //   spa.UseAngularCliServer(npmScript: "start");
+        // }
       });
     }
   }

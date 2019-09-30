@@ -2,6 +2,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 
 namespace synopackage_dotnet
 {
@@ -29,7 +30,7 @@ namespace synopackage_dotnet
             .ConfigureServices(services => services.AddAutofac())
             .ConfigureAppConfiguration((builderContext, config) =>
             {
-              IHostingEnvironment env = builderContext.HostingEnvironment;
+              IWebHostEnvironment env = builderContext.HostingEnvironment;
 
               config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
