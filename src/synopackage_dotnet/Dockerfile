@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:2.2 as build-env
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0 as build-env
 WORKDIR /app
 
 
@@ -38,7 +38,7 @@ RUN dotnet restore \
 RUN dotnet publish -c Release -o out
 
 # build runtime image
-FROM mcr.microsoft.com/dotnet/core/aspnet:2.2
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.0
 WORKDIR /app
 
 ENV ASPNETCORE_ENVIRONMENT docker
