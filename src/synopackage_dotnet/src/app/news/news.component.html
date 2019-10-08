@@ -9,7 +9,7 @@
   <div class="pb-3">
     <blockquote class="blockquote bq-primary">
       <p class="bq-title">{{ n.title }}</p>
-      <span style="font-size: 0.8rem">{{ n.date }}</span>
+      <span style="font-size: 0.8rem">{{ n.date | date : 'yyyy-MM-dd'}}</span>
     </blockquote>
     <div class="rounded border px-2 py-2">
       <p *ngFor="let b of n.body">{{ b }}</p>

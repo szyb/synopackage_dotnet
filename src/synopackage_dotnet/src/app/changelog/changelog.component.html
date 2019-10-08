@@ -10,7 +10,7 @@
   <div class="pb-3">
     <blockquote class="blockquote bq-primary">
       <p class="bq-title">Version {{ c.version }}</p>
-      <span style="font-size: 0.8rem">{{ c.date }}</span>
+      <span style="font-size: 0.8rem">{{ c.date | date : 'yyyy-MM-dd'}}</span>
     </blockquote>
     <div class="rounded border px-2 py-2">
       <div *ngIf="c.new.length!=0">
