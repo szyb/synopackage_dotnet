@@ -14,7 +14,10 @@ namespace synopackage_dotnet.Model.Services
     private IEnumerable<ModelDTO> GetAllInternal()
     {
       var modelsJson = File.ReadAllText(configFile);
-      return JsonConvert.DeserializeObject<ModelDTO[]>(modelsJson);
+      var models = JsonConvert.DeserializeObject<ModelDTO[]>(modelsJson);
+      var modelList = models.ToList();
+      modelList.Sort((x, y) => { return x.Name.CompareTo(y.Name); });
+      return modelList;
     }
 
     public IEnumerable<ModelDTO> GetAll()
