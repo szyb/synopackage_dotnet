@@ -5,6 +5,7 @@ import { DownloadDialogComponent } from '../download-dialog/download-dialog.comp
 
 @Component({
   selector: 'app-package-info',
+  styleUrls: ['./package-info.component.scss'],
   templateUrl: './package-info.component.html'
 })
 
