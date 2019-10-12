@@ -1,5 +1,18 @@
 [
   {
+    "Date": "2019-10-12",
+    "Title": "New version 0.4.2",
+    "Body": [
+      "As you can see we skip 0.4.1 version in the news. It's because 0.4.1 doesn't changed anything from user perspective. We just updated backend to run on .NET Core 3.0",
+      "For functional changes in 0.4.2 please refer to our changelog",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": "Changelog",
+    "RouterLink": "../info/changelog",
+    "ExternalLinkDescription": null,
+    "ExternalLink": null
+  },
+  {
     "Date": "2019-07-30",
     "Title": "Changes under the hood (v. 0.4.0)",
     "Body": [

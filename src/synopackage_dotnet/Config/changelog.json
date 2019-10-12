@@ -1,5 +1,19 @@
 [
   {
+    "version": "0.4.2",
+    "date": "2019-10-12",
+    "new": [],
+    "improved": [
+      "Default version is set to 6.2.2",
+      "Models in user settings are sorted alphabetically"
+    ],
+    "fixed": [
+      "Fix package layout view when package description is short",
+      "Fix date format on news and changelog page"
+    ],
+    "removedSources": []
+  },
+  {
     "version": "0.4.1",
     "date": "2019-10-06",
     "new": [],
