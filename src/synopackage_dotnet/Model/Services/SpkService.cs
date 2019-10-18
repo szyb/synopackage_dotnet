@@ -43,20 +43,19 @@ namespace synopackage_dotnet.Model.Services
       SpkResult result = null;
       if (cacheResult.Result == false)
       {
-        string finalUrl;
         string userAgent;
-        RestRequest request = PrepareRequest(url, arch, model, versionDto, isBeta, customUserAgent, out userAgent, out finalUrl);
+        var parametersRequest = PrepareParameters(arch, model, versionDto, isBeta, customUserAgent, out userAgent);
 
-        var response = downloadService.Execute(finalUrl, request, userAgent);
+        var response = downloadService.Execute(url, parametersRequest, userAgent).Result;
 
-        if (response.ResponseStatus == ResponseStatus.Completed && response.StatusCode == HttpStatusCode.OK)
+        if (response.Success)
         {
           logEntry.ResultFrom = ResultFrom.Server;
-          result = ParseResponse(sourceName, url, model, versionDto, isBeta, response);
+          result = ParseResponse(sourceName, url, model, versionDto, isBeta, response.Content);
         }
         else
         {
-          errorMessage = $"{response.StatusDescription} {response.ErrorMessage}";
+          errorMessage = $"{response.ErrorMessage}";
           logger.LogError($"Error getting response for url: {url}: {errorMessage}");
           return new SourceServerResponseDTO(false, errorMessage, parameters, null);
         }
@@ -110,10 +109,9 @@ namespace synopackage_dotnet.Model.Services
       return new SourceServerResponseDTO(true, null, parameters, list);
     }
 
-    private SpkResult ParseResponse(string sourceName, string url, string model, VersionDTO versionDto, bool isBeta, IRestResponse response)
+    private SpkResult ParseResponse(string sourceName, string url, string model, VersionDTO versionDto, bool isBeta, string responseContent)
     {
       SpkResult result;
-      var responseContent = response.Content;
       if (responseContent != null)
       {
         responseContent = responseContent.Replace("\\n", "\n");
@@ -138,24 +136,24 @@ namespace synopackage_dotnet.Model.Services
       return result;
     }
 
-    private RestRequest PrepareRequest(string url, string arch, string model, VersionDTO versionDto, bool isBeta, string customUserAgent, out string userAgent, out string finalUrl)
+
+    private IEnumerable<KeyValuePair<string, object>> PrepareParameters(string arch, string model, VersionDTO versionDto, bool isBeta, string customUserAgent, out string userAgent)
     {
-      var request = new RestRequest(Method.POST);
+      List<KeyValuePair<string, object>> list = new List<KeyValuePair<string, object>>();
       var unique = $"synology_{arch}_{model}";
 
-      request.AddParameter("language", "enu");
-      request.AddParameter("unique", unique);
-      request.AddParameter("arch", arch);
-      request.AddParameter("major", versionDto.Major.ToString());
-      request.AddParameter("minor", versionDto.Minor.ToString());
-      request.AddParameter("build", versionDto.Build.ToString());
-      request.AddParameter("package_update_channel", isBeta ? "beta" : "stable");
-      request.AddParameter("timezone", "Brussels");
+      list.Add(new KeyValuePair<string, object>("language", "enu"));
+      list.Add(new KeyValuePair<string, object>("unique", unique));
+      list.Add(new KeyValuePair<string, object>("arch", arch));
+      list.Add(new KeyValuePair<string, object>("major", versionDto.Major.ToString()));
+      list.Add(new KeyValuePair<string, object>("minor", versionDto.Minor.ToString()));
+      list.Add(new KeyValuePair<string, object>("build", versionDto.Build.ToString()));
+      list.Add(new KeyValuePair<string, object>("package_update_channel", isBeta ? "beta" : "stable"));
+      list.Add(new KeyValuePair<string, object>("timezone", "Brussels"));
 
-      finalUrl = GetLegacySupportUrl(url, request);
+
       userAgent = customUserAgent != null ? customUserAgent : unique;
-
-      return request;
+      return list;
     }
 
     private bool KeywordExists(string keyword, SpkPackage spkPackage)
@@ -171,20 +169,6 @@ namespace synopackage_dotnet.Model.Services
       if (spkPackage.Desc != null && spkPackage.Desc.Contains(keyword, StringComparison.InvariantCultureIgnoreCase))
         return true;
       return false;
-    }
-
-    private string GetLegacySupportUrl(string url, RestRequest request)
-    {
-      Dictionary<string, string> dictParamValue = new Dictionary<string, string>();
-      request.Parameters.ForEach(item =>
-      {
-        dictParamValue.Add(item.Name, item.Value.ToString());
-      });
-      string urlParams = Utils.GetUrlParameters(dictParamValue);
-      if (url.EndsWith("/"))
-        return $"{url}?{urlParams}";
-      else
-        return $"{url}/?{urlParams}";
     }
   }
 }
