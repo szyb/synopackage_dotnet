@@ -1,8 +1,12 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using RestSharp;
+using synopackage_dotnet.Model.DTOs;
 
 namespace synopackage_dotnet.Model.Services
 {
@@ -37,44 +41,59 @@ namespace synopackage_dotnet.Model.Services
       }
     }
 
-    public IRestResponse Execute(string url, RestRequest request, string userAgent = null)
+    private string GetLegacySupportUrl(string url, IEnumerable<KeyValuePair<string, object>> parameters)
+    {
+      Dictionary<string, string> dictParamValue = new Dictionary<string, string>();
+      parameters.ToList().ForEach(item =>
+      {
+        dictParamValue.Add(item.Key, item.Value.ToString());
+      });
+      string urlParams = Utils.GetUrlParameters(dictParamValue);
+      if (url.EndsWith("/"))
+        return $"{url}?{urlParams}";
+      else
+        return $"{url}/?{urlParams}";
+    }
+
+    public async Task<ExecuteResponse> Execute(string url, IEnumerable<KeyValuePair<string, object>> parameters, string userAgent = null)
     {
       try
       {
-        var client = GetClient(url, userAgent);
+        var finalUrl = GetLegacySupportUrl(url, parameters);
+        var client = GetClient(finalUrl, userAgent);
+        IRestRequest request = new RestRequest(Method.POST);
+        foreach (var p in parameters)
+        {
+          request.AddParameter(p.Key, p.Value);
+        }
+        IRestResponse response = await Task.Run(() => client.Execute(request));
 
-        return client.Execute(request);
+        if (response.ResponseStatus == ResponseStatus.Completed && response.StatusCode == HttpStatusCode.OK)
+
+          return new ExecuteResponse() { Success = true, Content = response.Content };
+        else
+        {
+          var errorMessage = $"{response.StatusDescription} {response.ErrorMessage}";
+          logger.LogError($"Error getting response for url: {url}: {errorMessage}");
+          return new ExecuteResponse() { Success = false, ErrorMessage = errorMessage };
+        }
+
       }
       catch (Exception ex)
       {
         logger.LogError(ex, "Execute - could not execute request");
         throw;
       }
-
     }
 
-    public IRestResponse<T> Execute<T>(string url, RestRequest request, string userAgent = null) where T : new()
-    {
-      try
-      {
-        var client = GetClient(url, userAgent);
-        return client.Execute<T>(request);
-      }
-      catch (Exception ex)
-      {
-        logger.LogError(ex, "Execute<T> - could not execute request");
-        throw;
-      }
-    }
-
-    public byte[] DownloadData(string url)
+    public async Task<byte[]> DownloadData(string url)
     {
       try
       {
         //act as a regular browser
         var client = GetClient(url, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36 OPR/56.0.3051.36");
         var request = new RestRequest(Method.GET);
-        return client.DownloadData(request);
+        return await Task.Run(() => client.DownloadData(request));
       }
       catch (Exception ex)
       {

@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Hosting.Internal;
 using Microsoft.Extensions.Logging;
@@ -47,7 +48,7 @@ namespace synopackage_dotnet.Model.Services
                 var extension = Path.GetExtension(url);
                 byte[] iconBytes = null;
                 if (ShouldDownloadIcon(sourceName, url))
-                  iconBytes = downloadService.DownloadData(url);
+                  iconBytes = Task.Run(() => downloadService.DownloadData(url)).Result;
                 if (IsValidIcon(iconBytes))
                 {
                   File.WriteAllBytesAsync(GetIconFileNameWithCacheFolder(sourceName, package.Name), iconBytes);
