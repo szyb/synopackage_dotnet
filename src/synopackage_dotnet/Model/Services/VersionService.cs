@@ -24,7 +24,12 @@ namespace synopackage_dotnet.Model.Services
           version.Major = Convert.ToInt32(m.Groups["major"].Value);
           version.Minor = Convert.ToInt32(m.Groups["minor"].Value);
           if (!string.IsNullOrWhiteSpace(m.Groups["micro"].Value))
+          {
             version.Micro = Convert.ToInt32(m.Groups["micro"].Value);
+            version.ShortVersion = $"{version.Major}.{version.Minor}.{version.Micro}";
+          }
+          else
+            version.ShortVersion = $"{version.Major}.{version.Minor}";
           version.Build = Convert.ToInt32(m.Groups["build"].Value);
         }
       }

@@ -13,7 +13,7 @@
           <div class="row">
             <div class="col-3"><span>Version</span></div>
             <div class="col-8">
-              <ng-select [items]="versions" bindLabel="version" bindValue="version" (change)="resetVersionError()"
+              <ng-select [items]="versions" bindLabel="shortVersion" bindValue="version" (change)="resetVersionError()"
                 [required]="true" [clearable]="false" [(ngModel)]="selectedVersion">
               </ng-select>
             </div>
