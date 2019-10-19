@@ -85,6 +85,7 @@ export class UserSettingsComponent {
 
 interface VersionDTO {
   version: string;
+  shortVersion: string;
 }
 
 interface ModelDTO {
