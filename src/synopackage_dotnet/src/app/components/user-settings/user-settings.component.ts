@@ -79,6 +79,10 @@ export class UserSettingsComponent {
   resetModelError(): void {
     this.errorModel = null;
   }
+
+  public isSetup(): boolean {
+    return this.userSettingsService.isSetup();
+  }
 }
 
 
