@@ -16,23 +16,25 @@ namespace synopackage_dotnet.Model.Services
 {
   public class CacheService : ICacheService
   {
-    IDownloadService downloadService;
-    ILogger<CacheService> logger;
+    // IDownloadService downloadService;
+    private readonly ILogger<CacheService> logger;
+    private readonly IDownloadFactory downloadFactory;
     private readonly string defaultIconExtension = "png";
     private readonly string defaultCacheExtension = "cache";
 
-    public CacheService(IDownloadService downloadService, ILogger<CacheService> logger)
+    public CacheService(IDownloadFactory factory, ILogger<CacheService> logger)
     {
       if (!Directory.Exists(AppSettingsProvider.AppSettings.FrontendCacheFolder))
         Directory.CreateDirectory(AppSettingsProvider.AppSettings.FrontendCacheFolder);
       if (!Directory.Exists(AppSettingsProvider.AppSettings.BackendCacheFolder))
         Directory.CreateDirectory(AppSettingsProvider.AppSettings.BackendCacheFolder);
-      this.downloadService = downloadService;
+      this.downloadFactory = factory;
       this.logger = logger;
     }
 
     public void ProcessIcons(string sourceName, List<SpkPackage> packages)
     {
+      IDownloadService downloadService = downloadFactory.GetDownloadServiceBySourceName(sourceName);
       if (packages != null)
       {
         byte[] defaultIconBytes = null;

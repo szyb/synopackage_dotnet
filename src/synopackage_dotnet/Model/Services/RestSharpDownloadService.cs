@@ -10,11 +10,11 @@ using synopackage_dotnet.Model.DTOs;
 
 namespace synopackage_dotnet.Model.Services
 {
-  public class DownloadService : IDownloadService
+  public class RestSharpDownloadService : IDownloadService
   {
-    ILogger<DownloadService> logger;
+    ILogger<RestSharpDownloadService> logger;
 
-    public DownloadService(ILogger<DownloadService> logger)
+    public RestSharpDownloadService(ILogger<RestSharpDownloadService> logger)
     {
       this.logger = logger;
     }

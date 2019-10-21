@@ -16,14 +16,14 @@ namespace synopackage_dotnet.Model.Services
 {
   public class SpkService : ISpkService
   {
-    private ICacheService cacheService;
-    private IDownloadService downloadService;
-    private ILogger<SpkService> logger;
+    private readonly ICacheService cacheService;
+    private readonly IDownloadFactory downloadFactory;
+    private readonly ILogger<SpkService> logger;
 
-    public SpkService(ICacheService cacheService, IDownloadService downloadService, ILogger<SpkService> logger)
+    public SpkService(ICacheService cacheService, IDownloadFactory downloadFactory, ILogger<SpkService> logger)
     {
       this.cacheService = cacheService;
-      this.downloadService = downloadService;
+      this.downloadFactory = downloadFactory;
       this.logger = logger;
     }
 
@@ -46,6 +46,7 @@ namespace synopackage_dotnet.Model.Services
         string userAgent;
         var parametersRequest = PrepareParameters(arch, model, versionDto, isBeta, customUserAgent, out userAgent);
 
+        IDownloadService downloadService = downloadFactory.GetDownloadServiceBySourceName(sourceName);
         var response = downloadService.Execute(url, parametersRequest, userAgent).Result;
 
         if (response.Success)
