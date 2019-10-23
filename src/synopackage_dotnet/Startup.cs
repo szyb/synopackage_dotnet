@@ -97,7 +97,7 @@ namespace synopackage_dotnet
           case DownloadLibrary.RestSharp:
             return new RestSharpDownloadService(c.Resolve<ILogger<RestSharpDownloadService>>());
           case DownloadLibrary.Flurl:
-            return new RestSharpDownloadService(c.Resolve<ILogger<RestSharpDownloadService>>()); //TODO: change it
+            return new FlurlDownloadService(c.Resolve<ILogger<FlurlDownloadService>>());
           default:
             throw new NotImplementedException("Invalid download library");
         }
