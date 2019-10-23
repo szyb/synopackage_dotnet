@@ -13,9 +13,11 @@
     </blockquote>
     <div class="rounded border px-2 py-2">
       <p *ngFor="let b of n.body">{{ b }}</p>
-      <div>
-        <a *ngIf="n.routerLinkDescription" [routerLink]="n.routerLink">{{n.routerLinkDescription}}</a>
-        <a *ngIf="n.externalLinkDescription" href="{{n.externalLink}}" target="_blank">{{n.externalLinkDescription}}</a>
+      <div *ngIf="n.routerLinkDescription">
+        <a [routerLink]="n.routerLink">{{n.routerLinkDescription}}</a>
+      </div>
+      <div *ngIf="n.externalLinkDescription">
+        <a href="{{n.externalLink}}" target="_blank">{{n.externalLinkDescription}}</a>
       </div>
     </div>
   </div>
