@@ -1,5 +1,17 @@
 [
   {
+    "Date": "2019-10-23",
+    "Title": "Jdel source is back to active list",
+    "Body": [
+      "Today we bring back https://packages.jdel.org source back to active source. It was tricky issue, but it's very technical related somehow to the framework we use. If you are interested in details see the link below",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": "Jdel packages to your model",
+    "RouterLink": "../sources/jdel",
+    "ExternalLinkDescription": "Github issue: Back jdel source to active",
+    "ExternalLink": "https://github.com/szyb/synopackage_dotnet/issues/112"
+  },
+  {
     "Date": "2019-10-12",
     "Title": "New version 0.4.2",
     "Body": [
