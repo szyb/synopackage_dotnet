@@ -47,11 +47,10 @@
     "Www": "https://emby.media/community/index.php?/forum/153-synology/"
   },
   {
-    "Active": false,
+    "Active": true,
     "Name": "jdel",
-    "Url": "https://packages.jdel.org/",
-    "DisabledDate": "2018-10-10",
-    "DisabledReason": "Error code: 301 Moved pernamently"
+    "Url": "https://packages.jdel.org/api/",
+    "Www": "https://packages.jdel.org/"
   },
   {
     "Active": true,
