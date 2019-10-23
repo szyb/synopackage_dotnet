@@ -10,7 +10,7 @@ using synopackage_dotnet.Model.DTOs;
 
 namespace synopackage_dotnet.Model.Services
 {
-  public class RestSharpDownloadService : IDownloadService
+  public class RestSharpDownloadService : DownloadServiceAbstract, IDownloadService
   {
     ILogger<RestSharpDownloadService> logger;
 
@@ -31,7 +31,7 @@ namespace synopackage_dotnet.Model.Services
       return client;
     }
 
-    private static void SetupProxy(RestClient client)
+    private static void SetupProxy(IRestClient client)
     {
       var httpProxy = Environment.GetEnvironmentVariable("http_proxy");
       if (!string.IsNullOrWhiteSpace(httpProxy))
@@ -39,20 +39,6 @@ namespace synopackage_dotnet.Model.Services
         client.Proxy = new WebProxy(httpProxy);
         client.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
       }
-    }
-
-    private string GetLegacySupportUrl(string url, IEnumerable<KeyValuePair<string, object>> parameters)
-    {
-      Dictionary<string, string> dictParamValue = new Dictionary<string, string>();
-      parameters.ToList().ForEach(item =>
-      {
-        dictParamValue.Add(item.Key, item.Value.ToString());
-      });
-      string urlParams = Utils.GetUrlParameters(dictParamValue);
-      if (url.EndsWith("/"))
-        return $"{url}?{urlParams}";
-      else
-        return $"{url}/?{urlParams}";
     }
 
     public async Task<ExecuteResponse> Execute(string url, IEnumerable<KeyValuePair<string, object>> parameters, string userAgent = null)

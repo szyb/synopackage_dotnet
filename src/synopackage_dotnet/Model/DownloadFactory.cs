@@ -12,7 +12,7 @@ namespace synopackage_dotnet.Model
     public DownloadFactory(Func<DownloadLibrary, IDownloadService> factory)
     {
       this.factory = factory;
-      this.defaultDownloadService = DownloadLibrary.RestSharp;
+      this.defaultDownloadService = DownloadLibrary.Flurl;
     }
 
     public IDownloadService GetDownloadService(DownloadLibrary library)
