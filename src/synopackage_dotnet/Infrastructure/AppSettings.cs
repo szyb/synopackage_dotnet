@@ -10,5 +10,6 @@ namespace synopackage_dotnet
     public bool CacheSpkServerResponse { get; set; }
     public int? CacheSpkServerResponseTimeInHours { get; set; }
     public int DownloadTimeoutInSeconds { get; set; }
+    public string DownloadService { get; set; }
   }
 }
