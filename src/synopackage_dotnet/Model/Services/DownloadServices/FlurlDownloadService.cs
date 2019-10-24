@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Flurl;
 using Flurl.Http;
 using synopackage_dotnet.Model.DTOs;
+using System.Text;
 
 namespace synopackage_dotnet.Model.Services
 {
@@ -20,6 +21,7 @@ namespace synopackage_dotnet.Model.Services
     public FlurlDownloadService(ILogger<FlurlDownloadService> logger)
     {
       this.logger = logger;
+      Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
     }
 
     private IFlurlClient GetClient(string url, string userAgent = null)
@@ -29,6 +31,11 @@ namespace synopackage_dotnet.Model.Services
         {
           settings.HttpClientFactory = new ProxyHttpClientFactory(Environment.GetEnvironmentVariable("http_proxy"));
           settings.Timeout = new TimeSpan(0, 0, AppSettingsProvider.AppSettings.DownloadTimeoutInSeconds);
+          settings.OnError = httpCall =>
+          {
+            httpCall.ExceptionHandled = true;
+            throw new Exception(httpCall.Exception.Message, httpCall.Exception);
+          };
         });
       if (!string.IsNullOrWhiteSpace(userAgent))
         client.WithHeader("User-Agent", userAgent);
@@ -36,39 +43,14 @@ namespace synopackage_dotnet.Model.Services
       return client;
     }
 
-    // private RestClient GetClient(string url, string userAgent = null)
-    // {
-    //   var client = new RestClient(url);
-
-    //   SetupProxy(client);
-
-    //   if (userAgent != null)
-    //     client.UserAgent = userAgent;
-    //   client.Timeout = AppSettingsProvider.AppSettings.DownloadTimeoutInSeconds * 1000;
-    //   return client;
-    // }
-
-    // private static void SetupProxy(RestClient client)
-    // {
-    //   var httpProxy = Environment.GetEnvironmentVariable("http_proxy");
-    //   if (!string.IsNullOrWhiteSpace(httpProxy))
-    //   {
-    //     client.Proxy = new WebProxy(httpProxy);
-    //     client.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
-    //   }
-    // }
-
-
-
     public async Task<ExecuteResponse> Execute(string url, IEnumerable<KeyValuePair<string, object>> parameters, string userAgent = null)
     {
       try
       {
-        IFlurlClient client = GetClient(url);
+        url = GetLegacySupportUrl(url, parameters);
+        IFlurlClient client = GetClient(url, userAgent);
 
         client.WithHeader("Content-Type", "application/x-www-form-urlencoded");
-        if (!string.IsNullOrWhiteSpace(userAgent))
-          client.WithHeader("User-Agent", userAgent);
 
         var response = await client
           .Request()
@@ -89,12 +71,11 @@ namespace synopackage_dotnet.Model.Services
       catch (Exception ex)
       {
         logger.LogError(ex, "Flurl error");
-        throw;
-        // return new ExecuteResponse()
-        // {
-        //   Success = false,
-        //   ErrorMessage = ex.Message
-        // };
+        return new ExecuteResponse()
+        {
+          Success = false,
+          ErrorMessage = ex.Message
+        };
       }
     }
 

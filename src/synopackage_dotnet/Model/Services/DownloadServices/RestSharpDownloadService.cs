@@ -55,7 +55,6 @@ namespace synopackage_dotnet.Model.Services
         IRestResponse response = await Task.Run(() => client.Execute(request));
 
         if (response.ResponseStatus == ResponseStatus.Completed && response.StatusCode == HttpStatusCode.OK)
-
           return new ExecuteResponse() { Success = true, Content = response.Content };
         else
         {
@@ -68,7 +67,11 @@ namespace synopackage_dotnet.Model.Services
       catch (Exception ex)
       {
         logger.LogError(ex, "Execute - could not execute request");
-        throw;
+        return new ExecuteResponse()
+        {
+          Success = false,
+          ErrorMessage = ex.Message
+        };
       }
     }
 

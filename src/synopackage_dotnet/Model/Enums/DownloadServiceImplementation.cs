@@ -1,6 +1,6 @@
 namespace synopackage_dotnet.Model.Enums
 {
-  public enum DownloadLibrary
+  public enum DownloadServiceImplementation
   {
     RestSharp = 1,
     Flurl = 2

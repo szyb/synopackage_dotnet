@@ -5,7 +5,8 @@ namespace synopackage_dotnet.Model
 {
   public interface IDownloadFactory
   {
-    IDownloadService GetDownloadService(DownloadLibrary library);
+    IDownloadService GetDefaultDownloadService();
+    IDownloadService GetDownloadService(DownloadServiceImplementation library);
     IDownloadService GetDownloadServiceBySourceName(string sourceName);
   }
 }

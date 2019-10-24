@@ -46,7 +46,7 @@ namespace synopackage_dotnet.Model.Services
         string userAgent;
         var parametersRequest = PrepareParameters(arch, model, versionDto, isBeta, customUserAgent, out userAgent);
 
-        IDownloadService downloadService = downloadFactory.GetDownloadServiceBySourceName(sourceName);
+        IDownloadService downloadService = downloadFactory.GetDefaultDownloadService();
         var response = downloadService.Execute(url, parametersRequest, userAgent).Result;
 
         if (response.Success)

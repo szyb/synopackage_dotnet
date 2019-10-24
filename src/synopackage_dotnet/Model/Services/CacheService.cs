@@ -34,7 +34,7 @@ namespace synopackage_dotnet.Model.Services
 
     public void ProcessIcons(string sourceName, List<SpkPackage> packages)
     {
-      IDownloadService downloadService = downloadFactory.GetDownloadServiceBySourceName(sourceName);
+      IDownloadService downloadService = downloadFactory.GetDefaultDownloadService();
       if (packages != null)
       {
         byte[] defaultIconBytes = null;
@@ -118,7 +118,7 @@ namespace synopackage_dotnet.Model.Services
         && iconBytes[2] == Encoding.ASCII.GetBytes("F")[0]
         )
         return true;
-      //JFIF  
+      //JFIF
       else if (iconBytes.Length >= 10
         && iconBytes[6] == Encoding.ASCII.GetBytes("J")[0]
         && iconBytes[7] == Encoding.ASCII.GetBytes("F")[0]

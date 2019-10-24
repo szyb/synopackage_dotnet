@@ -91,12 +91,12 @@ namespace synopackage_dotnet
 
       builder.Register<IDownloadService>((c, p) =>
       {
-        var type = p.TypedAs<DownloadLibrary>();
+        var type = p.TypedAs<DownloadServiceImplementation>();
         switch (type)
         {
-          case DownloadLibrary.RestSharp:
+          case DownloadServiceImplementation.RestSharp:
             return new RestSharpDownloadService(c.Resolve<ILogger<RestSharpDownloadService>>());
-          case DownloadLibrary.Flurl:
+          case DownloadServiceImplementation.Flurl:
             return new FlurlDownloadService(c.Resolve<ILogger<FlurlDownloadService>>());
           default:
             throw new NotImplementedException("Invalid download library");
@@ -108,7 +108,7 @@ namespace synopackage_dotnet
 
       builder.RegisterType<DownloadFactory>()
         .As<IDownloadFactory>()
-        .InstancePerDependency();
+        .InstancePerLifetimeScope();
 
     }
 
