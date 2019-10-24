@@ -34,13 +34,29 @@ namespace synopackage_dotnet.Model.Services
           settings.OnError = httpCall =>
           {
             httpCall.ExceptionHandled = true;
-            throw new Exception(httpCall.Exception.Message, httpCall.Exception);
+            throw new Exception(GetExceptionMessageWithoutCall(httpCall.Exception, url), httpCall.Exception);
           };
         });
       if (!string.IsNullOrWhiteSpace(userAgent))
         client.WithHeader("User-Agent", userAgent);
 
       return client;
+    }
+
+    private string GetExceptionMessageWithoutCall(Exception exception, string url)
+    {
+      if (exception.Message.Contains(url, StringComparison.InvariantCultureIgnoreCase))
+      {
+        string message = exception.Message;
+        int urlIndex = message.IndexOf(url, 0, StringComparison.InvariantCultureIgnoreCase);
+        int lastIndexOfColon = message.Substring(0, urlIndex).LastIndexOf(":");
+        if (lastIndexOfColon != -1)
+          return message.Substring(0, lastIndexOfColon);
+        else
+          return message.Substring(0, urlIndex);
+      }
+      else
+        return exception.Message;
     }
 
     public async Task<ExecuteResponse> Execute(string url, IEnumerable<KeyValuePair<string, object>> parameters, string userAgent = null)
@@ -65,7 +81,7 @@ namespace synopackage_dotnet.Model.Services
           return new ExecuteResponse()
           {
             Success = false,
-            // ErrorMessage = response;
+            Content = $"Status code: {(int)response.StatusCode} ({response.StatusCode.ToString()})"
           };
       }
       catch (Exception ex)
