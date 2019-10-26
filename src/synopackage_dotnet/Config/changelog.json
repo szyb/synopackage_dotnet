@@ -1,5 +1,17 @@
 [
   {
+    "version": "0.4.4",
+    "date": "2019-10-26",
+    "new": [],
+    "improved": [
+      "Simplified DSM version displaying in navigation bar (without build number)",
+      "User settings: channel (stable or beta) is displayed only when user choose beta packages",
+      "User settings: no build number in combobox with versions"
+    ],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
     "version": "0.4.3",
     "date": "2019-10-23",
     "new": [

@@ -1,5 +1,17 @@
 [
   {
+    "Date": "2019-10-26",
+    "Title": "DSM Version changes",
+    "Body": [
+      "Today we simplified version DSM displaying. We resign from showing build number, as from user perspective is irrelevant. Moreover as from today you won't see \"Stable\" in navigation bar. Only \"Beta\" will be shown if you choose \"Inlcude beta\" option in user settings.",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": null,
+    "RouterLink": null,
+    "ExternalLinkDescription": null,
+    "ExternalLink": null
+  },
+  {
     "Date": "2019-10-23",
     "Title": "Jdel source is back to active list",
     "Body": [
