@@ -79,12 +79,17 @@ export class UserSettingsComponent {
   resetModelError(): void {
     this.errorModel = null;
   }
+
+  public isSetup(): boolean {
+    return this.userSettingsService.isSetup();
+  }
 }
 
 
 
 interface VersionDTO {
   version: string;
+  shortVersion: string;
 }
 
 interface ModelDTO {

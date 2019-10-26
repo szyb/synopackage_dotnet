@@ -24,13 +24,13 @@ export class UserSettingsDisplayComponent {
   }
 
   init() {
-    this.selectedVersion = this.userSettingsService.getUserVersion();
+    this.selectedVersion = this.userSettingsService.getUserDisplayVersion();
     this.selectedModel = this.userSettingsService.getUserModel();
     this.selectedIsBeta = this.userSettingsService.getUserIsBeta();
     if (this.selectedIsBeta) {
       this.stableOrBeta = 'Beta';
     } else {
-      this.stableOrBeta = 'Stable';
+      this.stableOrBeta = '';
     }
   }
 

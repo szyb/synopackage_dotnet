@@ -16,6 +16,8 @@ using Serilog;
 using Autofac.Extras.DynamicProxy;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using synopackage_dotnet.Model.Enums;
+using synopackage_dotnet.Model;
 
 namespace synopackage_dotnet
 {
@@ -79,12 +81,34 @@ namespace synopackage_dotnet
 
       builder.RegisterAssemblyTypes(modelAssembly)
           .Where(t => t.Name.EndsWith("Service") || t.Name == "BackgroundTaskQueue")
+          .Except<RestSharpDownloadService>()
           .AsImplementedInterfaces()
           .EnableInterfaceInterceptors()
           .InterceptedBy(typeof(TryCatchInterceptor))
           .InterceptedBy(typeof(LoggingInterceptor));
       builder.RegisterType(typeof(TryCatchInterceptor)).AsSelf();
       builder.RegisterType(typeof(LoggingInterceptor)).AsSelf();
+
+      builder.Register<IDownloadService>((c, p) =>
+      {
+        var type = p.TypedAs<DownloadServiceImplementation>();
+        switch (type)
+        {
+          case DownloadServiceImplementation.RestSharp:
+            return new RestSharpDownloadService(c.Resolve<ILogger<RestSharpDownloadService>>());
+          case DownloadServiceImplementation.Flurl:
+            return new FlurlDownloadService(c.Resolve<ILogger<FlurlDownloadService>>());
+          default:
+            throw new NotImplementedException("Invalid download library");
+        }
+      })
+        .As<IDownloadService>()
+        .InterceptedBy(typeof(TryCatchInterceptor))
+        .InterceptedBy(typeof(LoggingInterceptor));
+
+      builder.RegisterType<DownloadFactory>()
+        .As<IDownloadFactory>()
+        .InstancePerLifetimeScope();
 
     }
 

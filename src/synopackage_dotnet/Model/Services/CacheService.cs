@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Hosting.Internal;
 using Microsoft.Extensions.Logging;
@@ -15,23 +16,25 @@ namespace synopackage_dotnet.Model.Services
 {
   public class CacheService : ICacheService
   {
-    IDownloadService downloadService;
-    ILogger<CacheService> logger;
+    // IDownloadService downloadService;
+    private readonly ILogger<CacheService> logger;
+    private readonly IDownloadFactory downloadFactory;
     private readonly string defaultIconExtension = "png";
     private readonly string defaultCacheExtension = "cache";
 
-    public CacheService(IDownloadService downloadService, ILogger<CacheService> logger)
+    public CacheService(IDownloadFactory factory, ILogger<CacheService> logger)
     {
       if (!Directory.Exists(AppSettingsProvider.AppSettings.FrontendCacheFolder))
         Directory.CreateDirectory(AppSettingsProvider.AppSettings.FrontendCacheFolder);
       if (!Directory.Exists(AppSettingsProvider.AppSettings.BackendCacheFolder))
         Directory.CreateDirectory(AppSettingsProvider.AppSettings.BackendCacheFolder);
-      this.downloadService = downloadService;
+      this.downloadFactory = factory;
       this.logger = logger;
     }
 
     public void ProcessIcons(string sourceName, List<SpkPackage> packages)
     {
+      IDownloadService downloadService = downloadFactory.GetDefaultDownloadService();
       if (packages != null)
       {
         byte[] defaultIconBytes = null;
@@ -47,7 +50,7 @@ namespace synopackage_dotnet.Model.Services
                 var extension = Path.GetExtension(url);
                 byte[] iconBytes = null;
                 if (ShouldDownloadIcon(sourceName, url))
-                  iconBytes = downloadService.DownloadData(url);
+                  iconBytes = Task.Run(() => downloadService.DownloadData(url)).Result;
                 if (IsValidIcon(iconBytes))
                 {
                   File.WriteAllBytesAsync(GetIconFileNameWithCacheFolder(sourceName, package.Name), iconBytes);
@@ -115,7 +118,7 @@ namespace synopackage_dotnet.Model.Services
         && iconBytes[2] == Encoding.ASCII.GetBytes("F")[0]
         )
         return true;
-      //JFIF  
+      //JFIF
       else if (iconBytes.Length >= 10
         && iconBytes[6] == Encoding.ASCII.GetBytes("J")[0]
         && iconBytes[7] == Encoding.ASCII.GetBytes("F")[0]

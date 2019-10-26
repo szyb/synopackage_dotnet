@@ -5,6 +5,7 @@ namespace synopackage_dotnet.Model.DTOs
   public class VersionDTO : IComparable<VersionDTO>
   {
     public string Version { get; set; }
+    public string ShortVersion { get; set; }
     public int Major { get; set; }
     public int Minor { get; set; }
     public int Micro { get; set; }

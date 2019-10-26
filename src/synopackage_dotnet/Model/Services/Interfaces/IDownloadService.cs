@@ -1,13 +1,12 @@
-using RestSharp;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using synopackage_dotnet.Model.DTOs;
 
 namespace synopackage_dotnet.Model.Services
 {
   public interface IDownloadService
   {
-    IRestResponse Execute(string url, RestRequest request, string userAgent = null);
-    IRestResponse<T> Execute<T>(string url, RestRequest request, string userAgent = null) where T : new();
-    byte[] DownloadData(string url);
-
-
+    Task<ExecuteResponse> Execute(string url, IEnumerable<KeyValuePair<string, object>> parameters, string userAgent = null);
+    Task<byte[]> DownloadData(string url);
   }
 }

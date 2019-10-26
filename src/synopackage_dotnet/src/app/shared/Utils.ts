@@ -17,4 +17,8 @@ export class Utils {
 
     return paramsQuery;
   }
+
+  public static isNullOrWhitespace(input: string): boolean {
+    return !input || !input.trim();
+  }
 }

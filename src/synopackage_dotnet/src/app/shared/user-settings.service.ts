@@ -1,5 +1,6 @@
 import { Subject } from 'rxjs';
 import { Injectable, OnInit } from '@angular/core';
+import { Utils } from './Utils';
 
 @Injectable({
   providedIn: 'root',
@@ -29,6 +30,19 @@ export class UserSettingsService implements OnInit {
 
   public getUserVersion(): string {
     return localStorage.getItem('version');
+  }
+
+  public getUserDisplayVersion(): string {
+    const ver = localStorage.getItem('version');
+    if (!Utils.isNullOrWhitespace(ver)) {
+      if (ver.indexOf('-') >= 0) {
+        return ver.substr(0, ver.indexOf('-'));
+      } else {
+        return ver;
+      }
+    } else {
+      return null;
+    }
   }
 
   public getUserModel(): string {
