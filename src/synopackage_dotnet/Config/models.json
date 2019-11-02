@@ -908,5 +908,20 @@
     "Name": "DS620Slim",
     "Arch": "apollolake",
     "Family": "x86_64"
+  },
+  {
+    "Name": "DS120j",
+    "Arch": "armada37xx",
+    "Family": "armv8"
+  },
+  {
+    "Name": "RS820+",
+    "Arch": "denverton",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS820RP+",
+    "Arch": "denverton",
+    "Family": "x86_64"
   }
 ]
