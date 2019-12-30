@@ -1,8 +1,0 @@
-version: '3.2'
-
-services:
-  synopackage_dotnet:
-    image: ${DOCKER_REGISTRY}synopackage_dotnet
-    build:
-      context: .
-      dockerfile: Dockerfile

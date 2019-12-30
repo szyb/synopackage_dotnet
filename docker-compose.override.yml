@@ -1,8 +1,0 @@
-version: '3.2'
-
-services:
-  synopackage_dotnet:
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-    ports:
-      - "80"
