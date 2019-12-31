@@ -48,7 +48,7 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription;
 
-  @ViewChild(PackageInfoComponent)
+  @ViewChild(PackageInfoComponent, { static: true })
   PackageInfoComponent: PackageInfoComponent;
 
   ngOnInit() {

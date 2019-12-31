@@ -46,7 +46,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   public expandIcon = 'fa fa-eye';
   public collapseIcon = 'fa fa-eye-slash';
 
-  @ViewChild(PackageInfoComponent)
+  @ViewChild(PackageInfoComponent, { static: true })
   PackageInfoComponent: PackageInfoComponent;
 
   ngOnInit() {

@@ -9,7 +9,7 @@ import { ModalDirective } from 'angular-bootstrap-md';
 
 export class DialogComponent {
   public message: string;
-  @ViewChild(ModalDirective) public dialogModal: ModalDirective;
+  @ViewChild(ModalDirective, { static: true }) public dialogModal: ModalDirective;
 
   constructor() {
   }

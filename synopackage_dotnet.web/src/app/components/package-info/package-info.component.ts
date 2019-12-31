@@ -15,7 +15,7 @@ export class PackageInfoComponent {
   @Input()
   public package: PackageDTO;
 
-  @ViewChild(DownloadDialogComponent) downloadDialog: DownloadDialogComponent;
+  @ViewChild(DownloadDialogComponent, { static: true }) downloadDialog: DownloadDialogComponent;
   showDownloadDialogModal() {
     this.downloadDialog.showModal();
   }

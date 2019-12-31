@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
     this.actualYear = date.getFullYear().toString();
   }
 
-  @ViewChild(UserSettingsComponent) basicModal: UserSettingsComponent;
+  @ViewChild(UserSettingsComponent, { static: true }) basicModal: UserSettingsComponent;
   showUserSettingsModal() {
     this.basicModal.showModal();
   }
