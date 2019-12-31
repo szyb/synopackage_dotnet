@@ -31,6 +31,8 @@ namespace synopackage_dotnet
     public Startup(IConfiguration configuration, IWebHostEnvironment env)
     {
       this.configuration = configuration;
+      // string str = "";
+      // str.Contains("X", StringComparison.InvariantCultureIgnoreCase)
     }
 
 

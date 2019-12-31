@@ -7,7 +7,7 @@
       "type": "process",
       "args": [
         "build",
-        "${workspaceFolder}/synopackage_dotnet.csproj"
+        "${workspaceFolder}/synopackage_dotnet.web/synopackage_dotnet.csproj"
       ],
       "problemMatcher": "$msCompile",
       "group": {
@@ -21,7 +21,7 @@
       "type": "process",
       "args": [
         "publish",
-        "${workspaceFolder}/synopackage_dotnet.csproj",
+        "${workspaceFolder}/synopackage_dotnet.web/synopackage_dotnet.csproj",
         "--configuration=Release"
       ],
       "problemMatcher": "$msCompile"
@@ -32,7 +32,7 @@
       "type": "process",
       "args": [
         "build",
-        "${workspaceFolder}/synopackage_dotnet.csproj",
+        "${workspaceFolder}/synopackage_dotnet.web/synopackage_dotnet.csproj",
         "--configuration=Release"
       ],
       "problemMatcher": "$msCompile"
@@ -53,7 +53,7 @@
       ],
       "problemMatcher": "$tsc",
       "options": {
-        "cwd": "${workspaceFolder}/src/app"
+        "cwd": "${workspaceFolder}/synopackage_dotnet.web/src/app"
       }
     },
     {
@@ -66,7 +66,7 @@
       ],
       "problemMatcher": "$tsc",
       "options": {
-        "cwd": "${workspaceFolder}/src/app"
+        "cwd": "${workspaceFolder}/synopackage_dotnet.web/src/app"
       }
     },
     {
@@ -80,7 +80,7 @@
       ],
       "problemMatcher": "$tsc",
       "options": {
-        "cwd": "${workspaceFolder}/src/app"
+        "cwd": "${workspaceFolder}/synopackage_dotnet.web/src/app"
       }
     },
     {
@@ -94,7 +94,7 @@
       ],
       "problemMatcher": "$tsc",
       "options": {
-        "cwd": "${workspaceFolder}/src/app"
+        "cwd": "${workspaceFolder}/synopackage_dotnet.web/src/app"
       }
     },
     {
@@ -108,7 +108,7 @@
       ],
       "problemMatcher": "$tsc",
       "options": {
-        "cwd": "${workspaceFolder}/src/app"
+        "cwd": "${workspaceFolder}/synopackage_dotnet.web/src/app"
       }
     },
   ]
