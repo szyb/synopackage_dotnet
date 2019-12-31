@@ -128,7 +128,7 @@
               "deployUrl": "/"
             },
             "development": {
-              "deleteOtputPath": false
+              "deleteOutputPath": false
             }
           }
         },
