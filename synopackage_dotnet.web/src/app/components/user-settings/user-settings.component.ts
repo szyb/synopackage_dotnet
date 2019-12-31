@@ -34,7 +34,7 @@ export class UserSettingsComponent {
     this.selectedIsBeta = this.userSettingsService.getUserIsBeta();
   }
 
-  @ViewChild(ModalDirective) public basicModal: ModalDirective;
+  @ViewChild(ModalDirective, { static: true }) public basicModal: ModalDirective;
 
   showModal = () => {
     this.basicModal.show();
