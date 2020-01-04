@@ -5,6 +5,18 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "firefox",
+      "request": "launch",
+      "name": "Launch Firefox against localhost",
+      "url": "http://localhost:58893",
+      "webRoot": "${workspaceFolder}",
+      "pathMappings": [
+        {
+          "webpack:/*": "${webRoot}/*"
+        }
+      ]
+    },
+    {
       "name": ".NET Core Launch (web)",
       "type": "coreclr",
       "request": "launch",

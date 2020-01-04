@@ -9,8 +9,8 @@
       "projectType": "application",
       "prefix": "app",
       "schematics": {
-        ":component": {
-          "styleext": "scss"
+        "@schematics/angular:component": {
+          "style": "scss"
         }
       },
       "architect": {
@@ -66,7 +66,19 @@
               "vendorChunk": false,
               "buildOptimizer": true,
               "baseHref": "/",
-              "deployUrl": "/"
+              "deployUrl": "/",
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
             },
             "test": {
               "fileReplacements": [
