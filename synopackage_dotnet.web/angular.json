@@ -54,6 +54,10 @@
                 {
                   "replace": "appsettings.json",
                   "with": "appsettings.production.json"
+                },
+                {
+                  "replace": "web.config",
+                  "with": "web.production.config"
                 }
               ],
               "optimization": true,
@@ -89,6 +93,10 @@
                 {
                   "replace": "appsettings.json",
                   "with": "appsettings.test.json"
+                },
+                {
+                  "replace": "web.config",
+                  "with": "web.test.config"
                 }
               ],
               "optimization": true,
