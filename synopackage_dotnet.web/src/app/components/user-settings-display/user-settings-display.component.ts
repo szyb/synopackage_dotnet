@@ -9,10 +9,10 @@ import { UserSettingsService } from '../../shared/user-settings.service';
 
 @Injectable()
 export class UserSettingsDisplayComponent {
-  private selectedVersion: string;
-  private selectedModel: string;
+  public selectedVersion: string;
+  public selectedModel: string;
   private selectedIsBeta: boolean;
-  private stableOrBeta: string;
+  public stableOrBeta: string;
 
   constructor(private userSettingsService: UserSettingsService) {
     this.userSettingsService.events.subscribe(
