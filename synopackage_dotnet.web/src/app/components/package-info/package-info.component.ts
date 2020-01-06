@@ -11,6 +11,7 @@ import { DownloadDialogComponent } from '../download-dialog/download-dialog.comp
 
 @Injectable()
 export class PackageInfoComponent {
+  public defaultImage = 'assets/package.png';
 
   @Input()
   public package: PackageDTO;
