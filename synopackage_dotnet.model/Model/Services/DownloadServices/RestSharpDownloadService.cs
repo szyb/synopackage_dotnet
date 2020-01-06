@@ -41,13 +41,19 @@ namespace synopackage_dotnet.Model.Services
       }
     }
 
-    public async Task<ExecuteResponse> Execute(string url, IEnumerable<KeyValuePair<string, object>> parameters, string userAgent = null)
+    public async Task<ExecuteResponse> Execute(string url, IEnumerable<KeyValuePair<string, object>> parameters, string userAgent = null, bool useGetMethod = false)
     {
       try
       {
         var finalUrl = GetLegacySupportUrl(url, parameters);
         var client = GetClient(finalUrl, userAgent);
-        IRestRequest request = new RestRequest(Method.POST);
+
+        IRestRequest request;
+        if (!useGetMethod)
+          request = new RestRequest(Method.POST);
+        else
+          request = new RestRequest(Method.GET);
+
         foreach (var p in parameters)
         {
           request.AddParameter(p.Key, p.Value);

@@ -60,7 +60,8 @@ namespace synopackage_dotnet.Controllers
           isBeta,
           sourceDto.CustomUserAgent,
           isSearch,
-          keyword);
+          keyword,
+          sourceDto.UseGetMethod);
       }
       else
       {

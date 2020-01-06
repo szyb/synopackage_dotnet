@@ -16,7 +16,8 @@
   {
     "Active": true,
     "Name": "pcloadletter",
-    "Url": "http://packages.pcloadletter.co.uk"
+    "Url": "https://packages.pcloadletter.co.uk",
+    "UseGetMethod": true
   },
   {
     "Active": true,
