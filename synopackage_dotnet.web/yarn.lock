@@ -907,11 +907,6 @@
     semver "6.3.0"
     semver-intersect "1.4.0"
 
-"@trademe/ng-defer-load@^3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@trademe/ng-defer-load/-/ng-defer-load-3.1.0.tgz#6ba97ea305604cf5940c74d833156b537e701bcd"
-  integrity sha512-iFSI/3aGsNe48aJArQZhNW/uQe5M2XlvybXziTSRtqnIBSCXU051fNiBHCX2PDawuKgzmtwgiz4HYFwOQv3X8g==
-
 "@types/chart.js@^2.7.56":
   version "2.9.7"
   resolved "https://registry.yarnpkg.com/@types/chart.js/-/chart.js-2.9.7.tgz#09b60cc2e8039a1854d49dd880f9d2e484d7c027"
@@ -5293,6 +5288,13 @@ neo-async@^2.5.0, neo-async@^2.6.0, neo-async@^2.6.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.1.tgz#ac27ada66167fa8849a6addd837f6b189ad2081c"
   integrity sha512-iyam8fBuCUpWeKPGpaNMetEocMt364qkCsfL9JuhjXX6dRnguRVOfk2GZaDpPjcOKiiXCPINZC1GczQ7iTq3Zw==
+
+ng-lazyload-image@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/ng-lazyload-image/-/ng-lazyload-image-7.0.1.tgz#c50f7eb581388673189d826bf504c352a73cb19f"
+  integrity sha512-0aTsuqeoos8gNlr9q7LJtWdODOuE3w/CDQHNK7lERU34TXJyM3ud77ccbArg+vaCHfzSaMkh87h/wZK4ZJ9dxw==
+  dependencies:
+    tslib "^1.9.0"
 
 nice-try@^1.0.4:
   version "1.0.5"
