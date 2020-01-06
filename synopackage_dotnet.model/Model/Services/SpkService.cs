@@ -27,7 +27,17 @@ namespace synopackage_dotnet.Model.Services
       this.logger = logger;
     }
 
-    public SourceServerResponseDTO GetPackages(string sourceName, string url, string arch, string model, VersionDTO versionDto, bool isBeta, string customUserAgent, bool isSearch, string keyword = null)
+    public SourceServerResponseDTO GetPackages(
+      string sourceName,
+      string url,
+      string arch,
+      string model,
+      VersionDTO versionDto,
+      bool isBeta,
+      string customUserAgent,
+      bool isSearch,
+      string keyword = null,
+      bool useGetMethod = false)
     {
       ExecutionTime et = new ExecutionTime();
 
@@ -47,7 +57,7 @@ namespace synopackage_dotnet.Model.Services
         var parametersRequest = PrepareParameters(arch, model, versionDto, isBeta, customUserAgent, out userAgent);
 
         IDownloadService downloadService = downloadFactory.GetDefaultDownloadService();
-        var response = downloadService.Execute(url, parametersRequest, userAgent).Result;
+        var response = downloadService.Execute(url, parametersRequest, userAgent, useGetMethod).Result;
 
         if (response.Success)
         {

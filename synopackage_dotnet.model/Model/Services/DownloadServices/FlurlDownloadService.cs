@@ -9,6 +9,7 @@ using Flurl;
 using Flurl.Http;
 using synopackage_dotnet.Model.DTOs;
 using System.Text;
+using System.Net.Http;
 
 namespace synopackage_dotnet.Model.Services
 {
@@ -59,7 +60,7 @@ namespace synopackage_dotnet.Model.Services
         return exception.Message;
     }
 
-    public async Task<ExecuteResponse> Execute(string url, IEnumerable<KeyValuePair<string, object>> parameters, string userAgent = null)
+    public async Task<ExecuteResponse> Execute(string url, IEnumerable<KeyValuePair<string, object>> parameters, string userAgent = null, bool useGetMethod = false)
     {
       try
       {
@@ -67,10 +68,15 @@ namespace synopackage_dotnet.Model.Services
         IFlurlClient client = GetClient(url, userAgent);
 
         client.WithHeader("Content-Type", "application/x-www-form-urlencoded");
+        HttpResponseMessage response;
+        if (!useGetMethod)
+          response = await client
+            .Request()
+            .PostUrlEncodedAsync(GetParameters(parameters));
+        else
+          response = await client
+            .Request().GetAsync();
 
-        var response = await client
-          .Request()
-          .PostUrlEncodedAsync(GetParameters(parameters));
         if ((int)response.StatusCode >= 200 && (int)response.StatusCode < 300)
           return new ExecuteResponse()
           {

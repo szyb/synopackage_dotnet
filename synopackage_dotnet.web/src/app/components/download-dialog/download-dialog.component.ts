@@ -20,7 +20,7 @@ export class DownloadDialogComponent {
   constructor(private sourcesService: SourcesService) {
   }
 
-  @ViewChild(ModalDirective) public downloadModal: ModalDirective;
+  @ViewChild(ModalDirective, { static: true }) public downloadModal: ModalDirective;
 
   showModal = () => {
     this.dialogShown = true;

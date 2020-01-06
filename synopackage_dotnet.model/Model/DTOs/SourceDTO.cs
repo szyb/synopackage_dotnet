@@ -13,6 +13,6 @@ namespace synopackage_dotnet.Model.DTOs
     [JsonConverter(typeof(DateFormatConverter), "yyyy-MM-dd")]
     public DateTime? DisabledDate { get; set; }
     public string CustomUserAgent { get; set; }
-
+    public bool UseGetMethod { get; set; }
   }
 }
