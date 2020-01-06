@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
     this.titleService.setTitle('Home - synopackage.com');
   }
 
-  @ViewChild(UserSettingsComponent) basicModal: UserSettingsComponent;
+  @ViewChild(UserSettingsComponent, { static: true }) basicModal: UserSettingsComponent;
   showUserSettingsModal() {
     this.basicModal.showModal();
   }

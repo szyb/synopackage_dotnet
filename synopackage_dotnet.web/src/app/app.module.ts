@@ -6,7 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
-import { DeferLoadModule } from '@trademe/ng-defer-load';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
@@ -140,7 +140,7 @@ export const routerConfig: Routes = [
     HttpClientModule,
     NgSelectModule,
     FormsModule,
-    DeferLoadModule,
+    LazyLoadImageModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(routerConfig),
     MDBBootstrapModule.forRoot()
