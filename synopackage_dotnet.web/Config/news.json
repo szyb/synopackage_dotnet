@@ -1,5 +1,19 @@
 [
   {
+    "Date": "2020-01-07",
+    "Title": "First release in 2020!",
+    "Body": [
+      "Today we are pleased to announce first release in 2020! The greatest thing had happen ofcourse under the hood (frontend works on Angular 8, backend has been refactored, docker image has been updated), but there are some things you may notice yourself. First, and most wanted probably, was fixing downloading data from pcloadletter server. It was tricky to find out what was changed lately on that server, because it worked for years. But we found an issue and we fixed the code to work better and we are ready for moving other servers to AWS (that was the case) or Azure with strict HTTP requests policy.",
+      "The other visible change was to show default icon for packages that doesn't have their own icon or icon has not been loaded yet.",
+      "We are not finished our work. We have plans to develop our website as more and more poeple is entering the page. We are motivated to work, thanks to you! Any feedback is welcome (see issues page - link below)",
+      "Enjoy the 2020!"
+    ],
+    "RouterLinkDescription": null,
+    "RouterLink": null,
+    "ExternalLinkDescription": "Github issues",
+    "ExternalLink": "https://github.com/szyb/synopackage_dotnet/issues"
+  },
+  {
     "Date": "2019-11-02",
     "Title": "New models: DS120j, RS820+, RS820RP+",
     "Body": [
