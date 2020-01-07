@@ -1,5 +1,22 @@
 [
   {
+    "version": "0.4.6",
+    "date": "2020-01-07",
+    "new": [
+      "Frontend running on Angular 8!"
+    ],
+    "improved": [
+      "Lazy loading packages icon - default icon is shown when origin icon is invalid or not loaded yet",
+      "Upgrade some external packages",
+      "Backend refactor",
+      "Updated Dockerfile"
+    ],
+    "fixed": [
+      "Fix download data from pcloadletter server"
+    ],
+    "removedSources": []
+  },
+  {
     "version": "0.4.5",
     "date": "2019-12-18",
     "new": [],
