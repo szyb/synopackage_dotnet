@@ -37,7 +37,7 @@ To create docker image:
 
 1. Go to root folder
 2. Run `docker-compose build` (this can take a while)
-3. When it's done run: `run_in_docker.bat` or `docker run -d -p 8080:80 --name synopackage -v synopackage_cache:/app/wwwroot/cache synopackage_dotnet`
+3. When it's done run: `run_in_docker.bat` or `docker run -d -p 8080:80 --name synopackage -v synopackage_cache:/app/wwwroot/cache szyb/synopackage_dotnet:latest`
 4. visit website at `http://your_host_domain:8080` (i.e. `http://localhost:8080` if you run image on your local machine)
 
 ### Proxy settings for docker
