@@ -1,5 +1,17 @@
 [
   {
+    "version": "0.4.7",
+    "date": "2020-01-12",
+    "new": [
+      "New model DS420j"
+    ],
+    "improved": [
+      "HTTPS redirection"
+    ],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
     "version": "0.4.6",
     "date": "2020-01-07",
     "new": [
