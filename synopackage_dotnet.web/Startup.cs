@@ -18,6 +18,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using synopackage_dotnet.Model.Enums;
 using synopackage_dotnet.Model;
+using Microsoft.AspNetCore.Http;
 
 namespace synopackage_dotnet
 {
@@ -27,12 +28,24 @@ namespace synopackage_dotnet
   public class Startup
   {
     public IConfiguration configuration { get; set; }
+    private IWebHostEnvironment environment { get; set; }
 
     public Startup(IConfiguration configuration, IWebHostEnvironment env)
     {
       this.configuration = configuration;
+      this.environment = env;
       // string str = "";
       // str.Contains("X", StringComparison.InvariantCultureIgnoreCase)
+    }
+
+    private bool IsProductionOrTest()
+    {
+      if (environment != null)
+      {
+        return environment.EnvironmentName.Equals("production", StringComparison.InvariantCultureIgnoreCase)
+          || environment.EnvironmentName.Equals("test", StringComparison.InvariantCultureIgnoreCase);
+      }
+      return false;
     }
 
 
@@ -42,6 +55,15 @@ namespace synopackage_dotnet
     /// <param name="services">The services.</param>
     public void ConfigureServices(IServiceCollection services)
     {
+      if (this.IsProductionOrTest())
+      {
+        services.AddHttpsRedirection(options =>
+        {
+          options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
+          options.HttpsPort = 443;
+        });
+      }
+
       services.AddMvc();
       services.AddSpaStaticFiles(c =>
       {
@@ -132,6 +154,14 @@ namespace synopackage_dotnet
         app.UseDeveloperExceptionPage();
       }
 
+      if (this.IsProductionOrTest())
+      {
+        app.UseExceptionHandler("/Error");
+        app.UseHsts();
+        app.UseHttpsRedirection();
+      }
+
+
       app.UseDefaultFiles();
       app.UseStaticFiles();
 
@@ -146,6 +176,7 @@ namespace synopackage_dotnet
       app.UseStaticFiles();
       app.UseSpaStaticFiles();
       app.UseRouting();
+
       app.UseEndpoints(endpoints =>
       {
         endpoints.MapControllers();

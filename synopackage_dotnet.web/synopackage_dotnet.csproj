@@ -14,6 +14,11 @@
     <noWarn>1591</noWarn>
   </PropertyGroup>
   <ItemGroup>
+    <Content Remove="web.config" />
+    <Content Remove="web.production.config" />
+    <Content Remove="web.test.config" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
   <ItemGroup>
@@ -48,9 +53,6 @@
     <ProjectReference Include="..\synopackage_dotnet.model\synopackage_dotnet.model.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Content Update="web.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Update="sitemap.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
