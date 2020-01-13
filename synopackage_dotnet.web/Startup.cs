@@ -161,6 +161,20 @@ namespace synopackage_dotnet
         app.UseHttpsRedirection();
       }
 
+      app.Use(async (context, next) =>
+      {
+        if (!Path.HasExtension(context.Request.Path.Value)
+          && !context.Request.Path.StartsWithSegments(new PathString("/api"))
+          && !context.Request.Path.StartsWithSegments(new PathString("/notification")))
+        {
+          context.Request.Path = "/index.html";
+          context.Response.Headers.Add("Cache-Control", "no-store,no-cache");
+          context.Response.Headers.Add("Pragma", "no-cache");
+          await next();
+        }
+        else
+          await next();
+      });
 
       app.UseDefaultFiles();
       app.UseStaticFiles();
