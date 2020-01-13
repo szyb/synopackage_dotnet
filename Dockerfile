@@ -31,7 +31,7 @@ RUN curl -SL "https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-lin
 #COPY src/synopackage_dotnet/ ./synopackage_dotnet/
 RUN cd synopackage_dotnet.web \
   && dotnet restore \
-  && yarn \
+  && yarn --network-timeout 100000 \
   && cd src \
   && npm rebuild node-sass \
   && ng build --configuration=docker
