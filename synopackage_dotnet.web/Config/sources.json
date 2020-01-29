@@ -95,10 +95,12 @@
     "Url": "https://www.hofrichter.at/sspks/"
   },
   {
-    "Active": true,
+    "Active": false,
     "Name": "diablos-netzwerk",
     "Url": "http://spk.diablos-netzwerk.de/",
-    "Www": "http://spk.diablos-netzwerk.de/?lang=en"
+    "Www": "http://spk.diablos-netzwerk.de/?lang=en",
+    "DisabledDate" : "2020-01-29",
+    "DisabledReason" : "This repository is discountinued by vendor"
   },
   {
     "Active": true,
