@@ -108,9 +108,12 @@
     "Url": "https://packages.page81.net/"
   },
   {
-    "Active": true,
+    "Active": false,
     "Name": "kastner",
-    "Url": "http://jaspr.kastner.wtf/"
+    "Url": "http://jaspr.kastner.wtf/",
+    "Www": "http://kastner.wtf",
+    "DisabledDate" : "2020-02-07",
+    "DisabledReason" : "This repository is discountinued by vendor"
   },
   {
     "Active": false,
