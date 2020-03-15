@@ -928,5 +928,10 @@
     "Name": "DS420j",
     "Arch": "rtd1296",
     "Family": "armv8"
+  },
+  {
+    "Name": "DS220j",
+    "Arch": "rtd1296",
+    "Family": "armv8"
   }
 ]
