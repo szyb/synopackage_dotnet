@@ -99,8 +99,8 @@
     "Name": "diablos-netzwerk",
     "Url": "http://spk.diablos-netzwerk.de/",
     "Www": "http://spk.diablos-netzwerk.de/?lang=en",
-    "DisabledDate" : "2020-01-29",
-    "DisabledReason" : "This repository is discountinued by vendor"
+    "DisabledDate": "2020-01-29",
+    "DisabledReason": "This repository is discountinued by vendor"
   },
   {
     "Active": true,
@@ -112,8 +112,8 @@
     "Name": "kastner",
     "Url": "http://jaspr.kastner.wtf/",
     "Www": "http://kastner.wtf",
-    "DisabledDate" : "2020-02-07",
-    "DisabledReason" : "This repository is discountinued by vendor"
+    "DisabledDate": "2020-02-07",
+    "DisabledReason": "This repository is discountinued by vendor"
   },
   {
     "Active": false,
@@ -142,5 +142,11 @@
     "Url": "http://www.brigittehelsen.be/plexconnect/",
     "DisabledDate": "2018-05-04",
     "DisabledReason": "Not a valid repository"
+  },
+  {
+    "Active": true,
+    "Name": "beatificabytes",
+    "Url": "https://www.beatificabytes.be/sspks/",
+    "Www": "https://www.beatificabytes.be/"
   }
 ]
