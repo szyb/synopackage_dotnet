@@ -148,5 +148,11 @@
     "Name": "beatificabytes",
     "Url": "https://www.beatificabytes.be/sspks/",
     "Www": "https://www.beatificabytes.be/"
+  },
+  {
+    "Active": true,
+    "Name": "pulse-station",
+    "Url": "https://www.pulse-station.com/repo/",
+    "Www": "https://www.pulse-station.com"
   }
 ]
