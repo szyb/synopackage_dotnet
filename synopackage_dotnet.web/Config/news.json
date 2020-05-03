@@ -1,5 +1,17 @@
 [
   {
+    "Date": "2020-05-02",
+    "Title": "New version 0.4.8",
+    "Body": [
+      "Today we've updated the version to 0.4.8. Most of the changes was already in place as they were configuration only changes. With this version we wanted to gather all the changes since previous version and put it to changelog. As you may see many changes was done under the hood.",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": "Changelog",
+    "RouterLink": "../info/changelog",
+    "ExternalLinkDescription": null,
+    "ExternalLink": null
+  },
+  {
     "Date": "2020-01-12",
     "Title": "New model DS420j",
     "Body": [

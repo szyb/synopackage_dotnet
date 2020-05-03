@@ -1,5 +1,24 @@
 [
   {
+    "version": "0.4.8",
+    "date": "2020-05-02",
+    "new": [
+      "New DSM version 6.2.3",
+      "New model DS220j",
+      "New source Beatificabytes",
+      "New source pulse-station"
+    ],
+    "improved": [
+      "Updated external packages",
+      "Add no-cache header for index.html, so the browser will always load the latest version."
+    ],
+    "fixed": [],
+    "removedSources": [
+      "Removed kastner source. Discountinued.",
+      "Removed diablos-netzwerk source. Discontinued."
+    ]
+  },
+  {
     "version": "0.4.7",
     "date": "2020-01-12",
     "new": [
