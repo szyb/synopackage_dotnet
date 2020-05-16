@@ -27,6 +27,10 @@ namespace synopackage_dotnet.Model.Services
       {
         if (string.IsNullOrWhiteSpace(item.Www))
           item.Www = item.Url;
+        if (!item.IsOfficial)
+          item.DisplayUrl = item.Url;
+        else
+          item.DisplayUrl = "Synology's Official Package Center";
       });
       return sources;
     }
