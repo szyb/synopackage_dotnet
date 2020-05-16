@@ -11,6 +11,7 @@ using synopackage_dotnet.Model.SPK;
 using Serilog.Extensions.Logging;
 using Serilog.Context;
 using synopackage_dotnet.Model.Enums;
+using System.Threading.Tasks;
 
 namespace synopackage_dotnet.Model.Services
 {
@@ -27,7 +28,7 @@ namespace synopackage_dotnet.Model.Services
       this.logger = logger;
     }
 
-    public SourceServerResponseDTO GetPackages(
+    public async Task<SourceServerResponseDTO> GetPackages(
       string sourceName,
       string url,
       string arch,
@@ -49,7 +50,7 @@ namespace synopackage_dotnet.Model.Services
       logger.LogInformation(Utils.GetSearchLogEntryString(logEntry));
       logEntry.LogType = LogType.Result;
       et.Start();
-      var cacheResult = cacheService.GetSpkResponseFromCache(sourceName, model, versionDto.Build.ToString(), isBeta);
+      var cacheResult = await cacheService.GetSpkResponseFromCache(sourceName, model, versionDto.Build.ToString(), isBeta);
       SpkResult result = null;
       if (cacheResult.Result == false)
       {
@@ -57,7 +58,7 @@ namespace synopackage_dotnet.Model.Services
         var parametersRequest = PrepareParameters(arch, model, versionDto, isBeta, customUserAgent, out userAgent);
 
         IDownloadService downloadService = downloadFactory.GetDefaultDownloadService();
-        var response = downloadService.Execute(url, parametersRequest, userAgent, useGetMethod).Result;
+        var response = await downloadService.Execute(url, parametersRequest, userAgent, useGetMethod);
 
         if (response.Success)
         {
@@ -81,7 +82,7 @@ namespace synopackage_dotnet.Model.Services
 
       if (result != null)
       {
-        var finalResult = GenerateResult(sourceName, keyword, parameters, result);
+        var finalResult = await GenerateResult(sourceName, keyword, parameters, result);
         et.Stop();
         logEntry.ExecutionTime = et.GetDiff();
         logger.LogInformation(Utils.GetSearchLogEntryString(logEntry));
@@ -97,9 +98,9 @@ namespace synopackage_dotnet.Model.Services
       }
     }
 
-    private SourceServerResponseDTO GenerateResult(string sourceName, string keyword, ParametersDTO parameters, SpkResult result)
+    private async Task<SourceServerResponseDTO> GenerateResult(string sourceName, string keyword, ParametersDTO parameters, SpkResult result)
     {
-      this.cacheService.ProcessIcons(sourceName, result.Packages);
+      await this.cacheService.ProcessIcons(sourceName, result.Packages);
       List<PackageDTO> list = new List<PackageDTO>();
       if (result.Packages == null)
       {
