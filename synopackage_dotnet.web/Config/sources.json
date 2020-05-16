@@ -27,9 +27,11 @@
     "UseGetMethod": true
   },
   {
-    "Active": true,
+    "Active": false,
     "Name": "hildinger",
-    "Url": "http://www.hildinger.us/sspks/"
+    "Url": "http://www.hildinger.us/sspks/",
+    "DisabledDate": "2020-05-16",
+    "DisabledReason": "Repository does not respond"
   },
   {
     "Active": true,
@@ -41,7 +43,7 @@
     "Name": "naefmarco",
     "Url": "http://spk.naefmarco.ch/spkrepo/packages/",
     "DisabledDate": "2018-10-10",
-    "DisabledReason": "Despite this package server is returning package data, the links for packages leads to spk.nas-mirror.de, which is currently down."
+    "DisabledReason": "This repository is discountinued by vendor"
   },
   {
     "Active": true,
