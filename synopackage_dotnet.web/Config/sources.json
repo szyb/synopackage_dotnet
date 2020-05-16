@@ -1,6 +1,13 @@
 [
   {
     "Active": true,
+    "Name": "synology",
+    "Url": "https://payment.synology.com/api/getPackageList.php",
+    "Www": "https://www.synology.com",
+    "IsOfficial": true
+  },
+  {
+    "Active": true,
     "Name": "synocommunity",
     "Url": "https://packages.synocommunity.com",
     "Www": "https://synocommunity.com",

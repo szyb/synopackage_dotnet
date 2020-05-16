@@ -17,9 +17,10 @@
 </div>
 <div *ngIf="sources">
   <div class="row" *ngFor="let source of activeSources">
-    <div class="d-inline-block d-sm-none mt-1"><a routerLink="/sources/{{source.name}}">{{ source.url }}</a></div>
+    <div class="d-inline-block d-sm-none mt-1"><a routerLink="/sources/{{source.name}}">{{ source.displayUrl }}</a>
+    </div>
     <div class="d-none d-md-inline-block          col-md-3 mt-1">{{ source.name }}</div>
-    <div class="d-none d-sm-inline-block col-sm-9 col-md-6 mt-1">{{ source.url }}</div>
+    <div class="d-none d-sm-inline-block col-sm-9 col-md-6 mt-1">{{ source.displayUrl }}</div>
     <div class="d-none d-sm-inline-block col-sm-2 col-md-2 mt-1">
       <a routerLink="/sources/{{source.name}}">browse</a>
     </div>
@@ -48,13 +49,13 @@
 <div *ngIf="inActiveSources">
   <div class="row" *ngFor="let source of inActiveSources">
     <div class="d-inline-block d-sm-none mt-1" *ngIf="source.www != null">
-      <a href="{{ source.www }}" target="_blank">{{ source.url }}</a>
+      <a href="{{ source.www }}" target="_blank">{{ source.displayUrl }}</a>
     </div>
     <div class="d-inline-block d-sm-none mt-1" *ngIf="source.www == null">
-      <a href="{{ source.url }}" target="_blank">{{ source.url }}</a>
+      <a href="{{ source.url }}" target="_blank">{{ source.displayUrl }}</a>
     </div>
     <div class="d-none d-md-inline-block           col-md-3 col-lg-2 mt-1">{{ source.name }}</div>
-    <div class="d-none d-sm-inline-block col-sm-11 col-md-8 col-lg-5 col-xl-4 mt-1">{{ source.url }}</div>
+    <div class="d-none d-sm-inline-block col-sm-11 col-md-8 col-lg-5 col-xl-4 mt-1">{{ source.displayUrl }}</div>
     <div class="d-none d-lg-inline-block                    col-lg-4 col-xl-5 mt-1">{{ source.disabledReason }}</div>
     <div class="d-none d-sm-inline-block col-sm-1  col-md-1 mt-1" *ngIf="source.www != null">
       <a href="{{ source.www }}" target="_blank">

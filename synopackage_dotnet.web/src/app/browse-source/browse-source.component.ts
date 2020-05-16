@@ -28,6 +28,7 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
   public noPackages: boolean;
   public parameters: ParametersDTO;
   public sourceUrl: string;
+  public isOfficial: boolean;
   public sourceWww: string;
   public count: number;
   public isSearchLinkCollapsed = true;
@@ -77,8 +78,9 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
       .pipe(
         take(1)
       ).subscribe(val => {
-        this.sourceUrl = val.url;
+        this.sourceUrl = val.displayUrl;
         this.sourceWww = val.www;
+        this.isOfficial = val.isOfficial;
       });
     const { keywordForSearch, model, version, channel } = this.getParameters();
 
