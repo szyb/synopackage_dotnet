@@ -24,7 +24,7 @@
 <div class="features mb-3">Other features & info</div>
 <div class="container">
   <div class="card-deck mb-3 text-center">
-    <div class="col-12 col-md-6 col-lg-4 d-flex">
+    <div class="col-12 col-md-6 col-lg-6 d-flex">
       <div class="card box-shadow">
         <div class="card-header py-2 py-md-3 py-lg-2">List of active repositories</div>
         <div class="card-body d-flex flex-column">
@@ -37,21 +37,30 @@
 
       </div>
     </div>
-    <div class="col-12 col-md-6 col-lg-4 pt-md-0 pt-3 d-flex">
+    <div class="col-12 col-md-6 col-lg-6 pt-md-0 pt-3 d-sm-flex">
       <div class="card box-shadow">
-        <div class="card-header py-2 py-md-1 py-lg-2">Browse third-party servers</div>
+        <div class="card-header py-2 py-md-3 py-lg-2">Browse Synology's server</div>
         <div class="card-body d-flex flex-column">
-
-          <div class="card-text mb-2">Browse third-party server for packages to your device. Have a look on our
-            recommended third-party package server (synocommunity):</div>
+          <div class="card-text mb-2">Browse Synology's Official server</div>
           <a mdbBtn color="primary" size="lg" class="mt-auto btn btn-lg btn-block btn-outline-primary"
-            (click)="onBrowseButton()" mdbWavesEffect>Browse server</a>
+            (click)="onBrowseOfficialButton()" mdbWavesEffect>Browse server</a>
         </div>
       </div>
     </div>
-    <div class="col-12 col-lg-4 col-md-12 pt-lg-0 pt-3 d-flex">
+    <div class="col-12 col-md-6 col-lg-6 pt-md-1 pt-3 d-flex">
       <div class="card box-shadow">
-        <div class="card-header py-2">Set your device & version</div>
+        <div class="card-header py-2 py-md-1 py-lg-2">Browse third-party servers</div>
+        <div class="card-body d-flex flex-column">
+          <div class="card-text mb-2">Browse third-party server for packages to your device. Have a look on our
+            recommended third-party package server (synocommunity):</div>
+          <a mdbBtn color="primary" size="lg" class="mt-auto btn btn-lg btn-block btn-outline-primary"
+            (click)="onBrowseRecommendedButton()" mdbWavesEffect>Browse server</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-lg-6 col-md-6 pt-md-1 pt-3 d-flex">
+      <div class="card box-shadow">
+        <div class="card-header py-2 py-md-3 py-lg-2">Set your device & version</div>
         <div class="card-body d-flex flex-column">
           <div class="card-text mb-2">Search results are personalized to your device and DSM version. Click the settings
             to setup your preferences.</div>
