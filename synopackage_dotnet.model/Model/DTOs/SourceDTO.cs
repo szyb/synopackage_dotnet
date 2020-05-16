@@ -15,12 +15,6 @@ namespace synopackage_dotnet.Model.DTOs
     public string CustomUserAgent { get; set; }
     public bool UseGetMethod { get; set; }
     public bool IsOfficial { get; set; }
-    public string DisplayUrl
-    {
-      get
-      {
-        return IsOfficial ? Www : Url;
-      }
-    }
+    public string DisplayUrl { get; set; }
   }
 }
