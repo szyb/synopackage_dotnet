@@ -37,7 +37,11 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/sources']);
   }
 
-  onBrowseButton() {
+  onBrowseOfficialButton() {
+    this.router.navigate(['/sources/synology']);
+  }
+
+  onBrowseRecommendedButton() {
     this.router.navigate(['/sources/synocommunity']);
   }
 
