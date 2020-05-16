@@ -5,6 +5,7 @@
 <h1>Browse source</h1>
 <blockquote class="blockquote bq-primary">
   <span class="bq-title">{{ nameString }}</span><span class="px-2">({{ count }})</span>
+  <span *ngIf="isOfficial" class="px-2"><img src="assets/logo_gray_30px.png" alt='logo' /></span>
   <div *ngIf="isResponseArrived">
     <app-parameters [parameters]="parameters" [showSourceName]="0" [url]="sourceUrl" [www]="sourceWww"></app-parameters>
   </div>

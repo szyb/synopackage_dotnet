@@ -14,5 +14,13 @@ namespace synopackage_dotnet.Model.DTOs
     public DateTime? DisabledDate { get; set; }
     public string CustomUserAgent { get; set; }
     public bool UseGetMethod { get; set; }
+    public bool IsOfficial { get; set; }
+    public string DisplayUrl
+    {
+      get
+      {
+        return IsOfficial ? Www : Url;
+      }
+    }
   }
 }

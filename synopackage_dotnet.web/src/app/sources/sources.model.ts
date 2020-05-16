@@ -5,6 +5,8 @@ export class SourceDTO {
   url: string;
   www: string;
   disabledReason: string;
+  displayUrl: string;
+  isOfficial: boolean;
 }
 
 export class SourcesDTO {
