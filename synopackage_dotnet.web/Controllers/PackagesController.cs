@@ -30,7 +30,7 @@ namespace synopackage_dotnet.Controllers
     }
 
     [HttpGet("GetSourceServerResponse")]
-    public IActionResult GetSourceServerResponse([FromQuery]string sourceName, [FromQuery]string model, [FromQuery]string version, [FromQuery]bool isBeta, [FromQuery]string keyword, [FromQuery]bool isSearch)
+    public async Task<ActionResult<SourceServerResponseDTO>> GetSourceServerResponse([FromQuery] string sourceName, [FromQuery] string model, [FromQuery] string version, [FromQuery] bool isBeta, [FromQuery] string keyword, [FromQuery] bool isSearch)
     {
       var validation = ValidateStringParameter(nameof(sourceName), sourceName, 100);
       if (!string.IsNullOrWhiteSpace(validation)) return BadRequest(validation);
@@ -52,7 +52,7 @@ namespace synopackage_dotnet.Controllers
 
       if (sourceDto != null && versionDto != null && modelDto != null)
       {
-        response = this.spkService.GetPackages(sourceName,
+        response = await this.spkService.GetPackages(sourceName,
           sourceDto.Url,
           modelDto.Arch,
           modelDto.Name,
@@ -72,7 +72,7 @@ namespace synopackage_dotnet.Controllers
     }
 
     [HttpPost("DownloadRequest")]
-    public IActionResult DownloadRequest([FromBody]DownloadRequestDTO downloadRequest)
+    public IActionResult DownloadRequest([FromBody] DownloadRequestDTO downloadRequest)
     {
       if (downloadRequest == null)
         return new BadRequestResult();

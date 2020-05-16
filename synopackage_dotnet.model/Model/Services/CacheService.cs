@@ -29,12 +29,12 @@ namespace synopackage_dotnet.Model.Services
       this.logger = logger;
     }
 
-    public void ProcessIcons(string sourceName, List<SpkPackage> packages)
+    public async Task ProcessIcons(string sourceName, List<SpkPackage> packages)
     {
       IDownloadService downloadService = downloadFactory.GetDefaultDownloadService();
+      List<Task> downloadTasks = new List<Task>();
       if (packages != null)
       {
-        byte[] defaultIconBytes = null;
         foreach (var package in packages)
         {
           if (package.Thumbnail != null && package.Thumbnail.Count > 0)
@@ -45,18 +45,10 @@ namespace synopackage_dotnet.Model.Services
               {
                 var url = GetValidUrl(package.Thumbnail[0]);
                 var extension = Path.GetExtension(url);
-                byte[] iconBytes = null;
                 if (ShouldDownloadIcon(sourceName, url))
-                  iconBytes = Task.Run(() => downloadService.DownloadData(url)).Result;
-                if (IsValidIcon(iconBytes))
                 {
-                  File.WriteAllBytesAsync(GetIconFileNameWithCacheFolder(sourceName, package.Name), iconBytes);
-                }
-                else
-                {
-                  if (defaultIconBytes == null)
-                    defaultIconBytes = File.ReadAllBytes("wwwroot/assets/package.png"); //TODO: assets folder should be in appsettings
-                  File.WriteAllBytesAsync(GetIconFileNameWithCacheFolder(sourceName, package.Name), defaultIconBytes);
+                  var task = DownloadIconAsync(url, sourceName, package.Name);
+                  downloadTasks.Add(task);
                 }
               }
               catch (Exception ex)
@@ -72,7 +64,7 @@ namespace synopackage_dotnet.Model.Services
               try
               {
                 byte[] iconBytes = Convert.FromBase64String(package.Icon);
-                File.WriteAllBytesAsync(GetIconFileNameWithCacheFolder(sourceName, package.Name), iconBytes);
+                await File.WriteAllBytesAsync(GetIconFileNameWithCacheFolder(sourceName, package.Name), iconBytes);
               }
               catch (Exception ex)
               {
@@ -81,6 +73,30 @@ namespace synopackage_dotnet.Model.Services
             }
           }
         }
+        Task.WaitAll(downloadTasks.ToArray());
+      }
+    }
+
+    private async Task DownloadIconAsync(string url, string sourceName, string packageName)
+    {
+      try
+      {
+        IDownloadService downloadService = downloadFactory.GetDefaultDownloadService();
+        byte[] iconBytes = null;
+        iconBytes = await downloadService.DownloadData(url);
+        if (IsValidIcon(iconBytes))
+        {
+          await File.WriteAllBytesAsync(GetIconFileNameWithCacheFolder(sourceName, packageName), iconBytes);
+        }
+        else
+        {
+          var defaultIconBytes = File.ReadAllBytes("wwwroot/assets/package.png"); //TODO: assets folder should be in appsettings
+          await File.WriteAllBytesAsync(GetIconFileNameWithCacheFolder(sourceName, packageName), defaultIconBytes);
+        }
+      }
+      catch (Exception ex)
+      {
+        logger.LogError(ex, "DownloadIconAsync - count not download icon");
       }
     }
 
@@ -159,7 +175,7 @@ namespace synopackage_dotnet.Model.Services
       return Path.Combine(AppSettingsProvider.AppSettings.FrontendCacheFolder, GetIconFileName(sourceName, packageName));
     }
 
-    public CacheSpkResponseDTO GetSpkResponseFromCache(string sourceName, string model, string version, bool isBeta)
+    public async Task<CacheSpkResponseDTO> GetSpkResponseFromCache(string sourceName, string model, string version, bool isBeta)
     {
       CacheSpkResponseDTO res = new CacheSpkResponseDTO();
       var fileName = GetResponseCacheFile(sourceName, model, version, isBeta);
@@ -174,7 +190,7 @@ namespace synopackage_dotnet.Model.Services
       {
         try
         {
-          var content = File.ReadAllText(fileName);
+          var content = await File.ReadAllTextAsync(fileName);
           var deserializedData = JsonConvert.DeserializeObject<SpkResult>(content);
           res.Result = true;
           res.SpkResult = deserializedData;
