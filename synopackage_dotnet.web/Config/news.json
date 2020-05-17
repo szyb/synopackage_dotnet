@@ -1,5 +1,18 @@
 [
   {
+    "Date": "2020-05-17",
+    "Title": "Browsing Synology's Official Package Center!",
+    "Body": [
+      "Today, thanks to github community, we are releasing 0.4.9 version with the main update: Now it is possible to browse Synology's Official Package Center. Feel free also to search in that repository. Remember to set you DSM version and model in the settings! As this is official source you don't need to add it to your DSM - it is already there.",
+      "This option might be very helpful to poeple who wants to buy Synology device and are wondering what software can be installed on it.",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": "Synology's Official Package center",
+    "RouterLink": "../browse/synology",
+    "ExternalLinkDescription": null,
+    "ExternalLink": null
+  },
+  {
     "Date": "2020-05-02",
     "Title": "New version 0.4.8",
     "Body": [
