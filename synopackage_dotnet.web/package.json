@@ -29,8 +29,10 @@
     "font-awesome": "^4.7.0",
     "hammerjs": "^2.0.8",
     "ng-lazyload-image": "^7.0.1",
+    "ngx-wow": "^2.0.1",
     "node-sass": "^4.14.0",
     "rxjs": "^6.3.3",
+    "wowjs": "^1.1.3",
     "zone.js": "^0.9.1"
   },
   "devDependencies": {

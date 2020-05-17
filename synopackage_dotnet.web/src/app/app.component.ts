@@ -2,6 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
 import { UserSettingsService } from './shared/user-settings.service';
 import { environment } from 'src/environments/environment';
+import { NgwWowService } from 'ngx-wow';
 
 
 @Component({
@@ -14,9 +15,10 @@ export class AppComponent implements OnInit {
   public actualYear: string;
   public version: string;
 
-  constructor(private userSettingsService: UserSettingsService) {
+  constructor(private userSettingsService: UserSettingsService, private wowService: NgwWowService) {
     const date = new Date();
     this.actualYear = date.getFullYear().toString();
+    this.wowService.init();
   }
 
   @ViewChild(UserSettingsComponent, { static: true }) basicModal: UserSettingsComponent;
@@ -48,8 +50,8 @@ export class AppComponent implements OnInit {
       ga('send', 'pageview');
       `;
       document.getElementsByTagName('head')[0].appendChild(node2);
-    }
 
+    }
   }
 
   ngOnInit() {
