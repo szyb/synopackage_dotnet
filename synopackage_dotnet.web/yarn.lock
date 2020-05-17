@@ -1309,6 +1309,11 @@ animate.css@^3.7.2:
   resolved "https://registry.yarnpkg.com/animate.css/-/animate.css-3.7.2.tgz#e73e0d50e92cb1cfef1597d9b38a9481020e08ea"
   integrity sha512-0bE8zYo7C0KvgOYrSVfrzkbYk6IOTVPNqkiHg2cbyF4Pq/PXzilz4BRWA3hwEUBoMp5VBgrC29lQIZyhRWdBTw==
 
+animate.css@latest:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/animate.css/-/animate.css-4.1.0.tgz#dec2aabe4babfc6f6777f9a5cccd132838729b50"
+  integrity sha512-0aVcfWDeU9ykV6vjn1P67ZSs01jxoUQZCGaYbkk0SIIelIG8kUdLrIkua1+VabHfTtsSivDRMMn0ILPvZum2gw==
+
 ansi-colors@4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/ansi-colors/-/ansi-colors-4.1.1.tgz#cbb9ae256bf750af1eab344f229aa27fe94ba348"
@@ -4793,6 +4798,11 @@ ng-lazyload-image@^7.0.1:
   resolved "https://registry.yarnpkg.com/ng-lazyload-image/-/ng-lazyload-image-7.1.0.tgz#8e3428300506e541fb1f4befe7d62cbaffbd2235"
   integrity sha512-1fip2FdPBDRnjGyBokI/DupBxOnrKh2lbtT8X8N1oPbE3KBZXXl82VIKcK2Sx+XQD67/+VtFzlISmrgsatzYuw==
 
+ngx-wow@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/ngx-wow/-/ngx-wow-2.0.1.tgz#a42a03102f854d0cced18ec52ac366af3f54dd09"
+  integrity sha512-7AfEVND/9kurvRNfSN4kxOcCu36OuMxPM2oFHuW8LJSeEi5FCmuPnCQjAGZlSksPeD06kjq+x1g20+BCEmPZVw==
+
 nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
@@ -7455,6 +7465,13 @@ worker-plugin@3.2.0:
   integrity sha512-W5nRkw7+HlbsEt3qRP6MczwDDISjiRj2GYt9+bpe8A2La00TmJdwzG5bpdMXhRt1qcWmwAvl1TiKaHRa+XDS9Q==
   dependencies:
     loader-utils "^1.1.0"
+
+wowjs@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/wowjs/-/wowjs-1.1.3.tgz#440fc1bb4c7e896840ee47972296a2b59075acbd"
+  integrity sha1-RA/Bu0x+iWhA7keXIpaitZB1rL0=
+  dependencies:
+    animate.css latest
 
 wrap-ansi@^2.0.0:
   version "2.1.0"
