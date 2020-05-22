@@ -933,5 +933,25 @@
     "Name": "DS220j",
     "Arch": "rtd1296",
     "Family": "armv8"
+  },
+  {
+    "Name": "DS920+",
+    "Arch": "geminilake",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "DS720+",
+    "Arch": "geminilake",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "DS420+",
+    "Arch": "geminilake",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "DS220+",
+    "Arch": "geminilake",
+    "Family": "x86_64"
   }
 ]
