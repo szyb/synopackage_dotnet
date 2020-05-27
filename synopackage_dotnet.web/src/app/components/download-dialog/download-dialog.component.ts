@@ -33,7 +33,16 @@ export class DownloadDialogComponent {
       take(1)
     ).subscribe(item => {
       if (item) {
-        document.location.href = this.package.downloadLink;
+        if (this.package.downloadLink.startsWith("http"))
+          document.location.href = this.package.downloadLink;
+        else {
+          this.sourcesService.getSource(this.package.sourceName).subscribe(source => {
+            if (this.package.downloadLink.startsWith("/"))
+              document.location.href = source.url.concat(this.package.downloadLink);
+            else
+              document.location.href = source.url.concat("/").concat(this.package.downloadLink);
+          })
+        }
       } else {
         alert('The package could not be downloaded');
       }
