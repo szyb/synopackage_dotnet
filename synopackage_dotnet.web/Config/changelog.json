@@ -1,5 +1,15 @@
 [
   {
+    "version": "0.4.10",
+    "date": "2020-05-27",
+    "new": [
+      "Allow download packages with relative url (given from the source server)"
+    ],
+    "improved": [],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
     "version": "0.4.9",
     "date": "2020-05-17",
     "new": [
