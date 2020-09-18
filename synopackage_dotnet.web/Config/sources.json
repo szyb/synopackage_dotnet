@@ -22,6 +22,11 @@
   },
   {
     "Active": true,
+    "Name": "digitalbox",
+    "Url": "http://digital.box.free.fr/sspks/"
+  },
+  {
+    "Active": true,
     "Name": "pcloadletter",
     "Url": "https://packages.pcloadletter.co.uk",
     "UseGetMethod": true
