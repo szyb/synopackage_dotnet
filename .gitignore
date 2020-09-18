@@ -235,3 +235,4 @@ _Pvt_Extensions
 
 cache/
 out/
+.vscode/settings.json
