@@ -1,5 +1,17 @@
 [
   {
+    "version": "0.4.12",
+    "date": "2020-09-18",
+    "new": [
+      "Add new source: DigitalBox",
+      "Add new models: DS1520+, DS1621xs+",
+      "Security fixes (dependencies)"
+    ],
+    "improved": [],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
     "version": "0.4.11",
     "date": "2020-08-06",
     "new": [
