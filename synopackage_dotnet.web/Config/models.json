@@ -953,5 +953,15 @@
     "Name": "DS220+",
     "Arch": "geminilake",
     "Family": "x86_64"
+  },
+  {
+    "Name": "DS1520+",
+    "Arch": "geminilake",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "DS1621xs+",
+    "Arch": "broadwell",
+    "Family": "x86_64"
   }
 ]
