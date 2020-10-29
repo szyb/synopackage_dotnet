@@ -33,15 +33,10 @@
   },
   {
     "Active": false,
-    "Name": "hildinger",
-    "Url": "http://www.hildinger.us/sspks/",
-    "DisabledDate": "2020-05-16",
-    "DisabledReason": "Repository does not respond"
-  },
-  {
-    "Active": true,
     "Name": "unzureichende",
-    "Url": "http://spk.unzureichende.info/"
+    "Url": "http://spk.unzureichende.info/",
+    "DisabledDate": "2020-10-29",
+    "DisabledReason": "Not a valid repository"
   },
   {
     "Active": false,
@@ -62,10 +57,12 @@
     "Www": "https://emby.media/community/index.php?/forum/153-synology/"
   },
   {
-    "Active": true,
+    "Active": false,
     "Name": "jdel",
     "Url": "https://packages.jdel.org/api/",
-    "Www": "https://packages.jdel.org/"
+    "Www": "https://packages.jdel.org/",
+    "DisabledDate": "2020-10-29",
+    "DisabledReason": "This repository is discountinued by vendor"
   },
   {
     "Active": true,
@@ -144,11 +141,15 @@
     "DisabledReason": "Domain has expired"
   },
   {
-    "Active": false,
+    "Active": true,
+    "Name": "hildinger",
+    "Url": "http://www.hildinger.us/sspks/"
+  },
+  {
+    "Active": true,
     "Name": "jadahl",
-    "Url": "http://www.jadahl.com",
-    "DisabledDate": "2018-06-10",
-    "DisabledReason": "This is not valid SPK repository and you cannot add this url to DSM. This source provides Domoticz packages for DSM and only manual download and install is available."
+    "Url": "http://www.jadahl.com/domoticz_stable_6/",
+    "Www": "http://www.jadahl.com"
   },
   {
     "Active": false,
