@@ -1,5 +1,18 @@
 [
   {
+    "Date": "2020-10-31",
+    "Title": "Happy Birthday to synopackage.com!",
+    "Body": [
+      "Today we celebrate a birthday! We have been online for 3 years!",
+      "We reviewed our source list and we added new repository jadahl (Domoticz) and hildinger is back to active. On the other hand sources: jdel and unzureichende have been moved to inactive.",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": "See the actual repository list",
+    "RouterLink": "../sources",
+    "ExternalLinkDescription": null,
+    "ExternalLink": null
+  },
+  {
     "Date": "2020-09-18",
     "Title": "New repository & new models",
     "Body": [

@@ -1,5 +1,19 @@
 [
   {
+    "version": "0.4.13",
+    "date": "2020-10-31",
+    "new": [
+      "Add new source: Jadahl (Domoticz)",
+      "Hildinger source is back to active"
+    ],
+    "improved": [],
+    "fixed": [],
+    "removedSources": [
+      "Jdel source is discontinued",
+      "Unzureichende source is now invalid"
+    ]
+  },
+  {
     "version": "0.4.12",
     "date": "2020-09-18",
     "new": [
