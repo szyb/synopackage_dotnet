@@ -9,6 +9,7 @@ import { UserSettingsService } from '../shared/user-settings.service';
 import { PackageInfoComponent } from '../components/package-info/package-info.component';
 import { ParametersDTO } from '../shared/model';
 import { Title } from '@angular/platform-browser';
+import { Utils } from '../shared/Utils';
 
 @Component({
   selector: 'app-browse-source',
@@ -35,6 +36,8 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
   public linksAvailable = false;
   public shortLink: string;
   public fullLink: string;
+  public isAlternativeCache: boolean;
+  public cacheOldString: string;
   private keywordParam: string;
   private modelParam: string;
   private versionParam: string;
@@ -107,6 +110,10 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
         this.packages.forEach(element => {
           element.thumbnailUrl = Config.cacheFolder + element.iconFileName;
         });
+      }
+      if (this.response.resultFrom === 3 && this.response.cacheOld !== null) {
+        this.isAlternativeCache = true;
+        this.cacheOldString = Utils.getCacheOldString(this.response.cacheOld);
       }
       this.isResponseArrived = true;
       this.generateSearchLinks(this.nameString, keywordForSearch, model, version, channel);

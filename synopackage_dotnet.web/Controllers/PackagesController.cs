@@ -66,7 +66,7 @@ namespace synopackage_dotnet.Controllers
       else
       {
         ParametersDTO parameters = new ParametersDTO(sourceName, model, version, isBeta, keyword);
-        response = new SourceServerResponseDTO(false, "Given parameters are not valid", parameters, null);
+        response = new SourceServerResponseDTO(false, "Given parameters are not valid", parameters, null, Model.Enums.ResultFrom.NotSpecified, null);
       }
       return new ObjectResult(response);
     }

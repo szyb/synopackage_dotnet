@@ -10,6 +10,7 @@ import { SearchResultDTO } from './search.model';
 import { PackageInfoComponent } from '../components/package-info/package-info.component';
 import { ParametersDTO } from '../shared/model';
 import { Title } from '@angular/platform-browser';
+import { Utils } from '../shared/Utils';
 
 @Component({
   selector: 'app-search',
@@ -30,7 +31,6 @@ export class SearchComponent implements OnInit, OnDestroy {
   public linksAvailable = false;
   public shortLink: string;
   public fullLink: string;
-
   public isSearchPerformed: boolean;
   public areSettingsSet: boolean;
   public sources: SourceDTO[];
@@ -157,6 +157,10 @@ export class SearchComponent implements OnInit, OnDestroy {
               item.packages.forEach(element => {
                 element.thumbnailUrl = Config.cacheFolder + element.iconFileName;
               });
+            }
+            if (val.resultFrom === 3 && val.cacheOld !== null) {
+              item.isAlternativeCache = true;
+              item.cacheOldString = Utils.getCacheOldString(val.cacheOld);
             }
             if (this.parameters == null) {
               this.parameters = val.parameters;
