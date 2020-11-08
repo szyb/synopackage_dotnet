@@ -61,6 +61,10 @@
       <app-wait></app-wait>
     </div>
     <div *ngIf="result.isSearchEnded">
+      <div *ngIf="result.isAlternativeCache">
+        <p class="alert alert-warning">Could not get data from this repository. The presented data comes from the cache
+          from {{ result.cacheOldString }}. Please note that download links may not work.</p>
+      </div>
       <div *ngIf="result.noPackages">
         <p class="alert alert-success">No results found</p>
       </div>

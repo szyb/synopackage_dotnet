@@ -145,16 +145,18 @@ namespace synopackage_dotnet.Model.Services
       }
     }
 
-    public bool SaveSpkResult(string sourceName, string model, string version, bool isBeta, SpkResult spkResult)
+    public bool SaveSpkResult(string sourceName, string arch, string model, string version, bool isBeta, SpkResult spkResult)
     {
       if (!AppSettingsProvider.AppSettings.CacheSpkServerResponse)
         return false;
 
       try
       {
-        var fileName = GetResponseCacheFile(sourceName, model, version, isBeta);
+        var fileNameByModel = GetResponseCacheByModelFile(sourceName, model, version, isBeta);
+        var fileNameByArch = GetResponseCacheByArchFile(sourceName, arch, version, isBeta);
         var serializedData = JsonConvert.SerializeObject(spkResult);
-        File.WriteAllText(fileName, serializedData);
+        File.WriteAllText(fileNameByModel, serializedData);
+        File.WriteAllText(fileNameByArch, serializedData);
         return true;
       }
       catch (Exception ex)
@@ -175,47 +177,81 @@ namespace synopackage_dotnet.Model.Services
       return Path.Combine(AppSettingsProvider.AppSettings.FrontendCacheFolder, GetIconFileName(sourceName, packageName));
     }
 
-    public async Task<CacheSpkResponseDTO> GetSpkResponseFromCache(string sourceName, string model, string version, bool isBeta)
+    public async Task<CacheSpkResponseDTO> GetSpkResponseFromCache(string sourceName, string arch, string model, string version, bool isBeta)
     {
       CacheSpkResponseDTO res = new CacheSpkResponseDTO();
-      var fileName = GetResponseCacheFile(sourceName, model, version, isBeta);
-      FileInfo fi = new FileInfo(fileName);
-      if (!fi.Exists || !AppSettingsProvider.AppSettings.CacheSpkServerResponse || !AppSettingsProvider.AppSettings.CacheSpkServerResponseTimeInHours.HasValue)
+      if (!AppSettingsProvider.AppSettings.CacheSpkServerResponse || !AppSettingsProvider.AppSettings.CacheSpkServerResponseTimeInHours.HasValue)
       {
-        res.Result = false;
+        //cache is disabled
+        res.HasValidCache = false;
         return res;
       }
-      TimeSpan ts = DateTime.Now - fi.LastWriteTime;
-      if (ts.TotalHours <= AppSettingsProvider.AppSettings.CacheSpkServerResponseTimeInHours.Value)
+      var fileNameByModel = GetResponseCacheByModelFile(sourceName, model, version, isBeta);
+      var fileNameByArch = GetResponseCacheByArchFile(sourceName, arch, version, isBeta);
+
+      FileInfo firstCache = new FileInfo(fileNameByModel);
+      FileInfo secondCache = new FileInfo(fileNameByArch);
+
+      if (firstCache.Exists && (DateTime.Now - firstCache.LastWriteTime).TotalHours <= AppSettingsProvider.AppSettings.CacheSpkServerResponseTimeInHours.Value)
       {
-        try
+        res.HasValidCache = true;
+        res.ValidCache = await GetCacheByFile(fileNameByModel);
+      }
+      else if (firstCache.Exists && secondCache.Exists && (DateTime.Now - firstCache.LastWriteTime) <= (DateTime.Now - secondCache.LastAccessTime))
+      {
+        res.HasValidCache = false;
+        res.AlternativeCache = await GetCacheByFile(fileNameByModel);
+      }
+      else if (secondCache.Exists)
+      {
+        res.HasValidCache = false;
+        res.AlternativeCache = await GetCacheByFile(fileNameByArch);
+      }
+      else if (firstCache.Exists)
+      {
+        res.HasValidCache = false;
+        res.AlternativeCache = await GetCacheByFile(fileNameByModel);
+      }
+      return res;
+    }
+
+    private async Task<CacheSpkDTO> GetCacheByFile(string fileName)
+    {
+      try
+      {
+        FileInfo fi = new FileInfo(fileName);
+        TimeSpan ts = DateTime.Now - fi.LastWriteTime;
+        if (fi.Exists)
         {
           var content = await File.ReadAllTextAsync(fileName);
           var deserializedData = JsonConvert.DeserializeObject<SpkResult>(content);
-          res.Result = true;
-          res.SpkResult = deserializedData;
-          res.CacheDate = fi.LastAccessTime;
-          res.CacheOld = ts.TotalSeconds;
-          return res;
+          var result = new CacheSpkDTO()
+          {
+            SpkResult = deserializedData,
+            CacheDate = fi.LastAccessTime,
+            CacheOld = ts.TotalSeconds
+          };
+          return result;
         }
-        catch (Exception ex)
-        {
-          logger.LogError(ex, "GetSpkResponseFromCache - could not get SPK response from cache");
-          res.Result = false;
-          return res;
-        }
+        return null;
       }
-      else
+      catch (Exception ex)
       {
-        res.Result = false;
-        return res;
+        logger.LogError(ex, "GetSpkResponseFromCache - could not get SPK response from cache");
+        return null;
       }
     }
 
-    private string GetResponseCacheFile(string sourceName, string model, string version, bool isBeta)
+    private string GetResponseCacheByModelFile(string sourceName, string model, string version, bool isBeta)
     {
       var channelString = isBeta ? "beta" : "stable";
       return Path.Combine(AppSettingsProvider.AppSettings.BackendCacheFolder, Utils.CleanFileName($"{sourceName}_{model}_{version}_{channelString}.{defaultCacheExtension}"));
+    }
+
+    private string GetResponseCacheByArchFile(string sourceName, string arch, string version, bool isBeta)
+    {
+      var channelString = isBeta ? "beta" : "stable";
+      return Path.Combine(AppSettingsProvider.AppSettings.BackendCacheFolder, Utils.CleanFileName($"{sourceName}_{arch}_{version}_{channelString}.{defaultCacheExtension}"));
     }
 
     private bool ShouldStoreIcon(string sourceName, string packageName)

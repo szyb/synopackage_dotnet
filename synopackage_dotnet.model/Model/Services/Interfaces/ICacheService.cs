@@ -10,8 +10,8 @@ namespace synopackage_dotnet.Model.Services
     Task ProcessIcons(string sourceName, List<SpkPackage> packages);
     string GetIconFileName(string sourceName, string packageName);
     string GetIconFileNameWithCacheFolder(string sourceName, string packageName);
-    Task<CacheSpkResponseDTO> GetSpkResponseFromCache(string sourceName, string model, string version, bool isBeta);
-    bool SaveSpkResult(string sourceName, string model, string version, bool isBeta, SpkResult spkResult);
+    Task<CacheSpkResponseDTO> GetSpkResponseFromCache(string sourceName, string arch, string model, string version, bool isBeta);
+    bool SaveSpkResult(string sourceName, string arch, string model, string version, bool isBeta, SpkResult spkResult);
 
   }
 }

@@ -43,6 +43,8 @@ namespace synopackage_dotnet.Model.Services
       ExecutionTime et = new ExecutionTime();
 
       string errorMessage = null;
+      ResultFrom resultFrom = ResultFrom.NotSpecified;
+      double? cacheOld = null;
       ParametersDTO parameters = new ParametersDTO(sourceName, model, versionDto, isBeta, keyword);
       SearchLogEntryDTO logEntry = new SearchLogEntryDTO(parameters);
       logEntry.RequestType = isSearch ? RequestType.Search : RequestType.Browse;
@@ -50,9 +52,9 @@ namespace synopackage_dotnet.Model.Services
       logger.LogInformation(Utils.GetSearchLogEntryString(logEntry));
       logEntry.LogType = LogType.Result;
       et.Start();
-      var cacheResult = await cacheService.GetSpkResponseFromCache(sourceName, model, versionDto.Build.ToString(), isBeta);
+      var cacheResult = await cacheService.GetSpkResponseFromCache(sourceName, arch, model, versionDto.Build.ToString(), isBeta);
       SpkResult result = null;
-      if (cacheResult.Result == false)
+      if (cacheResult.HasValidCache == false)
       {
         string userAgent;
         var parametersRequest = PrepareParameters(arch, model, versionDto, isBeta, customUserAgent, out userAgent);
@@ -62,28 +64,37 @@ namespace synopackage_dotnet.Model.Services
 
         if (response.Success)
         {
-          logEntry.ResultFrom = ResultFrom.Server;
-          result = ParseResponse(sourceName, url, model, versionDto, isBeta, response.Content);
+          resultFrom = ResultFrom.Server;
+          result = ParseResponse(sourceName, url, arch, model, versionDto, isBeta, response.Content);
         }
-        else
+        else if (cacheResult.AlternativeCache != null)
+        {
+          logger.LogError($"Error getting response for url: {url}: {response.ErrorMessage}");
+          result = cacheResult.AlternativeCache.SpkResult;
+          resultFrom = ResultFrom.AlternativeCache;
+          cacheOld = cacheResult.AlternativeCache.CacheOld;
+        }
+        else //no cache && no server response
         {
           errorMessage = $"{response.ErrorMessage}";
           logger.LogError($"Error getting response for url: {url}: {errorMessage}");
-          return new SourceServerResponseDTO(false, errorMessage, parameters, null);
+          return new SourceServerResponseDTO(false, errorMessage, parameters, null, ResultFrom.NotSpecified, null);
         }
-
       }
-      else
+      else // get data from Valid cache
       {
-        result = cacheResult.SpkResult;
-        logEntry.ResultFrom = ResultFrom.Cache;
-        logEntry.CacheOld = cacheResult.CacheOld;
+        result = cacheResult.ValidCache.SpkResult;
+        resultFrom = ResultFrom.Cache;
+        cacheOld = cacheResult.ValidCache.CacheOld;
       }
 
       if (result != null)
       {
-        var finalResult = await GenerateResult(sourceName, keyword, parameters, result);
+        var finalResult = await GenerateResult(sourceName, keyword, parameters, result, resultFrom, cacheOld);
+
         et.Stop();
+        logEntry.ResultFrom = resultFrom;
+        logEntry.CacheOld = cacheOld;
         logEntry.ExecutionTime = et.GetDiff();
         logger.LogInformation(Utils.GetSearchLogEntryString(logEntry));
         return finalResult;
@@ -92,19 +103,21 @@ namespace synopackage_dotnet.Model.Services
       {
         errorMessage = "Spk result is empty";
         et.Stop();
+        logEntry.ResultFrom = ResultFrom.NotSpecified;
+        logEntry.CacheOld = null;
         logEntry.ExecutionTime = et.GetDiff();
         logger.LogWarning("Spk result is empty {0}", Utils.GetSearchLogEntryString(logEntry));
-        return new SourceServerResponseDTO(false, errorMessage, parameters, null);
+        return new SourceServerResponseDTO(false, errorMessage, parameters, null, resultFrom, cacheOld);
       }
     }
 
-    private async Task<SourceServerResponseDTO> GenerateResult(string sourceName, string keyword, ParametersDTO parameters, SpkResult result)
+    private async Task<SourceServerResponseDTO> GenerateResult(string sourceName, string keyword, ParametersDTO parameters, SpkResult result, ResultFrom resultFrom, double? cacheOld)
     {
       await this.cacheService.ProcessIcons(sourceName, result.Packages);
       List<PackageDTO> list = new List<PackageDTO>();
       if (result.Packages == null)
       {
-        return new SourceServerResponseDTO(true, null, parameters, null);
+        return new SourceServerResponseDTO(true, null, parameters, null, resultFrom, cacheOld);
       }
       foreach (var spkPackage in result.Packages)
       {
@@ -118,10 +131,10 @@ namespace synopackage_dotnet.Model.Services
         }
       }
       list.Sort();
-      return new SourceServerResponseDTO(true, null, parameters, list);
+      return new SourceServerResponseDTO(true, null, parameters, list, resultFrom, cacheOld);
     }
 
-    private SpkResult ParseResponse(string sourceName, string url, string model, VersionDTO versionDto, bool isBeta, string responseContent)
+    private SpkResult ParseResponse(string sourceName, string url, string arch, string model, VersionDTO versionDto, bool isBeta, string responseContent)
     {
       SpkResult result;
       if (responseContent != null)
@@ -137,7 +150,7 @@ namespace synopackage_dotnet.Model.Services
           result.Packages = JsonConvert.DeserializeObject<List<SpkPackage>>(responseContent);
         }
         if (result != null)
-          cacheService.SaveSpkResult(sourceName, model, versionDto.Build.ToString(), isBeta, result);
+          cacheService.SaveSpkResult(sourceName, arch, model, versionDto.Build.ToString(), isBeta, result);
       }
       else
       {

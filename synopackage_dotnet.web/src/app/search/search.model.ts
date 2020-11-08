@@ -6,6 +6,8 @@ export class SearchResultDTO {
   www: string;
   isSearchEnded: boolean;
   isValid: boolean;
+  isAlternativeCache: boolean;
+  cacheOldString: string;
   errorMessage: string;
   count: number;
   noPackages: boolean;

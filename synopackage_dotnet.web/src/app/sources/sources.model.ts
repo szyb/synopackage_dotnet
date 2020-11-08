@@ -32,5 +32,7 @@ export class SourceServerResponseDTO {
   errorMessage: string;
   parameters: ParametersDTO;
   packages: PackageDTO[];
+  resultFrom: number;
+  cacheOld: number
 }
 
