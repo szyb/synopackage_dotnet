@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Polly;
 using synopackage_dotnet.Model.DTOs;
 using synopackage_dotnet.Model.SPK;
 
@@ -155,8 +156,13 @@ namespace synopackage_dotnet.Model.Services
         var fileNameByModel = GetResponseCacheByModelFile(sourceName, model, version, isBeta);
         var fileNameByArch = GetResponseCacheByArchFile(sourceName, arch, version, isBeta);
         var serializedData = JsonConvert.SerializeObject(spkResult);
-        File.WriteAllText(fileNameByModel, serializedData);
-        File.WriteAllText(fileNameByArch, serializedData);
+        Random rnd = new Random();
+        var IORetryPolicy = Policy.Handle<Exception>()
+          .OrResult<bool>(x => x == false)
+          .WaitAndRetry(4, retryCount => TimeSpan.FromMilliseconds(200 + rnd.Next(0, 200)));
+
+        IORetryPolicy.Execute(() => WriteToFile(fileNameByModel, serializedData));
+        IORetryPolicy.Execute(() => WriteToFile(fileNameByArch, serializedData));
         return true;
       }
       catch (Exception ex)
@@ -166,6 +172,35 @@ namespace synopackage_dotnet.Model.Services
       }
     }
 
+    private bool WriteToFile(string fileName, string serializedData)
+    {
+      try
+      {
+        using (FileStream fileStream = new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.Read))
+        {
+          var buf = new UTF8Encoding(false).GetBytes(serializedData);
+          fileStream.Write(buf);
+        }
+        return true;
+      }
+      catch (Exception ex)
+      {
+        logger.LogError(ex, $"WriteToFile failed: {fileName} - {ex.Message}");
+        FileInfo fi = new FileInfo(fileName);
+        if (fi.Exists && fi.Length == 0)
+        {
+          try
+          {
+            File.Delete(fileName);
+          }
+          catch (Exception ex2)
+          {
+            logger.LogError(ex2, $"WriteToFile: unable to delete empty file {fileName} - {ex.Message}");
+          }
+        }
+        return false;
+      }
+    }
 
     public string GetIconFileName(string sourceName, string packageName)
     {
