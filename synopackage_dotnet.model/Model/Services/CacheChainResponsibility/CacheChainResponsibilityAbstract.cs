@@ -25,7 +25,10 @@ namespace synopackage_dotnet.Model.Services
       }
       else
       {
-        return null;
+        return new CacheSpkResponseDTO()
+        {
+          HasValidCache = false
+        };
       }
     }
 
