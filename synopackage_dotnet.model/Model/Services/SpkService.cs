@@ -65,7 +65,18 @@ namespace synopackage_dotnet.Model.Services
         if (response.Success)
         {
           resultFrom = ResultFrom.Server;
-          result = ParseResponse(sourceName, url, arch, model, versionDto, isBeta, response.Content);
+          try
+          {
+            result = ParseResponse(sourceName, url, arch, model, versionDto, isBeta, response.Content);
+          }
+          catch (Exception ex)
+          {
+            logger.LogError(ex, $"Unable to parse response {response.Content}");
+            result = cacheResult.Cache.SpkResult;
+            resultFrom = cacheResult.HasValidCache ? ResultFrom.Cache : ResultFrom.AlternativeCache;
+            cacheOld = cacheResult.Cache.CacheOld;
+          }
+
         }
         else if (cacheResult.Cache != null)
         {
