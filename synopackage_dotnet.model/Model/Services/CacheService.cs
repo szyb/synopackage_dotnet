@@ -227,54 +227,16 @@ namespace synopackage_dotnet.Model.Services
       FileInfo firstCache = new FileInfo(fileNameByModel);
       FileInfo secondCache = new FileInfo(fileNameByArch);
 
-      if (firstCache.Exists && (DateTime.Now - firstCache.LastWriteTime).TotalHours <= AppSettingsProvider.AppSettings.CacheSpkServerResponseTimeInHours.Value)
-      {
-        res.HasValidCache = true;
-        res.ValidCache = await GetCacheByFile(fileNameByModel);
-      }
-      else if (firstCache.Exists && secondCache.Exists && (DateTime.Now - firstCache.LastWriteTime) <= (DateTime.Now - secondCache.LastAccessTime))
-      {
-        res.HasValidCache = false;
-        res.AlternativeCache = await GetCacheByFile(fileNameByModel);
-      }
-      else if (secondCache.Exists)
-      {
-        res.HasValidCache = false;
-        res.AlternativeCache = await GetCacheByFile(fileNameByArch);
-      }
-      else if (firstCache.Exists)
-      {
-        res.HasValidCache = false;
-        res.AlternativeCache = await GetCacheByFile(fileNameByModel);
-      }
-      return res;
-    }
-
-    private async Task<CacheSpkDTO> GetCacheByFile(string fileName)
-    {
-      try
-      {
-        FileInfo fi = new FileInfo(fileName);
-        TimeSpan ts = DateTime.Now - fi.LastWriteTime;
-        if (fi.Exists)
-        {
-          var content = await File.ReadAllTextAsync(fileName);
-          var deserializedData = JsonConvert.DeserializeObject<SpkResult>(content);
-          var result = new CacheSpkDTO()
-          {
-            SpkResult = deserializedData,
-            CacheDate = fi.LastAccessTime,
-            CacheOld = ts.TotalSeconds
-          };
-          return result;
-        }
-        return null;
-      }
-      catch (Exception ex)
-      {
-        logger.LogError(ex, "GetSpkResponseFromCache - could not get SPK response from cache");
-        return null;
-      }
+      ICacheChainResponsibility startChain = new ChainNotExpiredCache(logger);
+      ICacheChainResponsibility next;
+      next = startChain.SetupNext(new ChainNewerCache(logger));
+      next = next.SetupNext(new ChainSecondFileCache(logger));
+      next = next.SetupNext(new ChainFirstFileCache(logger));
+      // startChain.SetupNext(new ChainNewerCache(logger)
+      // .SetupNext(new Chaing));
+      // chain.SetupNext(new ChainSecondFileCache(logger));
+      // chain.SetupNext(new ChainFirstFileCache(logger));
+      return await startChain.Handle(firstCache, secondCache);
     }
 
     private string GetResponseCacheByModelFile(string sourceName, string model, string version, bool isBeta)

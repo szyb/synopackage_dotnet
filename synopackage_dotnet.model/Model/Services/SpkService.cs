@@ -67,12 +67,12 @@ namespace synopackage_dotnet.Model.Services
           resultFrom = ResultFrom.Server;
           result = ParseResponse(sourceName, url, arch, model, versionDto, isBeta, response.Content);
         }
-        else if (cacheResult.AlternativeCache != null)
+        else if (cacheResult.Cache != null)
         {
           logger.LogError($"Error getting response for url: {url}: {response.ErrorMessage}");
-          result = cacheResult.AlternativeCache.SpkResult;
+          result = cacheResult.Cache.SpkResult;
           resultFrom = ResultFrom.AlternativeCache;
-          cacheOld = cacheResult.AlternativeCache.CacheOld;
+          cacheOld = cacheResult.Cache.CacheOld;
         }
         else //no cache && no server response
         {
@@ -83,9 +83,9 @@ namespace synopackage_dotnet.Model.Services
       }
       else // get data from Valid cache
       {
-        result = cacheResult.ValidCache.SpkResult;
+        result = cacheResult.Cache.SpkResult;
         resultFrom = ResultFrom.Cache;
-        cacheOld = cacheResult.ValidCache.CacheOld;
+        cacheOld = cacheResult.Cache.CacheOld;
       }
 
       if (result != null)
