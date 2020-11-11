@@ -1,5 +1,21 @@
 [
   {
+    "version": "0.4.14",
+    "date": "2020-11-11",
+    "new": [
+      "Change caching response mechanism",
+      "Use CPU architecture based cache if no other found",
+      "Security fixes (dependencies)"
+    ],
+    "improved": [
+      "Optimize docker file"
+    ],
+    "fixed": [
+      "Fixed doubled search requests in some circumstances"
+    ],
+    "removedSources": []
+  },
+  {
     "version": "0.4.13",
     "date": "2020-10-31",
     "new": [
