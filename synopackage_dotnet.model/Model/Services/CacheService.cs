@@ -159,7 +159,7 @@ namespace synopackage_dotnet.Model.Services
         Random rnd = new Random();
         var IORetryPolicy = Policy.Handle<Exception>()
           .OrResult<bool>(x => x == false)
-          .WaitAndRetry(4, retryCount => TimeSpan.FromMilliseconds(200 + rnd.Next(0, 200)));
+          .WaitAndRetry(4, retryCount => TimeSpan.FromMilliseconds(50 + rnd.Next(0, 200)));
 
         IORetryPolicy.Execute(() => WriteToFile(fileNameByModel, serializedData));
         IORetryPolicy.Execute(() => WriteToFile(fileNameByArch, serializedData));
