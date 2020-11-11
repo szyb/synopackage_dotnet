@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy, Injectable, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, Params, NavigationEnd, NavigationStart } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { Config } from '../shared/config';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { SourceDTO } from '../sources/sources.model';
 import { SourcesService } from '../shared/sources.service';
 import { UserSettingsService } from '../shared/user-settings.service';
@@ -24,6 +24,11 @@ export class SearchComponent implements OnInit, OnDestroy {
     private userSettingsService: UserSettingsService,
     private titleService: Title,
     private router: Router) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.currentRoute = event.url;
+      }
+    });
     this.titleService.setTitle('Search - synopackage.com');
   }
 
@@ -35,13 +40,14 @@ export class SearchComponent implements OnInit, OnDestroy {
   public areSettingsSet: boolean;
   public sources: SourceDTO[];
   public searchResult: SearchResultDTO[];
-  private subscription: Subscription;
+
   public keyword: string;
   public parameters: ParametersDTO;
   private keywordParam: string;
   private modelParam: string;
   private versionParam: string;
   private channelParam: string;
+  private currentRoute: string;
 
   public expandIcon = 'fa fa-eye';
   public collapseIcon = 'fa fa-eye-slash';
@@ -50,6 +56,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   PackageInfoComponent: PackageInfoComponent;
 
   ngOnInit() {
+
     let areParamsSet = false;
     this.route.params.pipe(
       take(1)
@@ -86,27 +93,50 @@ export class SearchComponent implements OnInit, OnDestroy {
     });
   }
 
-  clearLinkParams() {
+  onSearchButton() {
+    this.performAnotherSearch();
+  }
+
+  onEnter() {
+    this.performAnotherSearch();
+  }
+
+  performAnotherSearch() {
+    if (this.keyword == null || this.keyword === '') {
+      this.keyword = '*';
+    }
     this.keywordParam = null;
     this.modelParam = null;
     this.versionParam = null;
     this.channelParam = null;
     this.parameters = null;
+    let shouldPerformSearch: boolean = false;
+    //if router link does not starts with '/search/keyword' then we don't need to performSearch()
+    //beacuse it will be handled on next ngInit()
     if (this.keyword != null && this.keyword !== '') {
+      shouldPerformSearch = this.shouldPerformSearch();
       this.router.navigate(['/search/keyword', this.keyword]);
     } else {
       this.router.navigate(['/search']);
     }
+    if (shouldPerformSearch) {
+      this.performSearch();
+    }
+    if (this.keyword === '*')
+      this.keyword = null;
   }
 
-  onSearchButton() {
-    this.clearLinkParams();
-    this.performSearch();
-  }
 
-  onEnter() {
-    this.clearLinkParams();
-    this.performSearch();
+  private shouldPerformSearch(): boolean {
+    let shouldPerformSearch = false;
+    if (this.currentRoute !== null) {
+      const lastSlashIndex = this.currentRoute.lastIndexOf('/');
+      if (lastSlashIndex === 15) {
+        //if '/' is only one in current route or there are more than 3 slashes
+        shouldPerformSearch = true;
+      }
+    }
+    return shouldPerformSearch;
   }
 
   performSearch() {
@@ -126,8 +156,6 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
 
     const { keywordForSearch, model, version, channel } = this.getParameters();
-
-
 
     if (keywordForSearch != null && keywordForSearch !== '') {
       this.titleService.setTitle('Search for "' + keywordForSearch + '" - synopackage.com');
@@ -177,6 +205,9 @@ export class SearchComponent implements OnInit, OnDestroy {
     let version = this.versionParam != null ? this.versionParam : this.userSettingsService.getUserVersion();
     const channel = this.channelParam === 'beta' ? true : this.userSettingsService.getUserIsBeta();
     let keywordForSearch = this.keywordParam != null && this.keywordParam !== '*' ? this.keywordParam : this.keyword;
+    if (keywordForSearch === '*')
+      keywordForSearch = null;
+
     if (model != null) {
       model = model.substring(0, 100);
     }
@@ -217,9 +248,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.subscription === null) {
-      this.subscription.unsubscribe();
-    }
+
   }
 
   getIcon(isCollapsed) {

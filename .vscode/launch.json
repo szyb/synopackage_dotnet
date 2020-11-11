@@ -8,11 +8,12 @@
       "type": "firefox",
       "request": "launch",
       "name": "Launch Firefox against localhost",
-      "url": "http://localhost:58893",
+      "url": "http://localhost:4200",
       "webRoot": "${workspaceFolder}",
       "pathMappings": [
         {
-          "webpack:/*": "${webRoot}/*"
+          "url": "webpack:///src/app",
+          "path": "${workspaceFolder}/synopackage_dotnet.web/src/app"
         }
       ]
     },
@@ -21,7 +22,6 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
-      // If you have changed target frameworks, make sure to update the program path.
       "program": "${workspaceFolder}/synopackage_dotnet.web/bin/Debug/netcoreapp3.1/synopackage_dotnet.dll",
       "args": [],
       "cwd": "${workspaceFolder}/synopackage_dotnet.web",
@@ -53,7 +53,6 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
-      // If you have changed target frameworks, make sure to update the program path.
       "program": "${workspaceFolder}/synopackage_dotnet.web/bin/Debug/netcoreapp3.1/synopackage_dotnet.dll",
       "args": [],
       "cwd": "${workspaceFolder}",

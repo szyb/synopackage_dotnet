@@ -191,6 +191,15 @@ namespace synopackage_dotnet
       app.UseSpaStaticFiles();
       app.UseRouting();
 
+      // CORS
+      app.UseCors(config =>
+      {
+        if (!IsProductionOrTest())
+          config.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+        else
+          config.AllowAnyHeader().AllowAnyMethod();
+      });
+
       app.UseEndpoints(endpoints =>
       {
         endpoints.MapControllers();
@@ -201,9 +210,7 @@ namespace synopackage_dotnet
       //   routes.MapRoute(name: "default", template: "{controller}/{action=index}/{id}");
       // });
 
-      // CORS
-      app.UseCors(config =>
-        config.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+
 
       app.UseSpa(spa =>
       {
