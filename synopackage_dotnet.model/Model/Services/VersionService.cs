@@ -40,6 +40,8 @@ namespace synopackage_dotnet.Model.Services
 
     public VersionDTO GetVersion(string version)
     {
+      if (version.Equals("6.2.3-25423"))
+        version = "6.2.3-25426"; //Handle with invalid build number for 6.2.3
       var versions = this.GetAllVersions();
       return versions.SingleOrDefault(item => item.Version.Equals(version, StringComparison.CurrentCultureIgnoreCase));
     }

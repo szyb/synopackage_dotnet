@@ -29,7 +29,13 @@ export class UserSettingsService implements OnInit {
   }
 
   public getUserVersion(): string {
-    return localStorage.getItem('version');
+    let version = localStorage.getItem('version');
+    if (version === "6.2.3-25423") {
+      //handle with invalid build number
+      version = "6.2.3-25426";
+      localStorage.setItem('version', version);
+    }
+    return version;
   }
 
   public getUserDisplayVersion(): string {
