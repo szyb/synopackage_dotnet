@@ -5,6 +5,10 @@
 <div *ngIf="!sources">
   <app-wait></app-wait>
 </div>
+<div *ngIf="sources">
+  <div class="col-12 p-0"><small class="light-green-text">Last update: {{sources.lastUpdateDate | date:'long' }}</small>
+  </div>
+</div>
 <blockquote *ngIf="sources" class="blockquote bq-primary">
   <p class="bq-title">Active repositiories:</p>
 </blockquote>
