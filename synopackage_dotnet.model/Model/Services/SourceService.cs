@@ -66,6 +66,8 @@ namespace synopackage_dotnet.Model.Services
           result.InActiveSources.Add(source);
         }
       }
+      FileInfo fi = new FileInfo(configFile);
+      result.LastUpdateDate = fi.LastWriteTimeUtc;
       return result;
     }
 

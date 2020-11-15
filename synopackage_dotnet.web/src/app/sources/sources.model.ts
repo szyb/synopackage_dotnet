@@ -12,6 +12,7 @@ export class SourceDTO {
 export class SourcesDTO {
   activeSources: SourceDTO[];
   inActiveSources: SourceDTO[];
+  lastUpdateDate: Date;
 }
 
 export class PackageDTO {
