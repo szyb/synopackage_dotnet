@@ -1,5 +1,20 @@
 [
   {
+    "version": "0.4.15",
+    "date": "2020-11-15",
+    "new": [
+      "Add last update date on sources page"
+    ],
+    "improved": [
+      "Change default model (DS220+) and version (6.2.3)",
+      "Click on 'synopackage.com' navigates to Home page without reloading"
+    ],
+    "fixed": [
+      "Fix build number for version 6.2.3"
+    ],
+    "removedSources": []
+  },
+  {
     "version": "0.4.14",
     "date": "2020-11-11",
     "new": [
