@@ -5,6 +5,6 @@ namespace synopackage_dotnet.Model.Services
 {
   public interface INewsService : IDomainService
   {
-    IEnumerable<NewsDTO> GetNews();
+    PagingDTO<NewsDTO> GetNews(int? page, int? itemsPerPage);
   }
 }
