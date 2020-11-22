@@ -106,6 +106,10 @@ export const routerConfig: Routes = [
     component: ChangelogComponent
   },
   {
+    path: 'info/changelog/page/:page',
+    component: ChangelogComponent
+  },
+  {
     path: 'info/privacy-policy',
     component: PrivacyPolicyComponent
   },
