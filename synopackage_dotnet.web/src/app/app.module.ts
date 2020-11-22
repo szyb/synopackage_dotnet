@@ -29,6 +29,7 @@ import { AppLoadService } from './shared/app-load.service';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { NewsComponent } from './news/news.component';
 import { InfoComponent } from './info/info.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
 
 export function init_app(appLoadService: AppLoadService) {
   return () => appLoadService.initializeApp();
@@ -41,6 +42,10 @@ export const routerConfig: Routes = [
   },
   {
     path: 'news',
+    component: NewsComponent
+  },
+  {
+    path: 'news/page/:page',
     component: NewsComponent
   },
   {
@@ -133,7 +138,8 @@ export const routerConfig: Routes = [
     ChangelogComponent,
     DownloadDialogComponent,
     PrivacyPolicyComponent,
-    InfoComponent
+    InfoComponent,
+    PaginatorComponent
   ],
   imports: [
     BrowserModule,
