@@ -1,3 +1,5 @@
+![.NET Core](https://github.com/szyb/synopackage_dotnet/workflows/.NET%20Core/badge.svg)
+![Docker Image CI](https://github.com/szyb/synopackage_dotnet/workflows/Docker%20Image%20CI/badge.svg)
 # Synopackage.com
 
 This is a repository of https://search.synopackage.com a search engine for packages to Synology's DSM across all known servers.
