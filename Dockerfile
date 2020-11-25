@@ -24,8 +24,11 @@ RUN rm -rf synopackage_dotnet.web/wwwroot \
   && rm synopackage_dotnet.web/global.json
 
 COPY synopackage_dotnet.web/src/environments/environment.ts synopackage_dotnet.web/src/environments
+RUN true
 COPY synopackage_dotnet.web/src/environments/environment.docker.ts synopackage_dotnet.web/src/environments
+RUN true
 COPY synopackage_dotnet.web/appsettings.json synopackage_dotnet.web/appsettings.json
+RUN true
 COPY synopackage_dotnet.web/appsettings.docker.json synopackage_dotnet.web/appsettings.docker.json
 
 RUN curl -SL "https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.gz" --output nodejs.tar.gz \
