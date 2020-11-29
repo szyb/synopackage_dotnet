@@ -17,9 +17,24 @@ namespace synopackage_dotnet.Controllers
     }
 
     [HttpGet("GetChangelogs")]
-    public IEnumerable<ChangelogDTO> GetChangelogs()
+    public ActionResult<PagingDTO<ChangelogDTO>> GetChangelogs(int? page = null, int? itemsPerPage = null)
     {
-      return changelogService.GetChangelogs();
+      if (page.HasValue && !itemsPerPage.HasValue)
+        itemsPerPage = AppSettingsProvider.AppSettings.DefaultItemsPerPage;
+      else if (!page.HasValue)
+        itemsPerPage = null;
+      if (page.HasValue && page <= 0)
+        return BadRequest("Invalid page number");
+      if (itemsPerPage.HasValue && itemsPerPage.Value <= 0)
+        return BadRequest("Invalid items per page");
+      try
+      {
+        return new ObjectResult(changelogService.GetChangelogs(page, itemsPerPage));
+      }
+      catch (PageMissingException pme)
+      {
+        return BadRequest(pme.Message);
+      }
     }
   }
 }
