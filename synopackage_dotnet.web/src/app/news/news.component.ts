@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
 import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 
+
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
@@ -16,7 +17,6 @@ import { take } from 'rxjs/operators';
 export class NewsComponent implements OnInit, PaginatorDataProvider {
   public newsPaging: NewsPagingDTO;
   public news: NewsDTO[];
-  public shouldDisplayPaginator: boolean = true;
   private currentRoute: string;
   private pageParam: number;
   private isPageSetFromParam: boolean = false;
@@ -32,7 +32,6 @@ export class NewsComponent implements OnInit, PaginatorDataProvider {
 
   public dataChanged: Subject<PagingDTO> = new Subject<PagingDTO>();
 
-
   @ViewChild(PaginatorComponent, { static: true })
   paginator: PaginatorComponent;
 
@@ -40,25 +39,48 @@ export class NewsComponent implements OnInit, PaginatorDataProvider {
     this.route.params.pipe(
       take(1)
     ).subscribe((params: Params) => {
-      this.pageParam = params['page'];
-      if (this.pageParam != null) {
-        this.isPageSetFromParam = true;
+      this.pageParam = parseInt(params['page']);
+      if (params['page'] != null && this.pageParam.toString() != params['page']) {
+        this.pageParam = 1;
+        this.router.navigate(['/news/page/1']);
+      } else {
+        if (params['page'] != null && (isNaN(this.pageParam) || this.pageParam <= 0)) {
+          this.pageParam = 1;
+          this.router.navigate(['/news/page/1']);
+        }
+        else if (params['page'] == null) {
+          this.pageParam = 1;
+        }
+        if (this.pageParam != null) {
+          this.isPageSetFromParam = true;
+        }
       }
     });
     if (this.isPageSetFromParam)
-      this.performGetNews(this.pageParam);
+      this.performGetNews(this.pageParam, true);
     else
-      this.performGetNews(1);
+      this.performGetNews(1, true);
 
   }
 
-  private performGetNews(page: number) {
+  private performGetNews(page: number, isFirst: boolean) {
+    let isError = false;
     this.newsService.getNews(page)
-      .subscribe(val => {
-        this.newsPaging = val;
-        this.news = val.items;
-        this.dataChanged.next(val);
-      });
+      .subscribe((response) => {
+        this.newsPaging = response;
+        this.news = response.items;
+        this.dataChanged.next(response);
+      },
+        (error) => {
+          if (error.status === 400) {
+            if (isFirst) {
+              this.router.navigate(['/news/page/1']);
+              if (this.shouldPerformGetNews())
+                this.performGetNews(1, false);
+            }
+          }
+        });
+
   }
 
   onPageChange(page: number) {
@@ -70,7 +92,7 @@ export class NewsComponent implements OnInit, PaginatorDataProvider {
     if (shouldPerformGetNews) {
       this.newsPaging = null;
       this.news = null;
-      this.performGetNews(page)
+      this.performGetNews(page, true)
     }
   }
 
