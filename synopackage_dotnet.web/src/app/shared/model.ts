@@ -15,6 +15,21 @@ export class ParametersDTO {
   }
 }
 
+export class PagingParamsDTO {
+  public page: number;
+  public itemsPerPage: number;
+}
+
+export class PagingDTO {
+  public totalPages: number;
+  public currentPage: number;
+  public itemsPerPage: number;
+}
+
+export class NewsPagingDTO extends PagingDTO {
+  public items: NewsDTO[];
+}
+
 export class NewsDTO {
   public date: Date;
   public title: string;
@@ -23,6 +38,10 @@ export class NewsDTO {
   public routerLink: string;
   public externalLinkDescription: string;
   public externalLink: string;
+}
+
+export class ChangelogPagingDTO extends PagingDTO {
+  public items: ChangelogDTO[];
 }
 
 export class ChangelogDTO {

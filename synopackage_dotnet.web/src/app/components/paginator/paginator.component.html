@@ -1,0 +1,13 @@
+<div *ngIf="shouldShowPaginator">
+  <nav aria-label="Page navigation">
+    <ul class="pagination pg-blue justify-content-center">
+      <li [ngClass]="getPrevClass()"><a class="page-link" tabindex="-1" mdbWavesEffect (click)="onPrev()">Previous</a>
+      </li>
+      <li *ngFor="let item of info.pages" [ngClass]="getItemClass(item)">
+        <a *ngIf="item !== -1" class="page-link" mdbWavesEffect (click)="onClick(item)">{{item}}</a>
+        <span *ngIf="item === -1">...</span>
+      </li>
+      <li [ngClass]="getNextClass()"><a class="page-link" tabindex="-1" mdbWavesEffect (click)="onNext()">Next</a> </li>
+    </ul>
+  </nav>
+</div>

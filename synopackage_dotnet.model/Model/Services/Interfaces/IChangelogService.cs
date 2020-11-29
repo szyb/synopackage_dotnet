@@ -5,6 +5,6 @@ namespace synopackage_dotnet.Model.Services
 {
   public interface IChangelogService
   {
-    IEnumerable<ChangelogDTO> GetChangelogs();
+    PagingDTO<ChangelogDTO> GetChangelogs(int? page, int? itemsPerPage);
   }
 }
