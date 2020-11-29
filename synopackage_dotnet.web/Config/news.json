@@ -1,5 +1,17 @@
 [
   {
+    "Date": "2020-11-29",
+    "Title": "Milestone 0.5 completed",
+    "Body": [
+      "Today we released version 0.5. This release includes resolution of 17 issues and some other changes. As we prefer to rolling out often but small changes, most of the issues were already deployed in 0.4.x. Completing milestone is just a notification we have finished many things and now we can focus on planning and implementing the next milestone.",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": "Changelog",
+    "RouterLink": "../info/changelog",
+    "ExternalLinkDescription": null,
+    "ExternalLink": null
+  },
+  {
     "Date": "2020-10-31",
     "Title": "Happy Birthday to synopackage.com!",
     "Body": [
