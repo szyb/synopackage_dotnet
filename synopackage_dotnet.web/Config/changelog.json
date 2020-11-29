@@ -1,5 +1,18 @@
 [
   {
+    "version": "0.5.0",
+    "date": "2020-11-29",
+    "new": [
+      "Milestone 0.5 completed",
+      "Paging on News & Changelog pages"
+    ],
+    "improved": [      
+    ],
+    "fixed": [      
+    ],
+    "removedSources": []
+  },
+  {
     "version": "0.4.15",
     "date": "2020-11-15",
     "new": [
