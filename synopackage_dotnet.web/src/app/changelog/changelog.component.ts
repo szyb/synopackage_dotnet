@@ -36,45 +36,70 @@ export class ChangelogComponent implements OnInit, PaginatorDataProvider {
     this.route.params.pipe(
       take(1)
     ).subscribe((params: Params) => {
-      this.pageParam = params['page'];
+      this.pageParam = parseInt(params['page']);
+      if (params['page'] != null && this.pageParam.toString() != params['page']) {
+        this.pageParam = 1;
+        this.router.navigate(['/info/changelog/page/1']);
+      } else {
+        if (params['page'] != null && (isNaN(this.pageParam) || this.pageParam <= 0)) {
+          this.pageParam = 1;
+          this.router.navigate(['/info/changelog/page/1']);
+        }
+        else if (params['page'] == null) {
+          this.pageParam = 1;
+        }
+        if (this.pageParam != null) {
+          this.isPageSetFromParam = true;
+        }
+      }
+
       if (this.pageParam != null) {
         this.isPageSetFromParam = true;
       }
     });
     if (this.isPageSetFromParam)
-      this.performGetChangelogs(this.pageParam);
+      this.performGetChangelogs(this.pageParam, true);
     else
-      this.performGetChangelogs(1);
+      this.performGetChangelogs(1, true);
   }
 
-  private performGetChangelogs(page: number) {
+  private performGetChangelogs(page: number, isFirst: boolean) {
     this.changelogService.getChangelogs(page)
-      .subscribe(val => {
-        this.changelogsPaging = val;
-        this.changelogs = val.items;
-        this.dataChanged.next(val);
-      });
+      .subscribe((response) => {
+        this.changelogsPaging = response;
+        this.changelogs = response.items;
+        this.dataChanged.next(response);
+      },
+        (error) => {
+          if (error.status === 400) {
+            if (isFirst) {
+              this.router.navigate(['/info/changelog/page/1']);
+              if (this.shouldPerformGetChangelogs())
+                this.performGetChangelogs(1, false);
+            }
+          }
+        });
   }
 
   onPageChange(page: number) {
-    let shouldPerformGetNews = false;
+    let shouldPerformGetChangelogs = false;
     if (page !== this.changelogsPaging.currentPage) {
-      shouldPerformGetNews = this.shouldPerformGetChangelogs();
+      shouldPerformGetChangelogs = this.shouldPerformGetChangelogs();
       this.router.navigate(['/info/changelog/page/', page.toString()]);
     }
-    if (shouldPerformGetNews) {
+    if (shouldPerformGetChangelogs) {
       this.changelogsPaging = null;
       this.changelogs = null;
-      this.performGetChangelogs(page)
+      this.performGetChangelogs(page, true)
     }
   }
 
   private shouldPerformGetChangelogs(): boolean {
-    let shouldPerformGetNews = false;
+    let shouldPerformGetChangelogs = false;
     if (this.currentRoute !== null) {
-      shouldPerformGetNews = this.currentRoute.startsWith('/info/changelog/page');
+      shouldPerformGetChangelogs = this.currentRoute.startsWith('/info/changelog/page');
     }
-    return shouldPerformGetNews;
+    return shouldPerformGetChangelogs;
   }
 
 }
