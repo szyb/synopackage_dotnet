@@ -19,6 +19,8 @@ using Microsoft.OpenApi.Models;
 using synopackage_dotnet.Model.Enums;
 using synopackage_dotnet.Model;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.Net.Http.Headers;
 
 namespace synopackage_dotnet
 {
@@ -65,6 +67,21 @@ namespace synopackage_dotnet
       }
 
       services.AddMvc();
+
+      services.AddResponseCompression(options =>
+      {
+        options.EnableForHttps = true;
+        options.MimeTypes = new[] {
+          "text/plain",
+          "text/css",
+          "application/javascript",
+          "text/html",
+          "application/xml",
+          "text/xml",
+          "application/json",
+          "text/json"
+          };
+      });
       services.AddSpaStaticFiles(c =>
       {
         c.RootPath = "wwwroot";
@@ -161,6 +178,8 @@ namespace synopackage_dotnet
         app.UseHttpsRedirection();
       }
 
+      app.UseResponseCompression();
+
       app.Use(async (context, next) =>
       {
         if (!Path.HasExtension(context.Request.Path.Value)
@@ -177,7 +196,17 @@ namespace synopackage_dotnet
       });
 
       app.UseDefaultFiles();
-      app.UseStaticFiles();
+      app.UseStaticFiles(new StaticFileOptions()
+      {
+        OnPrepareResponse = ctx =>
+        {
+          if (ctx.File.PhysicalPath.EndsWith(".woff2"))
+          {
+            const int durationInSeconds = 60 * 60 * 24 * 30; //30 days
+            ctx.Context.Response.Headers[HeaderNames.CacheControl] = $"public,max-age={durationInSeconds}";
+          }
+        }
+      });
 
       // Enable middleware to serve generated Swagger as a JSON endpoint.
       app.UseSwagger();
