@@ -34,13 +34,15 @@
       <tbody>
         <tr>
           <td scope="row">Short link:</td>
-          <td><span>{{shortLink}} <a *ngIf="linksAvailable" href="{{shortLink}}" target="_blank">
+          <td><span>{{shortLink}} <a *ngIf="linksAvailable" href="{{shortLink}}" target="_blank"
+                rel="noopener noreferrer">
                 <mdb-icon fas icon="external-link-alt" aria-hidden="true"></mdb-icon>
               </a></span></td>
         </tr>
         <tr>
           <td scope="row">Full link:</td>
-          <td><span>{{fullLink}} <a *ngIf="linksAvailable" href="{{fullLink}}" target="_blank">
+          <td><span>{{fullLink}} <a *ngIf="linksAvailable" href="{{fullLink}}" target="_blank"
+                rel="noopener noreferrer">
                 <mdb-icon fas icon="external-link-alt" aria-hidden="true"></mdb-icon>
               </a></span></td>
         </tr>
