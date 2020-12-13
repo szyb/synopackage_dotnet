@@ -29,12 +29,12 @@
       <a routerLink="/sources/{{source.name}}">browse</a>
     </div>
     <div class="d-none d-sm-inline-block col-sm-1 col-md-1 mt-1" *ngIf="source.www != null">
-      <a href="{{ source.www }}" target="_blank">
+      <a href="{{ source.www }}" target="_blank" rel="noopener noreferrer">
         <mdb-icon fas icon="external-link-alt" aria-hidden="true"></mdb-icon>
       </a>
     </div>
     <div class="d-none d-sm-inline-block col-sm-1 col-md-1" *ngIf="source.www == null">
-      <a href="{{ source.url }}" target="_blank">
+      <a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">
         <mdb-icon fas icon="external-link-alt" aria-hidden="true"></mdb-icon>
       </a>
     </div>
@@ -53,21 +53,21 @@
 <div *ngIf="inActiveSources">
   <div class="row" *ngFor="let source of inActiveSources">
     <div class="d-inline-block d-sm-none mt-1" *ngIf="source.www != null">
-      <a href="{{ source.www }}" target="_blank">{{ source.displayUrl }}</a>
+      <a href="{{ source.www }}" target="_blank" rel="noopener noreferrer">{{ source.displayUrl }}</a>
     </div>
     <div class="d-inline-block d-sm-none mt-1" *ngIf="source.www == null">
-      <a href="{{ source.url }}" target="_blank">{{ source.displayUrl }}</a>
+      <a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">{{ source.displayUrl }}</a>
     </div>
     <div class="d-none d-md-inline-block           col-md-3 col-lg-2 mt-1">{{ source.name }}</div>
     <div class="d-none d-sm-inline-block col-sm-11 col-md-8 col-lg-5 col-xl-4 mt-1">{{ source.displayUrl }}</div>
     <div class="d-none d-lg-inline-block                    col-lg-4 col-xl-5 mt-1">{{ source.disabledReason }}</div>
     <div class="d-none d-sm-inline-block col-sm-1  col-md-1 mt-1" *ngIf="source.www != null">
-      <a href="{{ source.www }}" target="_blank">
+      <a href="{{ source.www }}" target="_blank" rel="noopener noreferrer">
         <mdb-icon fas icon="external-link-alt" aria-hidden="true"></mdb-icon>
       </a>
     </div>
     <div class="d-none d-sm-inline-block col-sm-1  col-md-1" *ngIf="source.www == null">
-      <a href="{{ source.url }}" target="_blank">
+      <a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">
         <mdb-icon fas icon="external-link-alt" aria-hidden="true"></mdb-icon>
       </a>
     </div>
