@@ -11,6 +11,6 @@
   </p>
   <div [innerHTML]="entry.description"></div>
   <div *ngIf="entry.link">
-    <a href="{{entry.link}}" target="_blank">{{entry.linkDescription}}</a>
+    <a href="{{entry.link}}" target="_blank" rel="noopener noreferrer">{{entry.linkDescription}}</a>
   </div>
 </div>
