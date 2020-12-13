@@ -17,7 +17,7 @@
         <a [routerLink]="n.routerLink">{{n.routerLinkDescription}}</a>
       </div>
       <div *ngIf="n.externalLinkDescription">
-        <a href="{{n.externalLink}}" target="_blank">{{n.externalLinkDescription}}</a>
+        <a href="{{n.externalLink}}" target="_blank" rel="noopener noreferrer">{{n.externalLinkDescription}}</a>
       </div>
     </div>
   </div>
