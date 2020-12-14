@@ -1,15 +1,26 @@
 [
   {
+    "version": "0.5.1",
+    "date": "2020-12-14",
+    "new": [
+      "Enable compression of static files and server responses",
+      "Extend cache expiration for static font files"
+    ],
+    "improved": [],
+    "fixed": [
+      "Security fixes"
+    ],
+    "removedSources": []
+  },
+  {
     "version": "0.5.0",
     "date": "2020-11-29",
     "new": [
       "Milestone 0.5 completed",
       "Paging on News & Changelog pages"
     ],
-    "improved": [      
-    ],
-    "fixed": [      
-    ],
+    "improved": [],
+    "fixed": [],
     "removedSources": []
   },
   {
