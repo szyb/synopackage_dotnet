@@ -178,8 +178,6 @@ namespace synopackage_dotnet
         app.UseHttpsRedirection();
       }
 
-      app.UseResponseCompression();
-
       app.Use(async (context, next) =>
       {
         if (!Path.HasExtension(context.Request.Path.Value)
@@ -194,6 +192,7 @@ namespace synopackage_dotnet
         else
           await next();
       });
+      app.UseResponseCompression();
 
       app.UseDefaultFiles();
       app.UseStaticFiles(new StaticFileOptions()
