@@ -1,5 +1,15 @@
 [
   {
+    "version": "0.5.2",
+    "date": "2020-12-18",
+    "new": [],
+    "improved": [],
+    "fixed": [
+      "Fix compression middleware"
+    ],
+    "removedSources": []
+  },
+  {
     "version": "0.5.1",
     "date": "2020-12-14",
     "new": [
