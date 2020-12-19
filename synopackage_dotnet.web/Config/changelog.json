@@ -1,5 +1,16 @@
 [
   {
+    "version": "0.5.3",
+    "date": "2020-12-19",
+    "new": [],
+    "improved": [],
+    "fixed": [
+      "Fix cphub response parsing",
+      "Fix compression middleware (cont.)"
+    ],
+    "removedSources": []
+  },
+  {
     "version": "0.5.2",
     "date": "2020-12-18",
     "new": [],
