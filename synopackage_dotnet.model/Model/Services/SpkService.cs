@@ -150,7 +150,6 @@ namespace synopackage_dotnet.Model.Services
       SpkResult result;
       if (responseContent != null)
       {
-        responseContent = responseContent.Replace("\\n", "\n");
         if (responseContent.Contains("\"packages\""))
         {
           result = JsonConvert.DeserializeObject<SpkResult>(responseContent);
