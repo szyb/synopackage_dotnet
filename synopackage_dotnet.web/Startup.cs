@@ -192,9 +192,11 @@ namespace synopackage_dotnet
         else
           await next();
       });
-      app.UseResponseCompression();
+
 
       app.UseDefaultFiles();
+      app.UseResponseCompression();
+
       app.UseStaticFiles(new StaticFileOptions()
       {
         OnPrepareResponse = ctx =>
@@ -207,6 +209,7 @@ namespace synopackage_dotnet
         }
       });
 
+
       // Enable middleware to serve generated Swagger as a JSON endpoint.
       app.UseSwagger();
 
@@ -215,9 +218,10 @@ namespace synopackage_dotnet
       {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
       });
-      app.UseStaticFiles();
+
       app.UseSpaStaticFiles();
       app.UseRouting();
+
 
       // CORS
       app.UseCors(config =>
