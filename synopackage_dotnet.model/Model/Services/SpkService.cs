@@ -152,12 +152,12 @@ namespace synopackage_dotnet.Model.Services
       {
         if (responseContent.Contains("\"packages\""))
         {
-          result = JsonConvert.DeserializeObject<SpkResult>(responseContent);
+          result = JsonConvert.DeserializeObject<SpkResult>(responseContent, new CustomBooleanJsonConverter());
         }
         else
         {
           result = new SpkResult();
-          result.Packages = JsonConvert.DeserializeObject<List<SpkPackage>>(responseContent);
+          result.Packages = JsonConvert.DeserializeObject<List<SpkPackage>>(responseContent, new CustomBooleanJsonConverter());
         }
         if (result != null)
           cacheService.SaveSpkResult(sourceName, arch, model, versionDto.Build.ToString(), isBeta, result);
