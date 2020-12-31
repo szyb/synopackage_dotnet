@@ -1,5 +1,15 @@
 [
   {
+    "version": "0.5.4",
+    "date": "2020-12-31",
+    "new": [
+      "Allow insecure content (SPK) download in Chrome 88"
+    ],
+    "improved": [],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
     "version": "0.5.3",
     "date": "2020-12-19",
     "new": [],
