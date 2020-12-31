@@ -12,5 +12,6 @@ namespace synopackage_dotnet
     public int DownloadTimeoutInSeconds { get; set; }
     public string DownloadService { get; set; }
     public int DefaultItemsPerPage { get; set; }
+    public bool EnableProxyDownloadForInsecureProtocol { get; set; }
   }
 }

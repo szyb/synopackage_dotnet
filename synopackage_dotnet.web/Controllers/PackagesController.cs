@@ -18,15 +18,16 @@ namespace synopackage_dotnet.Controllers
     private ISourceService sourceService;
     private IVersionService versionService;
     private IModelService modelService;
-    private readonly ILogger<PackagesController> logger;
-
-    public PackagesController(ISpkService spkService, ISourceService sourceService, IVersionService versionService, IModelService modelService, ILogger<PackagesController> logger)
+    public PackagesController(
+      ISpkService spkService,
+      ISourceService sourceService,
+      IVersionService versionService,
+      IModelService modelService)
     {
       this.spkService = spkService;
       this.sourceService = sourceService;
       this.versionService = versionService;
       this.modelService = modelService;
-      this.logger = logger;
     }
 
     [HttpGet("GetSourceServerResponse")]
@@ -70,24 +71,5 @@ namespace synopackage_dotnet.Controllers
       }
       return new ObjectResult(response);
     }
-
-    [HttpPost("DownloadRequest")]
-    public IActionResult DownloadRequest([FromBody] DownloadRequestDTO downloadRequest)
-    {
-      if (downloadRequest == null)
-        return new BadRequestResult();
-
-      var validation = ValidateStringParameter(nameof(downloadRequest.RequestUrl), downloadRequest.RequestUrl, 1500);
-      if (!string.IsNullOrWhiteSpace(validation)) { logger.LogError(validation); return new BadRequestResult(); }
-      validation = ValidateStringParameter(nameof(downloadRequest.SourceName), downloadRequest.SourceName, 100);
-      if (!string.IsNullOrWhiteSpace(validation)) { logger.LogError(validation); return new BadRequestResult(); }
-      validation = ValidateStringParameter(nameof(downloadRequest.PackageName), downloadRequest.PackageName, 100);
-      if (!string.IsNullOrWhiteSpace(validation)) { logger.LogError(validation); return new BadRequestResult(); }
-
-      sourceService.DownloadRequest(downloadRequest);
-      return new NoContentResult();
-    }
   }
-
-
 }
