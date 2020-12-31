@@ -24,12 +24,17 @@
               updates. Do you want to proceed?</i></small></p>
       </div>
       <div class="modal-footer">
+        <div *ngIf="waitForDownload">
+          <span>Waiting...</span>
+        </div>
         <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
           (click)="downloadModal.hide()" mdbWavesEffect>Close</button>
         <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="download()"
           mdbWavesEffect>Download
         </button>
+
       </div>
+
     </div>
   </div>
 </div>

@@ -78,17 +78,5 @@ namespace synopackage_dotnet.Model.Services
 
       return result;
     }
-
-    public void DownloadRequest(DownloadRequestDTO downloadRequest)
-    {
-      if (!this.ValidateSource(downloadRequest.SourceName))
-      {
-        logger.LogError($"Coudn't not find source '{downloadRequest.SourceName}'");
-        return;
-      }
-
-      var message = $"Download request: '{downloadRequest.PackageName}' from '{downloadRequest.SourceName}'. Link: {downloadRequest.RequestUrl}";
-      logger.LogInformation(message);
-    }
   }
 }
