@@ -3,6 +3,8 @@ import { ModalDirective } from 'angular-bootstrap-md';
 import { SourcesService } from 'src/app/shared/sources.service';
 import { PackageDTO } from 'src/app/sources/sources.model';
 import { take } from 'rxjs/operators';
+import { DownloadSpkService } from 'src/app/shared/download-spk.service';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -13,38 +15,45 @@ import { take } from 'rxjs/operators';
 @Injectable()
 export class DownloadDialogComponent {
   public dialogShown = false;
+  public waitForDownload = false;
 
   @Input()
   public package: PackageDTO;
 
-  constructor(private sourcesService: SourcesService) {
+  constructor(private downloadSpkService: DownloadSpkService) {
   }
 
   @ViewChild(ModalDirective, { static: true }) public downloadModal: ModalDirective;
 
   showModal = () => {
+    this.waitForDownload = false;
     this.dialogShown = true;
     this.downloadModal.show();
   }
 
   download() {
-    const result = this.sourcesService.downloadRequest(this.package.downloadLink, this.package.sourceName, this.package.name);
+    if (this.waitForDownload === true)
+      return;
+    this.waitForDownload = true;
+    const result = this.downloadSpkService.downloadRequest(this.package.downloadLink, this.package.sourceName, this.package.name);
     result.pipe(
       take(1)
     ).subscribe(item => {
       if (item) {
-        if (this.package.downloadLink.startsWith("http"))
-          document.location.href = this.package.downloadLink;
+        if (item.startsWith("http"))
+          document.location.href = item;
         else {
-          this.sourcesService.getSource(this.package.sourceName).subscribe(source => {
-            if (this.package.downloadLink.startsWith("/"))
-              document.location.href = source.url.concat(this.package.downloadLink);
-            else
-              document.location.href = source.url.concat("/").concat(this.package.downloadLink);
-          })
+          document.location.href = environment.restBaseUrl.concat(item);
         }
+        // if (item.startsWith("http")) { //external link
+        //   window.open(item, "_blank", "noopener noreferrer");
+        // }
+        // else { //proxy download
+        //   window.open(environment.restBaseUrl.concat(item), "_blank", "noopener noreferrer");
+        // }
       } else {
         alert('The package could not be downloaded');
+        this.waitForDownload = false;
       }
       this.downloadModal.hide();
     });
