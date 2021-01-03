@@ -17,7 +17,7 @@ namespace synopackage_dotnet.Model.Services
   {
     ILogger<FlurlDownloadService> logger;
 
-    public HttpCall ErrorHandler { get; private set; }
+    public FlurlCall ErrorHandler { get; private set; }
 
     public FlurlDownloadService(ILogger<FlurlDownloadService> logger)
     {
@@ -68,7 +68,7 @@ namespace synopackage_dotnet.Model.Services
         IFlurlClient client = GetClient(url, userAgent);
 
         client.WithHeader("Content-Type", "application/x-www-form-urlencoded");
-        HttpResponseMessage response;
+        IFlurlResponse response;
         if (!useGetMethod)
           response = await client
             .Request()
@@ -81,7 +81,7 @@ namespace synopackage_dotnet.Model.Services
           return new ExecuteResponse()
           {
             Success = true,
-            Content = response.Content.ReadAsStringAsync().Result
+            Content = response.GetStringAsync().ConfigureAwait(false).GetAwaiter().GetResult()
           };
         else
           return new ExecuteResponse()
