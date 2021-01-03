@@ -17,8 +17,7 @@ export class DownloadDialogComponent {
   public dialogShown = false;
   public waitForDownload = false;
 
-  @Input()
-  public package: PackageDTO;
+  @Input() public package: PackageDTO;
 
   constructor(private downloadSpkService: DownloadSpkService) {
   }

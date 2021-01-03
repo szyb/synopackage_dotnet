@@ -50,6 +50,7 @@
     </table>
   </div>
 </div>
+<app-download-dialog #downloadModal></app-download-dialog>
 <div *ngFor="let package of packages" class="cloudy-knoxville-gradient z-depth-2 rounded mb-1 pd-3">
-  <app-package-info [package]="package"></app-package-info>
+  <app-package-info [downloadDialog]="downloadModal" [package]="package"></app-package-info>
 </div>
