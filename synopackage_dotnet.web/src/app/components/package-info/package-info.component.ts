@@ -13,11 +13,11 @@ import { DownloadDialogComponent } from '../download-dialog/download-dialog.comp
 export class PackageInfoComponent {
   public defaultImage = 'assets/package.png';
 
-  @Input()
-  public package: PackageDTO;
+  @Input() public package: PackageDTO;
+  @Input() public downloadDialog: DownloadDialogComponent;
 
-  @ViewChild(DownloadDialogComponent, { static: true }) downloadDialog: DownloadDialogComponent;
   showDownloadDialogModal() {
+    this.downloadDialog.package = this.package;
     this.downloadDialog.showModal();
   }
 
