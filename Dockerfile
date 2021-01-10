@@ -1,10 +1,10 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim as base
+FROM mcr.microsoft.com/dotnet/aspnet:5.0.1-buster-slim as base
 WORKDIR /app
 ENV ASPNETCORE_ENVIRONMENT docker
 EXPOSE 80/tcp
 
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster as build-env
+FROM mcr.microsoft.com/dotnet/sdk:5.0.101-buster-slim as build-env
 WORKDIR /app
 
 
