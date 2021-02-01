@@ -4,7 +4,7 @@ ENV ASPNETCORE_ENVIRONMENT docker
 EXPOSE 80/tcp
 
 
-FROM mcr.microsoft.com/dotnet/sdk:5.0.102-buster-slim as build-env
+FROM mcr.microsoft.com/dotnet/sdk:5.0.102-1-buster-slim as build-env
 WORKDIR /app
 
 
