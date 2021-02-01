@@ -101,9 +101,11 @@
     "Url": "http://synology.sysco.ch/"
   },
   {
-    "Active": true,
+    "Active": false,
     "Name": "hofrichter",
-    "Url": "https://www.hofrichter.at/sspks/"
+    "Url": "https://www.hofrichter.at/sspks/",
+    "DisabledDate": "2021-02-01",
+    "DisabledReason": "Connection to the server is refused"
   },
   {
     "Active": false,
