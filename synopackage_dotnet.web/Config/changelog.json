@@ -3,7 +3,7 @@
     "version": "0.5.5",
     "date": "2021-01-10",
     "new": [
-      "Backend is running under .NET 5.0",
+      "Backend is running under .NET 5.0"
     ],
     "improved": [
       "Optimized download dialog"
