@@ -1,5 +1,17 @@
 [
   {
+    "version": "0.5.7",
+    "date": "2021-03-20",
+    "new": [
+      "Add new source: Digitalboxdsm7 a dedicated package source for DSM 7"
+    ],
+    "improved": [],
+    "fixed": [
+      "Security fixes"
+    ],
+    "removedSources": []
+  },
+  {
     "version": "0.5.6",
     "date": "2021-02-23",
     "new": [
