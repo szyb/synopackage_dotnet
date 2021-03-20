@@ -27,6 +27,11 @@
   },
   {
     "Active": true,
+    "Name": "digitalboxdsm7",
+    "Url": "http://digital.box.free.fr/dsm7/"
+  },
+  {
+    "Active": true,
     "Name": "pcloadletter",
     "Url": "https://packages.pcloadletter.co.uk",
     "UseGetMethod": true
