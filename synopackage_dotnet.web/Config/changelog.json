@@ -1,5 +1,18 @@
 [
   {
+    "version": "0.5.8",
+    "date": "2021-04-17",
+    "new": [
+      "New DSM version 6.2.4",
+      "New model RS819"
+    ],
+    "improved": [],
+    "fixed": [
+      "Security fixes"
+    ],
+    "removedSources": []
+  },
+  {
     "version": "0.5.7",
     "date": "2021-03-20",
     "new": [
