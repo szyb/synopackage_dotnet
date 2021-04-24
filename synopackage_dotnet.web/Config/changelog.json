@@ -1,5 +1,17 @@
 [
   {
+    "version": "0.5.9",
+    "date": "2021-04-24",
+    "new": [
+      "New source: imnks (made for China and world users)"
+    ],
+    "improved": [],
+    "fixed": [
+      "Security fixes"
+    ],
+    "removedSources": []
+  },
+  {
     "version": "0.5.8",
     "date": "2021-04-17",
     "new": [
