@@ -86,9 +86,11 @@
     "Url": "http://synology.nimloth.pl/"
   },
   {
-    "Active": true,
+    "Active": false,
     "Name": "cambier",
-    "Url": "https://synology.cambier.org/"
+    "Url": "https://synology.cambier.org/",
+    "DisabledDate": "2021-05-21",
+    "DisabledReason":  "No packages"
   },
   {
     "Active": true,
@@ -182,5 +184,12 @@
     "Name": "pulse-station",
     "Url": "https://www.pulse-station.com/repo/",
     "Www": "https://www.pulse-station.com"
+  },
+  {
+    "Active": false,
+    "Name": "netzbaer",
+    "Url": "https://spk.netzbaer.de/",
+    "DisabledDate": "2021-05-21",
+    "DisabledReason": "This repository is discountinued by vendor"
   }
 ]
