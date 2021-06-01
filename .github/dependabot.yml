@@ -1,0 +1,14 @@
+version:2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/synopackage_dotnet.web/"
+    schedule:
+      inverval: "daily"
+    target-branch: "master"
+  
+  - package-ecosystem: "npm"
+    directory: "/synopackage_dotnet.web/"
+    schedule:
+      inverval: "weekly"
+      day: "friday"
+    target-branch: "angular_update"
