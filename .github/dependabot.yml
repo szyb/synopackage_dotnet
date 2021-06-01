@@ -5,6 +5,8 @@ updates:
     schedule:
       interval: "daily"
     target-branch: "master"
+    labels:
+      - "master dependencies"
   
   - package-ecosystem: "npm"
     directory: "/synopackage_dotnet.web/"
@@ -12,3 +14,5 @@ updates:
       interval: "weekly"
       day: "friday"
     target-branch: "angular_update"
+    labels:
+      - "angular_update dependencies"
