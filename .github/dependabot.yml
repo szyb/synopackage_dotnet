@@ -3,12 +3,12 @@ updates:
   - package-ecosystem: "npm"
     directory: "/synopackage_dotnet.web/"
     schedule:
-      inverval: "daily"
+      interval: "daily"
     target-branch: "master"
   
   - package-ecosystem: "npm"
     directory: "/synopackage_dotnet.web/"
     schedule:
-      inverval: "weekly"
+      interval: "weekly"
       day: "friday"
     target-branch: "angular_update"
