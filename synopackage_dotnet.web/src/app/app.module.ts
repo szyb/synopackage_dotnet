@@ -153,7 +153,7 @@ export const routerConfig: Routes = [
     FormsModule,
     LazyLoadImageModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(routerConfig),
+    RouterModule.forRoot(routerConfig, { relativeLinkResolution: 'legacy' }),
     MDBBootstrapModule.forRoot(),
     NgwWowModule
   ],
