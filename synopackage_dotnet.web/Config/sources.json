@@ -27,6 +27,17 @@
   },
   {
     "Active": true,
+    "Name": "digitalboxdsm7",
+    "Url": "http://digital.box.free.fr/dsm7/"
+  },
+  {
+    "Active": true,
+    "Name": "beatificabytes",
+    "Url": "https://www.beatificabytes.be/sspks/",
+    "Www": "https://www.beatificabytes.be/"
+  },
+  {
+    "Active": true,
     "Name": "pcloadletter",
     "Url": "https://packages.pcloadletter.co.uk",
     "UseGetMethod": true
@@ -75,9 +86,11 @@
     "Url": "http://synology.nimloth.pl/"
   },
   {
-    "Active": true,
+    "Active": false,
     "Name": "cambier",
-    "Url": "https://synology.cambier.org/"
+    "Url": "https://synology.cambier.org/",
+    "DisabledDate": "2021-05-21",
+    "DisabledReason":  "No packages"
   },
   {
     "Active": true,
@@ -144,6 +157,12 @@
   },
   {
     "Active": true,
+    "Name": "imnks",
+    "Url": "https://spk.imnks.com",
+    "Www": "https://spk.imnks.com"
+  },
+  {
+    "Active": true,
     "Name": "hildinger",
     "Url": "http://www.hildinger.us/sspks/"
   },
@@ -162,14 +181,15 @@
   },
   {
     "Active": true,
-    "Name": "beatificabytes",
-    "Url": "https://www.beatificabytes.be/sspks/",
-    "Www": "https://www.beatificabytes.be/"
-  },
-  {
-    "Active": true,
     "Name": "pulse-station",
     "Url": "https://www.pulse-station.com/repo/",
     "Www": "https://www.pulse-station.com"
+  },
+  {
+    "Active": false,
+    "Name": "netzbaer",
+    "Url": "https://spk.netzbaer.de/",
+    "DisabledDate": "2021-05-21",
+    "DisabledReason": "This repository is discountinued by vendor"
   }
 ]

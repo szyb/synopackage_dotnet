@@ -963,5 +963,10 @@
     "Name": "DS1621xs+",
     "Arch": "broadwell",
     "Family": "x86_64"
+  },
+  {
+    "Name": "RS819",
+    "Arch": "rtd1296",
+    "Family": "armv8"
   }
 ]

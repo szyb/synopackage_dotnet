@@ -1,5 +1,18 @@
 [
   {
+    "Date": "2021-03-20",
+    "Title": "New source: DigitalboxDSM7 - a dedicated repository for DSM 7",
+    "Body": [
+      "Today we added new repository: DigitalboxDSM7. As you may know there is digitalbox available on the sources list, but this one is a dedicated repository for DSM 7.",
+      "Please note that you should use this new repository only for DSM 7. For DSM 6 you should use origin digitalbox repository.",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": "Digitalbox DSM 7",
+    "RouterLink": "../sources/digitalboxdsm7",
+    "ExternalLinkDescription": null,
+    "ExternalLink": null
+  },
+  {
     "Date": "2020-11-29",
     "Title": "Milestone 0.5 completed",
     "Body": [
