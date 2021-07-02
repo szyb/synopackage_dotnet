@@ -26,7 +26,7 @@
     "@angular/cdk": "11.2.13",
     "angular-bootstrap-md": "^11.1.0",
     "animate.css": "3.7.2",
-    "chart.js": "^2.9.3",
+    "chart.js": "^3.4.0",
     "core-js": "^3.8.2",
     "font-awesome": "^4.7.0",
     "hammerjs": "^2.0.8",
