@@ -31,10 +31,12 @@
     "Url": "http://digital.box.free.fr/dsm7/"
   },
   {
-    "Active": true,
+    "Active": false,
     "Name": "beatificabytes",
     "Url": "https://www.beatificabytes.be/sspks/",
-    "Www": "https://www.beatificabytes.be/"
+    "Www": "https://www.beatificabytes.be/",
+    "DisabledDate": "2021-07-20",
+    "DisabledReason": "This repository is discountinued by vendor"
   },
   {
     "Active": true,
@@ -62,10 +64,12 @@
     "Url": "http://synology.acmenet.ru/"
   },
   {
-    "Active": true,
+    "Active": false,
     "Name": "emby",
     "Url": "https://synology.emby.media/",
-    "Www": "https://emby.media/community/index.php?/forum/153-synology/"
+    "Www": "https://emby.media/community/index.php?/forum/153-synology/",
+    "DisabledDate": "2021-07-20",
+    "DisabledReason": "Not a valid DSM repo. Packages are still available on the website."
   },
   {
     "Active": false,
@@ -127,9 +131,11 @@
     "DisabledReason": "This repository is discountinued by vendor"
   },
   {
-    "Active": true,
+    "Active": false,
     "Name": "page81",
-    "Url": "https://packages.page81.net/"
+    "Url": "https://packages.page81.net/",
+    "DisabledDate": "2021-07-20",
+    "DisabledReason": "This repository is discountinued by vendor"
   },
   {
     "Active": false,
