@@ -1,6 +1,6 @@
 {
   "name": "synopackage.com",
-  "version": "0.5.10",
+  "version": "0.5.11",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
