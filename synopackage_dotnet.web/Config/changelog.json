@@ -1,5 +1,17 @@
 [
   {
+    "version": "0.5.11",
+    "date": "2021-07-20",
+    "new": [ "Hofrichter repository is back to active" ],
+    "improved": [],
+    "fixed": [    ],
+    "removedSources": [
+      "Page81 moved to inactive",
+      "Emby moved to inactive as it is not valid DSM repo. However packages are still available on their website",
+      "Beatificabytes moved to inactive. This site is down for a while"
+    ]
+  },
+  {
     "version": "0.5.10",
     "date": "2021-05-21",
     "new": [],
