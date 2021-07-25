@@ -1,5 +1,100 @@
 [
   {
+    "version": "0.5.13",
+    "date": "2021-07-25",
+    "new": [
+      "Upgrade frontend to Angular 11",
+      "Upgrade backend libraries"
+    ],
+    "improved": [],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
+    "version": "0.5.12",
+    "date": "2021-07-25",
+    "new": [ "Add imnks source for DSM 7" ],
+    "improved": [],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
+    "version": "0.5.11",
+    "date": "2021-07-20",
+    "new": [ "Hofrichter repository is back to active" ],
+    "improved": [],
+    "fixed": [],
+    "removedSources": [
+      "Page81 moved to inactive",
+      "Emby moved to inactive as it is not valid DSM repo. However packages are still available on their website",
+      "Beatificabytes moved to inactive. This site is down for a while"
+    ]
+  },
+  {
+    "version": "0.5.10",
+    "date": "2021-05-21",
+    "new": [],
+    "improved": [],
+    "fixed": [
+      "Security fixes"
+    ],
+    "removedSources": [
+      "Cambier source has been removed as since 01.01.2021 they doesn't serve any packages",
+      "Added new spk.netzbaer.de directy to inactive sources just to acknowledge it worked some time ago"
+    ]
+  },
+  {
+    "version": "0.5.9",
+    "date": "2021-04-24",
+    "new": [
+      "New source: imnks (made for China and world users)"
+    ],
+    "improved": [],
+    "fixed": [
+      "Security fixes"
+    ],
+    "removedSources": []
+  },
+  {
+    "version": "0.5.8",
+    "date": "2021-04-17",
+    "new": [
+      "New DSM version 6.2.4",
+      "New model RS819"
+    ],
+    "improved": [],
+    "fixed": [
+      "Security fixes"
+    ],
+    "removedSources": []
+  },
+  {
+    "version": "0.5.7",
+    "date": "2021-03-20",
+    "new": [
+      "Add new source: Digitalboxdsm7 a dedicated package source for DSM 7"
+    ],
+    "improved": [],
+    "fixed": [
+      "Security fixes"
+    ],
+    "removedSources": []
+  },
+  {
+    "version": "0.5.6",
+    "date": "2021-02-23",
+    "new": [
+      "Support for DSM 7.0 beta"
+    ],
+    "improved": [
+      "Update Dockerfile"
+    ],
+    "fixed": [],
+    "removedSources": [
+      "Hofrichter source has been removed since 2021-02-01"
+    ]
+  },
+  {
     "version": "0.5.5",
     "date": "2021-01-10",
     "new": [
