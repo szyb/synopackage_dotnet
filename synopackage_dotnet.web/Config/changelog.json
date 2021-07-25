@@ -1,10 +1,18 @@
 [
   {
+    "version": "0.5.12",
+    "date": "2021-07-25",
+    "new": [ "Add imnks source for DSM 7" ],
+    "improved": [],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
     "version": "0.5.11",
     "date": "2021-07-20",
     "new": [ "Hofrichter repository is back to active" ],
     "improved": [],
-    "fixed": [    ],
+    "fixed": [],
     "removedSources": [
       "Page81 moved to inactive",
       "Emby moved to inactive as it is not valid DSM repo. However packages are still available on their website",
