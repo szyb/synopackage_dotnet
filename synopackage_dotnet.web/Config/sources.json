@@ -94,7 +94,7 @@
     "Name": "cambier",
     "Url": "https://synology.cambier.org/",
     "DisabledDate": "2021-05-21",
-    "DisabledReason":  "No packages"
+    "DisabledReason": "No packages"
   },
   {
     "Active": true,
@@ -164,6 +164,12 @@
     "Name": "imnks",
     "Url": "https://spk.imnks.com",
     "Www": "https://spk.imnks.com"
+  },
+  {
+    "Active": true,
+    "Name": "imnksdsm7",
+    "Url": "https://spk7.imnks.com",
+    "Www": "https://spk7.imnks.com"
   },
   {
     "Active": true,
