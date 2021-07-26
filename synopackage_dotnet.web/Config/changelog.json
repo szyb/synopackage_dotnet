@@ -1,7 +1,7 @@
 [
   {
     "version": "0.5.13",
-    "date": "2021-07-25",
+    "date": "2021-07-26",
     "new": [
       "Upgrade frontend to Angular 11",
       "Upgrade backend libraries"
