@@ -1,5 +1,16 @@
 [
   {
+    "version": "0.5.13",
+    "date": "2021-07-26",
+    "new": [
+      "Upgrade frontend to Angular 11",
+      "Upgrade backend libraries"
+    ],
+    "improved": [],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
     "version": "0.5.12",
     "date": "2021-07-25",
     "new": [ "Add imnks source for DSM 7" ],

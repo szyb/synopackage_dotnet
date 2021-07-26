@@ -17,6 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "outputPath": "wwwroot",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -55,16 +56,11 @@
                 {
                   "replace": "appsettings.json",
                   "with": "appsettings.production.json"
-                },
-                {
-                  "replace": "web.config",
-                  "with": "web.production.config"
                 }
               ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
@@ -89,7 +85,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
@@ -111,6 +106,12 @@
               ]
             },
             "test": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -119,16 +120,11 @@
                 {
                   "replace": "appsettings.json",
                   "with": "appsettings.test.json"
-                },
-                {
-                  "replace": "web.config",
-                  "with": "web.test.config"
                 }
               ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
@@ -138,6 +134,12 @@
               "deployUrl": "/"
             },
             "dev2": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "deleteOutputPath": false,
               "fileReplacements": [
                 {
@@ -151,6 +153,12 @@
               ]
             },
             "docker": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -164,7 +172,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
@@ -174,6 +181,12 @@
               "deployUrl": "/"
             },
             "development": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "deleteOutputPath": false
             }
           }
