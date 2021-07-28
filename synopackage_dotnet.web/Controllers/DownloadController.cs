@@ -1,18 +1,13 @@
 
-using System;
-using System.IO;
-
-using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
 using synopackage_dotnet.Model.DTOs;
 using synopackage_dotnet.Model.Services;
+using System;
+using System.Net;
+using System.Threading.Tasks;
 
 
 namespace synopackage_dotnet.Controllers
@@ -52,7 +47,6 @@ namespace synopackage_dotnet.Controllers
     {
       try
       {
-
         if (id == Guid.Empty)
         {
           Response.StatusCode = 400;
@@ -86,21 +80,17 @@ namespace synopackage_dotnet.Controllers
               break;
             ReadOnlyMemory<byte> rom = new ReadOnlyMemory<byte>(buff, 0, bytesRead);
             await Response.BodyWriter.WriteAsync(rom).ConfigureAwait(false);
-            rom = null;
           }
         }
       }
       catch (WebException wex)
       {
-
         Response.StatusCode = 404;
-
         logger.LogError(wex, "File download error (WebException)");
       }
       catch (Exception ex)
       {
         logger.LogError(ex, "File download error");
-
       }
     }
 
@@ -115,19 +105,16 @@ namespace synopackage_dotnet.Controllers
         if (contentDisposition != null)
         {
           fileName = downloadSpkService.GetFileNameFromContentDisposition(contentDisposition);
-
         }
         fileName = fileName ?? $"{id}.spk";
 
       }
       headers.Add(HeaderNames.ContentDisposition, $"attachment; filename=\"{fileName}\"");
-      // Response.Headers[HeaderNames.ContentDisposition] = $"attachment; filename=\"{fileName}\"";
+
       var lengthStr = newResponse.Headers[HeaderNames.ContentLength];
-      if (Int64.TryParse(lengthStr, out var length))
+      if (Int64.TryParse(lengthStr, out var length) && length > 0)
       {
-        if (length > 0)
-          headers.Add(HeaderNames.ContentLength, length.ToString());
-        // Response.Headers[HeaderNames.ContentLength] = length.ToString();
+        headers.Add(HeaderNames.ContentLength, length.ToString());
       }
       return headers;
     }

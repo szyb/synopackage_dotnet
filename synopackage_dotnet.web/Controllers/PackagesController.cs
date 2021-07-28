@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using synopackage_dotnet.Model.DTOs;
 using synopackage_dotnet.Model.Services;
+using System.Threading.Tasks;
 
 namespace synopackage_dotnet.Controllers
 {
@@ -14,10 +9,10 @@ namespace synopackage_dotnet.Controllers
   [Route("api/[controller]")]
   public class PackagesController : BaseController
   {
-    private ISpkService spkService;
-    private ISourceService sourceService;
-    private IVersionService versionService;
-    private IModelService modelService;
+    private readonly ISpkService spkService;
+    private readonly ISourceService sourceService;
+    private readonly IVersionService versionService;
+    private readonly IModelService modelService;
     public PackagesController(
       ISpkService spkService,
       ISourceService sourceService,

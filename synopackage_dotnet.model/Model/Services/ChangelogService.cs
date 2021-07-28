@@ -1,8 +1,7 @@
-using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using synopackage_dotnet.Model.DTOs;
 using System.IO;
 using System.Linq;
-using Newtonsoft.Json;
-using synopackage_dotnet.Model.DTOs;
 
 namespace synopackage_dotnet.Model.Services
 {
@@ -30,7 +29,6 @@ namespace synopackage_dotnet.Model.Services
       {
         return new PagingDTO<ChangelogDTO>(1, 1, changelogs.Length, changelogs);
       }
-
     }
 
     public PagingDTO<ChangelogDTO> GetChangelogs(int? page, int? itemsPerPage)

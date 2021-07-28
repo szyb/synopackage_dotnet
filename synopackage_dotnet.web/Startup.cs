@@ -1,26 +1,21 @@
+using Autofac;
+using Autofac.Extras.DynamicProxy;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Microsoft.Net.Http.Headers;
+using Microsoft.OpenApi.Models;
+using Serilog;
+using synopackage_dotnet.Model;
+using synopackage_dotnet.Model.Enums;
+using synopackage_dotnet.Model.Services;
 using System;
 using System.IO;
-using Autofac;
-using Autofac.Builder;
-using synopackage_dotnet.Model.Services;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
-using Microsoft.Extensions.Logging;
-using Serilog.Extensions.Logging;
-using Serilog;
-using Autofac.Extras.DynamicProxy;
-using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
-using synopackage_dotnet.Model.Enums;
-using synopackage_dotnet.Model;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.ResponseCompression;
-using Microsoft.Net.Http.Headers;
 
 namespace synopackage_dotnet
 {
@@ -36,15 +31,13 @@ namespace synopackage_dotnet
     {
       this.configuration = configuration;
       this.environment = env;
-      // string str = "";
-      // str.Contains("X", StringComparison.InvariantCultureIgnoreCase)
     }
 
     private bool IsProductionOrTest()
     {
       if (environment != null)
       {
-        return environment.EnvironmentName.Equals("production", StringComparison.InvariantCultureIgnoreCase)
+        return environment.IsProduction()
           || environment.EnvironmentName.Equals("test", StringComparison.InvariantCultureIgnoreCase);
       }
       return false;
@@ -95,10 +88,7 @@ namespace synopackage_dotnet
           Title = "synopackage_dotnet API",
           Description = "search.synopackage.com API"
         });
-        // Set the comments path for the Swagger JSON and UI.
-        // var basePath = AppContext.BaseDirectory;
-        //       var xmlPath = Path.Combine(basePath, "synopackage_dotnet.xml");
-        //       c.IncludeXmlComments(xmlPath);
+
       });
 
 
@@ -111,7 +101,7 @@ namespace synopackage_dotnet
       var appSettings = new AppSettings();
       new ConfigureFromConfigurationOptions<AppSettings>(appSettingsSection)
             .Configure(appSettings);
-      services.AddSingleton(new AppSettingsProvider(appSettings));
+      services.AddSingleton(AppSettingsProvider.Create(appSettings));
 
       MapperRegistrator.Register();
     }
@@ -125,9 +115,9 @@ namespace synopackage_dotnet
           .Except<RestSharpDownloadService>()
           .AsImplementedInterfaces()
           .EnableInterfaceInterceptors()
-          .InterceptedBy(typeof(TryCatchInterceptor))
+          //.InterceptedBy(typeof(TryCatchInterceptor))
           .InterceptedBy(typeof(LoggingInterceptor));
-      builder.RegisterType(typeof(TryCatchInterceptor)).AsSelf();
+      //builder.RegisterType(typeof(TryCatchInterceptor)).AsSelf();
       builder.RegisterType(typeof(LoggingInterceptor)).AsSelf();
 
       builder.Register<IDownloadService>((c, p) =>
@@ -142,7 +132,7 @@ namespace synopackage_dotnet
         }
       })
         .As<IDownloadService>()
-        .InterceptedBy(typeof(TryCatchInterceptor))
+        //.InterceptedBy(typeof(TryCatchInterceptor))
         .InterceptedBy(typeof(LoggingInterceptor));
 
       builder.RegisterType<DownloadFactory>()
@@ -235,24 +225,12 @@ namespace synopackage_dotnet
         endpoints.MapControllers();
       });
 
-      // app.UseMvc(routes =>
-      // {
-      //   routes.MapRoute(name: "default", template: "{controller}/{action=index}/{id}");
-      // });
-
-
-
       app.UseSpa(spa =>
       {
         // To learn more about options for serving an Angular SPA from ASP.NET Core,
         // see https://go.microsoft.com/fwlink/?linkid=864501
 
         spa.Options.SourcePath = "wwwroot";
-
-        // if (env.IsDevelopment())
-        // {
-        //   spa.UseAngularCliServer(npmScript: "start");
-        // }
       });
     }
   }

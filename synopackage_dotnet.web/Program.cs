@@ -1,6 +1,6 @@
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
@@ -9,7 +9,7 @@ namespace synopackage_dotnet
   /// <summary>
   /// Main App entry point
   /// </summary>
-  public class Program
+  public static class Program
   {
     /// <summary>
     /// Defines the entry point of the application.

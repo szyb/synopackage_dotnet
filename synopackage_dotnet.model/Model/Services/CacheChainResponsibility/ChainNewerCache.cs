@@ -1,8 +1,7 @@
-using System;
+﻿using Microsoft.Extensions.Logging;
+using synopackage_dotnet.Model.DTOs;
 using System.IO;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using synopackage_dotnet.Model.DTOs;
 
 namespace synopackage_dotnet.Model.Services
 {
@@ -11,7 +10,6 @@ namespace synopackage_dotnet.Model.Services
     public ChainNewerCache(ILogger logger) : base(logger)
     {
     }
-
 
     private bool CanHandle(FileInfo firstCacheFile, FileInfo secondCacheFile)
     {
