@@ -1,10 +1,9 @@
+﻿using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using synopackage_dotnet.Model.DTOs;
 using System;
 using System.IO;
 using System.Net;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using synopackage_dotnet.Model.DTOs;
-using Microsoft.Net.Http.Headers;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -142,8 +141,6 @@ namespace synopackage_dotnet.Model.Services
           response.Dispose();
         }
       }
-
-
     }
 
     private bool IsProxyDownload(DownloadRequestDTO downloadRequest, bool isHttps)

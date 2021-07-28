@@ -13,14 +13,11 @@ namespace synopackage_dotnet.Controllers
   [Route("api/[controller]")]
   public class SourcesController : BaseController
   {
-    private ISourceService sourceService;
-    private ISpkService spkService;
-    public SourcesController(ISourceService sourceService, ISpkService spkService)
+    private readonly ISourceService sourceService;    
+    public SourcesController(ISourceService sourceService)
     {
       this.sourceService = sourceService;
-      this.spkService = spkService;
     }
-
 
     [HttpGet("GetAllSources")]
     public IActionResult GetAllSources()
