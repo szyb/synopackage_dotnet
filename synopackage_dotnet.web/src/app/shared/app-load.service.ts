@@ -9,7 +9,7 @@ export class AppLoadService {
   constructor() { }
 
   initializeApp(): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
 
       setTimeout(() => {
         if (environment.restBaseUrl === null) {
