@@ -1,12 +1,17 @@
-namespace synopackage_dotnet
-{  
+﻿namespace synopackage_dotnet
+{
   public class AppSettingsProvider
   {
-    public static AppSettings AppSettings { get; set; }
+    public static AppSettings AppSettings { get; private set; }
 
-    public AppSettingsProvider(AppSettings appSettings)
+    private AppSettingsProvider(AppSettings appSettings)
     {
       AppSettings = appSettings;
+    }
+
+    public static AppSettingsProvider Create(AppSettings appSetting)
+    {
+      return new AppSettingsProvider(appSetting);
     }
 
   }

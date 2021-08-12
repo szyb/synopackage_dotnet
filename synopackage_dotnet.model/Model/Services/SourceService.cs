@@ -1,11 +1,10 @@
-using System.Collections.Generic;
-using System.IO;
+﻿using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using synopackage_dotnet.Model.DTOs;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 
 namespace synopackage_dotnet.Model.Services
 {
@@ -44,12 +43,12 @@ namespace synopackage_dotnet.Model.Services
     {
       if (source == null)
         return false;
-      return GetAllSourcesInternal().Where(p => p.Name == source).Any() ? true : false;
+      return GetAllSourcesInternal().Any(p => p.Name == source);
     }
 
     public SourceDTO GetSource(string source)
     {
-      return GetAllSourcesInternal().Where(p => p.Name == source).FirstOrDefault();
+      return GetAllSourcesInternal().FirstOrDefault(p => p.Name == source);
     }
 
     private SourcesDTO PrepareSources(SourceDTO[] sources)

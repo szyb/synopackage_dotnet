@@ -1,18 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using RestSharp;
 using synopackage_dotnet.Model.DTOs;
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace synopackage_dotnet.Model.Services
 {
   public class RestSharpDownloadService : DownloadServiceAbstract, IDownloadService
   {
-    ILogger<RestSharpDownloadService> logger;
+    private readonly ILogger<RestSharpDownloadService> logger;
 
     public RestSharpDownloadService(ILogger<RestSharpDownloadService> logger)
     {

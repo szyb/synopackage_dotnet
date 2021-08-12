@@ -1,19 +1,19 @@
-using System;
-using System.IO;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using synopackage_dotnet.Model.DTOs;
 using synopackage_dotnet.Model.SPK;
+using System;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace synopackage_dotnet.Model.Services
 {
   public abstract class CacheChainResponsibilityAbstract : ICacheChainResponsibility
   {
     protected ICacheChainResponsibility nextProcessor;
-    private ILogger logger;
+    private readonly ILogger logger;
 
-    public CacheChainResponsibilityAbstract(ILogger logger)
+    protected CacheChainResponsibilityAbstract(ILogger logger)
     {
       this.logger = logger;
     }
