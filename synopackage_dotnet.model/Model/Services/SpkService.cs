@@ -1,16 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Net;
-using ExpressMapper;
-using ExpressMapper.Extensions;
+﻿using ExpressMapper.Extensions;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using RestSharp;
 using synopackage_dotnet.Model.DTOs;
-using synopackage_dotnet.Model.SPK;
-using Serilog.Extensions.Logging;
-using Serilog.Context;
 using synopackage_dotnet.Model.Enums;
+using synopackage_dotnet.Model.SPK;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace synopackage_dotnet.Model.Services
@@ -40,9 +36,9 @@ namespace synopackage_dotnet.Model.Services
       string keyword = null,
       bool useGetMethod = false)
     {
-      ExecutionTime et = new ExecutionTime();
+      Stopwatch stopwatch = new Stopwatch();
 
-      string errorMessage = null;
+      string errorMessage;
       ResultFrom resultFrom = ResultFrom.NotSpecified;
       double? cacheOld = null;
       ParametersDTO parameters = new ParametersDTO(sourceName, model, versionDto, isBeta, keyword);
@@ -51,13 +47,12 @@ namespace synopackage_dotnet.Model.Services
       logEntry.LogType = LogType.Parameters;
       logger.LogInformation(Utils.GetSearchLogEntryString(logEntry));
       logEntry.LogType = LogType.Result;
-      et.Start();
+      stopwatch.Start();
       var cacheResult = await cacheService.GetSpkResponseFromCache(sourceName, arch, model, versionDto.Build.ToString(), isBeta);
-      SpkResult result = null;
-      if (cacheResult.HasValidCache == false)
+      SpkResult result;
+      if (!cacheResult.HasValidCache)
       {
-        string userAgent;
-        var parametersRequest = PrepareParameters(arch, model, versionDto, isBeta, customUserAgent, out userAgent);
+        var parametersRequest = PrepareParameters(arch, model, versionDto, isBeta, customUserAgent, out var userAgent);
 
         IDownloadService downloadService = downloadFactory.GetDefaultDownloadService();
         var response = await downloadService.Execute(url, parametersRequest, userAgent, useGetMethod);
@@ -103,20 +98,20 @@ namespace synopackage_dotnet.Model.Services
       {
         var finalResult = await GenerateResult(sourceName, keyword, parameters, result, resultFrom, cacheOld);
 
-        et.Stop();
+        stopwatch.Stop();
         logEntry.ResultFrom = resultFrom;
         logEntry.CacheOld = cacheOld;
-        logEntry.ExecutionTime = et.GetDiff();
+        logEntry.ExecutionTime = stopwatch.ElapsedMilliseconds;
         logger.LogInformation(Utils.GetSearchLogEntryString(logEntry));
         return finalResult;
       }
       else
       {
         errorMessage = "Spk result is empty";
-        et.Stop();
+        stopwatch.Stop();
         logEntry.ResultFrom = ResultFrom.NotSpecified;
         logEntry.CacheOld = null;
-        logEntry.ExecutionTime = et.GetDiff();
+        logEntry.ExecutionTime = stopwatch.ElapsedMilliseconds;
         logger.LogWarning("Spk result is empty {0}", Utils.GetSearchLogEntryString(logEntry));
         return new SourceServerResponseDTO(false, errorMessage, parameters, null, resultFrom, cacheOld);
       }
@@ -187,7 +182,7 @@ namespace synopackage_dotnet.Model.Services
       list.Add(new KeyValuePair<string, object>("timezone", "Brussels"));
 
 
-      userAgent = customUserAgent != null ? customUserAgent : unique;
+      userAgent = customUserAgent ?? unique;
       return list;
     }
 

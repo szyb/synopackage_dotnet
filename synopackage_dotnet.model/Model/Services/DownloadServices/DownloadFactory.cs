@@ -1,13 +1,13 @@
-using System;
-using synopackage_dotnet.Model.Enums;
+﻿using synopackage_dotnet.Model.Enums;
 using synopackage_dotnet.Model.Services;
+using System;
 
 namespace synopackage_dotnet.Model
 {
   public class DownloadFactory : IDownloadFactory
   {
-    DownloadServiceImplementation defaultDownloadService;
-    private Func<DownloadServiceImplementation, IDownloadService> factory;
+    private readonly DownloadServiceImplementation defaultDownloadService;
+    private readonly Func<DownloadServiceImplementation, IDownloadService> factory;
 
     public DownloadFactory(Func<DownloadServiceImplementation, IDownloadService> factory)
     {
@@ -20,23 +20,10 @@ namespace synopackage_dotnet.Model
       this.defaultDownloadService = downloadServiceImplementation;
     }
 
-    public IDownloadService GetDefaultDownloadService()
-    {
-      return factory(defaultDownloadService);
-    }
+    public IDownloadService GetDefaultDownloadService() => factory(defaultDownloadService);
 
-    public IDownloadService GetDownloadService(DownloadServiceImplementation donwloadServiceImplementation)
-    {
-      return factory(donwloadServiceImplementation);
-    }
+    public IDownloadService GetDownloadService(DownloadServiceImplementation library) => factory(library);
 
-    public IDownloadService GetDownloadServiceBySourceName(string sourceName)
-    {
-      //here we can use other library to the specific source
-      if (string.IsNullOrWhiteSpace(sourceName))
-        return factory(defaultDownloadService);
-      else
-        return factory(defaultDownloadService);
-    }
+    public IDownloadService GetDownloadServiceBySourceName(string sourceName) => factory(defaultDownloadService);
   }
 }

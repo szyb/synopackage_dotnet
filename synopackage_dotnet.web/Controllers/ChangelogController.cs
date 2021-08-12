@@ -10,7 +10,7 @@ namespace synopackage_dotnet.Controllers
   [Route("api/[controller]")]
   public class ChangelogController : BaseController
   {
-    private IChangelogService changelogService;
+    private readonly IChangelogService changelogService;
     public ChangelogController(IChangelogService changelogService)
     {
       this.changelogService = changelogService;

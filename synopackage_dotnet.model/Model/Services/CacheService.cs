@@ -1,20 +1,19 @@
+﻿using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using Polly;
+using synopackage_dotnet.Model.DTOs;
+using synopackage_dotnet.Model.SPK;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using Polly;
-using synopackage_dotnet.Model.DTOs;
-using synopackage_dotnet.Model.SPK;
 
 namespace synopackage_dotnet.Model.Services
 {
   public class CacheService : ICacheService
   {
-    // IDownloadService downloadService;
     private readonly ILogger<CacheService> logger;
     private readonly IDownloadFactory downloadFactory;
     private readonly string defaultIconExtension = "png";
@@ -32,7 +31,6 @@ namespace synopackage_dotnet.Model.Services
 
     public async Task ProcessIcons(string sourceName, List<SpkPackage> packages)
     {
-      IDownloadService downloadService = downloadFactory.GetDefaultDownloadService();
       List<Task> downloadTasks = new List<Task>();
       if (packages != null)
       {
@@ -45,7 +43,6 @@ namespace synopackage_dotnet.Model.Services
               try
               {
                 var url = GetValidUrl(package.Thumbnail[0]);
-                var extension = Path.GetExtension(url);
                 if (ShouldDownloadIcon(sourceName, url))
                 {
                   var task = DownloadIconAsync(url, sourceName, package.Name);
@@ -58,19 +55,16 @@ namespace synopackage_dotnet.Model.Services
               }
             }
           }
-          else if (package.Icon != null && package.Icon.Length > 0)
+          else if (package.Icon != null && package.Icon.Length > 0 && ShouldStoreIcon(sourceName, package.Name))
           {
-            if (ShouldStoreIcon(sourceName, package.Name))
+            try
             {
-              try
-              {
-                byte[] iconBytes = Convert.FromBase64String(package.Icon);
-                await File.WriteAllBytesAsync(GetIconFileNameWithCacheFolder(sourceName, package.Name), iconBytes);
-              }
-              catch (Exception ex)
-              {
-                logger.LogError(ex, "ProcessIcons - could not convert icon from base 64 or store error");
-              }
+              byte[] iconBytes = Convert.FromBase64String(package.Icon);
+              await File.WriteAllBytesAsync(GetIconFileNameWithCacheFolder(sourceName, package.Name), iconBytes);
+            }
+            catch (Exception ex)
+            {
+              logger.LogError(ex, "ProcessIcons - could not convert icon from base 64 or store error");
             }
           }
         }
@@ -231,11 +225,8 @@ namespace synopackage_dotnet.Model.Services
       ICacheChainResponsibility next;
       next = startChain.SetupNext(new ChainNewerCache(logger));
       next = next.SetupNext(new ChainSecondFileCache(logger));
-      next = next.SetupNext(new ChainFirstFileCache(logger));
-      // startChain.SetupNext(new ChainNewerCache(logger)
-      // .SetupNext(new Chaing));
-      // chain.SetupNext(new ChainSecondFileCache(logger));
-      // chain.SetupNext(new ChainFirstFileCache(logger));
+      next.SetupNext(new ChainFirstFileCache(logger));
+
       return await startChain.Handle(firstCache, secondCache);
     }
 

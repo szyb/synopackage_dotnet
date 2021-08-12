@@ -1,7 +1,7 @@
-using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using synopackage_dotnet.Model.Enums;
+using System;
 
 namespace synopackage_dotnet.Model.DTOs
 {
@@ -18,7 +18,7 @@ namespace synopackage_dotnet.Model.DTOs
     public RequestType RequestType { get; set; }
     public ParametersDTO parameters { get; set; }
     public double? CacheOld { get; set; }
-    public int ExecutionTime { get; set; }
+    public long ExecutionTime { get; set; }
 
     public SearchLogEntryDTO(ParametersDTO parameters)
     {

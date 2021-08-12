@@ -1,9 +1,9 @@
+﻿using Newtonsoft.Json;
+using synopackage_dotnet.Model.DTOs;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Newtonsoft.Json;
-using synopackage_dotnet.Model.DTOs;
 
 namespace synopackage_dotnet
 {
@@ -27,7 +27,7 @@ namespace synopackage_dotnet
       }
       string result = sb.ToString();
       if (result.EndsWith("&"))
-        result = result.Substring(0, result.Length - 1);
+        result = result[0..^1];
       return result;
     }
 
