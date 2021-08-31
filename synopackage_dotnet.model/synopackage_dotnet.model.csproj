@@ -1,9 +1,27 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <SourceGenerator_EnableLogging>True</SourceGenerator_EnableLogging>
+    <SourceGenerator_EnableDebug>False</SourceGenerator_EnableDebug>
+    <EmitCompilerGeneratedFiles>True</EmitCompilerGeneratedFiles>
+    <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)\GeneratedFiles</CompilerGeneratedFilesOutputPath>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Config\sources.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="Config\sources.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\synopackage_dotnet.Generator\synopackage_dotnet.Generator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Castle.Core" Version="4.4.1" />
     <PackageReference Include="HolopaMir.ExpressMapper" Version="2.0.0" />
@@ -20,5 +38,9 @@
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
     <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
   </ItemGroup>
+
+  <!--<ItemGroup>
+    <ProjectReference Include="..\synopackage_dotnet.Generator\synopackage_dotnet.Generator.csproj" />
+  </ItemGroup>-->
 
 </Project>
