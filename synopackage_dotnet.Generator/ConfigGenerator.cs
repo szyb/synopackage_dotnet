@@ -9,6 +9,7 @@ namespace synopackage_dotnet.Generator
   [Generator]
   public class ConfigGenerator : ISourceGenerator
   {
+    IGeneratorHandler generatorHandler;
     public void Execute(GeneratorExecutionContext context)
     {
       var files = context.AdditionalFiles.Where(p => p.Path.EndsWith(".json"));
@@ -24,12 +25,16 @@ namespace synopackage_dotnet.Generator
 
     private string GenerateClassesFromFile(string path)
     {
-      return null;
+      return generatorHandler.Handle(path);
     }
 
     public void Initialize(GeneratorInitializationContext context)
     {
-      //no need to initialize
+
+      //if (!Debugger.IsAttached)
+      //  Debugger.Launch();
+      generatorHandler = new SourcesGeneratorHandler();
+      //generatorHandler.SetupNext();
     }
   }
 }

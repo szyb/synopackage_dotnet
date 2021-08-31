@@ -1,0 +1,205 @@
+[
+  {
+    "Active": true,
+    "Name": "synology",
+    "Url": "https://payment.synology.com/api/getPackageList.php",
+    "Www": "https://www.synology.com",
+    "IsOfficial": true
+  },
+  {
+    "Active": true,
+    "Name": "synocommunity",
+    "Url": "https://packages.synocommunity.com",
+    "Www": "https://synocommunity.com",
+    "CustomUserAgent": null,
+    "DisabledReason": null,
+    "DisabledDate": null
+  },
+  {
+    "Active": true,
+    "Name": "cphub",
+    "Url": "https://www.cphub.net"
+  },
+  {
+    "Active": true,
+    "Name": "digitalbox",
+    "Url": "http://digital.box.free.fr/sspks/"
+  },
+  {
+    "Active": true,
+    "Name": "digitalboxdsm7",
+    "Url": "http://digital.box.free.fr/dsm7/"
+  },
+  {
+    "Active": false,
+    "Name": "beatificabytes",
+    "Url": "https://www.beatificabytes.be/sspks/",
+    "Www": "https://www.beatificabytes.be/",
+    "DisabledDate": "2021-07-20",
+    "DisabledReason": "This repository is discountinued by vendor"
+  },
+  {
+    "Active": true,
+    "Name": "pcloadletter",
+    "Url": "https://packages.pcloadletter.co.uk",
+    "UseGetMethod": true
+  },
+  {
+    "Active": false,
+    "Name": "unzureichende",
+    "Url": "http://spk.unzureichende.info/",
+    "DisabledDate": "2020-10-29",
+    "DisabledReason": "Not a valid repository"
+  },
+  {
+    "Active": false,
+    "Name": "naefmarco",
+    "Url": "http://spk.naefmarco.ch/spkrepo/packages/",
+    "DisabledDate": "2018-10-10",
+    "DisabledReason": "This repository is discountinued by vendor"
+  },
+  {
+    "Active": true,
+    "Name": "acmenet",
+    "Url": "http://synology.acmenet.ru/"
+  },
+  {
+    "Active": false,
+    "Name": "emby",
+    "Url": "https://synology.emby.media/",
+    "Www": "https://emby.media/community/index.php?/forum/153-synology/",
+    "DisabledDate": "2021-07-20",
+    "DisabledReason": "Not a valid DSM repo. Packages are still available on the website."
+  },
+  {
+    "Active": false,
+    "Name": "jdel",
+    "Url": "https://packages.jdel.org/api/",
+    "Www": "https://packages.jdel.org/",
+    "DisabledDate": "2020-10-29",
+    "DisabledReason": "This repository is discountinued by vendor"
+  },
+  {
+    "Active": true,
+    "Name": "dierkse",
+    "Url": "http://syno.dierkse.nl/"
+  },
+  {
+    "Active": true,
+    "Name": "nimloth",
+    "Url": "http://synology.nimloth.pl/"
+  },
+  {
+    "Active": false,
+    "Name": "cambier",
+    "Url": "https://synology.cambier.org/",
+    "DisabledDate": "2021-05-21",
+    "DisabledReason": "No packages"
+  },
+  {
+    "Active": true,
+    "Name": "synologyitalia",
+    "Url": "https://spk.synologyitalia.com",
+    "CustomUserAgent": "\"Mozilla/4.0 (compatible; MSIE 6.1; Windows XP) Synology\""
+  },
+  {
+    "Active": true,
+    "Name": "nzbusenet",
+    "Url": "http://synology.nzbusenet.com/"
+  },
+  {
+    "Active": true,
+    "Name": "filebot",
+    "Url": "https://get.filebot.net/syno/"
+  },
+  {
+    "Active": true,
+    "Name": "sysco",
+    "Url": "http://synology.sysco.ch/"
+  },
+  {
+    "Active": true,
+    "Name": "hofrichter",
+    "Url": "https://www.hofrichter.at/sspks/"
+  },
+  {
+    "Active": false,
+    "Name": "diablos-netzwerk",
+    "Url": "http://spk.diablos-netzwerk.de/",
+    "Www": "http://spk.diablos-netzwerk.de/?lang=en",
+    "DisabledDate": "2020-01-29",
+    "DisabledReason": "This repository is discountinued by vendor"
+  },
+  {
+    "Active": false,
+    "Name": "page81",
+    "Url": "https://packages.page81.net/",
+    "DisabledDate": "2021-07-20",
+    "DisabledReason": "This repository is discountinued by vendor"
+  },
+  {
+    "Active": false,
+    "Name": "kastner",
+    "Url": "http://jaspr.kastner.wtf/",
+    "Www": "http://kastner.wtf",
+    "DisabledDate": "2020-02-07",
+    "DisabledReason": "This repository is discountinued by vendor"
+  },
+  {
+    "Active": false,
+    "Name": "nas-mirror",
+    "Url": "http://spk.nas-mirror.de/spkrepo/packages/",
+    "DisabledDate": "2018-09-20",
+    "DisabledReason": "Domain has expired"
+  },
+  {
+    "Active": false,
+    "Name": "cytec",
+    "Url": "http://cytec.us/spk/",
+    "DisabledDate": "2018-08-28",
+    "DisabledReason": "Domain has expired"
+  },
+  {
+    "Active": true,
+    "Name": "imnks",
+    "Url": "https://spk.imnks.com",
+    "Www": "https://spk.imnks.com"
+  },
+  {
+    "Active": true,
+    "Name": "imnksdsm7",
+    "Url": "https://spk7.imnks.com",
+    "Www": "https://spk7.imnks.com"
+  },
+  {
+    "Active": true,
+    "Name": "hildinger",
+    "Url": "http://www.hildinger.us/sspks/"
+  },
+  {
+    "Active": true,
+    "Name": "jadahl",
+    "Url": "http://www.jadahl.com/domoticz_stable_6/",
+    "Www": "http://www.jadahl.com"
+  },
+  {
+    "Active": false,
+    "Name": "brigittehelsen",
+    "Url": "http://www.brigittehelsen.be/plexconnect/",
+    "DisabledDate": "2018-05-04",
+    "DisabledReason": "Not a valid repository"
+  },
+  {
+    "Active": true,
+    "Name": "pulse-station",
+    "Url": "https://www.pulse-station.com/repo/",
+    "Www": "https://www.pulse-station.com"
+  },
+  {
+    "Active": false,
+    "Name": "netzbaer",
+    "Url": "https://spk.netzbaer.de/",
+    "DisabledDate": "2021-05-21",
+    "DisabledReason": "This repository is discountinued by vendor"
+  }
+]

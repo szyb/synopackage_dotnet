@@ -1,10 +1,81 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using synopackage_dotnet.Model.DTOs;
 
-namespace synopackage_dotnet
+namespace synopackage_dotnet.Model
 {
-    class Sources
+    public static class SourcesManager
     {
+      public static IList<SourceDTO> ActiveSources { get; private set; }
+      public static IList<SourceDTO> InactiveSources { get; private set; }
+      private static Dictionary<string, SourceDTO> Sources { get; set; }
+
+      static SourcesManager()
+      {
+        ActiveSources = new List<SourceDTO>();
+        InactiveSources = new List<SourceDTO>();
+        Sources = new Dictionary<string, SourceDTO>(); 
+
+        {{~ for s in sources ~}}
+        AddSource(
+        {{~ s.active ~}},
+        "{{~ s.name ~}}",
+        "{{~ s.url ~}}",
+        "{{~ s.www ~}}",
+        "{{~ s.disabled_reason ~}}",
+        "{{~ s.disabled_date ~}}",
+        "{{~ s.custom_user_agent ~}}",
+        {{~ s.use_get_method ~}},
+        {{~ s.is_official ~}}
+        );
+        {{~ end ~}}
+      }
+
+      private static void AddSource(
+        bool active, 
+        string name, 
+        string url, 
+        string www, 
+        string disabledReason, 
+        DateTime? disabledDate, 
+        string customUserAgent,
+        bool useGetMethod,
+        bool isOfficial)
+        {
+          SourceDTO source = new SourceDTO()
+          {
+            Active = active,
+            Name = name,
+            Url = url,
+            Www = www,
+            DisabledReason = disabledReason,
+            DisabledDate = disabledDate,
+            CustomUserAgent = customUserAgent,
+            UseGetMethod = useGetMethod,
+            IsOfficial = isOfficial
+          };
+          if (string.IsNullOrWhitespace(source.Www))
+            source.Www = source.Url;
+          if (!source.IsOfficial)
+            source.DisplayUrl = source.Url;
+          else
+            source.DisplayUrl = "Synology's Official Package Center";
+
+          if (source.IsActive)
+            ActiveSources.Add(source);
+          else
+            InactiveSources.Add(source);
+
+          AllSources.Add(source.Name, source);
+        }
+
+        public static SourceDTO GetSourceByName(string name)
+        {
+          if (AllSources.Contains(name))
+            return AllSources[name];
+          else
+            return null;
+        }
     }
 }
