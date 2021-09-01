@@ -1,16 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using synopackage_dotnet.Model.DTOs;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace synopackage_dotnet.Model.Services
 {
   public class SourceService : ISourceService
   {
-    private readonly string configFile = "Config/sources.json";
 
     private readonly ILogger<SourceService> logger;
 
@@ -18,64 +13,25 @@ namespace synopackage_dotnet.Model.Services
     {
       this.logger = logger;
     }
-    private SourceDTO[] GetAllSourcesInternal()
+
+    public IEnumerable<SourceDTO> GetAllActiveSources()
     {
-      var sourcesJson = File.ReadAllText(configFile);
-      var sources = JsonConvert.DeserializeObject<SourceDTO[]>(sourcesJson);
-      Parallel.ForEach(sources, item =>
-      {
-        if (string.IsNullOrWhiteSpace(item.Www))
-          item.Www = item.Url;
-        if (!item.IsOfficial)
-          item.DisplayUrl = item.Url;
-        else
-          item.DisplayUrl = "Synology's Official Package Center";
-      });
-      return sources;
+      return SourceHelper.ActiveSources;
     }
 
     public SourcesDTO GetAllSources()
     {
-      return PrepareSources(GetAllSourcesInternal());
+      return SourceHelper.GetAllSources();
     }
 
-    public bool ValidateSource(string source)
+    public SourceDTO GetSource(string name)
     {
-      if (source == null)
-        return false;
-      return GetAllSourcesInternal().Any(p => p.Name == source);
+      return SourceHelper.GetSourceByName(name);
     }
 
-    public SourceDTO GetSource(string source)
+    public bool ValidateSource(string name)
     {
-      return GetAllSourcesInternal().FirstOrDefault(p => p.Name == source);
-    }
-
-    private SourcesDTO PrepareSources(SourceDTO[] sources)
-    {
-      SourcesDTO result = new SourcesDTO();
-      foreach (var source in sources)
-      {
-        if (source.Active)
-        {
-          result.ActiveSources.Add(source);
-        }
-        else
-        {
-          result.InActiveSources.Add(source);
-        }
-      }
-      FileInfo fi = new FileInfo(configFile);
-      result.LastUpdateDate = fi.LastWriteTimeUtc;
-      return result;
-    }
-
-    public IEnumerable<SourceDTO> GetAllActiveSources()
-    {
-      var result = GetAllSourcesInternal()
-        .Where(item => item.Active);
-
-      return result;
+      return SourceHelper.GetSourceByName(name) != null;
     }
   }
 }

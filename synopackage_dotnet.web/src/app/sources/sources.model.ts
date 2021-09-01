@@ -11,7 +11,7 @@ export class SourceDTO {
 
 export class SourcesDTO {
   activeSources: SourceDTO[];
-  inActiveSources: SourceDTO[];
+  inactiveSources: SourceDTO[];
   lastUpdateDate: Date;
 }
 
@@ -36,4 +36,3 @@ export class SourceServerResponseDTO {
   resultFrom: number;
   cacheOld: number
 }
-
