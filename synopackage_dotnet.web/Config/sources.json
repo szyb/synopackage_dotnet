@@ -31,12 +31,10 @@
     "Url": "http://digital.box.free.fr/dsm7/"
   },
   {
-    "Active": false,
+    "Active": true,
     "Name": "beatificabytes",
     "Url": "https://www.beatificabytes.be/sspks/",
-    "Www": "https://www.beatificabytes.be/",
-    "DisabledDate": "2021-07-20",
-    "DisabledReason": "This repository is discountinued by vendor"
+    "Www": "https://www.beatificabytes.be/"
   },
   {
     "Active": true,
