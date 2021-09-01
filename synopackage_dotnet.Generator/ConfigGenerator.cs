@@ -18,7 +18,7 @@ namespace synopackage_dotnet.Generator
         var fileName = Path.GetFileNameWithoutExtension(file.Path);
         string generatedCode = GenerateClassesFromFile(file.Path);
 
-        context.AddSource($"{fileName}.cs", SourceText.From(generatedCode, Encoding.UTF8));
+        context.AddSource($"{fileName.FirstCharToUpper()}Helper.cs", SourceText.From(generatedCode, Encoding.UTF8));
 
       }
     }
@@ -33,7 +33,11 @@ namespace synopackage_dotnet.Generator
 
       //if (!Debugger.IsAttached)
       //  Debugger.Launch();
-      generatorHandler = new SourcesGeneratorHandler();
+
+      var sourcesGeneratorHandler = new SourcesGeneratorHandler();
+      var modelsGeneratorHandler = new ModelsGeneratorHandler();
+      generatorHandler = sourcesGeneratorHandler;
+      sourcesGeneratorHandler.SetupNext(modelsGeneratorHandler);
       //generatorHandler.SetupNext();
     }
   }
