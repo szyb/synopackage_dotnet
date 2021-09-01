@@ -1,5 +1,17 @@
 [
   {
+    "version": "0.5.15",
+    "date": "2021-09-01",
+    "new": [
+      "Beatificabytes back to active sources"
+    ],
+    "improved": [],
+    "fixed": [
+      "Security fixes"
+    ],
+    "removedSources": []
+  },
+  {
     "version": "0.5.14",
     "date": "2021-08-12",
     "new": [],
