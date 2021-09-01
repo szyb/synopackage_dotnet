@@ -6,7 +6,8 @@
   <app-wait></app-wait>
 </div>
 <div *ngIf="sources">
-  <div class="col-12 p-0"><small class="light-green-text">Last update: {{sources.lastUpdateDate | date:'long' }}</small>
+  <div class="col-12 p-0">
+    <small class="light-green-text">Last update: {{sources.lastUpdateDate | date:'long' }}</small>
   </div>
 </div>
 <blockquote *ngIf="sources" class="blockquote bq-primary">
@@ -21,7 +22,8 @@
 </div>
 <div *ngIf="sources">
   <div class="row" *ngFor="let source of activeSources">
-    <div class="d-inline-block d-sm-none mt-1"><a routerLink="/sources/{{source.name}}">{{ source.displayUrl }}</a>
+    <div class="d-inline-block d-sm-none mt-1">
+      <a routerLink="/sources/{{source.name}}">{{ source.displayUrl }}</a>
     </div>
     <div class="d-none d-md-inline-block          col-md-3 mt-1">{{ source.name }}</div>
     <div class="d-none d-sm-inline-block col-sm-9 col-md-6 mt-1">{{ source.displayUrl }}</div>
@@ -40,18 +42,18 @@
     </div>
   </div>
 </div>
-<blockquote *ngIf="inActiveSources" class="blockquote bq-primary mt-3">
+<blockquote *ngIf="inactiveSources" class="blockquote bq-primary mt-3">
   <p class="bq-title">Inactive repositiories:</p>
 </blockquote>
-<div class="row border-bottom" *ngIf="inActiveSources">
+<div class="row border-bottom" *ngIf="inactiveSources">
   <div class="d-inline-block d-sm-none mt-1 font-weight-bold">url</div>
   <div class="d-none d-md-inline-block           col-md-3 col-lg-2 mt-1 font-weight-bold">name</div>
   <div class="d-none d-sm-inline-block col-sm-11 col-md-8 col-lg-5 col-xl-4 mt-1 font-weight-bold">url</div>
   <div class="d-none d-lg-inline-block                    col-lg-4 col-xl-5 mt-1 font-weight-bold">disabled reason</div>
   <div class="d-none d-sm-inline-block col-sm-1  col-md-1 mt-1 font-weight-bold">link</div>
 </div>
-<div *ngIf="inActiveSources">
-  <div class="row" *ngFor="let source of inActiveSources">
+<div *ngIf="inactiveSources">
+  <div class="row" *ngFor="let source of inactiveSources">
     <div class="d-inline-block d-sm-none mt-1" *ngIf="source.www != null">
       <a href="{{ source.www }}" target="_blank" rel="noopener noreferrer">{{ source.displayUrl }}</a>
     </div>

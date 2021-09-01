@@ -13,13 +13,13 @@ import { Title } from '@angular/platform-browser';
 export class SourcesComponent {
   public sources: SourcesDTO;
   public activeSources: SourceDTO[];
-  public inActiveSources: SourceDTO[];
+  public inactiveSources: SourceDTO[];
 
   constructor(http: HttpClient, private sourcesService: SourcesService, private titleService: Title) {
     this.titleService.setTitle('Sources - synopackage.com');
     this.sourcesService.getAllSources().subscribe(result => {
       this.activeSources = result.activeSources;
-      this.inActiveSources = result.inActiveSources;
+      this.inactiveSources = result.inactiveSources;
       this.sources = result;
     });
   }
