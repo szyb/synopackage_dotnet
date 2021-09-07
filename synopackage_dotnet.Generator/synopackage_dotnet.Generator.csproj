@@ -10,6 +10,7 @@
     <None Remove="Templates\Models.sbncs" />
     <None Remove="Templates\News.sbncs" />
     <None Remove="Templates\Sources.sbncs" />
+    <None Remove="Templates\Versions.sbncs" />
   </ItemGroup>
 
   <ItemGroup>
