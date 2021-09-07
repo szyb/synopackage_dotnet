@@ -1,0 +1,56 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using synopackage_dotnet.Model.DTOs;
+
+namespace synopackage_dotnet.Model
+{
+    public static class VersionHelper
+    {
+      private static Dictionary<string, VersionDTO> AllVersions { get; set; }
+
+      static VersionHelper()
+      {
+        AllVersions = new Dictionary<string, VersionDTO>(); 
+
+        {{~ for v in versions ~}}
+        AddVersion(
+        {{--}}"{{- v.version -}}",
+        {{--}}"{{- v.short_version -}}",
+        {{- v.major -}},
+        {{- v.minor -}},
+        {{- v.micro -}},
+        {{- v.nano -}},
+        {{- v.build -}});
+        {{~ end ~}}
+      }
+
+      private static void AddVersion(
+        string version,
+        string shortVersion,
+        int major,
+        int minor,
+        int micro,
+        int nano,
+        int build
+      )
+      {
+        VersionDTO ver = new VersionDTO()
+        {
+          Version = version,
+          ShortVersion = shortVersion,
+          Major = major,
+          Minor = minor,
+          Micro = micro,
+          Nano = nano,
+          Build = build
+        };
+        AllVersions.Add(ver.Build.ToString(), ver);
+      }
+
+      public IEnumerable<VersionDTO> GetAllVersions()
+      {
+        return AllVersions.Values;
+      }
+    }
+}

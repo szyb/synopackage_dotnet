@@ -15,6 +15,7 @@
     <None Remove="Config\models.json" />
     <None Remove="Config\news.json" />
     <None Remove="Config\sources.json" />
+    <None Remove="Config\versions.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +31,13 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </AdditionalFiles>
   </ItemGroup>
+  
+  <ItemGroup>
+    <AdditionalFiles Include="Config\versions.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </AdditionalFiles>
 
   <ItemGroup>
     <AdditionalFiles Include="Config\changelog.json">
