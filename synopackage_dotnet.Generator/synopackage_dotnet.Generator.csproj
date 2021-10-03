@@ -6,11 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Templates\Changelogs.sbncs" />
     <None Remove="Templates\Models.sbncs" />
     <None Remove="Templates\Sources.sbncs" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Templates\Changelogs.sbncs" />
     <EmbeddedResource Include="Templates\Models.sbncs" />
     <EmbeddedResource Include="Templates\Sources.sbncs" />
   </ItemGroup>

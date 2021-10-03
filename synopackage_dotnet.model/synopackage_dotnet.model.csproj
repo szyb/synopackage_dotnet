@@ -11,6 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Config\changelog.json" />
     <None Remove="Config\models.json" />
     <None Remove="Config\sources.json" />
   </ItemGroup>
@@ -24,6 +25,14 @@
   <ItemGroup>
     <AdditionalFiles Include="Config\models.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </AdditionalFiles>
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="Config\changelog.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </AdditionalFiles>
