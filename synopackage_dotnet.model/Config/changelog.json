@@ -1,0 +1,470 @@
+﻿[
+  {
+    "version": "0.5.14",
+    "date": "2021-08-12",
+    "new": [],
+    "improved": [
+      "Minor code improvements - not visible changes"
+    ],
+    "fixed": [
+      "Security fixes"
+    ],
+    "removedSources": []
+  },
+  {
+    "version": "0.5.13",
+    "date": "2021-07-26",
+    "new": [
+      "Upgrade frontend to Angular 11",
+      "Upgrade backend libraries"
+    ],
+    "improved": [],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
+    "version": "0.5.12",
+    "date": "2021-07-25",
+    "new": [ "Add imnks source for DSM 7" ],
+    "improved": [],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
+    "version": "0.5.11",
+    "date": "2021-07-20",
+    "new": [ "Hofrichter repository is back to active" ],
+    "improved": [],
+    "fixed": [],
+    "removedSources": [
+      "Page81 moved to inactive",
+      "Emby moved to inactive as it is not valid DSM repo. However packages are still available on their website",
+      "Beatificabytes moved to inactive. This site is down for a while"
+    ]
+  },
+  {
+    "version": "0.5.10",
+    "date": "2021-05-21",
+    "new": [],
+    "improved": [],
+    "fixed": [
+      "Security fixes"
+    ],
+    "removedSources": [
+      "Cambier source has been removed as since 01.01.2021 they doesn't serve any packages",
+      "Added new spk.netzbaer.de directy to inactive sources just to acknowledge it worked some time ago"
+    ]
+  },
+  {
+    "version": "0.5.9",
+    "date": "2021-04-24",
+    "new": [
+      "New source: imnks (made for China and world users)"
+    ],
+    "improved": [],
+    "fixed": [
+      "Security fixes"
+    ],
+    "removedSources": []
+  },
+  {
+    "version": "0.5.8",
+    "date": "2021-04-17",
+    "new": [
+      "New DSM version 6.2.4",
+      "New model RS819"
+    ],
+    "improved": [],
+    "fixed": [
+      "Security fixes"
+    ],
+    "removedSources": []
+  },
+  {
+    "version": "0.5.7",
+    "date": "2021-03-20",
+    "new": [
+      "Add new source: Digitalboxdsm7 a dedicated package source for DSM 7"
+    ],
+    "improved": [],
+    "fixed": [
+      "Security fixes"
+    ],
+    "removedSources": []
+  },
+  {
+    "version": "0.5.6",
+    "date": "2021-02-23",
+    "new": [
+      "Support for DSM 7.0 beta"
+    ],
+    "improved": [
+      "Update Dockerfile"
+    ],
+    "fixed": [],
+    "removedSources": [
+      "Hofrichter source has been removed since 2021-02-01"
+    ]
+  },
+  {
+    "version": "0.5.5",
+    "date": "2021-01-10",
+    "new": [
+      "Backend is running under .NET 5.0"
+    ],
+    "improved": [
+      "Optimized download dialog"
+    ],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
+    "version": "0.5.4",
+    "date": "2020-12-31",
+    "new": [
+      "Allow insecure content (SPK) download in Chrome 88"
+    ],
+    "improved": [],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
+    "version": "0.5.3",
+    "date": "2020-12-19",
+    "new": [],
+    "improved": [],
+    "fixed": [
+      "Fix cphub response parsing",
+      "Fix compression middleware (cont.)"
+    ],
+    "removedSources": []
+  },
+  {
+    "version": "0.5.2",
+    "date": "2020-12-18",
+    "new": [],
+    "improved": [],
+    "fixed": [
+      "Fix compression middleware"
+    ],
+    "removedSources": []
+  },
+  {
+    "version": "0.5.1",
+    "date": "2020-12-14",
+    "new": [
+      "Enable compression of static files and server responses",
+      "Extend cache expiration for static font files"
+    ],
+    "improved": [],
+    "fixed": [
+      "Security fixes"
+    ],
+    "removedSources": []
+  },
+  {
+    "version": "0.5.0",
+    "date": "2020-11-29",
+    "new": [
+      "Milestone 0.5 completed",
+      "Paging on News & Changelog pages"
+    ],
+    "improved": [],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
+    "version": "0.4.15",
+    "date": "2020-11-15",
+    "new": [
+      "Add last update date on sources page"
+    ],
+    "improved": [
+      "Change default model (DS220+) and version (6.2.3)",
+      "Click on 'synopackage.com' navigates to Home page without reloading"
+    ],
+    "fixed": [
+      "Fix build number for version 6.2.3"
+    ],
+    "removedSources": []
+  },
+  {
+    "version": "0.4.14",
+    "date": "2020-11-11",
+    "new": [
+      "Change caching response mechanism",
+      "Use CPU architecture based cache if no other found",
+      "Security fixes (dependencies)"
+    ],
+    "improved": [
+      "Optimize docker file"
+    ],
+    "fixed": [
+      "Fixed doubled search requests in some circumstances"
+    ],
+    "removedSources": []
+  },
+  {
+    "version": "0.4.13",
+    "date": "2020-10-31",
+    "new": [
+      "Add new source: Jadahl (Domoticz)",
+      "Hildinger source is back to active"
+    ],
+    "improved": [],
+    "fixed": [],
+    "removedSources": [
+      "Jdel source is discontinued",
+      "Unzureichende source is now invalid"
+    ]
+  },
+  {
+    "version": "0.4.12",
+    "date": "2020-09-18",
+    "new": [
+      "Add new source: DigitalBox",
+      "Add new models: DS1520+, DS1621xs+",
+      "Security fixes (dependencies)"
+    ],
+    "improved": [],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
+    "version": "0.4.11",
+    "date": "2020-08-06",
+    "new": [
+      "Security fixes (dependencies)"
+    ],
+    "improved": [],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
+    "version": "0.4.10",
+    "date": "2020-05-27",
+    "new": [
+      "Allow download packages with relative url (given from the source server)"
+    ],
+    "improved": [],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
+    "version": "0.4.9",
+    "date": "2020-05-17",
+    "new": [
+      "Browse Synology's Official Package Center (search is also available)",
+      "Home page - add Browse Synology server card"
+    ],
+    "improved": [
+      "Loading icons from source servers"
+    ],
+    "fixed": [],
+    "removedSources": [
+      "Removed hildinger source. Discountinued."
+    ]
+  },
+  {
+    "version": "0.4.8",
+    "date": "2020-05-02",
+    "new": [
+      "New DSM version 6.2.3",
+      "New model DS220j",
+      "New source Beatificabytes",
+      "New source pulse-station"
+    ],
+    "improved": [
+      "Updated external packages",
+      "Add no-cache header for index.html, so the browser will always load the latest version."
+    ],
+    "fixed": [],
+    "removedSources": [
+      "Removed kastner source. Discountinued.",
+      "Removed diablos-netzwerk source. Discontinued."
+    ]
+  },
+  {
+    "version": "0.4.7",
+    "date": "2020-01-12",
+    "new": [
+      "New model DS420j"
+    ],
+    "improved": [
+      "HTTPS redirection"
+    ],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
+    "version": "0.4.6",
+    "date": "2020-01-07",
+    "new": [
+      "Frontend running on Angular 8!"
+    ],
+    "improved": [
+      "Lazy loading packages icon - default icon is shown when origin icon is invalid or not loaded yet",
+      "Upgrade some external packages",
+      "Backend refactor",
+      "Updated Dockerfile"
+    ],
+    "fixed": [
+      "Fix download data from pcloadletter server"
+    ],
+    "removedSources": []
+  },
+  {
+    "version": "0.4.5",
+    "date": "2019-12-18",
+    "new": [],
+    "improved": [
+      "Backend runing on .NET CORE 3.1 (LTS)",
+      "Upgrade some external packages"
+    ],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
+    "version": "0.4.4",
+    "date": "2019-10-26",
+    "new": [],
+    "improved": [
+      "Simplified DSM version displaying in navigation bar (without build number)",
+      "User settings: channel (stable or beta) is displayed only when user choose beta packages",
+      "User settings: no build number in combobox with versions"
+    ],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
+    "version": "0.4.3",
+    "date": "2019-10-23",
+    "new": [
+      "Jdel source back to active list"
+    ],
+    "improved": [
+      "News page: small fix for viewing 2 kind of links (internal and external)"
+    ],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
+    "version": "0.4.2",
+    "date": "2019-10-12",
+    "new": [],
+    "improved": [
+      "Default version is set to 6.2.2",
+      "Models in user settings are sorted alphabetically"
+    ],
+    "fixed": [
+      "Fix package layout view when package description is short",
+      "Fix date format on news and changelog page"
+    ],
+    "removedSources": []
+  },
+  {
+    "version": "0.4.1",
+    "date": "2019-10-06",
+    "new": [],
+    "improved": [
+      "Backend works now on .NET Core 3.0"
+    ],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
+    "version": "0.4.0",
+    "date": "2019-07-30",
+    "new": [
+      "New model: DS620Slim",
+      "Update to .NET Core 2.2 & Angular 7",
+      "New info page"
+    ],
+    "improved": [
+      "Minimal footer information"
+    ],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
+    "version": "0.3.0",
+    "date": "2019-06-30",
+    "new": [
+      "New home page: now you can perform search directly from home page",
+      "News are moved to other page",
+      "New model DS419Slim is available for search"
+    ],
+    "improved": [],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
+    "version": "0.2.3",
+    "date": "2019-02-17",
+    "new": [
+      "Source http://jaspr.kastner.wtf/ is back to active"
+    ],
+    "improved": [
+      "Navbar menu: active page is highlighted",
+      "Navbar menu: better responsive layout",
+      "Sources page: better responsive layout"
+    ],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
+    "version": "0.2.2",
+    "date": "2019-01-12",
+    "new": [
+      "Add Privacy Policy (link in the footer)"
+    ],
+    "improved": [
+      "Dockerfile uses volume. Updated instructions in README.md on github",
+      "Search page: add hand pointer over the colapse/expand icon"
+    ],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
+    "version": "0.2.1",
+    "date": "2019-01-10",
+    "new": [
+      "Share link for browse source page",
+      "Support for proxy on host environment (via http_proxy variable)"
+    ],
+    "improved": [
+      "Footer update",
+      "Search page: hand pointer over the \"share icon\"",
+      "Docker changes"
+    ],
+    "fixed": [
+      "Search page: fix broken share link when user did not provide own model & version",
+      "Fix broken link when model contains \"/\""
+    ],
+    "removedSources": []
+  },
+  {
+    "version": "0.2.0",
+    "date": "2018-12-04",
+    "new": [
+      "Milestone 0.2 completed",
+      "Docker image is ready. More info soon on home page",
+      "Add license information: Apache 2.0. More info in git repository"
+    ],
+    "improved": [],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
+    "version": "0.1.5",
+    "date": "2018-11-26",
+    "new": [
+      "Confirm dialog when attempting to download package",
+      "Source server spk.unzureichende.info is back to active sources",
+      "Changelog page introduced"
+    ],
+    "improved": [],
+    "fixed": [],
+    "removedSources": []
+  }
+]

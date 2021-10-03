@@ -36,8 +36,10 @@ namespace synopackage_dotnet.Generator
 
       var sourcesGeneratorHandler = new SourcesGeneratorHandler();
       var modelsGeneratorHandler = new ModelsGeneratorHandler();
+      var changelogsGeneratorHandler = new ChangelogsGeneratorHandler();
       generatorHandler = sourcesGeneratorHandler;
       sourcesGeneratorHandler.SetupNext(modelsGeneratorHandler);
+      modelsGeneratorHandler.SetupNext(changelogsGeneratorHandler);
       //generatorHandler.SetupNext();
     }
   }
