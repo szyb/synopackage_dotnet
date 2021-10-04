@@ -84,7 +84,13 @@ namespace synopackage_dotnet.Model
           {
             ActiveSources = ActiveSources,
             InactiveSources = InactiveSources,
-            LastUpdateDate = DateTime.Now
+            LastUpdateDate = new DateTime(
+              {{- last_update_date.year -}}, 
+              {{- last_update_date.month -}}, 
+              {{- last_update_date.day -}}, 
+              {{- last_update_date.hour -}}, 
+              {{- last_update_date.minute -}}, 
+              {{- last_update_date.second -}}) 
           };
           return result;
         }
