@@ -5,8 +5,6 @@ namespace synopackage_dotnet.Model.Services
 {
   public class ChangelogService : Paging, IChangelogService
   {
-    private readonly string configFile = "Config/changelog.json";
-
     private PagingDTO<ChangelogDTO> GetChangelogsInternal(int? page, int? itemsPerPage)
     {
       var changelogs = ChangelogHelper.GetChangelogs();
