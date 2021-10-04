@@ -16,7 +16,6 @@ namespace synopackage_dotnet.Generator.Entities
     public int Major { get; private set; }
     public int Minor { get; private set; }
     public int Micro { get; private set; }
-    public int Nano { get; private set; }
     public int Build { get; private set; }
     public bool IsValid { get; private set; }
 

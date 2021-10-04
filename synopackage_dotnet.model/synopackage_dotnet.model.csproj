@@ -21,6 +21,8 @@
   <ItemGroup>
     <AdditionalFiles Include="Config\sources.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </AdditionalFiles>
   </ItemGroup>
 
@@ -31,13 +33,14 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </AdditionalFiles>
   </ItemGroup>
-  
+
   <ItemGroup>
     <AdditionalFiles Include="Config\versions.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </AdditionalFiles>
+  </ItemGroup>
 
   <ItemGroup>
     <AdditionalFiles Include="Config\changelog.json">
