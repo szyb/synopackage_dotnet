@@ -10,7 +10,11 @@ namespace synopackage_dotnet.Generator
   [Generator]
   public class ConfigGenerator : ISourceGenerator
   {
-    IGeneratorHandler generatorHandler;
+    private readonly IGeneratorHandler sourcesGeneratorHandler = new SourcesGeneratorHandler();
+    private readonly IGeneratorHandler versionsGeneratorHandler = new VersionsGeneratorHandler();
+    private readonly IGeneratorHandler modelsGeneratorHandler = new ModelsGeneratorHandler();
+    private readonly IGeneratorHandler changelogsGeneratorHandler = new ChangelogsGeneratorHandler();
+    private readonly IGeneratorHandler newsGeneratorHandler = new NewsGeneratorHandler();
     public void Execute(GeneratorExecutionContext context)
     {
       var files = context.AdditionalFiles.Where(p => p.Path.EndsWith(".json"));
@@ -18,15 +22,24 @@ namespace synopackage_dotnet.Generator
       {
         var fileName = Path.GetFileNameWithoutExtension(file.Path);
         string generatedCode = GenerateClassesFromFile(file.Path);
-
-        context.AddSource($"{fileName.FirstCharToUpper()}Helper.cs", SourceText.From(generatedCode, Encoding.UTF8));
+        if (generatedCode != null)
+          context.AddSource($"{fileName.FirstCharToUpper()}Helper.cs", SourceText.From(generatedCode, Encoding.UTF8));
 
       }
     }
 
     private string GenerateClassesFromFile(string path)
     {
-      return generatorHandler.Handle(path);
+      string fileName = Path.GetFileNameWithoutExtension(path);
+      return fileName switch
+      {
+        "sources" => sourcesGeneratorHandler.Handle(path),
+        "versions" => versionsGeneratorHandler.Handle(path),
+        "models" => modelsGeneratorHandler.Handle(path),
+        "changelog" => changelogsGeneratorHandler.Handle(path),
+        "news" => newsGeneratorHandler.Handle(path),
+        _ => null,
+      };
     }
 
     public void Initialize(GeneratorInitializationContext context)
@@ -35,16 +48,7 @@ namespace synopackage_dotnet.Generator
       //if (!Debugger.IsAttached)
       //  Debugger.Launch();
 
-      var sourcesGeneratorHandler = new SourcesGeneratorHandler();
-      var versionsGeneratorHandler = new VersionsGeneratorHandler();
-      var modelsGeneratorHandler = new ModelsGeneratorHandler();
-      var changelogsGeneratorHandler = new ChangelogsGeneratorHandler();
-      var newsGeneratorHandler = new NewsGeneratorHandler();
-      generatorHandler = sourcesGeneratorHandler;
-      sourcesGeneratorHandler.SetupNext(versionsGeneratorHandler);
-      versionsGeneratorHandler.SetupNext(modelsGeneratorHandler);
-      modelsGeneratorHandler.SetupNext(changelogsGeneratorHandler);
-      changelogsGeneratorHandler.SetupNext(newsGeneratorHandler);
+
     }
   }
 }

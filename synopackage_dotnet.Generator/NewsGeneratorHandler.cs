@@ -8,13 +8,7 @@ namespace synopackage_dotnet.Generator
 {
   public class NewsGeneratorHandler : GeneratorHandlerAbstract
   {
-    public override bool CanHandle(string filePath)
-    {
-      string fileName = Path.GetFileNameWithoutExtension(filePath);
-      return fileName == "news";
-    }
-
-    public override string ConcreteHandle(string filePath)
+    public override string Handle(string filePath)
     {
       var content = File.ReadAllText(filePath);
       var list = JsonConvert.DeserializeObject<List<NewsDto>>(content);
