@@ -14,15 +14,9 @@
     <noWarn>1591</noWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Content Remove="Config\sources.json" />
     <Content Remove="web.config" />
     <Content Remove="web.production.config" />
     <Content Remove="web.test.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <AdditionalFiles Include="Config\sources.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </AdditionalFiles>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\" />
