@@ -1,5 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -35,11 +36,13 @@ namespace synopackage_dotnet.Generator
       //  Debugger.Launch();
 
       var sourcesGeneratorHandler = new SourcesGeneratorHandler();
+      var versionsGeneratorHandler = new VersionsGeneratorHandler();
       var modelsGeneratorHandler = new ModelsGeneratorHandler();
       var changelogsGeneratorHandler = new ChangelogsGeneratorHandler();
       var newsGeneratorHandler = new NewsGeneratorHandler();
       generatorHandler = sourcesGeneratorHandler;
-      sourcesGeneratorHandler.SetupNext(modelsGeneratorHandler);
+      sourcesGeneratorHandler.SetupNext(versionsGeneratorHandler);
+      versionsGeneratorHandler.SetupNext(modelsGeneratorHandler);
       modelsGeneratorHandler.SetupNext(changelogsGeneratorHandler);
       changelogsGeneratorHandler.SetupNext(newsGeneratorHandler);
     }

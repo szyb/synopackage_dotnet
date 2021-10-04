@@ -18,6 +18,7 @@
     <EmbeddedResource Include="Templates\Changelogs.sbncs" />
     <EmbeddedResource Include="Templates\Models.sbncs" />
     <EmbeddedResource Include="Templates\Sources.sbncs" />
+    <EmbeddedResource Include="Templates\Versions.sbncs" />
   </ItemGroup>
 
   <ItemGroup>

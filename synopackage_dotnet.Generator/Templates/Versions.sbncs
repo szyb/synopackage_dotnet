@@ -8,10 +8,12 @@ namespace synopackage_dotnet.Model
     public static class VersionHelper
     {
       private static Dictionary<string, VersionDTO> AllVersions { get; set; }
+      private static Dictionary<string, VersionDTO> AllVersionsByShortVersion { get; set; }
 
       static VersionHelper()
       {
         AllVersions = new Dictionary<string, VersionDTO>(); 
+        AllVersionsByShortVersion = new Dictionary<string, VersionDTO>();
 
         {{~ for v in versions ~}}
         AddVersion(
@@ -20,7 +22,6 @@ namespace synopackage_dotnet.Model
         {{- v.major -}},
         {{- v.minor -}},
         {{- v.micro -}},
-        {{- v.nano -}},
         {{- v.build -}});
         {{~ end ~}}
       }
@@ -31,7 +32,6 @@ namespace synopackage_dotnet.Model
         int major,
         int minor,
         int micro,
-        int nano,
         int build
       )
       {
@@ -42,15 +42,30 @@ namespace synopackage_dotnet.Model
           Major = major,
           Minor = minor,
           Micro = micro,
-          Nano = nano,
           Build = build
         };
-        AllVersions.Add(ver.Build.ToString(), ver);
+        AllVersions.Add(ver.Version, ver);
+        if (!AllVersionsByShortVersion.ContainsKey(ver.ShortVersion))
+          AllVersionsByShortVersion.Add(ver.ShortVersion, ver);
+        else if (AllVersionsByShortVersion[ver.ShortVersion].Build < ver.Build)
+          AllVersionsByShortVersion[ver.ShortVersion] = ver;
       }
 
-      public IEnumerable<VersionDTO> GetAllVersions()
+      public static IEnumerable<VersionDTO> GetAllVersions() => AllVersionsByShortVersion.Values;
+
+      public static VersionDTO FindVersion(string version)
       {
-        return AllVersions.Values;
+        if (AllVersions.ContainsKey(version))
+        {
+          var ver = AllVersions[version];
+          if (AllVersionsByShortVersion.ContainsKey(ver.ShortVersion))
+            return AllVersionsByShortVersion[ver.ShortVersion];
+          else          
+            return ver;          
+        }
+        else
+          return null;
       }
+      
     }
 }
