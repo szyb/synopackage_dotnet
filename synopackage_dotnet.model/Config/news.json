@@ -1,0 +1,260 @@
+[
+  {
+    "Date": "2021-03-20",
+    "Title": "New source: DigitalboxDSM7 - a dedicated repository for DSM 7",
+    "Body": [
+      "Today we added new repository: DigitalboxDSM7. As you may know there is digitalbox available on the sources list, but this one is a dedicated repository for DSM 7.",
+      "Please note that you should use this new repository only for DSM 7. For DSM 6 you should use origin digitalbox repository.",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": "Digitalbox DSM 7",
+    "RouterLink": "../sources/digitalboxdsm7",
+    "ExternalLinkDescription": null,
+    "ExternalLink": null
+  },
+  {
+    "Date": "2020-11-29",
+    "Title": "Milestone 0.5 completed",
+    "Body": [
+      "Today we released version 0.5. This release includes resolution of 17 issues and some other changes. As we prefer to rolling out often but small changes, most of the issues were already deployed in 0.4.x. Completing milestone is just a notification we have finished many things and now we can focus on planning and implementing the next milestone.",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": "Changelog",
+    "RouterLink": "../info/changelog",
+    "ExternalLinkDescription": null,
+    "ExternalLink": null
+  },
+  {
+    "Date": "2020-10-31",
+    "Title": "Happy Birthday to synopackage.com!",
+    "Body": [
+      "Today we celebrate a birthday! We have been online for 3 years!",
+      "We reviewed our source list and we added new repository jadahl (Domoticz) and hildinger is back to active. On the other hand sources: jdel and unzureichende have been moved to inactive.",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": "See the current repository list",
+    "RouterLink": "../sources",
+    "ExternalLinkDescription": null,
+    "ExternalLink": null
+  },
+  {
+    "Date": "2020-09-18",
+    "Title": "New repository & new models",
+    "Body": [
+      "Thanks to Facebook community we are pleased to announce that we are adding new repository source: DigitalBox!",
+      "We also added new models: DS1520+ & DS1621xs+. They are ready to use in your settings",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": "Browse DigitalBox",
+    "RouterLink": "../sources/digitalbox",
+    "ExternalLinkDescription": "DigitalBox website",
+    "ExternalLink": "http://digital.box.free.fr/sspks/"
+  },
+  {
+    "Date": "2020-05-17",
+    "Title": "Browsing Synology's Official Package Center!",
+    "Body": [
+      "Today, thanks to github community, we are releasing 0.4.9 version with the main update: Now it is possible to browse Synology's Official Package Center. Feel free also to search in that repository. Remember to set your DSM version and model in the settings! As this is official source you don't need to add it to your DSM - it is already there.",
+      "This option might be very helpful to poeple who wants to buy Synology device and are wondering what software can be installed on it.",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": "Synology's Official Package center",
+    "RouterLink": "../sources/synology",
+    "ExternalLinkDescription": null,
+    "ExternalLink": null
+  },
+  {
+    "Date": "2020-05-02",
+    "Title": "New version 0.4.8",
+    "Body": [
+      "Today we've updated the version to 0.4.8. Most of the changes was already in place as they were configuration only changes. With this version we wanted to gather all the changes since previous version and put it to changelog. As you may see many changes was done under the hood.",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": "Changelog",
+    "RouterLink": "../info/changelog",
+    "ExternalLinkDescription": null,
+    "ExternalLink": null
+  },
+  {
+    "Date": "2020-01-12",
+    "Title": "New model DS420j",
+    "Body": [
+      "Lately Synology annouced new DiskStation model - DS420j. Today it is also available in our search engine!",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": null,
+    "RouterLink": null,
+    "ExternalLinkDescription": "DiskStation DS420j",
+    "ExternalLink": "https://www.synology.com/en-us/products/DS420j"
+  },
+  {
+    "Date": "2020-01-07",
+    "Title": "First release in 2020!",
+    "Body": [
+      "Today we are pleased to announce first release in 2020! The greatest thing had happen ofcourse under the hood (frontend works on Angular 8, backend has been refactored, docker image has been updated), but there are some things you may notice yourself. First, and most wanted probably, was fixing downloading data from pcloadletter server. It was tricky to find out what was changed lately on that server, because it worked for years. But we found an issue and we fixed the code to work better and we are ready for moving other servers to AWS (that was the case) or Azure with strict HTTP requests policy.",
+      "The other visible change was to show default icon for packages that doesn't have their own icon or icon has not been loaded yet.",
+      "We are not finished our work. We have plans to develop our website as more and more poeple is entering the page. We are motivated to work, thanks to you! Any feedback is welcome (see issues page - link below)",
+      "Enjoy the 2020!"
+    ],
+    "RouterLinkDescription": null,
+    "RouterLink": null,
+    "ExternalLinkDescription": "Github issues",
+    "ExternalLink": "https://github.com/szyb/synopackage_dotnet/issues"
+  },
+  {
+    "Date": "2019-11-02",
+    "Title": "New models: DS120j, RS820+, RS820RP+",
+    "Body": [
+      "As from today you may search packages for new models from x20 series: DS120j, RS820+ & RS820RP+",
+      "See link below for more info about DS120j",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": null,
+    "RouterLink": null,
+    "ExternalLinkDescription": "DiskStation DS120j",
+    "ExternalLink": "https://www.synology.com/en-global/products/DS120j"
+  },
+  {
+    "Date": "2019-10-26",
+    "Title": "DSM Version changes",
+    "Body": [
+      "Today we simplified version DSM displaying. We resign from showing build number, as from user perspective is irrelevant. Moreover as from today you won't see \"Stable\" in navigation bar. Only \"Beta\" will be shown if you choose \"Inlcude beta\" option in user settings.",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": null,
+    "RouterLink": null,
+    "ExternalLinkDescription": null,
+    "ExternalLink": null
+  },
+  {
+    "Date": "2019-10-23",
+    "Title": "Jdel source is back to active list",
+    "Body": [
+      "Today we bring back https://packages.jdel.org source back to active source. It was tricky issue, but it's very technical related somehow to the framework we use. If you are interested in details see the link below",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": "Jdel packages to your model",
+    "RouterLink": "../sources/jdel",
+    "ExternalLinkDescription": "Github issue: Back jdel source to active",
+    "ExternalLink": "https://github.com/szyb/synopackage_dotnet/issues/112"
+  },
+  {
+    "Date": "2019-10-12",
+    "Title": "New version 0.4.2",
+    "Body": [
+      "As you can see we skip 0.4.1 version in the news. It's because 0.4.1 doesn't changed anything from user perspective. We just updated backend to run on .NET Core 3.0",
+      "For functional changes in 0.4.2 please refer to our changelog",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": "Changelog",
+    "RouterLink": "../info/changelog",
+    "ExternalLinkDescription": null,
+    "ExternalLink": null
+  },
+  {
+    "Date": "2019-07-30",
+    "Title": "Changes under the hood (v. 0.4.0)",
+    "Body": [
+      "To whom it may concern: Now page is running on .NET Core 2.2 runtime and Angular 7! We also updated many related packages.",
+      "There might be a slight visual difference between old version of the page and current, but it should work the same.",
+      "This is also the first step to upgrade Angular to version 8, however this task can wait a bit as we depend on updating other packages.",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": null,
+    "RouterLink": null,
+    "ExternalLinkDescription": null,
+    "ExternalLink": null
+  },
+  {
+    "Date": "2019-06-30",
+    "Title": "New version of synopackage.com",
+    "Body": [
+      "Now you can perform search directly from home page. News now are moved to other page (you can find it in menu)",
+      "Milestone 0.3 is completed! Now we will work on new milestone 0.4.",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": null,
+    "RouterLink": null,
+    "ExternalLinkDescription": null,
+    "ExternalLink": null
+  },
+  {
+    "Date": "2019-06-21",
+    "Title": "New model DS419Slim is avaliable",
+    "Body": [
+      "We've just added new model DS419lim",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": null,
+    "RouterLink": null,
+    "ExternalLinkDescription": "DiskStation DS419slim",
+    "ExternalLink": "https://www.synology.com/en-global/products/DS419slim"
+  },
+  {
+    "Date": "2019-04-05",
+    "Title": "New DSM version is available",
+    "Body": [
+      "We've just added new version of DSM: 6.2.2-24922",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": null,
+    "RouterLink": null,
+    "ExternalLinkDescription": "DSM 6.2.2-24922 release notes",
+    "ExternalLink": "https://www.synology.com/en-us/releaseNote/DS718+"
+  },
+  {
+    "Date": "2019-02-14",
+    "Title": "New models available",
+    "Body": [
+      "We've just added 4 new models: DS1019+, DS2419+, DS1819+ and RS1619xs+",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": null,
+    "RouterLink": null,
+    "ExternalLinkDescription": null,
+    "ExternalLink": null
+  },
+  {
+    "Date": "2019-01-10",
+    "Title": "New feature: share link to the source",
+    "Body": [
+      "From now on you can use share link directly to source server page with parameters like model, version and even keyword.",
+      "The format is https://search.synopackge.com/ sources/[sourcename]/keyword/[k]/ model/[m]/version/[v]/channel/[c]",
+      "Where [k] keyword (could be *), [m] model (device), [v] version (with build numer, i.e. 6.2.1-23824), [c] channel (beta or stable). The order of parameters is important.",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": null,
+    "RouterLink": null,
+    "ExternalLinkDescription": null,
+    "ExternalLink": null
+  },
+  {
+    "Date": "2018-11-07",
+    "Title": "Support for new device DS119j",
+    "Body": [
+      "Today we add DS119j to the model list, so now it is possible to search for packages to this device.",
+      "However there are not many packages for this device at the moment, but the number will grow with time. We found only two sources that have packages compiled to DS119j (nimloth and emby). Other servers shows either noarch packages or shows packages that probably won't work on this device (cphub and synologyitalia). Let's hope synocommunity will serve their packages for this device soon!",
+      "More information available at the link below.",
+      "2018-11-16 EDIT: for DS119j packages from cphub & synologyitalia are valid as they are not specific to any architecture (noarch)",
+      "2018-11-30 EDIT: Good news! Synocommunity supports now armada37xx architecture, so there are new packages available for DS119j!",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": null,
+    "RouterLink": null,
+    "ExternalLinkDescription": "Please add DS119J support: armada37xx architecture",
+    "ExternalLink": "https://github.com/SynoCommunity/spksrc/issues/3477"
+  },
+  {
+    "Date": "2018-10-30",
+    "Title": "Synopackage ver. 2.0",
+    "Body": [
+      "This is a new version of synopackage.com. The project was completly rewritten from PHP to .NET Core 2.1, Angular 6 and Typescript (whoever cares). Below you can find link to issues. Feel free to contribute!",
+      "The breaking change is that you need to provide your settings first (DSM version and model). If you don't do this the results will be shown for default version and model. Currently defaults are: 6.2.1 and DS218Play, but that may change in the future.",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": null,
+    "RouterLink": null,
+    "ExternalLinkDescription": "Github issues",
+    "ExternalLink": "https://github.com/szyb/synopackage_dotnet/issues"
+  }
+]
