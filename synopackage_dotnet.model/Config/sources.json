@@ -87,7 +87,7 @@
     "Name": "nimloth",
     "Url": "http://synology.nimloth.pl/",
     "DisabledDate": "2021-10-06",
-    "DisabledReason": "Not valid SSL certificate makes this repo inactive also in DSM"
+    "DisabledReason": "Not a valid SSL certificate makes this repo inactive also in DSM"
   },
   {
     "Active": false,
