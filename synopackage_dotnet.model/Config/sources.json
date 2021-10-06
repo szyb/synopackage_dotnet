@@ -31,12 +31,10 @@
     "Url": "http://digital.box.free.fr/dsm7/"
   },
   {
-    "Active": false,
+    "Active": true,
     "Name": "beatificabytes",
     "Url": "https://www.beatificabytes.be/sspks/",
-    "Www": "https://www.beatificabytes.be/",
-    "DisabledDate": "2021-07-20",
-    "DisabledReason": "This repository is discountinued by vendor"
+    "Www": "https://www.beatificabytes.be/"
   },
   {
     "Active": true,
@@ -85,9 +83,11 @@
     "Url": "http://syno.dierkse.nl/"
   },
   {
-    "Active": true,
+    "Active": false,
     "Name": "nimloth",
-    "Url": "http://synology.nimloth.pl/"
+    "Url": "http://synology.nimloth.pl/",
+    "DisabledDate": "2021-10-06",
+    "DisabledReason": "Not valid SSL certificate makes this repo inactive also in DSM"
   },
   {
     "Active": false,
@@ -190,10 +190,12 @@
     "DisabledReason": "Not a valid repository"
   },
   {
-    "Active": true,
+    "Active": false,
     "Name": "pulse-station",
     "Url": "https://www.pulse-station.com/repo/",
-    "Www": "https://www.pulse-station.com"
+    "Www": "https://www.pulse-station.com",
+    "DisabledDate": "2021-10-06",
+    "DisabledReason": "This repository is discountinued by vendor"
   },
   {
     "Active": false,
