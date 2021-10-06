@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace synopackage_dotnet.Model.DTOs
@@ -8,10 +8,10 @@ namespace synopackage_dotnet.Model.DTOs
     public SourcesDTO()
     {
       this.ActiveSources = new List<SourceDTO>();
-      this.InActiveSources = new List<SourceDTO>();
+      this.InactiveSources = new List<SourceDTO>();
     }
-    public List<SourceDTO> ActiveSources { get; set; }
-    public List<SourceDTO> InActiveSources { get; set; }
+    public IList<SourceDTO> ActiveSources { get; set; }
+    public IList<SourceDTO> InactiveSources { get; set; }
     public DateTime LastUpdateDate { get; set; }
   }
 }

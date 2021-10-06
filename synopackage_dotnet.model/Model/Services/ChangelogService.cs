@@ -1,18 +1,13 @@
-﻿using Newtonsoft.Json;
-using synopackage_dotnet.Model.DTOs;
-using System.IO;
+﻿using synopackage_dotnet.Model.DTOs;
 using System.Linq;
 
 namespace synopackage_dotnet.Model.Services
 {
   public class ChangelogService : Paging, IChangelogService
   {
-    private readonly string configFile = "Config/changelog.json";
-
     private PagingDTO<ChangelogDTO> GetChangelogsInternal(int? page, int? itemsPerPage)
     {
-      var changelogJson = File.ReadAllText(configFile);
-      var changelogs = JsonConvert.DeserializeObject<ChangelogDTO[]>(changelogJson);
+      var changelogs = ChangelogHelper.GetChangelogs();
 
       if (page.HasValue && itemsPerPage.HasValue)
       {

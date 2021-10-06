@@ -7,12 +7,9 @@ namespace synopackage_dotnet.Model.Services
 {
   public class NewsService : Paging, INewsService
   {
-    private readonly string configFile = "Config/news.json";
-
     private PagingDTO<NewsDTO> GetNewsInternal(int? page, int? itemsPerPage)
     {
-      var newsJson = File.ReadAllText(configFile);
-      var news = JsonConvert.DeserializeObject<NewsDTO[]>(newsJson);
+      var news = NewsHelper.GetNews();
 
       if (page.HasValue && itemsPerPage.HasValue)
       {
