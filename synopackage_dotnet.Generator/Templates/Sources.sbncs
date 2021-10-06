@@ -1,0 +1,98 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using synopackage_dotnet.Model.DTOs;
+
+namespace synopackage_dotnet.Model
+{
+    public static class SourceHelper
+    {
+      public static IList<SourceDTO> ActiveSources { get; private set; }
+      public static IList<SourceDTO> InactiveSources { get; private set; }
+      private static Dictionary<string, SourceDTO> AllSources { get; set; }
+
+      static SourceHelper()
+      {
+        ActiveSources = new List<SourceDTO>();
+        InactiveSources = new List<SourceDTO>();
+        AllSources = new Dictionary<string, SourceDTO>(StringComparer.InvariantCultureIgnoreCase); 
+
+        {{~ for s in sources ~}}
+        AddSource(        
+        {{--}}"{{- s.name -}}",
+        {{- s.active -}},
+        {{--}}"{{- s.url -}}",
+        {{- if s.www -}} "{{- s.www -}}" {{- else -}} null {{- end -}},
+        {{- if s.disabled_reason -}} "{{- s.disabled_reason -}}" {{- else -}} null {{- end -}},
+        {{- if s.disabled_date -}} new DateTime({{- s.disabled_date.year -}}, {{- s.disabled_date.month -}}, {{- s.disabled_date.day -}}) {{- else -}} null {{- end -}},
+        {{- if s.custom_user_agent -}} "{{- string.escape s.custom_user_agent -}}" {{- else -}} null {{- end -}},
+        {{- s.use_get_method -}},
+        {{- s.is_official -}}
+        );
+        {{~ end ~}}
+      }
+
+      private static void AddSource(       
+        string name,
+        bool active,
+        string url, 
+        string www, 
+        string disabledReason, 
+        DateTime? disabledDate, 
+        string customUserAgent,
+        bool useGetMethod,
+        bool isOfficial)
+        {
+          SourceDTO source = new SourceDTO()
+          {
+            Active = active,
+            Name = name,
+            Url = url,
+            Www = www,
+            DisabledReason = disabledReason,
+            DisabledDate = disabledDate,
+            CustomUserAgent = customUserAgent,
+            UseGetMethod = useGetMethod,
+            IsOfficial = isOfficial
+          };
+          if (string.IsNullOrWhiteSpace(source.Www))
+            source.Www = source.Url;
+          if (!source.IsOfficial)
+            source.DisplayUrl = source.Url;
+          else
+            source.DisplayUrl = "Synology's Official Package Center";
+
+          if (source.Active)
+            ActiveSources.Add(source);
+          else
+            InactiveSources.Add(source);
+
+          AllSources.Add(source.Name, source);
+        }
+
+        public static SourceDTO GetSourceByName(string name)
+        {
+          if (AllSources.ContainsKey(name))
+            return AllSources[name];
+          else
+            return null;
+        }
+
+        public static SourcesDTO GetAllSources()
+        {
+          SourcesDTO result = new SourcesDTO()
+          {
+            ActiveSources = ActiveSources,
+            InactiveSources = InactiveSources,
+            LastUpdateDate = new DateTime(
+              {{- last_update_date.year -}}, 
+              {{- last_update_date.month -}}, 
+              {{- last_update_date.day -}}, 
+              {{- last_update_date.hour -}}, 
+              {{- last_update_date.minute -}}, 
+              {{- last_update_date.second -}}) 
+          };
+          return result;
+        }
+    }
+}

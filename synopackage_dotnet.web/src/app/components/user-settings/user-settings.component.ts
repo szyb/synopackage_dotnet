@@ -23,15 +23,22 @@ export class UserSettingsComponent {
   public errorModel: string;
 
   constructor(http: HttpClient, private userSettingsService: UserSettingsService) {
+    this.selectedVersion = this.userSettingsService.getUserVersion();
+    this.selectedModel = this.userSettingsService.getUserModel();
+    this.selectedIsBeta = this.userSettingsService.getUserIsBeta();
     http.get<VersionDTO[]>(`${Config.apiUrl}Versions/GetAll`).subscribe(result => {
       this.versions = result;
+      if (this.selectedVersion !== null && !this.validateVersion(this.selectedVersion)) {
+        this.resetVersionError();
+        this.selectedVersion = this.findBestVersionMatch(this.selectedVersion);
+        this.validateVersion(this.selectedVersion); //validate best match version
+        if (this.selectedVersion != this.userSettingsService.getUserVersion())
+          this.userSettingsService.saveUserSettings(this.selectedVersion, this.selectedModel, this.selectedIsBeta);
+      }
     });
     http.get<ModelDTO[]>(`${Config.apiUrl}Models/GetAll`).subscribe(result => {
       this.models = result;
     });
-    this.selectedVersion = this.userSettingsService.getUserVersion();
-    this.selectedModel = this.userSettingsService.getUserModel();
-    this.selectedIsBeta = this.userSettingsService.getUserIsBeta();
   }
 
   @ViewChild(ModalDirective, { static: true }) public basicModal: ModalDirective;
@@ -70,6 +77,18 @@ export class UserSettingsComponent {
       this.errorModel = null;
       return true;
     }
+  }
+
+  findBestVersionMatch(version: string): string {
+    if (version !== null && this.versions !== null && version.indexOf("-") != -1) {
+      const shortVersion = version.substr(0, version.indexOf("-"));
+      const versionFound = this.versions.find(x => x.shortVersion == shortVersion);
+      if (versionFound !== null)
+        return versionFound.version;
+      else
+        return version;
+    }
+    return null;
   }
 
   resetVersionError(): void {

@@ -1,0 +1,60 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using synopackage_dotnet.Model.DTOs;
+
+namespace synopackage_dotnet.Model
+{
+  public static class NewsHelper
+  {
+    private static NewsDTO[] News;
+
+    static NewsHelper()
+    {
+      News = new NewsDTO[{{ array.size news }}];
+      {{~ for n in news ~}}
+      AddNews({{- for.index -}},
+      {{--}}new DateTime({{- n.date.year -}}, {{- n.date.month -}}, {{- n.date.day -}}),
+      {{--}}"{{- string.escape n.title -}}",
+      {{- if n.body != null -}}new List<string>() { 
+        {{- for item in n.body -}}
+        {{--}}"{{ string.escape item }}"{{- if !for.last }},{{- end -}}
+        {{- end -}}
+      }, 
+      {{- end -}}
+      {{--}}"{{- string.escape n.router_link_description -}}",
+      {{--}}"{{- string.escape n.router_link -}}",
+      {{--}}"{{- string.escape n.external_link_description -}}",
+      {{--}}"{{- string.escape n.external_link -}}"
+      {{--}});
+      {{~ end ~}}
+    }
+
+    private static void AddNews(
+      int index,
+      DateTime date,
+      string title,
+      List<string> body,
+      string routerLinkDescription,
+      string routerLink,
+      string externalLinkDescription,
+      string externalLink
+    )
+    {
+      var news = new NewsDTO()
+      {
+        Date = date,
+        Title = title,
+        Body = body,
+        RouterLinkDescription = routerLinkDescription,
+        RouterLink = routerLink,
+        ExternalLinkDescription = externalLinkDescription,
+        ExternalLink = externalLink
+      };
+
+      News[index] = news;
+    }
+
+    public static NewsDTO[] GetNews() => News;
+  }
+}
