@@ -14,24 +14,13 @@ namespace synopackage_dotnet.Model.Services
       this.logger = logger;
     }
 
-    public IEnumerable<SourceDTO> GetAllActiveSources()
-    {
-      return SourceHelper.ActiveSources;
-    }
+    public IEnumerable<SourceDTO> GetAllActiveSources() => SourceHelper.ActiveSources;
 
-    public SourcesDTO GetAllSources()
-    {
-      return SourceHelper.GetAllSources();
-    }
+    public SourcesDTO GetAllSources() => SourceHelper.GetAllSources();
 
-    public SourceDTO GetSource(string name)
-    {
-      return SourceHelper.GetSourceByName(name);
-    }
+    public SourceDTO GetSource(string name) => SourceHelper.GetSourceByName(name);
 
-    public bool ValidateSource(string name)
-    {
-      return SourceHelper.GetSourceByName(name) != null;
-    }
+    public bool ValidateSource(string name) => SourceHelper.GetSourceByName(name) != null;
+
   }
 }
