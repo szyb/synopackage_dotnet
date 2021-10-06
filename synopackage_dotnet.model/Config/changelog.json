@@ -1,5 +1,24 @@
 ﻿[
   {
+    "version": "0.5.16",
+    "date": "2021-10-06",
+    "new": [
+      "Add version 7.0.1 of DSM",
+      "Beatificabytes back to active sources",
+      "Support the same version with different builds"
+    ],
+    "improved": [
+      "Backend - reduced number of I&O reads by using Source Generators"
+    ],
+    "fixed": [
+      "Security fixes"
+    ],
+    "removedSources": [
+      "Source nimloth disabled - SSL certificate is not valid",
+      "Source puls-station disabled - discontinued"
+    ]
+  },
+  {
     "version": "0.5.15",
     "date": "2021-09-01",
     "new": [],
