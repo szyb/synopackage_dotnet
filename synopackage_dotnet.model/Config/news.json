@@ -1,5 +1,18 @@
 [
   {
+    "Date": "2021-10-31",
+    "Title": "Buy me a coffee",
+    "Body": [
+      "Today we've added Buy me a coffee widget (on the bottom right corner of the page). This is a form where you can support synopackage.com and buy a symbolic coffee for the effort we've made. We always say \"We\" in all our posts, but behind the scenes there is one software developer who make all of this happen and trying to keep everything  up-to-date in his spare time. All the kind of support from users, even just a good word or like on FB, are very welcome and also are inspiring to work on this project.",
+      "We also would like you to ensure you that synopackage is and will be always free to use. However, if you can and wish to help us, you may consider buy a coffee :)",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": null,
+    "RouterLink": null,
+    "ExternalLinkDescription": "Buy me a coffee",
+    "ExternalLink": "https://www.buymeacoffee.com/synopackage"
+  },
+  {
     "Date": "2021-03-20",
     "Title": "New source: DigitalboxDSM7 - a dedicated repository for DSM 7",
     "Body": [
