@@ -58,7 +58,7 @@ export class AppComponent implements OnInit {
     node4.setAttribute('data-cfasync', 'false');
     node4.setAttribute('data-id', 'synopackage');
     node4.setAttribute('data-description', 'Support me on Buy me a coffee!');
-    /*    node4.setAttribute('data-message', '');*/
+    node4.setAttribute('data-message', 'Support me on Buy me a coffee!');
     node4.setAttribute('data-color', '#5F7FFF');
     node4.setAttribute('data-position', 'Right');
     node4.setAttribute('data-x_margin', '18');
