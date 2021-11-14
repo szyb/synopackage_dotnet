@@ -1,5 +1,17 @@
 ﻿[
   {
+    "version": "0.5.18",
+    "date": "2021-11-14",
+    "new": [
+      "Bliss repositories (for DSM7 and pre-DSM7)"
+    ],
+    "improved": [
+      "Internal logging - should perform better"
+    ],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
     "version": "0.5.17",
     "date": "2021-10-31",
     "new": [

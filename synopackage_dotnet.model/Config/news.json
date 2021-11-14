@@ -1,5 +1,17 @@
 [
   {
+    "Date": "2021-11-14",
+    "Title": "New sources: Bliss",
+    "Body": [
+      "Today we've added new repositories: blissdsm7 (for DSM 7) and blisspredsm7 (for pre DSM 7). They contain Bliss application dedicated for Synology DSM.",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": "Bliss DSM 7",
+    "RouterLink": "../sources/blissdsm7",
+    "ExternalLinkDescription": "More info about Bliss",
+    "ExternalLink": "https://www.blisshq.com"
+  },
+  {
     "Date": "2021-10-31",
     "Title": "Buy me a coffee",
     "Body": [
