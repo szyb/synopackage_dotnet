@@ -10,12 +10,13 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
-using Serilog;
+using NLog.Extensions.Logging;
 using synopackage_dotnet.Model;
 using synopackage_dotnet.Model.Enums;
 using synopackage_dotnet.Model.Services;
 using System;
 using System.IO;
+using NLog;
 
 namespace synopackage_dotnet
 {
@@ -58,7 +59,9 @@ namespace synopackage_dotnet
           options.HttpsPort = 443;
         });
       }
+      services.AddLogging(c => c.AddNLog());
 
+      NLog.LogManager.Configuration = new NLogLoggingConfiguration(configuration.GetSection("NLog"));
       services.AddMvc();
 
       services.AddResponseCompression(options =>
@@ -102,7 +105,6 @@ namespace synopackage_dotnet
       new ConfigureFromConfigurationOptions<AppSettings>(appSettingsSection)
             .Configure(appSettings);
       services.AddSingleton(AppSettingsProvider.Create(appSettings));
-
       MapperRegistrator.Register();
     }
 
@@ -114,26 +116,18 @@ namespace synopackage_dotnet
           .Where(t => t.Name.EndsWith("Service") || t.Name == "BackgroundTaskQueue")
           .Except<RestSharpDownloadService>()
           .AsImplementedInterfaces()
-          .EnableInterfaceInterceptors()
-          //.InterceptedBy(typeof(TryCatchInterceptor))
-          .InterceptedBy(typeof(LoggingInterceptor));
-      //builder.RegisterType(typeof(TryCatchInterceptor)).AsSelf();
-      builder.RegisterType(typeof(LoggingInterceptor)).AsSelf();
+          .EnableInterfaceInterceptors();
 
       builder.Register<IDownloadService>((c, p) =>
       {
         var type = p.TypedAs<DownloadServiceImplementation>();
-        switch (type)
+        return type switch
         {
-          case DownloadServiceImplementation.RestSharp:
-            return new RestSharpDownloadService(c.Resolve<ILogger<RestSharpDownloadService>>());
-          default:
-            throw new NotImplementedException("Invalid download library");
-        }
+          DownloadServiceImplementation.RestSharp => new RestSharpDownloadService(c.Resolve<ILogger<RestSharpDownloadService>>()),
+          _ => throw new NotImplementedException("Invalid download library"),
+        };
       })
-        .As<IDownloadService>()
-        //.InterceptedBy(typeof(TryCatchInterceptor))
-        .InterceptedBy(typeof(LoggingInterceptor));
+        .As<IDownloadService>();
 
       builder.RegisterType<DownloadFactory>()
         .As<IDownloadFactory>()
@@ -146,13 +140,9 @@ namespace synopackage_dotnet
     /// </summary>
     /// <param name="app">The application.</param>
     /// <param name="env">The hosting environment</param>
-    /// <param name="loggerFactory">The logger factory</param>
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
+    /// <param name="hostApplicationLifetime">The host application lifetime</param>
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, Microsoft.Extensions.Hosting.IHostApplicationLifetime hostApplicationLifetime)
     {
-      var logger = new LoggerConfiguration()
-            .ReadFrom.Configuration(configuration)
-            .CreateLogger();
-      loggerFactory.AddSerilog(logger);
 
       if (env.IsDevelopment())
       {
@@ -232,6 +222,12 @@ namespace synopackage_dotnet
 
         spa.Options.SourcePath = "wwwroot";
       });
+      hostApplicationLifetime.ApplicationStopping.Register(OnShutdown);
+    }
+
+    private void OnShutdown()
+    {
+      NLog.LogManager.Shutdown();
     }
   }
 }
