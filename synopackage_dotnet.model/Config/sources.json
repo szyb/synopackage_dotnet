@@ -43,6 +43,20 @@
     "UseGetMethod": true
   },
   {
+    "Active": true,
+    "Name": "blissdsm7",
+    "Url": "https://www.blisshq.com/repo/syno/packages-DSM7.json",
+    "Www": "https://www.blisshq.com/",
+    "UseGetMethod": true
+  },
+  {
+    "Active": true,
+    "Name": "blisspredsm7",
+    "Url": "https://www.blisshq.com/repo/syno/packages-pre-DSM7.json",
+    "Www": "https://www.blisshq.com/",
+    "UseGetMethod": true
+  },
+  {
     "Active": false,
     "Name": "unzureichende",
     "Url": "http://spk.unzureichende.info/",

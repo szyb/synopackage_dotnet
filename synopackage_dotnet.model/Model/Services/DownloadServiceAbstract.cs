@@ -7,8 +7,8 @@ namespace synopackage_dotnet.Model.Services
   {
     protected string GetLegacySupportUrl(string url, IEnumerable<KeyValuePair<string, object>> parameters)
     {
-      string urlParams = GetParameters(parameters);
-      if (url.EndsWith("/"))
+      string urlParams = GetParameters(parameters);      
+      if (url.EndsWith("/") || url.EndsWith(".json"))
         return $"{url}?{urlParams}";
       else
         return $"{url}/?{urlParams}";
