@@ -5,7 +5,6 @@ namespace synopackage_dotnet.Model.Services
 {
   public interface ISpkService : IDomainService
   {
-    [Logging(Consts.SpkQueryContext, "true")]
     Task<SourceServerResponseDTO> GetPackages(
       string sourceName,
       string url,
