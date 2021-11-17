@@ -896,7 +896,7 @@
   },
   {
     "Name": "RS1619xs+",
-    "Arch": "broadwell",
+    "Arch": "broadwellnk",
     "Family": "x86_64"
   },
   {
@@ -961,12 +961,73 @@
   },
   {
     "Name": "DS1621xs+",
-    "Arch": "broadwell",
+    "Arch": "broadwellnk",
     "Family": "x86_64"
   },
   {
     "Name": "RS819",
     "Arch": "rtd1296",
     "Family": "armv8"
+  },
+  {
+    "Name": "DS1621+",
+    "Arch": "v1000",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "DS1821+",
+    "Arch": "v1000",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS1221+",
+    "Arch": "v1000",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS1221RP+",
+    "Arch": "v1000",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS2421+",
+    "Arch": "v1000",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS2421RP+",
+    "Arch": "v1000",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS2821RP+",
+    "Arch": "v1000",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS3621RPxs",
+    "Arch": "broadwellnk",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS3621xs+",
+    "Arch": "broadwellnk",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS4021xs+",
+    "Arch": "broadwellnk",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "DS2422+",
+    "Arch": "v1000",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "DS3622xs+",
+    "Arch": "broadwellnk",
+    "Family": "x64"
   }
+
 ]
