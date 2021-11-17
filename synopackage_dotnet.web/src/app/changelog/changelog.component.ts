@@ -81,7 +81,7 @@ export class ChangelogComponent implements OnInit, PaginatorDataProvider {
         });
   }
 
-  onPageChange(page: number) {
+  onPageChange(page: string) {
     let shouldPerformGetChangelogs = false;
     if (page !== this.changelogsPaging.currentPage) {
       shouldPerformGetChangelogs = this.shouldPerformGetChangelogs();
@@ -90,7 +90,7 @@ export class ChangelogComponent implements OnInit, PaginatorDataProvider {
     if (shouldPerformGetChangelogs) {
       this.changelogsPaging = null;
       this.changelogs = null;
-      this.performGetChangelogs(page, true)
+      this.performGetChangelogs(eval(page), true)
     }
   }
 
