@@ -1,5 +1,15 @@
 ﻿[
   {
+    "version": "0.5.19",
+    "date": "2021-11-17",
+    "new": [
+      "Add new models from x21 & x22 series: DS1621+, DS1821+, RS1221+, RS1221RP+, RS2421+, RS2421RP+, RS2821RP+, RS3621RPxs, RS3621xs+, RS4021xs+, DS2422+, DS3622xs+"
+    ],
+    "improved": [],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
     "version": "0.5.18",
     "date": "2021-11-14",
     "new": [
