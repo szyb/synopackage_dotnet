@@ -22,7 +22,7 @@ export class PagingParamsDTO {
 
 export class PagingDTO {
   public totalPages: number;
-  public currentPage: number;
+  public currentPage: string;
   public itemsPerPage: number;
 }
 
