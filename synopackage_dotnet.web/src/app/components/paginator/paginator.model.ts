@@ -1,5 +1,5 @@
 
 export class PageInfoDTO {
-  pages: number[];
+  pages: string[];
   current: number;
 }
