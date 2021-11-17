@@ -83,7 +83,7 @@ export class NewsComponent implements OnInit, PaginatorDataProvider {
 
   }
 
-  onPageChange(page: number) {
+  onPageChange(page: string) {
     let shouldPerformGetNews = false;
     if (page !== this.newsPaging.currentPage) {
       shouldPerformGetNews = this.shouldPerformGetNews();
@@ -92,7 +92,7 @@ export class NewsComponent implements OnInit, PaginatorDataProvider {
     if (shouldPerformGetNews) {
       this.newsPaging = null;
       this.news = null;
-      this.performGetNews(page, true)
+      this.performGetNews(eval(page), true)
     }
   }
 
