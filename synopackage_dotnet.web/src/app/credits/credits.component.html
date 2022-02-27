@@ -2,6 +2,7 @@
   <a class="breadcrumb-item" routerLink="/info">Info</a>
   <span class="breadcrumb-item active">Credits</span>
 </nav>
+<app-removed-subdomain-info></app-removed-subdomain-info>
 <h1>Credits</h1>
 <blockquote class="blockquote bq-primary">
   <p class="bq-title">Third party libraries</p>
@@ -10,8 +11,9 @@
 <div *ngFor="let entry of libraries" class="rounded border px-2 py-2 my-3 cloudy-knoxville-gradient z-depth-2">
   <p>
     <mdb-icon fas icon="toolbox" class="green-text p-2" size="2x" aria-hidden="true"></mdb-icon>
-    <a href="{{entry.projectUrl}}" target="_blank" rel="noopener noreferrer"><span
-        class="fa-2x">{{entry.name}}</span></a>
+    <a href="{{entry.projectUrl}}" target="_blank" rel="noopener noreferrer">
+      <span class="fa-2x">{{entry.name}}</span>
+    </a>
   </p>
   <p>{{entry.description}}</p>
   <a href="{{entry.licenseUrl}}" target="_blank" rel="noopener noreferrer">License</a>

@@ -30,6 +30,8 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
 import { NewsComponent } from './news/news.component';
 import { InfoComponent } from './info/info.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
+import { RepositoryComponent } from './repository/repository.component';
+import { RemovedSubdomainInfoComponent } from './components/removed-subdomain-info/removed-subdomain-info.component';
 
 export function init_app(appLoadService: AppLoadService) {
   return () => appLoadService.initializeApp();
@@ -47,6 +49,11 @@ export const routerConfig: Routes = [
   {
     path: 'news/page/:page',
     component: NewsComponent
+  },
+  {
+    path: 'repository',
+    component: RepositoryComponent,
+    pathMatch: 'full'
   },
   {
     path: 'sources',
@@ -130,6 +137,7 @@ export const routerConfig: Routes = [
     HomeComponent,
     NewsComponent,
     SourcesComponent,
+    RepositoryComponent,
     WaitComponent,
     UserSettingsComponent,
     UserSettingsDisplayComponent,
@@ -143,7 +151,8 @@ export const routerConfig: Routes = [
     DownloadDialogComponent,
     PrivacyPolicyComponent,
     InfoComponent,
-    PaginatorComponent
+    PaginatorComponent,
+    RemovedSubdomainInfoComponent
   ],
   imports: [
     BrowserModule,

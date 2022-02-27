@@ -1,6 +1,7 @@
 ﻿using ExpressMapper.Extensions;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using synopackage_dotnet.model.Model.DTOs;
 using synopackage_dotnet.Model.DTOs;
 using synopackage_dotnet.Model.Enums;
 using synopackage_dotnet.Model.SPK;
@@ -52,7 +53,8 @@ namespace synopackage_dotnet.Model.Services
       SpkResult result;
       if (!cacheResult.HasValidCache)
       {
-        var parametersRequest = PrepareParameters(arch, model, versionDto, isBeta, customUserAgent, out var userAgent);
+        string unique = $"synology_{arch}_{model}"; //TODO: DSM provide model without leading "DS" or "RS", so we should do the same some day.
+        var parametersRequest = PrepareParametersForRequest(arch, unique, versionDto, isBeta, customUserAgent, out var userAgent);
 
         IDownloadService downloadService = downloadFactory.GetDefaultDownloadService();
         var response = await downloadService.Execute(url, parametersRequest, userAgent, useGetMethod);
@@ -117,9 +119,72 @@ namespace synopackage_dotnet.Model.Services
       }
     }
 
+    public async Task<RawSpkResultDto> GetRawPackages(
+      string sourceName,
+      string url,
+      string arch,
+      string unique,
+      VersionDTO versionDto,
+      bool isBeta,
+      string customUserAgent,
+      bool isSearch,
+      string keyword = null,
+      bool useGetMethod = false
+      )
+    {
+      RawSpkResultDto result;
+      ParametersDTO parameters = new ParametersDTO(sourceName, unique, versionDto, isBeta, keyword);
+      SearchLogEntryDTO logEntry = new SearchLogEntryDTO(parameters);
+      logEntry.RequestType = isSearch ? RequestType.Search : RequestType.Browse;
+      logEntry.LogType = LogType.Parameters;
+      logger.LogInformation(Utils.GetSearchLogEntryString(logEntry));
+      logEntry.LogType = LogType.Result;
+      var stopwatch = Stopwatch.StartNew();
+      var cacheResult = await cacheService.GetSpkResponseForRepositoryFromCache(sourceName, arch, versionDto.Build.ToString(), isBeta);
+      if (!cacheResult.HasValidCache)
+      {
+        var parametersRequest = PrepareParametersForRequest(arch, unique, versionDto, isBeta, customUserAgent, out var userAgent);
+
+        IDownloadService downloadService = downloadFactory.GetDefaultDownloadService();
+        var response = await downloadService.Execute(url, parametersRequest, userAgent, useGetMethod);
+
+        if (response.Success)
+        {
+          logEntry.ResultFrom = ResultFrom.Server;
+          try
+          {
+            var rawResponse = ParseResponse(sourceName, url, arch, unique, versionDto, isBeta, response.Content, false);
+            result = new RawSpkResultDto(rawResponse, null);
+          }
+          catch (Exception ex)
+          {
+            logger.LogError(ex, $"Could not parse response from server {url}");
+            result = new RawSpkResultDto(null, ex.Message);
+          }
+        }
+        else
+        {
+          logger.LogError($"Could not get any data from the server {url}");
+          result = new RawSpkResultDto(null, $"Could not get any data from the server {url}");
+        }
+      }
+      else //return response from valid cache
+      {
+        result = new RawSpkResultDto(cacheResult.Cache?.SpkResult, null);
+        logEntry.CacheOld = cacheResult.Cache.CacheOld;
+        logEntry.LogType = LogType.Result;
+        logEntry.ResultFrom = ResultFrom.AlternativeCache;
+      }
+
+      stopwatch.Stop();
+      logEntry.ExecutionTime = stopwatch.ElapsedMilliseconds;
+      logger.LogInformation(Utils.GetSearchLogEntryString(logEntry));
+      return result;
+    }
+
     private async Task<SourceServerResponseDTO> GenerateResult(string sourceName, string keyword, ParametersDTO parameters, SpkResult result, ResultFrom resultFrom, double? cacheOld)
     {
-      await this.cacheService.ProcessIcons(sourceName, result.Packages);
+      var processIconsTask = this.cacheService.ProcessIcons(sourceName, result.Packages);
       List<PackageDTO> list = new List<PackageDTO>();
       if (result.Packages == null)
       {
@@ -137,10 +202,11 @@ namespace synopackage_dotnet.Model.Services
         }
       }
       list.Sort();
+      await processIconsTask;
       return new SourceServerResponseDTO(true, null, parameters, list, resultFrom, cacheOld);
     }
 
-    private SpkResult ParseResponse(string sourceName, string url, string arch, string model, VersionDTO versionDto, bool isBeta, string responseContent)
+    private SpkResult ParseResponse(string sourceName, string url, string arch, string modelOrUnique, VersionDTO versionDto, bool isBeta, string responseContent, bool shouldSaveCacheForModel = true)
     {
       SpkResult result;
       if (responseContent != null)
@@ -155,7 +221,7 @@ namespace synopackage_dotnet.Model.Services
           result.Packages = JsonConvert.DeserializeObject<List<SpkPackage>>(responseContent, new CustomBooleanJsonConverter());
         }
         if (result != null)
-          cacheService.SaveSpkResult(sourceName, arch, model, versionDto.Build.ToString(), isBeta, result);
+          cacheService.SaveSpkResult(sourceName, arch, modelOrUnique, versionDto.Build.ToString(), isBeta, result, shouldSaveCacheForModel);
       }
       else
       {
@@ -167,10 +233,9 @@ namespace synopackage_dotnet.Model.Services
     }
 
 
-    private IEnumerable<KeyValuePair<string, object>> PrepareParameters(string arch, string model, VersionDTO versionDto, bool isBeta, string customUserAgent, out string userAgent)
+    private static IEnumerable<KeyValuePair<string, object>> PrepareParametersForRequest(string arch, string unique, VersionDTO versionDto, bool isBeta, string customUserAgent, out string userAgent)
     {
       List<KeyValuePair<string, object>> list = new List<KeyValuePair<string, object>>();
-      var unique = $"synology_{arch}_{model}";
 
       list.Add(new KeyValuePair<string, object>("language", "enu"));
       list.Add(new KeyValuePair<string, object>("unique", unique));
@@ -186,7 +251,7 @@ namespace synopackage_dotnet.Model.Services
       return list;
     }
 
-    private bool KeywordExists(string keyword, SpkPackage spkPackage)
+    private static bool KeywordExists(string keyword, SpkPackage spkPackage)
     {
       if (string.IsNullOrWhiteSpace(keyword))
         return true;
