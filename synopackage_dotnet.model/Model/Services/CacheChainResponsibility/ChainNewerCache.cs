@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using synopackage_dotnet.Model.DTOs;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -23,17 +24,25 @@ namespace synopackage_dotnet.Model.Services
     {
       if (CanHandle(firstCacheFile, secondCacheFile))
       {
-        FileInfo newerCacheFile;
-        if (firstCacheFile.LastAccessTime >= secondCacheFile.LastAccessTime)
-          newerCacheFile = firstCacheFile;
-        else
-          newerCacheFile = secondCacheFile;
-        CacheSpkResponseDTO res = new CacheSpkResponseDTO()
+        try
         {
-          HasValidCache = false,
-          Cache = await GetCacheByFile(newerCacheFile)
-        };
-        return res;
+          FileInfo newerCacheFile;
+          if (firstCacheFile.LastAccessTime >= secondCacheFile.LastAccessTime)
+            newerCacheFile = firstCacheFile;
+          else
+            newerCacheFile = secondCacheFile;
+          CacheSpkResponseDTO res = new CacheSpkResponseDTO()
+          {
+            HasValidCache = false,
+            Cache = await CacheService.GetCacheByFile(newerCacheFile)
+          };
+          return res;
+        }
+        catch (Exception ex)
+        {
+          logger.LogError(ex, "ChainNewerCache -  could not get SPK response from cache");
+          return null;
+        }
       }
       else
         return await base.Handle(firstCacheFile, secondCacheFile);

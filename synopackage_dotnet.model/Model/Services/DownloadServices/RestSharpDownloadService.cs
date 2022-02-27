@@ -17,7 +17,7 @@ namespace synopackage_dotnet.Model.Services
       this.logger = logger;
     }
 
-    private RestClient GetClient(string url, string userAgent = null)
+    private RestClient GetClient(string url, string userAgent = null, bool isRepository = false)
     {
       var client = new RestClient(url);
 
@@ -25,7 +25,10 @@ namespace synopackage_dotnet.Model.Services
 
       if (userAgent != null)
         client.UserAgent = userAgent;
-      client.Timeout = AppSettingsProvider.AppSettings.DownloadTimeoutInSeconds * 1000;
+      if (isRepository)
+        client.Timeout = AppSettingsProvider.AppSettings.DownloadTimeoutInSecondsForRepository * 1000;
+      else
+        client.Timeout = AppSettingsProvider.AppSettings.DownloadTimeoutInSeconds * 1000;
       return client;
     }
 
@@ -39,12 +42,12 @@ namespace synopackage_dotnet.Model.Services
       }
     }
 
-    public async Task<ExecuteResponse> Execute(string url, IEnumerable<KeyValuePair<string, object>> parameters, string userAgent = null, bool useGetMethod = false)
+    public async Task<ExecuteResponse> Execute(string url, IEnumerable<KeyValuePair<string, object>> parameters, string userAgent = null, bool useGetMethod = false, bool isRepository = false)
     {
       try
       {
         var finalUrl = GetLegacySupportUrl(url, parameters);
-        var client = GetClient(finalUrl, userAgent);
+        var client = GetClient(finalUrl, userAgent, isRepository);
 
         IRestRequest request;
         if (!useGetMethod)
@@ -62,8 +65,8 @@ namespace synopackage_dotnet.Model.Services
           return new ExecuteResponse() { Success = true, Content = response.Content };
         else
         {
-          var errorMessage = $"{response.StatusDescription} {response.ErrorMessage}";
-          logger.LogError($"Error getting response for url: {url}: {errorMessage}");
+          var errorMessage = $"{response.StatusDescription}; {response.ErrorMessage}; content: {response.Content}";
+          logger.LogError($"Error getting response for url: {url} - {errorMessage}");
           return new ExecuteResponse() { Success = false, ErrorMessage = errorMessage };
         }
 
@@ -86,7 +89,7 @@ namespace synopackage_dotnet.Model.Services
         //act as a regular browser
         var client = GetClient(url, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36 OPR/56.0.3051.36");
         var request = new RestRequest(Method.GET);
-        return await Task.Run(() => client.DownloadData(request));
+        return await Task.Run(() => client.DownloadData(request)); //TODO: use real async method here
       }
       catch (Exception ex)
       {

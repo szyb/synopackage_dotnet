@@ -7,5 +7,6 @@ namespace synopackage_dotnet.Model.Services
   {
     IEnumerable<ModelDTO> GetAll();
     ModelDTO GetModel(string name);
+    ModelDTO FindBestMatch(string unique, string arch);
   }
 }

@@ -9,7 +9,9 @@ namespace synopackage_dotnet
     public int? CacheIconExpirationInDays { get; set; }
     public bool CacheSpkServerResponse { get; set; }
     public int? CacheSpkServerResponseTimeInHours { get; set; }
+    public int CacheSpkServerResponseTimeInHoursForRepository { get; set; } = 0;
     public int DownloadTimeoutInSeconds { get; set; }
+    public int DownloadTimeoutInSecondsForRepository { get; set; }
     public string DownloadService { get; set; }
     public int DefaultItemsPerPage { get; set; }
     public bool EnableProxyDownloadForInsecureProtocol { get; set; }

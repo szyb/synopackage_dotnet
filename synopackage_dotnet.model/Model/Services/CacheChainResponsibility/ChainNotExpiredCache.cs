@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using synopackage_dotnet.model;
 using synopackage_dotnet.Model.DTOs;
 
 namespace synopackage_dotnet.Model.Services
@@ -14,21 +15,27 @@ namespace synopackage_dotnet.Model.Services
 
     private bool CanHandle(FileInfo firstCacheFile)
     {
-      if (firstCacheFile.Exists && (DateTime.Now - firstCacheFile.LastWriteTime).TotalHours <= AppSettingsProvider.AppSettings.CacheSpkServerResponseTimeInHours.Value)
-        return true;
-      else
-        return false;
+      return !firstCacheFile.IsCacheFileExpired(AppSettingsProvider.AppSettings.CacheSpkServerResponseTimeInHours.Value);
     }
     public override async Task<CacheSpkResponseDTO> Handle(FileInfo firstCacheFile, FileInfo secondCacheFile)
     {
       if (CanHandle(firstCacheFile))
       {
-        CacheSpkResponseDTO res = new CacheSpkResponseDTO()
+        try
         {
-          HasValidCache = true,
-          Cache = await GetCacheByFile(firstCacheFile)
-        };
-        return res;
+          CacheSpkResponseDTO res = new CacheSpkResponseDTO()
+          {
+            HasValidCache = true,
+            Cache = await CacheService.GetCacheByFile(firstCacheFile)
+          };
+          return res;
+        }
+        catch (Exception ex)
+        {
+          logger.LogError(ex, "ChainNotExpiredCache -  could not get SPK response from cache");
+          return null;
+        }
+
       }
       else
         return await base.Handle(firstCacheFile, secondCacheFile);

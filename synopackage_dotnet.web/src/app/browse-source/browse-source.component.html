@@ -2,6 +2,7 @@
   <a class="breadcrumb-item" routerLink="/sources">Sources</a>
   <span class="breadcrumb-item active">{{ nameString }}</span>
 </nav>
+<app-removed-subdomain-info></app-removed-subdomain-info>
 <h1>Browse source</h1>
 <blockquote class="blockquote bq-primary">
   <span class="bq-title">{{ nameString }}</span><span class="px-2">({{ count }})</span>
@@ -10,7 +11,8 @@
     <app-parameters [parameters]="parameters" [showSourceName]="0" [url]="sourceUrl" [www]="sourceWww"></app-parameters>
   </div>
 </blockquote>
-<div *ngIf="!areSettingsSet" class="alert alert-warning" role="alert">User settings are not set. Showing
+<div *ngIf="!areSettingsSet" class="alert alert-warning" role="alert">
+  User settings are not set. Showing
   results for default model and version
 </div>
 <div *ngIf="!isResponseArrived">
@@ -20,31 +22,43 @@
   <p class="alert alert-danger">{{ errorMessage }}</p>
 </div>
 <div *ngIf="isAlternativeCache">
-  <p class="alert alert-warning">Could not get data from this repository. The presented data comes from the cache
-    from {{ cacheOldString }}. Please note that download links may not work.</p>
+  <p class="alert alert-warning">
+    Could not get data from this repository. The presented data comes from the cache
+    from {{ cacheOldString }}. Please note that download links may not work.
+  </p>
 </div>
 <div *ngIf="noPackages">
   <p class="alert alert-success">No results found</p>
 </div>
 <div *ngIf="isResponseArrived && !isError" class="py-2">
-  <span>Share results <mdb-icon fas icon="share-alt" class="cursor-pointer" (click)="link.toggle()" aria-hidden="true">
-    </mdb-icon></span>
+  <span>
+    Share results <mdb-icon fas icon="share-alt" class="cursor-pointer" (click)="link.toggle()" aria-hidden="true">
+    </mdb-icon>
+  </span>
   <div mdbCollapse [isCollapsed]="isSearchLinkCollapsed" #link="bs-collapse" class="pr-2 pl-1">
     <table class="table">
       <tbody>
         <tr>
           <td scope="row">Short link:</td>
-          <td><span>{{shortLink}} <a *ngIf="linksAvailable" href="{{shortLink}}" target="_blank"
-                rel="noopener noreferrer">
+          <td>
+            <span>
+              {{shortLink}} <a *ngIf="linksAvailable" href="{{shortLink}}" target="_blank"
+                               rel="noopener noreferrer">
                 <mdb-icon fas icon="external-link-alt" aria-hidden="true"></mdb-icon>
-              </a></span></td>
+              </a>
+            </span>
+          </td>
         </tr>
         <tr>
           <td scope="row">Full link:</td>
-          <td><span>{{fullLink}} <a *ngIf="linksAvailable" href="{{fullLink}}" target="_blank"
-                rel="noopener noreferrer">
+          <td>
+            <span>
+              {{fullLink}} <a *ngIf="linksAvailable" href="{{fullLink}}" target="_blank"
+                              rel="noopener noreferrer">
                 <mdb-icon fas icon="external-link-alt" aria-hidden="true"></mdb-icon>
-              </a></span></td>
+              </a>
+            </span>
+          </td>
         </tr>
       </tbody>
     </table>

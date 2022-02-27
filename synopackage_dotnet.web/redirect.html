@@ -1,0 +1,43 @@
+<html>
+
+<head>
+  <title>Synopackage.com - redirect</title>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WFVHJ7RXM8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-WFVHJ7RXM8');
+</script>
+</head>
+
+<body>
+  <script>
+    function redirectWithParameters() {
+      let model = localStorage.getItem("model");
+      let version = localStorage.getItem("version");
+      let selectedIsBeta = localStorage.getItem("isBeta");
+      let path = window.location.pathname;
+      console.log(model);
+      console.log(version);
+      console.log(selectedIsBeta);
+      if (model && version) {
+        //localStorage.removeItem("model");
+        //localStorage.removeItem("version");
+        //localStorage.removeItem("isBeta");
+        localStorage.setItem("synopackage", "synopackage was here some day ;) now it is just https://synopackage.com");
+        let newUrl = "https://synopackage.com" + path + "?model=" + encodeURIComponent(model) + "&version=" + encodeURIComponent(version) + "&isBeta=" + encodeURIComponent(selectedIsBeta);
+        console.log('new url:' + newUrl);
+        window.location.replace(newUrl);
+      }
+      else {
+        window.location.replace("https://synopackage.com" + path);
+      }
+    }
+    redirectWithParameters();
+  </script>
+</body>
+
+</html>

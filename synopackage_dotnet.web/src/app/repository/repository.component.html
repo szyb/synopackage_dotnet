@@ -1,0 +1,38 @@
+<nav class="breadcrumb">
+  <span class="breadcrumb-item active">Repository</span>
+</nav>
+<app-removed-subdomain-info></app-removed-subdomain-info>
+<h1>Synopackage Proxy Repository<img src="assets/beta.png" alt="beta" class="pr-2 pl-1" /></h1>
+<div class="cloudy-knoxville-gradient z-depth-2 rounded mb-1 pd-3 ng-star-inserted ">
+  <p class="p-3">
+    <span class="font-weight-bold">Synopackage Proxy Repository</span> is an intermediary server between DSM and active source servers.
+    It allows you to add a single repository link in your Package Center and get packages from all active repositories (or from some subset).
+    <span class="font-weight-bold">All you need to do is to add the link to your Package Center. </span>
+    <br /><br /><span class="font-italic">Please note that this feature is still in beta phase.</span>
+  </p>
+</div>
+<div *ngIf="!repoDetails">
+  <app-wait></app-wait>
+</div>
+<div *ngIf="repoDetails">
+
+  <div *ngFor="let repo of repoDetails.details" class="pb-3">
+    <blockquote class="blockquote bq-primary inline">
+      <p class="bq-title">Repository: <span class='font-weight-bold'>{{repo.name}}</span></p>
+      <span class="repo_description">{{repo.description}}</span>
+      <p>Link: <span class='font-weight-bold'>{{baseUrl}}{{repo.url}}</span></p>
+    </blockquote>
+    <div class="rounded border px-2 py-2">
+      <div class="p-2">
+        <p>Included sources ({{repo.sources.length}}):*</p>
+        <div class="d-inline-block p-0" *ngFor="let source of repo.sources">
+          <a class="d-inline-block p-1 nav-link" routerLink="../sources/{{source}}">{{source}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="rounded border px-2 py-2">
+    *Listed repositories are based on your settings (DSM version). They may be different when you add it to the Package Center.
+    Moreover list of active repositories is changing from time to time.
+  </p>
+</div>

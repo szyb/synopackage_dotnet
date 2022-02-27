@@ -16,5 +16,8 @@ namespace synopackage_dotnet.Model.DTOs
     public bool UseGetMethod { get; set; }
     public bool IsOfficial { get; set; }
     public string DisplayUrl { get; set; }
+    public int? MinMajorVersion { get; set; }
+    public int? MaxMajorVersion { get; set; }
+    public bool? SynopackageChoice { get; set; }
   }
 }

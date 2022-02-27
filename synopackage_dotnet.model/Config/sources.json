@@ -13,28 +13,35 @@
     "Www": "https://synocommunity.com",
     "CustomUserAgent": null,
     "DisabledReason": null,
-    "DisabledDate": null
+    "DisabledDate": null,
+    "SynopackageChoice": true
   },
   {
     "Active": true,
     "Name": "cphub",
-    "Url": "https://www.cphub.net"
+    "Url": "https://www.cphub.net",
+    "SynopackageChoice": true
   },
   {
     "Active": true,
     "Name": "digitalbox",
-    "Url": "http://digital.box.free.fr/sspks/"
+    "Url": "http://digital.box.free.fr/sspks/",
+    "MaxMajorVersion": 6,
+    "SynopackageChoice": true
   },
   {
     "Active": true,
     "Name": "digitalboxdsm7",
-    "Url": "http://digital.box.free.fr/dsm7/"
+    "Url": "http://digital.box.free.fr/dsm7/",
+    "MinMajorVersion": 7,
+    "SynopackageChoice": true
   },
   {
     "Active": true,
     "Name": "beatificabytes",
     "Url": "https://www.beatificabytes.be/sspks/",
-    "Www": "https://www.beatificabytes.be/"
+    "Www": "https://www.beatificabytes.be/",
+    "SynopackageChoice": true
   },
   {
     "Active": true,
@@ -47,14 +54,16 @@
     "Name": "blissdsm7",
     "Url": "https://www.blisshq.com/repo/syno/packages-DSM7.json",
     "Www": "https://www.blisshq.com/",
-    "UseGetMethod": true
+    "UseGetMethod": true,
+    "MinMajorVersion": 7
   },
   {
     "Active": true,
     "Name": "blisspredsm7",
     "Url": "https://www.blisshq.com/repo/syno/packages-pre-DSM7.json",
     "Www": "https://www.blisshq.com/",
-    "UseGetMethod": true
+    "UseGetMethod": true,
+    "MaxMajorVersion": 6
   },
   {
     "Active": false,
@@ -177,13 +186,15 @@
     "Active": true,
     "Name": "imnks",
     "Url": "https://spk.imnks.com",
-    "Www": "https://spk.imnks.com"
+    "Www": "https://spk.imnks.com",
+    "MaxMajorVersion": 6
   },
   {
     "Active": true,
     "Name": "imnksdsm7",
     "Url": "https://spk7.imnks.com",
-    "Www": "https://spk7.imnks.com"
+    "Www": "https://spk7.imnks.com",
+    "MinMajorVersion": 7
   },
   {
     "Active": true,

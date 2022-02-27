@@ -78,6 +78,7 @@ namespace synopackage_dotnet
           "text/json"
           };
       });
+
       services.AddSpaStaticFiles(c =>
       {
         c.RootPath = "wwwroot";
@@ -160,6 +161,7 @@ namespace synopackage_dotnet
       {
         if (!Path.HasExtension(context.Request.Path.Value)
           && !context.Request.Path.StartsWithSegments(new PathString("/api"))
+          && !context.Request.Path.StartsWithSegments(new PathString("/repository/spk"))
           && !context.Request.Path.StartsWithSegments(new PathString("/notification")))
         {
           context.Request.Path = "/index.html";
@@ -170,7 +172,6 @@ namespace synopackage_dotnet
         else
           await next();
       });
-
 
       app.UseDefaultFiles();
       app.UseResponseCompression();
@@ -214,7 +215,6 @@ namespace synopackage_dotnet
       {
         endpoints.MapControllers();
       });
-
       app.UseSpa(spa =>
       {
         // To learn more about options for serving an Angular SPA from ASP.NET Core,

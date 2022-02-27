@@ -11,7 +11,7 @@ namespace synopackage_dotnet.Model
 
       static ModelHelper()
       {
-        AllModels = new Dictionary<string, ModelDTO>(); 
+        AllModels = new Dictionary<string, ModelDTO>(StringComparer.InvariantCultureIgnoreCase); 
 
         {{~ for m in models ~}}
         AddModel(

@@ -11,7 +11,7 @@ namespace synopackage_dotnet.Model.Services
   public abstract class CacheChainResponsibilityAbstract : ICacheChainResponsibility
   {
     protected ICacheChainResponsibility nextProcessor;
-    private readonly ILogger logger;
+    protected readonly ILogger logger;
 
     protected CacheChainResponsibilityAbstract(ILogger logger)
     {
@@ -38,30 +38,5 @@ namespace synopackage_dotnet.Model.Services
       return nextProcessor;
     }
 
-    protected async Task<CacheSpkDTO> GetCacheByFile(FileInfo fileInfo)
-    {
-      try
-      {
-        TimeSpan ts = DateTime.Now - fileInfo.LastWriteTime;
-        if (fileInfo.Exists)
-        {
-          var content = await File.ReadAllTextAsync(fileInfo.FullName);
-          var deserializedData = JsonConvert.DeserializeObject<SpkResult>(content);
-          var result = new CacheSpkDTO()
-          {
-            SpkResult = deserializedData,
-            CacheDate = fileInfo.LastAccessTime,
-            CacheOld = ts.TotalSeconds
-          };
-          return result;
-        }
-        return null;
-      }
-      catch (Exception ex)
-      {
-        logger.LogError(ex, "GetSpkResponseFromCache - could not get SPK response from cache");
-        return null;
-      }
-    }
   }
 }

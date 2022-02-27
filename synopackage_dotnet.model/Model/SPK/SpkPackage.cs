@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace synopackage_dotnet.Model.SPK
 {
@@ -14,15 +15,56 @@ namespace synopackage_dotnet.Model.SPK
     public string Link { get; set; }
     public bool Beta { get; set; }
     public List<string> Thumbnail { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string Icon { get; set; }
     public string Name
     {
       get
       {
-        return Dname != null ? Dname : Package;
+        return Dname ?? Package;
       }
     }
-    //TODO: implement other if needed
+    public long? Size { get; set; }
+    public string Changelog { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string Conflictpkgs { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string Deppkgs { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string Depsers { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public bool? Thirdparty { get; set; }
+    public string Distributor { get; set; }
+    public string Distributor_url { get; set; }
+    public long? Download_count { get; set; }
+    public string Maintainer { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public bool? Qinst { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public bool? Qstart { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public bool? Qupgrade { get; set; }
+    public long? Recent_download_count { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public int? Category { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public int? Subcategory { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public int? Type { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string Price { get; set; }
+    public List<string> Thumbnail_retina { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public List<string> Snapshot { get; set; }
+    public string Md5 { get; set; }
+    public bool? Start { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public bool? Silent_install { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public bool? Silent_upgrade { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public bool? Silent_uninstall { get; set; }
+
   }
 
 

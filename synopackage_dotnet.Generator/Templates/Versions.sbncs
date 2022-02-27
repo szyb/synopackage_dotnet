@@ -9,11 +9,13 @@ namespace synopackage_dotnet.Model
     {
       private static Dictionary<string, VersionDTO> AllVersions { get; set; }
       private static Dictionary<string, VersionDTO> AllVersionsByShortVersion { get; set; }
+      private static Dictionary<int, VersionDTO> AllVersionsByBuild { get; set; } 
 
       static VersionHelper()
       {
         AllVersions = new Dictionary<string, VersionDTO>(); 
         AllVersionsByShortVersion = new Dictionary<string, VersionDTO>();
+        AllVersionsByBuild = new Dictionary<int, VersionDTO>();
 
         {{~ for v in versions ~}}
         AddVersion(
@@ -45,6 +47,8 @@ namespace synopackage_dotnet.Model
           Build = build
         };
         AllVersions.Add(ver.Version, ver);
+        AllVersionsByBuild.Add(ver.Build, ver);
+
         if (!AllVersionsByShortVersion.ContainsKey(ver.ShortVersion))
           AllVersionsByShortVersion.Add(ver.ShortVersion, ver);
         else if (AllVersionsByShortVersion[ver.ShortVersion].Build < ver.Build)
@@ -67,5 +71,6 @@ namespace synopackage_dotnet.Model
           return null;
       }
       
+      public static VersionDTO FindByBuild(int build) => AllVersionsByBuild.ContainsKey(build) ? AllVersionsByBuild[build] : null;
     }
 }

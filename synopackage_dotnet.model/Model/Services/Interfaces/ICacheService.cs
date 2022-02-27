@@ -11,7 +11,8 @@ namespace synopackage_dotnet.Model.Services
     string GetIconFileName(string sourceName, string packageName);
     string GetIconFileNameWithCacheFolder(string sourceName, string packageName);
     Task<CacheSpkResponseDTO> GetSpkResponseFromCache(string sourceName, string arch, string model, string version, bool isBeta);
-    bool SaveSpkResult(string sourceName, string arch, string model, string version, bool isBeta, SpkResult spkResult);
+    Task<CacheSpkResponseDTO> GetSpkResponseForRepositoryFromCache(string sourceName, string arch, string version, bool isBeta);
+    bool SaveSpkResult(string sourceName, string arch, string model, string version, bool isBeta, SpkResult spkResult, bool shouldSaveCacheForModel = true);
 
   }
 }

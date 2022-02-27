@@ -9,5 +9,6 @@ namespace synopackage_dotnet.Model.Services
     bool ValidateSource(string name);
     SourceDTO GetSource(string name);
     IEnumerable<SourceDTO> GetAllActiveSources();
+    IEnumerable<SourceDTO> GetActiveSources(bool? synopackageChoice, int? version);
   }
 }
