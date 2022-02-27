@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Polly;
+using synopackage_dotnet.model;
 using synopackage_dotnet.Model.DTOs;
 using synopackage_dotnet.Model.SPK;
 using System;
@@ -60,7 +61,7 @@ namespace synopackage_dotnet.Model.Services
             try
             {
               byte[] iconBytes = Convert.FromBase64String(package.Icon);
-              await File.WriteAllBytesAsync(GetIconFileNameWithCacheFolder(sourceName, package.Name), iconBytes);
+              await File.WriteAllBytesAsync(GetIconFileNameWithCacheFolder(sourceName, package.Name), iconBytes).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -68,7 +69,7 @@ namespace synopackage_dotnet.Model.Services
             }
           }
         }
-        Task.WaitAll(downloadTasks.ToArray());
+        await Task.WhenAll(downloadTasks.ToArray()).ConfigureAwait(false);
       }
     }
 
@@ -78,15 +79,15 @@ namespace synopackage_dotnet.Model.Services
       {
         IDownloadService downloadService = downloadFactory.GetDefaultDownloadService();
         byte[] iconBytes = null;
-        iconBytes = await downloadService.DownloadData(url);
+        iconBytes = await downloadService.DownloadData(url).ConfigureAwait(false);
         if (IsValidIcon(iconBytes))
         {
-          await File.WriteAllBytesAsync(GetIconFileNameWithCacheFolder(sourceName, packageName), iconBytes);
+          await File.WriteAllBytesAsync(GetIconFileNameWithCacheFolder(sourceName, packageName), iconBytes).ConfigureAwait(false);
         }
         else
         {
           var defaultIconBytes = File.ReadAllBytes("wwwroot/assets/package.png"); //TODO: assets folder should be in appsettings
-          await File.WriteAllBytesAsync(GetIconFileNameWithCacheFolder(sourceName, packageName), defaultIconBytes);
+          await File.WriteAllBytesAsync(GetIconFileNameWithCacheFolder(sourceName, packageName), defaultIconBytes).ConfigureAwait(false);
         }
       }
       catch (Exception ex)
@@ -95,7 +96,7 @@ namespace synopackage_dotnet.Model.Services
       }
     }
 
-    private bool ShouldDownloadIcon(string sourceName, string url)
+    private static bool ShouldDownloadIcon(string sourceName, string url)
     {
       //performance improvement for synologyitalia (downloading one icon is taking too much time and eventually it fails)
       if (sourceName == "synologyitalia" && url != null && url.Contains("piwik"))
@@ -104,7 +105,7 @@ namespace synopackage_dotnet.Model.Services
         return true;
     }
 
-    private bool IsValidIcon(byte[] iconBytes)
+    private static bool IsValidIcon(byte[] iconBytes)
     {
       if (iconBytes == null)
         return false;
@@ -140,7 +141,7 @@ namespace synopackage_dotnet.Model.Services
       }
     }
 
-    public bool SaveSpkResult(string sourceName, string arch, string model, string version, bool isBeta, SpkResult spkResult)
+    public bool SaveSpkResult(string sourceName, string arch, string model, string version, bool isBeta, SpkResult spkResult, bool shouldSaveCacheForModel = true)
     {
       if (!AppSettingsProvider.AppSettings.CacheSpkServerResponse)
         return false;
@@ -155,7 +156,8 @@ namespace synopackage_dotnet.Model.Services
           .OrResult<bool>(x => x == false)
           .WaitAndRetry(4, retryCount => TimeSpan.FromMilliseconds(50 + rnd.Next(0, 200)));
 
-        IORetryPolicy.Execute(() => WriteToFile(fileNameByModel, serializedData));
+        if (shouldSaveCacheForModel)
+          IORetryPolicy.Execute(() => WriteToFile(fileNameByModel, serializedData));
         IORetryPolicy.Execute(() => WriteToFile(fileNameByArch, serializedData));
         return true;
       }
@@ -228,6 +230,48 @@ namespace synopackage_dotnet.Model.Services
       next.SetupNext(new ChainFirstFileCache(logger));
 
       return await startChain.Handle(firstCache, secondCache);
+    }
+
+    public async Task<CacheSpkResponseDTO> GetSpkResponseForRepositoryFromCache(string sourceName, string arch, string version, bool isBeta)
+    {
+      var fileNameByArch = GetResponseCacheByArchFile(sourceName, arch, version, isBeta);
+      FileInfo cacheFileInfo = new FileInfo(fileNameByArch);
+      if (!cacheFileInfo.IsCacheFileExpired(AppSettingsProvider.AppSettings.CacheSpkServerResponseTimeInHoursForRepository))
+      {
+        try
+        {
+          CacheSpkResponseDTO result = new CacheSpkResponseDTO()
+          {
+            HasValidCache = true,
+            Cache = await CacheService.GetCacheByFile(cacheFileInfo)
+          };
+          return result;
+        }
+        catch (Exception ex)
+        {
+          logger.LogError(ex, "GetSpkResponseForRepositoryFromCache - could not get SPK response from cache");
+
+        }
+      }
+      return new CacheSpkResponseDTO() { HasValidCache = false, Cache = null };
+    }
+
+    internal static async Task<CacheSpkDTO> GetCacheByFile(FileInfo fileInfo)
+    {
+      TimeSpan ts = DateTime.Now - fileInfo.LastWriteTime;
+      if (fileInfo.Exists)
+      {
+        var content = await File.ReadAllTextAsync(fileInfo.FullName);
+        var deserializedData = JsonConvert.DeserializeObject<SpkResult>(content);
+        var result = new CacheSpkDTO()
+        {
+          SpkResult = deserializedData,
+          CacheDate = fileInfo.LastAccessTime,
+          CacheOld = ts.TotalSeconds
+        };
+        return result;
+      }
+      return null;
     }
 
     private string GetResponseCacheByModelFile(string sourceName, string model, string version, bool isBeta)

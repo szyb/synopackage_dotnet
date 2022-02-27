@@ -1,5 +1,19 @@
 [
   {
+    "Date": "2022-02-21",
+    "Title": "Synopackage.com - 1.0.0",
+    "Body": [
+      "Today we are happy to announce new version 1.0 of synopackage.com! We skip all versions between 0.6 and 0.9 as we think this is a big step forward to the Synopackage.",
+      "We decided to remove subdomain 'search' from the url and leave only synopackage.com. This website is now much more than just search (years ago it was designed to be a search engine only), so the 'search' subdomain is now outdated. Today we provide to you an up-to-date list of active repositories which is (probably) far better then any post at any forum. You may also browse packages from those repositories without adding them to your DSM. We also provide proxy repository which is new in version 1.0 (read more below). As you can see search engine is now only the addon but it completes Synopackage features. Old subdomain still works, but it redirects you to this website.",
+      "Today we introduce Synopackage Proxy Repository. We have been working on that for the last 2-3 months. With this feature you may add only one link to your Package Center and get the list of all the packages across all active repositories. Moreover, if we add new repository then it will be added also to your Package Center automatically. This feature is still in beta phase but it looks promising. Please share your feedback about it (see info and contact paragraph).",
+      "Enjoy!"
+    ],
+    "RouterLinkDescription": "Synopackage Proxy Repository",
+    "RouterLink": "../repository",
+    "ExternalLinkDescription": null,
+    "ExternalLink": null
+  },
+  {
     "Date": "2021-11-14",
     "Title": "New sources: Bliss",
     "Body": [

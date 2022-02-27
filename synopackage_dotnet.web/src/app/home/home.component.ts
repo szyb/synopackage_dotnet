@@ -33,6 +33,10 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/search/keyword', keywordRouter]);
   }
 
+  onSynopackageProxyRepositoryButton() {
+    this.router.navigate(['/repository']);
+  }
+
   onSourcesButton() {
     this.router.navigate(['/sources']);
   }

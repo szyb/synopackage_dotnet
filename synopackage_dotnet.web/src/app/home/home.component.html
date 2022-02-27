@@ -1,15 +1,18 @@
 <nav class="breadcrumb">
   <span class="breadcrumb-item active">Home</span>
 </nav>
+<app-removed-subdomain-info></app-removed-subdomain-info>
 <h1>Home</h1>
-<div class="home_info">This is a search engine for third-party packages to Synology's DSM. Perform your search
-  now!</div>
+<div class="home_info">
+  This is a search engine for third-party packages to Synology's DSM. Perform your search
+  now!
+</div>
 <form>
   <div class="row">
     <div class="col-md-10">
       <div class="md-form form-sm">
         <input mdbInput type="search" id="searchForm" class="form-control" [(ngModel)]="keyword" name="keyword"
-          (keyup.enter)="$event.target.blur(); onEnter()" [mdbValidate]="false" maxLength="300" />
+               (keyup.enter)="$event.target.blur(); onEnter()" [mdbValidate]="false" maxLength="300" />
         <label for="searchForm" class="">Keyword</label>
       </div>
     </div>
@@ -21,30 +24,51 @@
   </div>
 </form>
 <app-user-settings #basicModal></app-user-settings>
-<div class="features mb-3">Other features & info</div>
+<div class="features mb-3">Features</div>
 <div class="container">
+  <div class="card-deck mb-3 text-center">
+    <div class="col-12 col-md-612 col-lg-12 d-flex wow heartBeat" data-wow-delay="0.6s" data-wow-duration="2s">
+      <div class="card box-shadow">
+        <div class="card-header py-2 py-md-3 py-lg-2">
+          <span class="red-text font-weight-bold">NEW: </span>
+          <span class="font-weight-bold">Synopackage Proxy Repository<img src="assets/beta.png" alt="beta" class="pr-2 pl-1" /></span>
+        </div>
+        <div class="card-body d-flex flex-column">
+          <div class="card-text mb-2 pb-4">
+            Synopackage Proxy Repository - One link in Package Center for all active sources!
+          </div>
+          <a mdbBtn color="primary" size="lg" class="mt-auto btn btn-lg btn-block btn-outline-primary"
+             (click)="onSynopackageProxyRepositoryButton()" mdbWavesEffect>Show me!</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
   <div class="card-deck mb-3 text-center">
     <div class="col-12 col-md-6 col-lg-6 d-flex">
       <div class="card box-shadow">
         <div class="card-header py-2 py-md-3 py-lg-2">List of active repositories</div>
         <div class="card-body d-flex flex-column">
-          <div class="card-text mb-2">The list of active repositories is keeping up-to-date. Get the link and add it to
-            your DSM!</div>
+          <div class="card-text mb-2">
+            The list of active repositories is keeping up-to-date. Get the link and add it to
+            your DSM!
+          </div>
 
           <a mdbBtn color="primary" size="lg" class="mt-auto btn btn-lg btn-block btn-outline-primary"
-            (click)="onSourcesButton()" mdbWavesEffect>Show the list</a>
+             (click)="onSourcesButton()" mdbWavesEffect>Show the list</a>
         </div>
 
       </div>
     </div>
     <div class="col-12 col-md-6 col-lg-6 pt-md-0 pt-3 d-sm-flex">
       <div class="card box-shadow">
-        <div class="card-header py-2 py-md-3 py-lg-2">Browse Synology's server
+        <div class="card-header py-2 py-md-3 py-lg-2">
+          Browse Synology's server
         </div>
         <div class="card-body d-flex flex-column">
           <div class="card-text mb-2">Browse Synology's Official server</div>
           <a mdbBtn color="primary" size="lg" class="mt-auto btn btn-lg btn-block btn-outline-primary"
-            (click)="onBrowseOfficialButton()" mdbWavesEffect>Browse server</a>
+             (click)="onBrowseOfficialButton()" mdbWavesEffect>Browse server</a>
         </div>
       </div>
     </div>
@@ -52,10 +76,12 @@
       <div class="card box-shadow">
         <div class="card-header py-2 py-md-1 py-lg-2">Browse third-party servers</div>
         <div class="card-body d-flex flex-column">
-          <div class="card-text mb-2">Browse third-party server for packages to your device. Have a look on our
-            recommended third-party package server (synocommunity):</div>
+          <div class="card-text mb-2">
+            Browse third-party server for packages to your device. Have a look on our
+            recommended third-party package server (synocommunity):
+          </div>
           <a mdbBtn color="primary" size="lg" class="mt-auto btn btn-lg btn-block btn-outline-primary"
-            (click)="onBrowseRecommendedButton()" mdbWavesEffect>Browse server</a>
+             (click)="onBrowseRecommendedButton()" mdbWavesEffect>Browse server</a>
         </div>
       </div>
     </div>
@@ -63,10 +89,12 @@
       <div class="card box-shadow">
         <div class="card-header py-2 py-md-3 py-lg-2">Set your device & version</div>
         <div class="card-body d-flex flex-column">
-          <div class="card-text mb-2">Search results are personalized to your device and DSM version. Click the settings
-            to setup your preferences.</div>
+          <div class="card-text mb-2">
+            Search results are personalized to your device and DSM version. Click the settings
+            to setup your preferences.
+          </div>
           <a mdbBtn color="primary" size="lg" class="mt-auto btn btn-lg btn-block btn-outline-primary"
-            (click)="onSettingsButton()" mdbWavesEffect>Setup Settings</a>
+             (click)="onSettingsButton()" mdbWavesEffect>Setup Settings</a>
 
         </div>
 

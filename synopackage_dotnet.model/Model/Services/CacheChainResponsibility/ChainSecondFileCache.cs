@@ -21,12 +21,20 @@ namespace synopackage_dotnet.Model.Services
     {
       if (CanHandle(secondCacheFile))
       {
-        CacheSpkResponseDTO res = new CacheSpkResponseDTO()
+        try
         {
-          HasValidCache = false,
-          Cache = await GetCacheByFile(secondCacheFile)
-        };
-        return res;
+          CacheSpkResponseDTO res = new CacheSpkResponseDTO()
+          {
+            HasValidCache = false,
+            Cache = await CacheService.GetCacheByFile(secondCacheFile)
+          };
+          return res;
+        }
+        catch (Exception ex)
+        {
+          logger.LogError(ex, "ChainSecondFileCache -  could not get SPK response from cache");
+          return null;
+        }
       }
       return await base.Handle(firstCacheFile, secondCacheFile);
     }

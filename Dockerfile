@@ -13,6 +13,7 @@ ENV NODE_VERSION 12.13.1
 ENV NODE_DOWNLOAD_SHA 074a6129da34b768b791f39e8b74c6e4ab3349d1296f1a303ef3547a7f9cf9be
 
 COPY ["synopackage_dotnet.web/synopackage_dotnet.csproj",  "synopackage_dotnet.web/"]
+COPY ["synopackage_dotnet.Generator/synopackage_dotnet.Generator.csproj",  "synopackage_dotnet.Generator/"]
 COPY ["synopackage_dotnet.model/synopackage_dotnet.model.csproj",  "synopackage_dotnet.model/"]
 #RUN dotnet restore "synopackage_dotnet.model/synopackage_dotnet.model.csproj"
 RUN dotnet restore "synopackage_dotnet.web/synopackage_dotnet.csproj"

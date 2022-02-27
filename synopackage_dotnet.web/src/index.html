@@ -12,6 +12,40 @@
 </head>
 
 <body>
+  <script>
+    function isSetup() {
+      let model = localStorage.getItem("model");
+      let version = localStorage.getItem("version");
+      if (model && version)
+        return true;
+      else
+        return false;
+    }
+
+    function getParameterByName(name, url = window.location.href) {
+      name = name.replace(/[\[\]]/g, '\\$&');
+      var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    function copySettingsFromQueryString() { //TBDAAW
+      let model = getParameterByName("model");
+      let version = getParameterByName("version");
+      let isBeta = getParameterByName("isBeta");
+
+      if (!isSetup() && model && version) {
+        console.log('setting new parameters!');
+        localStorage.setItem("version", version);
+        localStorage.setItem("model", model);
+        if (isBeta)
+          localStorage.setItem("isBeta", isBeta);
+      }
+    }
+    copySettingsFromQueryString();
+  </script>
   <app-root>Loading...</app-root>
 </body>
 

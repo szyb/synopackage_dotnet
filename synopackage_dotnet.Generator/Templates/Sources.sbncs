@@ -27,7 +27,10 @@ namespace synopackage_dotnet.Model
         {{- if s.disabled_date -}} new DateTime({{- s.disabled_date.year -}}, {{- s.disabled_date.month -}}, {{- s.disabled_date.day -}}) {{- else -}} null {{- end -}},
         {{- if s.custom_user_agent -}} "{{- string.escape s.custom_user_agent -}}" {{- else -}} null {{- end -}},
         {{- s.use_get_method -}},
-        {{- s.is_official -}}
+        {{- s.is_official -}},
+        {{- if s.min_major_version -}} {{- s.min_major_version -}} {{- else -}} null {{- end -}},
+        {{- if s.max_major_version -}} {{- s.max_major_version -}} {{- else -}} null {{- end -}},
+        {{- if s.synopackage_choice -}} {{- s.synopackage_choice -}} {{- else -}} null {{- end -}}
         );
         {{~ end ~}}
       }
@@ -41,7 +44,10 @@ namespace synopackage_dotnet.Model
         DateTime? disabledDate, 
         string customUserAgent,
         bool useGetMethod,
-        bool isOfficial)
+        bool isOfficial,
+        int? minMajorVersion,
+        int? maxMajorVersion,
+        bool? synopackageChoice)
         {
           SourceDTO source = new SourceDTO()
           {
@@ -53,7 +59,10 @@ namespace synopackage_dotnet.Model
             DisabledDate = disabledDate,
             CustomUserAgent = customUserAgent,
             UseGetMethod = useGetMethod,
-            IsOfficial = isOfficial
+            IsOfficial = isOfficial,
+            MinMajorVersion = minMajorVersion,
+            MaxMajorVersion = maxMajorVersion,
+            SynopackageChoice = synopackageChoice
           };
           if (string.IsNullOrWhiteSpace(source.Www))
             source.Www = source.Url;

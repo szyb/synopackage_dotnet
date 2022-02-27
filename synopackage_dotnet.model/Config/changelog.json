@@ -1,5 +1,21 @@
 ﻿[
   {
+    "version": "1.0.0",
+    "date": "2022-02-21",
+    "new": [
+      "Removed subdomain 'Search'. From now on it's only synopackage.com",
+      "Synopackage Proxy Repository - new feature in beta stage",
+      "Redirect script that copies settings from subdomain local storage"
+    ],
+    "improved": [
+      "Changed default version to 7.0.1"
+    ],
+    "fixed": [
+      "Security fixes"
+    ],
+    "removedSources": []
+  },
+  {
     "version": "0.5.19",
     "date": "2021-11-17",
     "new": [
