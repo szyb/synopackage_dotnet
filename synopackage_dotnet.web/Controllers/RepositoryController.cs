@@ -64,7 +64,7 @@ namespace synopackage_dotnet.Controllers
       try
       {
         if (!Enum.TryParse<PredefinedSources>(predefined, true, out var predefinedResult))
-          predefinedResult = PredefinedSources.All;
+          return Ok($"This link is dedicated to your DSM only, however we were unable to parse chosen repository: '{predefined}'. Please visit https://synopackage.com/repository and choose the right link");
         var result = await repositoryService.GetRepositoryPackages(predefinedResult, request, null).ConfigureAwait(false);
         return new ObjectResult(result);
       }
