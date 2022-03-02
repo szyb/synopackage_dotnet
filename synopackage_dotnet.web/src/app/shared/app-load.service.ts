@@ -15,8 +15,8 @@ export class AppLoadService {
         if (environment.restBaseUrl === null) {
           let url = document.location.protocol.concat('//', document.location.hostname);
 
-          if ((document.location.protocol === 'http:' && document.location.port !== '80') ||
-            (document.location.protocol === 'https:' && document.location.port !== '443')) {
+          if ((document.location.protocol === 'http:' && document.location.port !== '80' && document.location.port !== '') ||
+            (document.location.protocol === 'https:' && document.location.port !== '443' && document.location.port !== '')) {
             url = url.concat(':', document.location.port);
           }
           url = url.concat('/');
