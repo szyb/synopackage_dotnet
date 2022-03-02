@@ -24,9 +24,9 @@
       console.log(version);
       console.log(selectedIsBeta);
       if (model && version) {
-        //localStorage.removeItem("model");
-        //localStorage.removeItem("version");
-        //localStorage.removeItem("isBeta");
+        localStorage.removeItem("model");
+        localStorage.removeItem("version");
+        localStorage.removeItem("isBeta");
         localStorage.setItem("synopackage", "synopackage was here some day ;) now it is just https://synopackage.com");
         let newUrl = "https://synopackage.com" + path + "?model=" + encodeURIComponent(model) + "&version=" + encodeURIComponent(version) + "&isBeta=" + encodeURIComponent(selectedIsBeta);
         console.log('new url:' + newUrl);
