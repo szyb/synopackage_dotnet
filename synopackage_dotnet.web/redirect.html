@@ -2,15 +2,15 @@
 
 <head>
   <title>Synopackage.com - redirect</title>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WFVHJ7RXM8"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WFVHJ7RXM8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-  gtag('config', 'G-WFVHJ7RXM8');
-</script>
+    gtag('config', 'G-WFVHJ7RXM8');
+  </script>
 </head>
 
 <body>
@@ -28,7 +28,11 @@
         localStorage.removeItem("version");
         localStorage.removeItem("isBeta");
         localStorage.setItem("synopackage", "synopackage was here some day ;) now it is just https://synopackage.com");
-        let newUrl = "https://synopackage.com" + path + "?model=" + encodeURIComponent(model) + "&version=" + encodeURIComponent(version) + "&isBeta=" + encodeURIComponent(selectedIsBeta);
+        var newUrl = "https://synopackage.com";
+        if (path)
+          var newUrl = "https://synopackage.com" + path + "?model=" + encodeURIComponent(model) + "&version=" + encodeURIComponent(version) + "&isBeta=" + encodeURIComponent(selectedIsBeta);
+        else
+          var newUrl = "https://synopackage.com?model=" + encodeURIComponent(model) + "&version=" + encodeURIComponent(version) + "&isBeta=" + encodeURIComponent(selectedIsBeta);
         console.log('new url:' + newUrl);
         window.location.replace(newUrl);
       }
@@ -38,6 +42,9 @@
     }
     redirectWithParameters();
   </script>
+  <p>
+    Synopackage has been moved to the root domain. Click here if you were not redirected automatically: <b><a href="https://synopackage.com" alt="synopackage">https://synopackage.com</a></b>
+  </p>
 </body>
 
 </html>
