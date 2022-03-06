@@ -2,7 +2,7 @@
 ![Docker Image CI](https://github.com/szyb/synopackage_dotnet/workflows/Docker%20Image%20CI/badge.svg)
 # Synopackage.com
 
-This is a repository of https://search.synopackage.com a search engine for packages to Synology's DSM across all known servers.
+This is a repository of https://synopackage.com a search engine for packages to Synology's DSM across all known servers.
 
 ## Prerequisites
 
