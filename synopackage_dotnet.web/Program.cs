@@ -3,7 +3,9 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using NLog;
 using NLog.Web;
+using System;
 
 namespace synopackage_dotnet
 {
@@ -18,7 +20,19 @@ namespace synopackage_dotnet
     /// <param name="args">The arguments.</param>
     public static void Main(string[] args)
     {
+      AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
       BuildWebHost(args).Run();
+    }
+
+    private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+    {
+      var logger = LogManager.GetCurrentClassLogger();
+      if (e.IsTerminating)
+      {
+        logger.Fatal("App is crashed!", e.ExceptionObject);
+      }
+      else
+        logger.Error("Unhandled exception", e.ExceptionObject);
     }
 
     /// <summary>
