@@ -68,10 +68,19 @@ namespace synopackage_dotnet.Model.Services
           }
           catch (Exception ex)
           {
-            logger.LogError(ex, $"Unable to parse response {response.Content}");
-            result = cacheResult.Cache.SpkResult;
-            resultFrom = cacheResult.HasValidCache ? ResultFrom.Cache : ResultFrom.AlternativeCache;
-            cacheOld = cacheResult.Cache.CacheOld;
+            logger.LogError(ex, $"Unable to parse response from {url}: {response.Content}");
+            if (cacheResult.Cache != null)
+            {
+              logger.LogInformation("Returning data from cache");
+              result = cacheResult.Cache.SpkResult;
+              resultFrom = cacheResult.HasValidCache ? ResultFrom.Cache : ResultFrom.AlternativeCache;
+              cacheOld = cacheResult.Cache.CacheOld;
+            }
+            else
+            {
+              logger.LogError($"Error getting response for url: {url}. No cache available.");
+              return new SourceServerResponseDTO(false, "No data from source server. No cache available", parameters, null, ResultFrom.NotSpecified, null);
+            }
           }
 
         }
