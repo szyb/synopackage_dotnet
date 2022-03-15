@@ -1,5 +1,16 @@
 ﻿[
   {
+    "version": "1.0.1",
+    "date": "2022-03-15",
+    "new": [],
+    "improved": [
+      "Add logging unhandled exception",
+      "Fixed null reference exception"
+    ],
+    "fixed": [],
+    "removedSources": []
+  },
+  {
     "version": "1.0.0",
     "date": "2022-02-21",
     "new": [
