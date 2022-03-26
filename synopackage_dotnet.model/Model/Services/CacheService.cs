@@ -96,6 +96,14 @@ namespace synopackage_dotnet.Model.Services
       }
     }
 
+    public static bool IsCacheFileExpired(FileInfo fi, int cacheValidTimeInHours)
+    {
+      if (!fi.Exists)
+        return true;
+      else
+        return (DateTime.Now - fi.LastWriteTime).TotalHours > cacheValidTimeInHours;
+    }
+
     private static bool ShouldDownloadIcon(string sourceName, string url)
     {
       //performance improvement for synologyitalia (downloading one icon is taking too much time and eventually it fails)
@@ -141,23 +149,20 @@ namespace synopackage_dotnet.Model.Services
       }
     }
 
-    public bool SaveSpkResult(string sourceName, string arch, string model, string version, bool isBeta, SpkResult spkResult, bool shouldSaveCacheForModel = true)
+    public bool SaveSpkResult(string sourceName, string arch, string model, string version, bool isBeta, SpkResult spkResult)
     {
       if (!AppSettingsProvider.AppSettings.CacheSpkServerResponse)
         return false;
 
       try
       {
-        var fileNameByModel = GetResponseCacheByModelFile(sourceName, model, version, isBeta);
         var fileNameByArch = GetResponseCacheByArchFile(sourceName, arch, version, isBeta);
         var serializedData = JsonConvert.SerializeObject(spkResult);
         Random rnd = new Random();
         var IORetryPolicy = Policy.Handle<Exception>()
-          .OrResult<bool>(x => x == false)
+          .OrResult<bool>(result => !result)
           .WaitAndRetry(4, retryCount => TimeSpan.FromMilliseconds(50 + rnd.Next(0, 200)));
 
-        if (shouldSaveCacheForModel)
-          IORetryPolicy.Execute(() => WriteToFile(fileNameByModel, serializedData));
         IORetryPolicy.Execute(() => WriteToFile(fileNameByArch, serializedData));
         return true;
       }
@@ -210,33 +215,38 @@ namespace synopackage_dotnet.Model.Services
 
     public async Task<CacheSpkResponseDTO> GetSpkResponseFromCache(string sourceName, string arch, string model, string version, bool isBeta)
     {
-      CacheSpkResponseDTO res = new CacheSpkResponseDTO();
       if (!AppSettingsProvider.AppSettings.CacheSpkServerResponse || !AppSettingsProvider.AppSettings.CacheSpkServerResponseTimeInHours.HasValue)
       {
         //cache is disabled
-        res.HasValidCache = false;
-        return res;
+        return new CacheSpkResponseDTO() { HasValidCache = false };
       }
-      var fileNameByModel = GetResponseCacheByModelFile(sourceName, model, version, isBeta);
       var fileNameByArch = GetResponseCacheByArchFile(sourceName, arch, version, isBeta);
 
-      FileInfo firstCache = new FileInfo(fileNameByModel);
-      FileInfo secondCache = new FileInfo(fileNameByArch);
+      FileInfo cacheFileInfo = new FileInfo(fileNameByArch);
+      if (cacheFileInfo.Exists)
+      {
+        var isExpired = IsCacheFileExpired(cacheFileInfo, AppSettingsProvider.AppSettings.CacheSpkServerResponseTimeInHours.Value);
+        return new CacheSpkResponseDTO()
+        {
+          HasValidCache = !isExpired,
+          Cache = await CacheService.GetCacheByFile(cacheFileInfo)
+        };
+      }
+      else
+      {
+        return new CacheSpkResponseDTO()
+        {
+          HasValidCache = false
+        };
+      }
 
-      ICacheChainResponsibility startChain = new ChainNotExpiredCache(logger);
-      ICacheChainResponsibility next;
-      next = startChain.SetupNext(new ChainNewerCache(logger));
-      next = next.SetupNext(new ChainSecondFileCache(logger));
-      next.SetupNext(new ChainFirstFileCache(logger));
-
-      return await startChain.Handle(firstCache, secondCache);
     }
 
     public async Task<CacheSpkResponseDTO> GetSpkResponseForRepositoryFromCache(string sourceName, string arch, string version, bool isBeta)
     {
       var fileNameByArch = GetResponseCacheByArchFile(sourceName, arch, version, isBeta);
       FileInfo cacheFileInfo = new FileInfo(fileNameByArch);
-      if (!cacheFileInfo.IsCacheFileExpired(AppSettingsProvider.AppSettings.CacheSpkServerResponseTimeInHoursForRepository))
+      if (!IsCacheFileExpired(cacheFileInfo, AppSettingsProvider.AppSettings.CacheSpkServerResponseTimeInHoursForRepository))
       {
         try
         {
@@ -274,6 +284,7 @@ namespace synopackage_dotnet.Model.Services
       return null;
     }
 
+    [Obsolete("This is redundant. Use GetResponseCacheByArchFile")]
     private string GetResponseCacheByModelFile(string sourceName, string model, string version, bool isBeta)
     {
       var channelString = isBeta ? "beta" : "stable";

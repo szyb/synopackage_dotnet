@@ -61,10 +61,10 @@ namespace synopackage_dotnet.Model.Services
 
         if (response.Success)
         {
-          resultFrom = ResultFrom.Server;
           try
           {
             result = ParseResponse(sourceName, url, arch, model, versionDto, isBeta, response.Content);
+            resultFrom = ResultFrom.Server;
           }
           catch (Exception ex)
           {
@@ -73,7 +73,7 @@ namespace synopackage_dotnet.Model.Services
             {
               logger.LogInformation("Returning data from cache");
               result = cacheResult.Cache.SpkResult;
-              resultFrom = cacheResult.HasValidCache ? ResultFrom.Cache : ResultFrom.AlternativeCache;
+              resultFrom = ResultFrom.Cache;
               cacheOld = cacheResult.Cache.CacheOld;
             }
             else
@@ -88,7 +88,7 @@ namespace synopackage_dotnet.Model.Services
         {
           logger.LogError($"Error getting response for url: {url}: {response.ErrorMessage}");
           result = cacheResult.Cache.SpkResult;
-          resultFrom = ResultFrom.AlternativeCache;
+          resultFrom = ResultFrom.Cache;
           cacheOld = cacheResult.Cache.CacheOld;
         }
         else //no cache && no server response
@@ -162,7 +162,7 @@ namespace synopackage_dotnet.Model.Services
           logEntry.ResultFrom = ResultFrom.Server;
           try
           {
-            var rawResponse = ParseResponse(sourceName, url, arch, unique, versionDto, isBeta, response.Content, false);
+            var rawResponse = ParseResponse(sourceName, url, arch, unique, versionDto, isBeta, response.Content);
             result = new RawSpkResultDto(rawResponse, null);
           }
           catch (Exception ex)
@@ -182,7 +182,7 @@ namespace synopackage_dotnet.Model.Services
         result = new RawSpkResultDto(cacheResult.Cache?.SpkResult, null);
         logEntry.CacheOld = cacheResult.Cache.CacheOld;
         logEntry.LogType = LogType.Result;
-        logEntry.ResultFrom = ResultFrom.AlternativeCache;
+        logEntry.ResultFrom = ResultFrom.Cache;
       }
 
       stopwatch.Stop();
@@ -215,7 +215,7 @@ namespace synopackage_dotnet.Model.Services
       return new SourceServerResponseDTO(true, null, parameters, list, resultFrom, cacheOld);
     }
 
-    private SpkResult ParseResponse(string sourceName, string url, string arch, string modelOrUnique, VersionDTO versionDto, bool isBeta, string responseContent, bool shouldSaveCacheForModel = true)
+    private SpkResult ParseResponse(string sourceName, string url, string arch, string modelOrUnique, VersionDTO versionDto, bool isBeta, string responseContent)
     {
       SpkResult result;
       if (responseContent != null)
@@ -230,7 +230,7 @@ namespace synopackage_dotnet.Model.Services
           result.Packages = JsonConvert.DeserializeObject<List<SpkPackage>>(responseContent, new CustomBooleanJsonConverter());
         }
         if (result != null)
-          cacheService.SaveSpkResult(sourceName, arch, modelOrUnique, versionDto.Build.ToString(), isBeta, result, shouldSaveCacheForModel);
+          cacheService.SaveSpkResult(sourceName, arch, modelOrUnique, versionDto.Build.ToString(), isBeta, result);
       }
       else
       {

@@ -9,6 +9,7 @@ namespace synopackage_dotnet.model
 {
   public static class FileInfoExtensions
   {
+    [Obsolete("Use static method IsCacheFileExpired im CacheService")]
     public static bool IsCacheFileExpired(this FileInfo fi, int cacheValidTimeInHours)
     {
       if (!fi.Exists)
