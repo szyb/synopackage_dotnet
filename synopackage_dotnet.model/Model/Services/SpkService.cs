@@ -40,7 +40,7 @@ namespace synopackage_dotnet.Model.Services
       Stopwatch stopwatch = new Stopwatch();
 
       string errorMessage;
-      ResultFrom resultFrom = ResultFrom.NotSpecified;
+      ResultFrom resultFrom;
       double? cacheOld = null;
       ParametersDTO parameters = new ParametersDTO(sourceName, model, versionDto, isBeta, keyword);
       SearchLogEntryDTO logEntry = new SearchLogEntryDTO(parameters);

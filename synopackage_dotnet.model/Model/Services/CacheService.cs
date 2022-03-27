@@ -284,13 +284,6 @@ namespace synopackage_dotnet.Model.Services
       return null;
     }
 
-    [Obsolete("This is redundant. Use GetResponseCacheByArchFile")]
-    private string GetResponseCacheByModelFile(string sourceName, string model, string version, bool isBeta)
-    {
-      var channelString = isBeta ? "beta" : "stable";
-      return Path.Combine(AppSettingsProvider.AppSettings.BackendCacheFolder, Utils.CleanFileName($"{sourceName}_{model}_{version}_{channelString}.{defaultCacheExtension}"));
-    }
-
     private string GetResponseCacheByArchFile(string sourceName, string arch, string version, bool isBeta)
     {
       var channelString = isBeta ? "beta" : "stable";
@@ -313,7 +306,7 @@ namespace synopackage_dotnet.Model.Services
         return false;
       }
     }
-    private string GetValidUrl(string urlCandidate, bool useSsl = true)
+    private static string GetValidUrl(string urlCandidate, bool useSsl = true)
     {
       string protocol = useSsl ? "https" : "http";
       if (string.IsNullOrWhiteSpace(urlCandidate))
