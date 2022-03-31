@@ -9,8 +9,6 @@ namespace synopackage_dotnet.Model.Enums
     [Description("Server")]
     Server,
     [Description("Cache")]
-    Cache,
-    [Description("Alternative cache")]
-    AlternativeCache
+    Cache
   }
 }

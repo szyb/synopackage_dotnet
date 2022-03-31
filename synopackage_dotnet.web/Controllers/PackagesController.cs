@@ -36,7 +36,7 @@ namespace synopackage_dotnet.Controllers
       if (!string.IsNullOrWhiteSpace(validation)) return BadRequest(validation);
       validation = ValidateStringParameter(nameof(keyword), keyword, 300);
       if (!string.IsNullOrWhiteSpace(validation)) return BadRequest(validation);
-      SourceServerResponseDTO response = null;
+      SourceServerResponseDTO response;
       if (model == null)
         model = AppSettingsProvider.AppSettings.DefaultModel;
       if (version == null)
