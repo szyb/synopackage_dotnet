@@ -88,7 +88,7 @@ namespace synopackage_dotnet.Model.Services
         {
           logger.LogError($"Error getting response for url: {url}: {response.ErrorMessage}");
           result = cacheResult.Cache.SpkResult;
-          resultFrom = ResultFrom.Cache;
+          resultFrom = ResultFrom.ExpiredCache;
           cacheOld = cacheResult.Cache.CacheOld;
         }
         else //no cache && no server response

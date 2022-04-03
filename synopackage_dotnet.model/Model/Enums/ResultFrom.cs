@@ -9,6 +9,8 @@ namespace synopackage_dotnet.Model.Enums
     [Description("Server")]
     Server,
     [Description("Cache")]
-    Cache
+    Cache,
+    [Description("Expired cache")]
+    ExpiredCache
   }
 }
