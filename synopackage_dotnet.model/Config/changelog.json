@@ -1,5 +1,22 @@
 ﻿[
   {
+    "version": "1.0.2",
+    "date": "2022-04-04",
+    "new": [
+      "Backend upgraded to .NET 6"
+    ],
+    "improved": [
+      "Removed cache for model. Only the one for architecture is available. This is should be more efficient.",
+      "Upgraded third-party libraries"
+    ],
+    "fixed": [
+      "Security fixes"
+    ],
+    "removedSources": [
+      "nzbusenet - service is temporary unavailable"
+    ]
+  },
+  {
     "version": "1.0.1",
     "date": "2022-03-15",
     "new": [],
