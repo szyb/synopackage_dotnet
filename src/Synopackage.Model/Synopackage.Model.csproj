@@ -58,7 +58,7 @@
     </AdditionalFiles>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\synopackage_dotnet.Generator\synopackage_dotnet.Generator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\Synopackage.Generator\Synopackage.Generator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Castle.Core" Version="4.4.1" />
@@ -76,7 +76,7 @@
   </ItemGroup>
 
   <!--<ItemGroup>
-    <ProjectReference Include="..\synopackage_dotnet.Generator\synopackage_dotnet.Generator.csproj" />
+    <ProjectReference Include="..\Synopackage.Generator\Synopackage.Generator.csproj" />
   </ItemGroup>-->
 
 </Project>

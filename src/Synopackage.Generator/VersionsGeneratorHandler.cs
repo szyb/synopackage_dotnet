@@ -19,7 +19,7 @@ namespace synopackage_dotnet.Generator
         .ToList();
       extendedVersions.Sort();
 
-      Template template = Template.Parse(GetFromResource("synopackage_dotnet.Generator.Templates.Versions.sbncs"));
+      Template template = Template.Parse(GetFromResource("Synopackage.Generator.Templates.Versions.sbncs"));
       var rendered = template.Render(new
       {
         Versions = extendedVersions

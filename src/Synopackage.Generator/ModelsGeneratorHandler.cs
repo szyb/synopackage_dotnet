@@ -6,16 +6,18 @@ using System.IO;
 
 namespace synopackage_dotnet.Generator
 {
-  public class ChangelogsGeneratorHandler : GeneratorHandlerAbstract
+  public class ModelsGeneratorHandler : GeneratorHandlerAbstract
   {
+
     public override string Handle(string filePath)
     {
       var content = File.ReadAllText(filePath);
-      var list = JsonConvert.DeserializeObject<List<ChangelogDto>>(content);
-      Template template = Template.Parse(GetFromResource("synopackage_dotnet.Generator.Templates.Changelogs.sbncs"));
+      var list = JsonConvert.DeserializeObject<List<ModelDto>>(content);
+      list.Sort((x, y) => { return x.Name.CompareTo(y.Name); });
+      Template template = Template.Parse(GetFromResource("Synopackage.Generator.Templates.Models.sbncs"));
       var rendered = template.Render(new
       {
-        Changelogs = list
+        Models = list
       });
       return rendered;
     }

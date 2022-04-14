@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "synopackage_dotnet", "synopackage_dotnet.web\synopackage_dotnet.csproj", "{99F653EE-F8B1-46A7-BDF9-AB6DD09AF253}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synopackage.Web", "Synopackage.Web\Synopackage.Web.csproj", "{99F653EE-F8B1-46A7-BDF9-AB6DD09AF253}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "synopackage_dotnet.model", "synopackage_dotnet.model\synopackage_dotnet.model.csproj", "{9D19C1D6-CE8A-4094-B69F-9484B482F951}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synopackage.Model", "Synopackage.Model\Synopackage.Model.csproj", "{9D19C1D6-CE8A-4094-B69F-9484B482F951}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "synopackage_dotnet.Generator", "synopackage_dotnet.Generator\synopackage_dotnet.Generator.csproj", "{E4633004-D8E0-4DB7-8773-E2ECA70FDD6E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synopackage.Generator", "Synopackage.Generator\Synopackage.Generator.csproj", "{E4633004-D8E0-4DB7-8773-E2ECA70FDD6E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

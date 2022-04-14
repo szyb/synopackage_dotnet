@@ -12,7 +12,7 @@ namespace synopackage_dotnet.Generator
     {
       var content = File.ReadAllText(filePath);
       var list = JsonConvert.DeserializeObject<List<NewsDto>>(content);
-      Template template = Template.Parse(GetFromResource("synopackage_dotnet.Generator.Templates.News.sbncs"));
+      Template template = Template.Parse(GetFromResource("Synopackage.Generator.Templates.News.sbncs"));
       var rendered = template.Render(new
       {
         News = list

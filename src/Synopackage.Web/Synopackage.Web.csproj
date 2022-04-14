@@ -50,7 +50,7 @@
     <UserSecretsId>212fa35c-f580-40c4-9dcc-449f33a58a3c</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\synopackage_dotnet.model\synopackage_dotnet.model.csproj" />
+    <ProjectReference Include="..\Synopackage.Model\Synopackage.Model.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="sitemap.xml">
