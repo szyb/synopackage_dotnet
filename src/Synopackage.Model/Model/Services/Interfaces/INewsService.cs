@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using synopackage_dotnet.Model.DTOs;
+using Synopackage.Model.DTOs;
 
-namespace synopackage_dotnet.Model.Services
+namespace Synopackage.Model.Services
 {
   public interface INewsService : IDomainService
   {

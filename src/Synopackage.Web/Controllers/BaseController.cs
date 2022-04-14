@@ -1,7 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
 
-namespace synopackage_dotnet.Controllers
+namespace Synopackage.Controllers
 {
   public abstract class BaseController : Controller
   {

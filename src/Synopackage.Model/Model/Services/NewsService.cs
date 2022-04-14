@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
-using synopackage_dotnet.Model.DTOs;
+using Synopackage.Model.DTOs;
 using System.IO;
 using System.Linq;
 
-namespace synopackage_dotnet.Model.Services
+namespace Synopackage.Model.Services
 {
   public class NewsService : Paging, INewsService
   {

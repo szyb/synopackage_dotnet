@@ -1,7 +1,7 @@
 using System;
-using synopackage_dotnet.Model.SPK;
+using Synopackage.Model.SPK;
 
-namespace synopackage_dotnet.Model.DTOs
+namespace Synopackage.Model.DTOs
 {
   public class CacheSpkDTO
   {

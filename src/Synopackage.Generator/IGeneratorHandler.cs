@@ -1,4 +1,4 @@
-﻿namespace synopackage_dotnet.Generator
+﻿namespace Synopackage.Generator
 {
   public interface IGeneratorHandler
   {

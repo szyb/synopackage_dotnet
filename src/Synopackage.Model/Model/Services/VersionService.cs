@@ -4,16 +4,16 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
-using synopackage_dotnet.Model.DTOs;
+using Synopackage.Model.DTOs;
 
-namespace synopackage_dotnet.Model.Services
+namespace Synopackage.Model.Services
 {
   public class VersionService : IVersionService
   {
     public IEnumerable<VersionDTO> GetAllVersions() => VersionHelper.GetAllVersions();
 
-    public VersionDTO GetVersion(string version) => VersionHelper.FindVersion(version); 
-        
+    public VersionDTO GetVersion(string version) => VersionHelper.FindVersion(version);
+
     public VersionDTO FindBestMatch(int build, int major, int minor, int micro)
     {
       var version = VersionHelper.FindByBuild(build);

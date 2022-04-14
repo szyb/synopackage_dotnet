@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace synopackage_dotnet.Model.Enums
+namespace Synopackage.Model.Enums
 {
   public enum PredefinedSources
   {

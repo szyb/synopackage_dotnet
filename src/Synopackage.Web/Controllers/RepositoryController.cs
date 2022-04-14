@@ -2,12 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Logging;
-using synopackage_dotnet.model.Model.DTOs;
-using synopackage_dotnet.Model;
-using synopackage_dotnet.Model.DTOs;
-using synopackage_dotnet.Model.Enums;
-using synopackage_dotnet.Model.Services;
-using synopackage_dotnet.Model.SPK;
+using Synopackage.model.Model.DTOs;
+using Synopackage.Model;
+using Synopackage.Model.DTOs;
+using Synopackage.Model.Enums;
+using Synopackage.Model.Services;
+using Synopackage.Model.SPK;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -16,7 +16,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace synopackage_dotnet.Controllers
+namespace Synopackage.Controllers
 {
   [ApiController]
   public class RepositoryController : BaseController

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace synopackage_dotnet
+namespace Synopackage
 {
   [Serializable]
   public class RepositoryException : Exception

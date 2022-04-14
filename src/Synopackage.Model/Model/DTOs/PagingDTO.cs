@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace synopackage_dotnet.Model.DTOs
+namespace Synopackage.Model.DTOs
 {
   public class PagingDTO<T>
   {

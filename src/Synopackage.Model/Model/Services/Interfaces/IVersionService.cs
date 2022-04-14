@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using synopackage_dotnet.Model.DTOs;
-namespace synopackage_dotnet.Model.Services
+using Synopackage.Model.DTOs;
+namespace Synopackage.Model.Services
 {
-    public interface IVersionService : IDomainService 
-    {
-        IEnumerable<VersionDTO> GetAllVersions();
-        VersionDTO GetVersion(string version);
-        VersionDTO FindBestMatch(int build, int major, int minor, int micro);
-    }
+  public interface IVersionService : IDomainService
+  {
+    IEnumerable<VersionDTO> GetAllVersions();
+    VersionDTO GetVersion(string version);
+    VersionDTO FindBestMatch(int build, int major, int minor, int micro);
+  }
 }

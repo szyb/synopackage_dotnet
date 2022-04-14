@@ -1,4 +1,4 @@
-namespace synopackage_dotnet.Model.Services
+namespace Synopackage.Model.Services
 {
   public abstract class Paging
   {

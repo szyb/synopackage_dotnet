@@ -16,7 +16,7 @@
         "ASPNETCORE_ENVIRONMENT": "test2"
       }
     },
-    "synopackage_dotnet": {
+    "synopackage": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

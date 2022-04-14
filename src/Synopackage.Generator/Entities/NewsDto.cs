@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace synopackage_dotnet.Generator.Entities
+namespace Synopackage.Generator.Entities
 {
   public class NewsDto
   {

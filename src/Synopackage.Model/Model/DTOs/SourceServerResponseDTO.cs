@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using synopackage_dotnet.Model.Enums;
+using Synopackage.Model.Enums;
 
-namespace synopackage_dotnet.Model.DTOs
+namespace Synopackage.Model.DTOs
 {
   public class SourceServerResponseDTO
   {

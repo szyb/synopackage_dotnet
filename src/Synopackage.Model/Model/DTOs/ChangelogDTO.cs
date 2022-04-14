@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace synopackage_dotnet.Model.DTOs
+namespace Synopackage.Model.DTOs
 {
   public class ChangelogDTO
   {

@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace synopackage_dotnet.Generator
+namespace Synopackage.Generator
 {
   [Generator]
   public class ConfigGenerator : ISourceGenerator

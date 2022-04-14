@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Reflection;
 
-namespace synopackage_dotnet.Generator
+namespace Synopackage.Generator
 {
   public abstract class GeneratorHandlerAbstract : IGeneratorHandler
   {

@@ -1,7 +1,7 @@
-using synopackage_dotnet.Model.Enums;
-using synopackage_dotnet.Model.Services;
+using Synopackage.Model.Enums;
+using Synopackage.Model.Services;
 
-namespace synopackage_dotnet.Model
+namespace Synopackage.Model
 {
   public interface IDownloadFactory
   {

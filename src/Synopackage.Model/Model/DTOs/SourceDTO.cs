@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace synopackage_dotnet.Model.DTOs
+namespace Synopackage.Model.DTOs
 {
   public class SourceDTO
   {

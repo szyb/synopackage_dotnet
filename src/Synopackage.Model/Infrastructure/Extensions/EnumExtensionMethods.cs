@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace synopackage_dotnet.model
+namespace Synopackage.model
 {
   public static class EnumExtensionMethods
   {

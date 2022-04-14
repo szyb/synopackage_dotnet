@@ -1,13 +1,13 @@
-﻿using synopackage_dotnet.model.Model.DTOs;
-using synopackage_dotnet.Model.Enums;
-using synopackage_dotnet.Model.SPK;
+﻿using Synopackage.model.Model.DTOs;
+using Synopackage.Model.Enums;
+using Synopackage.Model.SPK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace synopackage_dotnet.Model.Services
+namespace Synopackage.Model.Services
 {
   public interface IRepositoryService
   {

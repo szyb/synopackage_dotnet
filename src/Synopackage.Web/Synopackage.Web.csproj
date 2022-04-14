@@ -10,7 +10,7 @@
     <Version>1.0.0.0</Version>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\net5.0\synopackage_dotnet.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\net6.0\Synopackage.Web.xml</DocumentationFile>
     <noWarn>1591</noWarn>
   </PropertyGroup>
   <ItemGroup>

@@ -1,6 +1,6 @@
 using Newtonsoft.Json.Converters;
 
-namespace synopackage_dotnet
+namespace Synopackage
 {
   public class DateFormatConverter : IsoDateTimeConverter
   {

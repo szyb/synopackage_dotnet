@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Polly;
-using synopackage_dotnet.model;
-using synopackage_dotnet.Model.DTOs;
-using synopackage_dotnet.Model.SPK;
+using Synopackage.model;
+using Synopackage.Model.DTOs;
+using Synopackage.Model.SPK;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -11,7 +11,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace synopackage_dotnet.Model.Services
+namespace Synopackage.Model.Services
 {
   public class CacheService : ICacheService
   {

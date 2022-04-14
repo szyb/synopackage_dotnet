@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using synopackage_dotnet.model.Model.DTOs;
-using synopackage_dotnet.Model.DTOs;
-using synopackage_dotnet.Model.SPK;
+using Synopackage.model.Model.DTOs;
+using Synopackage.Model.DTOs;
+using Synopackage.Model.SPK;
 
-namespace synopackage_dotnet.Model.Services
+namespace Synopackage.Model.Services
 {
   public interface ISpkService : IDomainService
   {

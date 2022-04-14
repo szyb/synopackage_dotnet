@@ -1,8 +1,8 @@
-﻿using synopackage_dotnet.Model.Enums;
-using synopackage_dotnet.Model.Services;
+﻿using Synopackage.Model.Enums;
+using Synopackage.Model.Services;
 using System;
 
-namespace synopackage_dotnet.Model
+namespace Synopackage.Model
 {
   public class DownloadFactory : IDownloadFactory
   {

@@ -1,10 +1,10 @@
 
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using synopackage_dotnet.Model.DTOs;
-using synopackage_dotnet.Model.Services;
+using Synopackage.Model.DTOs;
+using Synopackage.Model.Services;
 
-namespace synopackage_dotnet.Controllers
+namespace Synopackage.Controllers
 {
   ///<summary></summary>
   [Route("api/[controller]")]

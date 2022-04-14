@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace synopackage_dotnet.Model.Enums
+namespace Synopackage.Model.Enums
 {
   public enum LogType
   {

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using synopackage_dotnet.Model.DTOs;
+using Synopackage.Model.DTOs;
 
-namespace synopackage_dotnet.Model
+namespace Synopackage.Model
 {
     public static class VersionHelper
     {

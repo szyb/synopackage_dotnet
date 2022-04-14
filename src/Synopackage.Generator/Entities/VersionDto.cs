@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace synopackage_dotnet.Generator.Entities
+namespace Synopackage.Generator.Entities
 {
   public class VersionDto
   {

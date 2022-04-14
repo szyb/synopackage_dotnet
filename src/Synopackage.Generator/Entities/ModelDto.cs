@@ -1,4 +1,4 @@
-﻿namespace synopackage_dotnet.Generator.Entities
+﻿namespace Synopackage.Generator.Entities
 {
   public class ModelDto
   {

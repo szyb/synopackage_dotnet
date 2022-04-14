@@ -4,16 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using synopackage_dotnet.Model.DTOs;
-using synopackage_dotnet.Model.Services;
+using Synopackage.Model.DTOs;
+using Synopackage.Model.Services;
 
-namespace synopackage_dotnet.Controllers
+namespace Synopackage.Controllers
 {
   ///<summary></summary>
   [Route("api/[controller]")]
   public class SourcesController : BaseController
   {
-    private readonly ISourceService sourceService;    
+    private readonly ISourceService sourceService;
     public SourcesController(ISourceService sourceService)
     {
       this.sourceService = sourceService;
@@ -32,7 +32,7 @@ namespace synopackage_dotnet.Controllers
     }
 
     [HttpGet("GetSource")]
-    public SourceDTO GetSource([FromQuery]string sourceName)
+    public SourceDTO GetSource([FromQuery] string sourceName)
     {
       return sourceService.GetSource(sourceName);
     }

@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
-using synopackage_dotnet.Model.DTOs;
+using Synopackage.Model.DTOs;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace synopackage_dotnet
+namespace Synopackage
 {
   public static class Utils
   {

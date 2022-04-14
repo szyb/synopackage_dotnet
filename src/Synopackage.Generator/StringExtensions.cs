@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace synopackage_dotnet.Generator
+namespace Synopackage.Generator
 {
   public static class StringExtensions
   {

@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
 using Scriban;
-using synopackage_dotnet.Generator.Entities;
+using Synopackage.Generator.Entities;
 using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace synopackage_dotnet.Generator
+namespace Synopackage.Generator
 {
   public class SourcesGeneratorHandler : GeneratorHandlerAbstract
   {

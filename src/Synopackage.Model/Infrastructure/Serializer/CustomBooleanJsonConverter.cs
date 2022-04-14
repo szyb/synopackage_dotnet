@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 using System;
-namespace synopackage_dotnet.Model
+namespace Synopackage.Model
 {
   public class CustomBooleanJsonConverter : JsonConverter<bool>
   {

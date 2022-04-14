@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
-using synopackage_dotnet.Model.DTOs;
+using Synopackage.Model.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace synopackage_dotnet.Model.Services
+namespace Synopackage.Model.Services
 {
   public class ModelService : IModelService
   {

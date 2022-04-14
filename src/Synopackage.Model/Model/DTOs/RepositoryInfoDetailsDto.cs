@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace synopackage_dotnet.model.Model.DTOs
+namespace Synopackage.model.Model.DTOs
 {
   public class RepositoryInfoDetailsDto
   {

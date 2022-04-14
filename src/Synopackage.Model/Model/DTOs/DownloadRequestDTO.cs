@@ -1,4 +1,4 @@
-namespace synopackage_dotnet.Model.DTOs
+namespace Synopackage.Model.DTOs
 {
   public class DownloadRequestDTO
   {

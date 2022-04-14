@@ -11,14 +11,14 @@ using Microsoft.Extensions.Options;
 using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
 using NLog.Extensions.Logging;
-using synopackage_dotnet.Model;
-using synopackage_dotnet.Model.Enums;
-using synopackage_dotnet.Model.Services;
+using Synopackage.Model;
+using Synopackage.Model.Enums;
+using Synopackage.Model.Services;
 using System;
 using System.IO;
 using NLog;
 
-namespace synopackage_dotnet
+namespace Synopackage
 {
   /// <summary>
   /// Startup class

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace synopackage_dotnet.Model.SPK
+namespace Synopackage.Model.SPK
 {
   public class SpkPackage
   {

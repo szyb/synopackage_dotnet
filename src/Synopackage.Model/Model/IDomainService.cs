@@ -1,7 +1,7 @@
-namespace synopackage_dotnet.Model
+namespace Synopackage.Model
 {
-    public interface IDomainService
-    {
-        
-    }
+  public interface IDomainService
+  {
+
+  }
 }

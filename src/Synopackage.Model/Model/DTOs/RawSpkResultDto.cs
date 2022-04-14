@@ -1,11 +1,11 @@
-﻿using synopackage_dotnet.Model.SPK;
+﻿using Synopackage.Model.SPK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace synopackage_dotnet.model.Model.DTOs
+namespace Synopackage.model.Model.DTOs
 {
   public class RawSpkResultDto
   {

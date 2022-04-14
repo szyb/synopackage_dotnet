@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace synopackage_dotnet.Model.SPK
+namespace Synopackage.Model.SPK
 {
   public class SpkResult
   {

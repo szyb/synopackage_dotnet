@@ -1,13 +1,13 @@
 ﻿using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using synopackage_dotnet.Model.DTOs;
+using Synopackage.Model.DTOs;
 using System;
 using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace synopackage_dotnet.Model.Services
+namespace Synopackage.Model.Services
 {
   public class DownloadSpkService : IDownloadSpkService
   {

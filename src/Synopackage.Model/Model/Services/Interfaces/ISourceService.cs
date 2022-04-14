@@ -1,7 +1,7 @@
-﻿using synopackage_dotnet.Model.DTOs;
+﻿using Synopackage.Model.DTOs;
 using System.Collections.Generic;
 
-namespace synopackage_dotnet.Model.Services
+namespace Synopackage.Model.Services
 {
   public interface ISourceService : IDomainService
   {

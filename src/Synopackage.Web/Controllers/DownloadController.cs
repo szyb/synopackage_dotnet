@@ -3,14 +3,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
-using synopackage_dotnet.Model.DTOs;
-using synopackage_dotnet.Model.Services;
+using Synopackage.Model.DTOs;
+using Synopackage.Model.Services;
 using System;
 using System.Net;
 using System.Threading.Tasks;
 
 
-namespace synopackage_dotnet.Controllers
+namespace Synopackage.Controllers
 {
   [Route("api/[controller]")]
   public class DownloadController : BaseController

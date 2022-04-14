@@ -1,4 +1,4 @@
-namespace synopackage_dotnet
+namespace Synopackage
 {
   public static class Consts
   {

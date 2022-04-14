@@ -7,7 +7,7 @@ using NLog;
 using NLog.Web;
 using System;
 
-namespace synopackage_dotnet
+namespace Synopackage
 {
   /// <summary>
   /// Main App entry point

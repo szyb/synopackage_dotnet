@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "synopackage_dotnet": {
+    "synopackage": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -194,18 +194,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "synopackage_dotnet:build"
+            "browserTarget": "synopackage:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "synopackage_dotnet:build:production"
+              "browserTarget": "synopackage:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "synopackage_dotnet:build"
+            "browserTarget": "synopackage:build"
           }
         },
         "test": {
@@ -241,7 +241,7 @@
         }
       }
     },
-    "synopackage_dotnet-e2e": {
+    "synopackage-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -249,7 +249,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "synopackage_dotnet:serve"
+            "devServerTarget": "synopackage:serve"
           }
         },
         "lint": {
@@ -264,5 +264,5 @@
       }
     }
   },
-  "defaultProject": "synopackage_dotnet"
+  "defaultProject": "synopackage"
 }
