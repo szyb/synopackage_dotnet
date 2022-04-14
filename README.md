@@ -7,7 +7,7 @@ This is a repository of https://synopackage.com a search engine for packages to 
 ## Prerequisites
 
 1. Installed Node.js (version 12.x)
-2. .NET 6.0.201 SDK
+2. .NET 6.0.202 SDK
 
 ## Setting up dev environment
 0. Best IDE for this project is Visual Studio Code. There are tasks defined and ready for debug (C# code). 
