@@ -1,0 +1,72 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using Synopackage.Model.DTOs;
+
+namespace Synopackage.Model
+{
+  public static class ChangelogHelper
+  {
+    private static ChangelogDTO[] Changelogs;
+
+    static ChangelogHelper()
+    {
+      Changelogs = new ChangelogDTO[{{ array.size changelogs }}];
+      {{~ for c in changelogs ~}}
+      AddChangelog({{- for.index -}},
+      {{--}}"{{- string.escape c.version -}}",
+      {{--}}new DateTime({{- c.date.year -}}, {{- c.date.month -}}, {{- c.date.day -}}),
+      {{- if c.new != null -}}new List<string>() { 
+        {{- for item in c.new -}}
+        {{--}}"{{ string.escape item }}"{{- if !for.last }},{{- end -}}
+        {{- end -}}
+      }, 
+      {{- end -}}
+      {{- if c.improved != null -}}new List<string>() { 
+        {{- for item in c.improved -}}
+        {{--}}"{{ string.escape item }}"{{- if !for.last }},{{- end -}}
+        {{- end -}}
+      }, 
+      {{- end -}}
+      {{- if c.fixed != null -}}new List<string>() { 
+        {{- for item in c.fixed -}}
+        {{--}}"{{ string.escape item }}"{{- if !for.last }},{{- end -}}
+        {{- end -}}
+      }, 
+      {{- end -}}
+      {{- if c.removed_sources != null -}}new List<string>() { 
+        {{- for item in c.removed_sources -}}
+        {{--}}"{{ string.escape item }}"{{- if !for.last }},{{- end -}}
+        {{- end -}}
+      }
+      {{- end -}}
+      );
+      {{~ end ~}}
+    }
+
+    private static void AddChangelog(
+      int index,
+      string version,
+      DateTime date,
+      IEnumerable<string> @new,
+      IEnumerable<string> improved,
+      IEnumerable<string> @fixed,
+      IEnumerable<string> removedSources
+    )
+    {
+      var changelog = new ChangelogDTO()
+      {
+        Version = version,
+        Date = date,
+        New = @new,
+        Improved = improved,
+        Fixed = @fixed,
+        RemovedSources = removedSources
+      };
+
+      Changelogs[index] = changelog;
+    }
+
+    public static ChangelogDTO[] GetChangelogs() => Changelogs;
+  }
+}
