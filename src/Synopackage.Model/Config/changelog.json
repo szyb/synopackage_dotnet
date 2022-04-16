@@ -1,5 +1,19 @@
 ﻿[
   {
+    "version": "1.0.3",
+    "date": "2022-04-15",
+    "new": [
+      "Add support for DSM 7.1"
+    ],
+    "improved": [
+      "Non functional changes"
+    ],
+    "fixed": [
+      "Security fixes"
+    ],
+    "removedSources": []
+  },
+  {
     "version": "1.0.2",
     "date": "2022-04-04",
     "new": [
