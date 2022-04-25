@@ -15,5 +15,7 @@ namespace Synopackage
     public string DownloadService { get; set; }
     public int DefaultItemsPerPage { get; set; }
     public bool EnableProxyDownloadForInsecureProtocol { get; set; }
+
+    public HealthChecksSettings HealthChecks { get; set; }
   }
 }
