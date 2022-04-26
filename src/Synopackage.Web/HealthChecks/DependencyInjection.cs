@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using System.Linq;
@@ -10,12 +12,12 @@ namespace Synopackage.Web.HealthChecks
     {
       var builder = hcBuilder;
       if (AppSettingsProvider.AppSettings.HealthChecks.Enabled)
-        foreach (var sourceName in Model.SourceHelper.ActiveSources.Where(p => !p.IsOfficial).Select(p => p.Name))
+        foreach (var sourceName in Model.SourceHelper.ActiveSources.Select(p => p.Name))
         {
           builder = builder.AddTypeActivatedCheck<SourceHealthCheck>(
             $"Repository: {sourceName}",
             HealthStatus.Degraded,
-            tags: new[] { "source" },
+            tags: new[] { "source", sourceName },
             args: new[] { sourceName }
             );
         }

@@ -14,13 +14,18 @@ export class SourcesComponent {
   public sources: SourcesDTO;
   public activeSources: SourceDTO[];
   public inactiveSources: SourceDTO[];
+  public isHealthChecksEnabled: boolean;
 
   constructor(http: HttpClient, private sourcesService: SourcesService, private titleService: Title) {
     this.titleService.setTitle('Sources - synopackage.com');
+    this.sourcesService.healthChecksEnabled().subscribe(result => {
+      this.isHealthChecksEnabled = result;
+    });
     this.sourcesService.getAllSources().subscribe(result => {
       this.activeSources = result.activeSources;
       this.inactiveSources = result.inactiveSources;
       this.sources = result;
     });
+
   }
 }

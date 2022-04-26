@@ -21,6 +21,7 @@ using Synopackage.Web.HealthChecks;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using HealthChecks.UI.Core;
 using HealthChecks.UI.Client;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace Synopackage
 {
@@ -110,11 +111,13 @@ namespace Synopackage
       new ConfigureFromConfigurationOptions<AppSettings>(appSettingsSection)
             .Configure(appSettings);
       services.AddSingleton(AppSettingsProvider.Create(appSettings));
+      services.AddMemoryCache();
 
       if (appSettings.HealthChecks.Enabled)
       {
         services.AddHealthChecks()
           .AddSynopackageSourcesHealthChecks();
+
         services
           .AddHealthChecksUI(c =>
           {
@@ -125,6 +128,11 @@ namespace Synopackage
           {
             c.EnableThreadSafetyChecks(true);
           });
+      }
+      else
+      {
+        //mocking HealthCheckService as it not needed when HealthChecks is disabled
+        services.AddSingleton<HealthCheckService, MockHealthChecksService>();
       }
       MapperRegistrator.Register();
     }
@@ -198,9 +206,8 @@ namespace Synopackage
       // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
       app.UseSwaggerUI(c =>
       {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Synopackage.com API V1");
       });
-
       app.UseSpaStaticFiles();
       app.UseRouting();
 

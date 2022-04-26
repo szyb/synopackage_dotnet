@@ -19,5 +19,7 @@ namespace Synopackage.Model.DTOs
     public int? MinMajorVersion { get; set; }
     public int? MaxMajorVersion { get; set; }
     public bool? SynopackageChoice { get; set; }
+    public bool? IsHealthy { get; set; }
+    public string HealthCheckDescription { get; set; }
   }
 }
