@@ -16,11 +16,10 @@
 </blockquote>
 <div class="row border-bottom" *ngIf="sources">
   <div class="d-inline-block d-sm-none font-weight-bold">url / browse</div>
-  <div class="d-none d-md-inline-block          col-md-3 font-weight-bold">name</div>
-  <div class="d-none d-sm-inline-block col-sm-9 col-md-6 font-weight-bold">url</div>
-  <div class="d-none d-sm-inline-block col-sm-1 col-md-1 font-weight-bold"></div>
-  <div class="d-none d-sm-inline-block col-sm-1 col-md-1 font-weight-bold">link</div>
-  <div class="d-none d-sm-inline-block col-sm-1 col-md-1 font-weight-bold">status</div>
+  <div class="d-none d-md-inline-block          col-md-3 font-weight-bold ">name</div>
+  <div class="d-none d-sm-inline-block col-sm-8 col-md-6 font-weight-bold ">url</div>
+  <div class="d-none d-sm-inline-block col-sm-2 col-md-1 font-weight-bold center_column">link</div>
+  <div class="d-none d-sm-inline-block col-sm-2 col-md-2 font-weight-bold center_column">status</div>
 </div>
 <div *ngIf="sources">
   <div class="row" *ngFor="let source of activeSources">
@@ -28,61 +27,72 @@
       <a routerLink="/sources/{{source.name}}">{{ source.displayUrl }}</a>
     </div>
     <div class="d-none d-md-inline-block          col-md-3 mt-1">{{ source.name }}</div>
-    <div class="d-none d-sm-inline-block col-sm-9 col-md-6 mt-1" style="word-break: break-all">{{ source.displayUrl }}</div>
-    <div class="d-none d-sm-inline-block col-sm-1 col-md-1 mt-1">
-      <a routerLink="/sources/{{source.name}}"><mdb-icon fas icon="arrow-alt-circle-right" aria-hidden="true" style="color:blue"></mdb-icon></a>
+    <div class="d-none d-sm-inline-block col-sm-8 col-md-6 mt-1" style="word-break: break-all">
+      <a routerLink="/sources/{{source.name}}">{{ source.displayUrl }}</a>
+      <div class="tooltip1" *ngIf="!source.isOfficial">
+        <mdb-icon far icon="copy" aria-hidden="true" class="copy_url pl-1" (click)="copyToClipboard(source.displayUrl, source.name)" (mouseout)="resetTooltip(source.name)"></mdb-icon>
+        <span class="tooltiptext" id="tooltip{{source.name}}">Copy to clipboard</span>
+      </div>
     </div>
-    <div class="d-none d-sm-inline-block col-sm-1 col-md-1 mt-1" *ngIf="source.www != null" style="word-break: break-all">
+    <div class="d-none d-sm-inline-block col-sm-2 col-md-1 mt-1 center_column" *ngIf="source.www != null" style="word-break: break-all">
       <a href="{{ source.www }}" target="_blank" rel="noopener noreferrer">
         <mdb-icon fas icon="external-link-alt" aria-hidden="true"></mdb-icon>
       </a>
     </div>
-    <div class="d-none d-sm-inline-block col-sm-1 col-md-1" *ngIf="source.www == null" style="word-break: break-all">
+    <div class="d-none d-sm-inline-block col-sm-2 col-md-1" *ngIf="source.www == null" style="word-break: break-all">
       <a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">
         <mdb-icon fas icon="external-link-alt" aria-hidden="true"></mdb-icon>
       </a>
     </div>
-    <div class="d-none d-sm-inline-block col-sm-1 col-md-1" *ngIf="source.isHealthy && isHealthChecksEnabled" style="text-align:center">
-      <mdb-icon fas icon="check-circle" style="color:green" aria-hidden="true" data-mdb-toggle="tooltip" title="Looks good!"></mdb-icon>
+    <div class="d-none d-sm-inline-block col-sm-2 col-md-2 center_column" *ngIf="source.isHealthy && isHealthChecksEnabled">
+      <div class="tooltip2">
+        <span class="tooltiptext">Looks good!</span>
+        <mdb-icon fas icon="check-circle" class="hc_ok_status_icon" aria-hidden="true"></mdb-icon>
+      </div>
     </div>
-    <div class="d-none d-sm-inline-block col-sm-1 col-md-1" *ngIf="!source.isHealthy && isHealthChecksEnabled" style="text-align:center">
-      <mdb-icon fas icon="exclamation-triangle" style="color:orange" aria-hidden="true" data-mdb-toggle="tooltip" title="{{ source.healthCheckDescription }}"></mdb-icon>
+    <div class="d-none d-sm-inline-block col-sm-2 col-md-2 center_column" *ngIf="!source.isHealthy && isHealthChecksEnabled">
+      <div class="tooltip2">
+        <span class="tooltiptext">{{ source.healthCheckDescription }}</span>
+        <mdb-icon fas icon="exclamation-triangle" class="hc_degraded_status_icon" aria-hidden="true"></mdb-icon>
+      </div>
     </div>
-    <div class="d-none d-sm-inline-block col-sm-1 col-md-1" *ngIf="!isHealthChecksEnabled" style="text-align:center">
-      <mdb-icon fas icon="globe" style="color:royalblue" aria-hidden="true" data-mdb-toggle="tooltip" title="Status checking is disabled. Try it your self!"></mdb-icon>
-    </div>
-  </div>
-</div>
-<blockquote *ngIf="inactiveSources" class="blockquote bq-primary mt-3">
-  <p class="bq-title">Inactive repositiories:</p>
-</blockquote>
-<div class="row border-bottom" *ngIf="inactiveSources">
-  <div class="d-inline-block d-sm-none mt-1 font-weight-bold">url</div>
-  <div class="d-none d-md-inline-block           col-md-3 col-lg-2 mt-1 font-weight-bold">name</div>
-  <div class="d-none d-sm-inline-block col-sm-11 col-md-8 col-lg-5 col-xl-4 mt-1 font-weight-bold">url</div>
-  <div class="d-none d-lg-inline-block                    col-lg-4 col-xl-5 mt-1 font-weight-bold">disabled reason</div>
-  <div class="d-none d-sm-inline-block col-sm-1  col-md-1 mt-1 font-weight-bold">link</div>
-</div>
-<div *ngIf="inactiveSources">
-  <div class="row" *ngFor="let source of inactiveSources">
-    <div class="d-inline-block d-sm-none mt-1" *ngIf="source.www != null">
-      <a href="{{ source.www }}" target="_blank" rel="noopener noreferrer">{{ source.displayUrl }}</a>
-    </div>
-    <div class="d-inline-block d-sm-none mt-1" *ngIf="source.www == null">
-      <a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">{{ source.displayUrl }}</a>
-    </div>
-    <div class="d-none d-md-inline-block           col-md-3 col-lg-2 mt-1">{{ source.name }}</div>
-    <div class="d-none d-sm-inline-block col-sm-11 col-md-8 col-lg-5 col-xl-4 mt-1">{{ source.displayUrl }}</div>
-    <div class="d-none d-lg-inline-block                    col-lg-4 col-xl-5 mt-1">{{ source.disabledReason }}</div>
-    <div class="d-none d-sm-inline-block col-sm-1  col-md-1 mt-1" *ngIf="source.www != null">
-      <a href="{{ source.www }}" target="_blank" rel="noopener noreferrer">
-        <mdb-icon fas icon="external-link-alt" aria-hidden="true"></mdb-icon>
-      </a>
-    </div>
-    <div class="d-none d-sm-inline-block col-sm-1  col-md-1" *ngIf="source.www == null">
-      <a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">
-        <mdb-icon fas icon="external-link-alt" aria-hidden="true"></mdb-icon>
-      </a>
+    <div class="d-none d-sm-inline-block col-sm-2 col-md-2 center_column" *ngIf="!isHealthChecksEnabled">
+      <div class="tooltip2">
+        <span class="tooltiptext">Status checking is disabled</span>
+        <mdb-icon fas icon="globe" class="hc_disabled_icon" aria-hidden="true"></mdb-icon>
+      </div>
     </div>
   </div>
-</div>
+  <blockquote *ngIf="inactiveSources" class="blockquote bq-primary mt-3">
+    <p class="bq-title">Inactive repositiories:</p>
+  </blockquote>
+  <div class="row border-bottom" *ngIf="inactiveSources">
+    <div class="d-inline-block d-sm-none mt-1 font-weight-bold">url</div>
+    <div class="d-none d-md-inline-block           col-md-3 col-lg-2 mt-1 font-weight-bold">name</div>
+    <div class="d-none d-sm-inline-block col-sm-11 col-md-8 col-lg-5 col-xl-4 mt-1 font-weight-bold">url</div>
+    <div class="d-none d-lg-inline-block                    col-lg-4 col-xl-5 mt-1 font-weight-bold">disabled reason</div>
+    <div class="d-none d-sm-inline-block col-sm-1  col-md-1 mt-1 font-weight-bold center_column">link</div>
+  </div>
+  <div *ngIf="inactiveSources">
+    <div class="row" *ngFor="let source of inactiveSources">
+      <div class="d-inline-block d-sm-none mt-1" *ngIf="source.www != null">
+        <a href="{{ source.www }}" target="_blank" rel="noopener noreferrer">{{ source.displayUrl }}</a>
+      </div>
+      <div class="d-inline-block d-sm-none mt-1" *ngIf="source.www == null">
+        <a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">{{ source.displayUrl }}</a>
+      </div>
+      <div class="d-none d-md-inline-block           col-md-3 col-lg-2 mt-1">{{ source.name }}</div>
+      <div class="d-none d-sm-inline-block col-sm-11 col-md-8 col-lg-5 col-xl-4 mt-1">{{ source.displayUrl }}</div>
+      <div class="d-none d-lg-inline-block                    col-lg-4 col-xl-5 mt-1">{{ source.disabledReason }}</div>
+      <div class="d-none d-sm-inline-block col-sm-1  col-md-1 mt-1 center_column" *ngIf="source.www != null">
+        <a href="{{ source.www }}" target="_blank" rel="noopener noreferrer">
+          <mdb-icon fas icon="external-link-alt" aria-hidden="true"></mdb-icon>
+        </a>
+      </div>
+      <div class="d-none d-sm-inline-block col-sm-1  col-md-1" *ngIf="source.www == null">
+        <a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">
+          <mdb-icon fas icon="external-link-alt" aria-hidden="true"></mdb-icon>
+        </a>
+      </div>
+    </div>
+  </div>

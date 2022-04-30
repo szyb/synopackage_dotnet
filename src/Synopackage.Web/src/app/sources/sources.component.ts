@@ -8,6 +8,7 @@ import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-sources',
   templateUrl: './sources.component.html',
+  styleUrls: ['./sources.component.scss']
 })
 @Injectable()
 export class SourcesComponent {
@@ -26,6 +27,16 @@ export class SourcesComponent {
       this.inactiveSources = result.inactiveSources;
       this.sources = result;
     });
+  }
 
+  copyToClipboard(url: string, tooltipId: string) {
+    navigator.clipboard.writeText(url);
+    var tooltip = document.getElementById("tooltip" + tooltipId);
+    tooltip.innerHTML = "Copied!";
+  }
+
+  resetTooltip(tooltipId: string) {
+    var tooltip = document.getElementById("tooltip" + tooltipId);
+    tooltip.innerHTML = "Copy to clipboard";
   }
 }
