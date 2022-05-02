@@ -42,4 +42,8 @@ export class SourcesService {
     return this.http.get<SourceDTO>(`${Config.apiUrl}Sources/GetSource${Utils.getQueryParams(params)}`);
   }
 
+  public healthChecksEnabled(): Observable<boolean> {
+    return this.http.get<boolean>(`${Config.baseUrl}health-enabled`);
+  }
+
 }

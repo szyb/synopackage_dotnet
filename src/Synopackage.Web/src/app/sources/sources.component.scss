@@ -1,0 +1,95 @@
+.hc_disabled_icon {
+  color: royalblue;
+}
+
+.hc_ok_status_icon {
+  color: green;
+}
+
+.hc_degraded_status_icon {
+  color: orange;
+}
+
+.browse_arrow {
+  color: blue;
+}
+
+.copy_url {
+  color: blue;
+  cursor: pointer;
+}
+
+.tooltip1 {
+  position: relative;
+  display: inline-block;
+  color: black;
+}
+
+.tooltip1 .tooltiptext {
+  visibility: hidden;
+  width: 170px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 6px;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -86px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  white-space: nowrap;
+}
+
+.tooltip1 .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip1:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+.tooltip2 {
+  position: relative;
+  display: inline-block;
+  color: black;
+}
+
+.tooltip2 .tooltiptext {
+  visibility: hidden;
+  width: auto;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 6px;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -86px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  white-space: nowrap;
+}
+
+
+.tooltip2:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.center_column {
+  text-align: center;
+}

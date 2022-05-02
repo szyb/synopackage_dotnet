@@ -7,6 +7,8 @@ export class SourceDTO {
   disabledReason: string;
   displayUrl: string;
   isOfficial: boolean;
+  isHealthy: boolean;
+  healthCheckDescription: string;
 }
 
 export class SourcesDTO {

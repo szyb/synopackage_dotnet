@@ -17,6 +17,11 @@ using Synopackage.Model.Services;
 using System;
 using System.IO;
 using NLog;
+using Synopackage.Web.HealthChecks;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using HealthChecks.UI.Core;
+using HealthChecks.UI.Client;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace Synopackage
 {
@@ -106,6 +111,29 @@ namespace Synopackage
       new ConfigureFromConfigurationOptions<AppSettings>(appSettingsSection)
             .Configure(appSettings);
       services.AddSingleton(AppSettingsProvider.Create(appSettings));
+      services.AddMemoryCache();
+
+      if (appSettings.HealthChecks.Enabled)
+      {
+        services.AddHealthChecks()
+          .AddSynopackageSourcesHealthChecks();
+
+        services
+          .AddHealthChecksUI(c =>
+          {
+            c.AddHealthCheckEndpoint("Sources status", "/health-sources");
+            c.SetEvaluationTimeInSeconds(appSettings.HealthChecks.EvaluationTimeInSeconds);
+          })
+          .AddInMemoryStorage(c =>
+          {
+            c.EnableThreadSafetyChecks(true);
+          });
+      }
+      else
+      {
+        //mocking HealthCheckService as it not needed when HealthChecks is disabled
+        services.AddSingleton<HealthCheckService, MockHealthChecksService>();
+      }
       MapperRegistrator.Register();
     }
 
@@ -142,7 +170,7 @@ namespace Synopackage
     /// <param name="app">The application.</param>
     /// <param name="env">The hosting environment</param>
     /// <param name="hostApplicationLifetime">The host application lifetime</param>
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, Microsoft.Extensions.Hosting.IHostApplicationLifetime hostApplicationLifetime)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime hostApplicationLifetime)
     {
 
       if (env.IsDevelopment())
@@ -156,22 +184,6 @@ namespace Synopackage
         app.UseHsts();
         app.UseHttpsRedirection();
       }
-
-      app.Use(async (context, next) =>
-      {
-        if (!Path.HasExtension(context.Request.Path.Value)
-          && !context.Request.Path.StartsWithSegments(new PathString("/api"))
-          && !context.Request.Path.StartsWithSegments(new PathString("/repository/spk"))
-          && !context.Request.Path.StartsWithSegments(new PathString("/notification")))
-        {
-          context.Request.Path = "/index.html";
-          context.Response.Headers.Add("Cache-Control", "no-store,no-cache");
-          context.Response.Headers.Add("Pragma", "no-cache");
-          await next();
-        }
-        else
-          await next();
-      });
 
       app.UseDefaultFiles();
       app.UseResponseCompression();
@@ -188,18 +200,34 @@ namespace Synopackage
         }
       });
 
-
       // Enable middleware to serve generated Swagger as a JSON endpoint.
       app.UseSwagger();
 
       // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
       app.UseSwaggerUI(c =>
       {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Synopackage.com API V1");
       });
-
       app.UseSpaStaticFiles();
       app.UseRouting();
+
+      app.Use(async (context, next) =>
+      {
+        if (!Path.HasExtension(context.Request.Path.Value)
+          && !context.Request.Path.StartsWithSegments(new PathString("/api"))
+          && !context.Request.Path.StartsWithSegments(new PathString("/repository/spk"))
+          && !context.Request.Path.StartsWithSegments(new PathString("/health"))
+          && !context.Request.Path.StartsWithSegments(new PathString("/notification")))
+        {
+          context.Request.Path = "/index.html";
+          context.Response.Headers.Add("Cache-Control", "no-store,no-cache");
+          context.Response.Headers.Add("Pragma", "no-cache");
+          await next();
+        }
+        else
+          await next();
+      });
+
 
 
       // CORS
@@ -214,6 +242,24 @@ namespace Synopackage
       app.UseEndpoints(endpoints =>
       {
         endpoints.MapControllers();
+        endpoints.Map("/health-enabled", () => AppSettingsProvider.AppSettings.HealthChecks.Enabled);
+        if (AppSettingsProvider.AppSettings.HealthChecks.Enabled)
+        {
+          endpoints.MapHealthChecksUI();
+          endpoints.MapHealthChecks("/health-sources", new HealthCheckOptions()
+          {
+            //Predicate = _ => true,
+            Predicate = p => p.Tags.Contains("source"),
+            ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+          });
+          endpoints.MapHealthChecksUI(o =>
+          {
+            o.UIPath = "/healthUI";
+            o.ResourcesPath = "/health/ui/resources";
+            o.ApiPath = "/health/api";
+            o.WebhookPath = "/health/webhook";
+          });
+        }
       });
       app.UseSpa(spa =>
       {
