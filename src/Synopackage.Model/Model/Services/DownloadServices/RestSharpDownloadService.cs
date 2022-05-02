@@ -3,6 +3,7 @@ using RestSharp;
 using Synopackage.Model.DTOs;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -59,12 +60,18 @@ namespace Synopackage.Model.Services
         {
           request.AddParameter(p.Key, p.Value);
         }
+        Stopwatch stopwatch = Stopwatch.StartNew();
         IRestResponse response = await Task.Run(() => client.Execute(request));
-
+        stopwatch.Stop();
+        logger.LogInformation("Restsharp executed in {0}ms", stopwatch.ElapsedMilliseconds);
         if (response.ResponseStatus == ResponseStatus.Completed && response.StatusCode == HttpStatusCode.OK)
           return new ExecuteResponse() { Success = true, Content = response.Content };
         else
         {
+          if (response.ErrorMessage != null && response.ErrorMessage.Contains("timeout"))
+          {
+            logger.LogInformation($"Timeout after {client.Timeout}");
+          }
           var errorMessage = $"{response.StatusDescription}; {response.ErrorMessage}; content: {response.Content}";
           logger.LogError($"Error getting response for url: {url} - {errorMessage}");
           return new ExecuteResponse() { Success = false, ErrorMessage = errorMessage };
