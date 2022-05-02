@@ -68,7 +68,7 @@ namespace Synopackage.Model.Services
           return new ExecuteResponse() { Success = true, Content = response.Content };
         else
         {
-          if (response.ErrorMessage != null && response.ErrorMessage.Contains("timeout"))
+          if (response.ErrorMessage != null && response.ErrorMessage.Contains("time"))
           {
             logger.LogInformation($"Timeout after {client.Timeout}");
           }
