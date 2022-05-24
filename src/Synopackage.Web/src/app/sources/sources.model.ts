@@ -9,6 +9,8 @@ export class SourceDTO {
   isOfficial: boolean;
   isHealthy: boolean;
   healthCheckDescription: string;
+  info: string;
+  isDownloadDisabled: boolean;
 }
 
 export class SourcesDTO {

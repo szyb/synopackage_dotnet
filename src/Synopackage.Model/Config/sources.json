@@ -189,14 +189,18 @@
     "Name": "imnks",
     "Url": "https://spk.imnks.com",
     "Www": "https://spk.imnks.com",
-    "MaxMajorVersion": 6
+    "MaxMajorVersion": 6,
+    "Info": "This source server does not allow to download packages directly from the browser. Downloading is possible only from DSM Package Center.",
+    "IsDownloadDisabled": true
   },
   {
     "Active": true,
     "Name": "imnksdsm7",
     "Url": "https://spk7.imnks.com",
     "Www": "https://spk7.imnks.com",
-    "MinMajorVersion": 7
+    "MinMajorVersion": 7,
+    "Info": "This source server does not allow to download packages directly from the browser. Downloading is possible only from DSM Package Center.",
+    "IsDownloadDisabled": true
   },
   {
     "Active": true,

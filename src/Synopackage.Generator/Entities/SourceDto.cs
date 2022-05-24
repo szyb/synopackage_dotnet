@@ -19,5 +19,7 @@ namespace Synopackage.Generator.Entities
     public int? MinMajorVersion { get; set; }
     public int? MaxMajorVersion { get; set; }
     public bool? SynopackageChoice { get; set; }
+    public string Info { get; set; }
+    public bool IsDownloadDisabled { get; set; }
   }
 }

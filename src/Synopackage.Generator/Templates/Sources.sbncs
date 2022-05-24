@@ -30,7 +30,9 @@ namespace Synopackage.Model
         {{- s.is_official -}},
         {{- if s.min_major_version -}} {{- s.min_major_version -}} {{- else -}} null {{- end -}},
         {{- if s.max_major_version -}} {{- s.max_major_version -}} {{- else -}} null {{- end -}},
-        {{- if s.synopackage_choice -}} {{- s.synopackage_choice -}} {{- else -}} null {{- end -}}
+        {{- if s.synopackage_choice -}} {{- s.synopackage_choice -}} {{- else -}} null {{- end -}},
+        {{- if s.info -}} "{{- s.info -}}" {{- else -}} null {{- end -}},
+        {{- s.is_download_disabled -}}        
         );
         {{~ end ~}}
       }
@@ -47,7 +49,9 @@ namespace Synopackage.Model
         bool isOfficial,
         int? minMajorVersion,
         int? maxMajorVersion,
-        bool? synopackageChoice)
+        bool? synopackageChoice,
+        string info,
+        bool isDownloadDisabled)
         {
           SourceDTO source = new SourceDTO()
           {
@@ -62,7 +66,9 @@ namespace Synopackage.Model
             IsOfficial = isOfficial,
             MinMajorVersion = minMajorVersion,
             MaxMajorVersion = maxMajorVersion,
-            SynopackageChoice = synopackageChoice
+            SynopackageChoice = synopackageChoice,
+            Info = info,
+            IsDownloadDisabled = isDownloadDisabled
           };
           if (string.IsNullOrWhiteSpace(source.Www))
             source.Www = source.Url;
