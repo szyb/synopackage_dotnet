@@ -35,7 +35,9 @@ namespace Synopackage.Model.Services
       string customUserAgent,
       bool isSearch,
       string keyword = null,
-      bool useGetMethod = false)
+      bool useGetMethod = false,
+      string sourceInfo = null,
+      bool isDownloadDisabled = false)
     {
       Stopwatch stopwatch = new Stopwatch();
 
@@ -79,7 +81,7 @@ namespace Synopackage.Model.Services
             else
             {
               logger.LogError($"Error getting response for url: {url}. No cache available.");
-              return new SourceServerResponseDTO(false, "No data from source server. No cache available", parameters, null, ResultFrom.NotSpecified, null);
+              return new SourceServerResponseDTO(false, "No data from source server. No cache available", parameters, null, ResultFrom.NotSpecified, null, sourceInfo, isDownloadDisabled);
             }
           }
 
@@ -95,7 +97,7 @@ namespace Synopackage.Model.Services
         {
           errorMessage = $"{response.ErrorMessage}";
           logger.LogError($"Error getting response for url: {url}: {errorMessage}");
-          return new SourceServerResponseDTO(false, errorMessage, parameters, null, ResultFrom.NotSpecified, null);
+          return new SourceServerResponseDTO(false, errorMessage, parameters, null, ResultFrom.NotSpecified, null, sourceInfo, isDownloadDisabled);
         }
       }
       else // get data from Valid cache
@@ -107,7 +109,7 @@ namespace Synopackage.Model.Services
 
       if (result != null)
       {
-        var finalResult = await GenerateResult(sourceName, keyword, parameters, result, resultFrom, cacheOld);
+        var finalResult = await GenerateResult(sourceName, keyword, parameters, result, resultFrom, cacheOld, sourceInfo, isDownloadDisabled);
 
         stopwatch.Stop();
         logEntry.ResultFrom = resultFrom;
@@ -124,7 +126,7 @@ namespace Synopackage.Model.Services
         logEntry.CacheOld = null;
         logEntry.ExecutionTime = stopwatch.ElapsedMilliseconds;
         logger.LogWarning("Spk result is empty {0}", Utils.GetSearchLogEntryString(logEntry));
-        return new SourceServerResponseDTO(false, errorMessage, parameters, null, resultFrom, cacheOld);
+        return new SourceServerResponseDTO(false, errorMessage, parameters, null, resultFrom, cacheOld, sourceInfo, isDownloadDisabled);
       }
     }
 
@@ -191,7 +193,7 @@ namespace Synopackage.Model.Services
       return result;
     }
 
-    private async Task<SourceServerResponseDTO> GenerateResult(string sourceName, string keyword, ParametersDTO parameters, SpkResult result, ResultFrom resultFrom, double? cacheOld)
+    private async Task<SourceServerResponseDTO> GenerateResult(string sourceName, string keyword, ParametersDTO parameters, SpkResult result, ResultFrom resultFrom, double? cacheOld, string sourceInfo = null, bool isDownloadDisabled = false)
     {
       var processIconsTask = this.cacheService.ProcessIcons(sourceName, result.Packages);
       List<PackageDTO> list = new List<PackageDTO>();
@@ -212,7 +214,7 @@ namespace Synopackage.Model.Services
       }
       list.Sort();
       await processIconsTask;
-      return new SourceServerResponseDTO(true, null, parameters, list, resultFrom, cacheOld);
+      return new SourceServerResponseDTO(true, null, parameters, list, resultFrom, cacheOld, sourceInfo, isDownloadDisabled);
     }
 
     private SpkResult ParseResponse(string sourceName, string url, string arch, string modelOrUnique, VersionDTO versionDto, bool isBeta, string responseContent)

@@ -18,7 +18,9 @@ namespace Synopackage.Model.Services
       string customUserAgent,
       bool isSearch,
       string keyword = null,
-      bool useGetMethod = false);
+      bool useGetMethod = false,
+      string sourceInfo = null,
+      bool isDownloadDisabled = false);
 
     Task<RawSpkResultDto> GetRawPackages(
      string sourceName,

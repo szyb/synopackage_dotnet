@@ -38,5 +38,7 @@ export class SourceServerResponseDTO {
   parameters: ParametersDTO;
   packages: PackageDTO[];
   resultFrom: number;
-  cacheOld: number
+  cacheOld: number;
+  sourceInfo: string;
+  isDownloadDisabled: boolean;
 }

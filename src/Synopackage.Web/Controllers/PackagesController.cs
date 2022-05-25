@@ -57,7 +57,9 @@ namespace Synopackage.Controllers
           sourceDto.CustomUserAgent,
           isSearch,
           keyword,
-          sourceDto.UseGetMethod);
+          sourceDto.UseGetMethod,
+          sourceDto.Info,
+          sourceDto.IsDownloadDisabled);
       }
       else
       {
