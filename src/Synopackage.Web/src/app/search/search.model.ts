@@ -14,4 +14,6 @@ export class SearchResultDTO {
   packages: PackageDTO[];
   response: SourceServerResponseDTO;
   isCollapsed: boolean;
+  sourceInfo: string;
+  isDownloadDisabled: boolean;
 }

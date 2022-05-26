@@ -9,6 +9,8 @@ export class SourceDTO {
   isOfficial: boolean;
   isHealthy: boolean;
   healthCheckDescription: string;
+  info: string;
+  isDownloadDisabled: boolean;
 }
 
 export class SourcesDTO {
@@ -36,5 +38,7 @@ export class SourceServerResponseDTO {
   parameters: ParametersDTO;
   packages: PackageDTO[];
   resultFrom: number;
-  cacheOld: number
+  cacheOld: number;
+  sourceInfo: string;
+  isDownloadDisabled: boolean;
 }

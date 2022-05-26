@@ -21,5 +21,7 @@ namespace Synopackage.Model.DTOs
     public bool? SynopackageChoice { get; set; }
     public bool? IsHealthy { get; set; }
     public string HealthCheckDescription { get; set; }
+    public string Info { get; set; }
+    public bool IsDownloadDisabled { get; set; }
   }
 }

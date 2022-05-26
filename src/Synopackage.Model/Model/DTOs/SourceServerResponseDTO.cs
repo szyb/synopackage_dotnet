@@ -11,8 +11,18 @@ namespace Synopackage.Model.DTOs
     public double? CacheOld { get; private set; }
     public ParametersDTO Parameters { get; private set; }
     public IEnumerable<PackageDTO> Packages { get; private set; }
+    public string SourceInfo { get; private set; }
+    public bool IsDownloadDisabled { get; private set; }
 
-    public SourceServerResponseDTO(bool result, string errorMessage, ParametersDTO parameters, IEnumerable<PackageDTO> packages, ResultFrom resultFrom, double? cacheOld)
+    public SourceServerResponseDTO(
+      bool result,
+      string errorMessage,
+      ParametersDTO parameters,
+      IEnumerable<PackageDTO> packages,
+      ResultFrom resultFrom,
+      double? cacheOld,
+      string sourceInfo = null,
+      bool isDownloadDisabled = false)
     {
       this.Result = result;
       this.ErrorMessage = errorMessage;
@@ -20,6 +30,8 @@ namespace Synopackage.Model.DTOs
       this.Packages = packages;
       this.ResultFrom = resultFrom;
       this.CacheOld = cacheOld;
+      this.SourceInfo = sourceInfo;
+      this.IsDownloadDisabled = isDownloadDisabled;
     }
   }
 }

@@ -1,4 +1,4 @@
-import { Injectable, Component, OnChanges, Input, ViewChild } from '@angular/core';
+import { Injectable, Component, OnChanges, Input, ViewChild, OnInit } from '@angular/core';
 import { PackageDTO } from 'src/app/sources/sources.model';
 import { DownloadDialogComponent } from '../download-dialog/download-dialog.component';
 
@@ -10,22 +10,33 @@ import { DownloadDialogComponent } from '../download-dialog/download-dialog.comp
 })
 
 @Injectable()
-export class PackageInfoComponent {
+export class PackageInfoComponent implements OnInit {
   public defaultImage = 'assets/package.png';
 
   @Input() public package: PackageDTO;
   @Input() public downloadDialog: DownloadDialogComponent;
+  @Input() public isDownloadDisabled: boolean;
+
+  ngOnInit() {
+    //console.log("init");
+    //console.log(this.isDownloadDisabled);
+  }
 
   showDownloadDialogModal() {
-    this.downloadDialog.package = this.package;
-    this.downloadDialog.showModal();
+    //console.log(this.isDownloadDisabled);
+    if (!this.isDownloadDisabled) {
+      this.downloadDialog.package = this.package;
+      this.downloadDialog.showModal();
+    }
+    else {
+      alert('Download is disabled for this source server');
+    }
   }
 
-  constructor() {
+  getDownloadIconClass(): string {
+    if (!this.isDownloadDisabled)
+      return "green-text px-2 cursor-pointer";
+    else
+      return "grey-text px-2 disabled";
   }
-
-  init() {
-  }
-
-
 }

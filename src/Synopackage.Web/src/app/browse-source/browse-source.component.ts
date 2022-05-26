@@ -38,6 +38,8 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
   public fullLink: string;
   public isAlternativeCache: boolean;
   public cacheOldString: string;
+  public info: string;
+  public isDownloadDisabled: boolean;
   private keywordParam: string;
   private modelParam: string;
   private versionParam: string;
@@ -65,6 +67,7 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
     this.noPackages = false;
     this.parameters = new ParametersDTO();
 
+
     this.count = 0;
     this.route.params.pipe(
       take(1)
@@ -84,6 +87,8 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
         this.sourceUrl = val.displayUrl;
         this.sourceWww = val.www;
         this.isOfficial = val.isOfficial;
+        this.info = val.info;
+        this.isDownloadDisabled = val.isDownloadDisabled;
       });
     const { keywordForSearch, model, version, channel } = this.getParameters();
 

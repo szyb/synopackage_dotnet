@@ -152,6 +152,8 @@ export class SearchComponent implements OnInit, OnDestroy {
         item.response = null;
         item.count = 0;
         item.isCollapsed = true;
+        item.sourceInfo = null;
+        item.isDownloadDisabled = false;
       });
     }
 
@@ -194,6 +196,8 @@ export class SearchComponent implements OnInit, OnDestroy {
               this.parameters = val.parameters;
               this.generateSearchLinks(keywordForSearch, model, version, channel);
             }
+            item.sourceInfo = val.sourceInfo;
+            item.isDownloadDisabled = val.isDownloadDisabled;
           });
       });
       this.isSearchPerformed = true;
