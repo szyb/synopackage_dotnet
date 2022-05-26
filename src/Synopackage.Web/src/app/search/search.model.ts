@@ -6,7 +6,7 @@ export class SearchResultDTO {
   www: string;
   isSearchEnded: boolean;
   isValid: boolean;
-  isAlternativeCache: boolean;
+  isExpiredCache: boolean;
   cacheOldString: string;
   errorMessage: string;
   count: number;

@@ -26,7 +26,7 @@
 <div *ngIf="isError">
   <p class="alert alert-danger">{{ errorMessage }}</p>
 </div>
-<div *ngIf="isAlternativeCache">
+<div *ngIf="isExpiredCache">
   <p class="alert alert-warning">
     Could not get data from this repository. The presented data comes from the cache
     from {{ cacheOldString }}. Please note that download links may not work.
