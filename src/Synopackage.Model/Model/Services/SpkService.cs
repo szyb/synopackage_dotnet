@@ -75,7 +75,7 @@ namespace Synopackage.Model.Services
             {
               logger.LogInformation("Returning data from cache");
               result = cacheResult.Cache.SpkResult;
-              resultFrom = ResultFrom.Cache;
+              resultFrom = ResultFrom.ExpiredCache;
               cacheOld = cacheResult.Cache.CacheOld;
             }
             else

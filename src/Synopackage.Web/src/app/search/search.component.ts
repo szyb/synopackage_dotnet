@@ -189,7 +189,7 @@ export class SearchComponent implements OnInit, OnDestroy {
               });
             }
             if (val.resultFrom === 3 && val.cacheOld !== null) {
-              item.isAlternativeCache = true;
+              item.isExpiredCache = true;
               item.cacheOldString = Utils.getCacheOldString(val.cacheOld);
             }
             if (this.parameters == null) {

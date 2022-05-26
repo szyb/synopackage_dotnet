@@ -79,7 +79,7 @@
           {{ result.sourceInfo }}
         </p>
       </div>
-      <div *ngIf="result.isAlternativeCache">
+      <div *ngIf="result.isExpiredCache">
         <p class="alert alert-warning">
           Could not get data from this repository. The presented data comes from the cache
           from {{ result.cacheOldString }}. Please note that download links may not work.

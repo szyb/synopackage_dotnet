@@ -36,7 +36,7 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
   public linksAvailable = false;
   public shortLink: string;
   public fullLink: string;
-  public isAlternativeCache: boolean;
+  public isExpiredCache: boolean;
   public cacheOldString: string;
   public info: string;
   public isDownloadDisabled: boolean;
@@ -117,7 +117,7 @@ export class BrowseSourceComponent implements OnInit, OnDestroy {
         });
       }
       if (this.response.resultFrom === 3 && this.response.cacheOld !== null) {
-        this.isAlternativeCache = true;
+        this.isExpiredCache = true;
         this.cacheOldString = Utils.getCacheOldString(this.response.cacheOld);
       }
       this.isResponseArrived = true;
