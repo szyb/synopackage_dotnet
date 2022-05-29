@@ -17,10 +17,12 @@
     "SynopackageChoice": true
   },
   {
-    "Active": true,
+    "Active": false,
     "Name": "cphub",
     "Url": "https://www.cphub.net",
-    "SynopackageChoice": true
+    "SynopackageChoice": true,
+    "DisabledDate": "2022-05-29",
+    "DisabledReason": "Invalid response. Looks like temporary issue"
   },
   {
     "Active": true,
@@ -208,10 +210,12 @@
     "Url": "http://www.hildinger.us/sspks/"
   },
   {
-    "Active": true,
+    "Active": false,
     "Name": "jadahl",
     "Url": "http://www.jadahl.com/domoticz_stable_6/",
-    "Www": "http://www.jadahl.com"
+    "Www": "http://www.jadahl.com",
+    "DisabledDate": "2022-05-29",
+    "DisabledReason": "No response from server"
   },
   {
     "Active": false,
