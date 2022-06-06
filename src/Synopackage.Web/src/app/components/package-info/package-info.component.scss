@@ -1,12 +1,15 @@
-.package_info_main
-{
+.package_info_main {
   min-height: 80px;
 }
-.package_info_name
-{
+
+.package_info_name {
   font-size: 1.5rem;
 }
-.package_info_version
-{
+
+.package_info_version {
   font-size: 0.8rem;
+}
+
+.word_break {
+  word-break: break-word;
 }

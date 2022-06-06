@@ -32,6 +32,7 @@ import { InfoComponent } from './info/info.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { RepositoryComponent } from './repository/repository.component';
 import { RemovedSubdomainInfoComponent } from './components/removed-subdomain-info/removed-subdomain-info.component';
+import { CopyToClipboardComponent } from './components/copy-to-clipboard/copy-to-clipboard.component';
 
 export function init_app(appLoadService: AppLoadService) {
   return () => appLoadService.initializeApp();
@@ -152,7 +153,8 @@ export const routerConfig: Routes = [
     PrivacyPolicyComponent,
     InfoComponent,
     PaginatorComponent,
-    RemovedSubdomainInfoComponent
+    RemovedSubdomainInfoComponent,
+    CopyToClipboardComponent
   ],
   imports: [
     BrowserModule,

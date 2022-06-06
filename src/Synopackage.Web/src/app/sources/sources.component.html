@@ -27,12 +27,9 @@
       <a routerLink="/sources/{{source.name}}">{{ source.displayUrl }}</a>
     </div>
     <div class="d-none d-md-inline-block          col-md-3 mt-1">{{ source.name }}</div>
-    <div class="d-none d-sm-inline-block col-sm-8 col-md-6 mt-1" style="word-break: break-all">
+    <div class="d-none d-sm-inline-block col-sm-8 col-md-6 mt-1 url_word_break">
       <a routerLink="/sources/{{source.name}}">{{ source.displayUrl }}</a>
-      <div class="tooltip1" *ngIf="!source.isOfficial">
-        <mdb-icon far icon="copy" aria-hidden="true" class="copy_url pl-1" (click)="copyToClipboard(source.displayUrl, source.name)" (mouseout)="resetTooltip(source.name)"></mdb-icon>
-        <span class="tooltiptext" id="tooltip{{source.name}}">Copy to clipboard</span>
-      </div>
+      <app-copy-to-clipboard [urlToCopy]="source.displayUrl" [tooltipSuffix]="source.name" *ngIf="!source.isOfficial"></app-copy-to-clipboard>
     </div>
     <div class="d-none d-sm-inline-block col-sm-2 col-md-1 mt-1 center_column" *ngIf="source.www != null" style="word-break: break-all">
       <a href="{{ source.www }}" target="_blank" rel="noopener noreferrer">

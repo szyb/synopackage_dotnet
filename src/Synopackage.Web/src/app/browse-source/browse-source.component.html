@@ -46,22 +46,24 @@
         <tr>
           <td scope="row">Short link:</td>
           <td>
-            <span>
+            <span class="url_word_break">
               {{shortLink}} <a *ngIf="linksAvailable" href="{{shortLink}}" target="_blank"
                                rel="noopener noreferrer">
                 <mdb-icon fas icon="external-link-alt" aria-hidden="true"></mdb-icon>
               </a>
+              <app-copy-to-clipboard [urlToCopy]="shortLink" [tooltipSuffix]="'shareShortLink'"></app-copy-to-clipboard>
             </span>
           </td>
         </tr>
         <tr>
           <td scope="row">Full link:</td>
           <td>
-            <span>
+            <span class="url_word_break">
               {{fullLink}} <a *ngIf="linksAvailable" href="{{fullLink}}" target="_blank"
                               rel="noopener noreferrer">
                 <mdb-icon fas icon="external-link-alt" aria-hidden="true"></mdb-icon>
               </a>
+              <app-copy-to-clipboard [urlToCopy]="fullLink" [tooltipSuffix]="'shareFullLink'"></app-copy-to-clipboard>
             </span>
           </td>
         </tr>

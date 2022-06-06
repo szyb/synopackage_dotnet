@@ -14,6 +14,7 @@ import { Utils } from '../shared/Utils';
 @Component({
   selector: 'app-browse-source',
   templateUrl: './browse-source.component.html',
+  styleUrls: ['./browse-source.component.scss']
 })
 @Injectable()
 export class BrowseSourceComponent implements OnInit, OnDestroy {
