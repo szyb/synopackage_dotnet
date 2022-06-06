@@ -1,28 +1,18 @@
-.hc_disabled_icon {
-  color: royalblue;
-}
 
-.hc_ok_status_icon {
-  color: green;
-}
-
-.hc_degraded_status_icon {
-  color: orange;
-}
-
-.browse_arrow {
+.copy_url {
   color: blue;
+  cursor: pointer;
 }
 
-.tooltip2 {
+.tooltip1 {
   position: relative;
   display: inline-block;
   color: black;
 }
 
-.tooltip2 .tooltiptext {
+.tooltip1 .tooltiptext {
   visibility: hidden;
-  width: auto;
+  width: 170px;
   background-color: #555;
   color: #fff;
   text-align: center;
@@ -38,12 +28,18 @@
   white-space: nowrap;
 }
 
-
-.tooltip2:hover .tooltiptext {
-  visibility: visible;
-  opacity: 1;
+.tooltip1 .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
 }
 
-.center_column {
-  text-align: center;
+.tooltip1:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
 }
