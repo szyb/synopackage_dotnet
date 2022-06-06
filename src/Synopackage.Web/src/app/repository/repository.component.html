@@ -20,7 +20,10 @@
     <blockquote class="blockquote bq-primary inline">
       <p class="bq-title">Repository: <span class='font-weight-bold'>{{repo.name}}</span></p>
       <span class="repo_description">{{repo.description}}</span>
-      <p>Link: <span class='font-weight-bold'>{{baseUrl}}{{repo.url}}</span></p>
+      <p class="url_word_break">
+        Link: <span class='font-weight-bold'>{{baseUrl}}{{repo.url}}</span>
+        <app-copy-to-clipboard [urlToCopy]="baseUrl + repo.url" [tooltipSuffix]="repo.name"></app-copy-to-clipboard>
+      </p>
     </blockquote>
     <div class="rounded border px-2 py-2">
       <div class="p-2">
