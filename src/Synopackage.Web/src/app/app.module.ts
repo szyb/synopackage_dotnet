@@ -8,7 +8,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgwWowModule } from 'ngx-wow';
 
 import { AppComponent } from './app.component';
 import { SourcesComponent } from './sources/sources.component';
@@ -165,8 +164,7 @@ export const routerConfig: Routes = [
     LazyLoadImageModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(routerConfig, { relativeLinkResolution: 'legacy' }),
-    MDBBootstrapModule.forRoot(),
-    NgwWowModule
+    MDBBootstrapModule.forRoot()
   ],
   providers: [UserSettingsService, AppLoadService, { provide: APP_INITIALIZER, useFactory: init_app, deps: [AppLoadService], multi: true }],
   bootstrap: [AppComponent]
