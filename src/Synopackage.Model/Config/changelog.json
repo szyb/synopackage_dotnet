@@ -1,5 +1,20 @@
 ﻿[
   {
+    "version": "1.0.6",
+    "date": "2022-06-07",
+    "new": [
+      "Add copy URL on browse, search and repository pages",
+      "Removed WOW effect on home page (for repository feature)"
+    ],
+    "improved": [
+      "Better mobile view for long URL's on the pages"
+    ],
+    "fixed": [
+      "Security fixes"
+    ],
+    "removedSources": []
+  },
+  {
     "version": "1.0.5",
     "date": "2022-05-29",
     "new": [
