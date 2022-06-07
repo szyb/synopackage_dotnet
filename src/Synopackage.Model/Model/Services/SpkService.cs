@@ -47,8 +47,8 @@ namespace Synopackage.Model.Services
       ParametersDTO parameters = new ParametersDTO(sourceName, model, versionDto, isBeta, keyword);
       SearchLogEntryDTO logEntry = new SearchLogEntryDTO(parameters);
       logEntry.RequestType = isSearch ? RequestType.Search : RequestType.Browse;
-      logEntry.LogType = LogType.Parameters;
-      logger.LogInformation(Utils.GetSearchLogEntryString(logEntry));
+      //logEntry.LogType = LogType.Parameters;
+      //logger.LogInformation(Utils.GetSearchLogEntryString(logEntry));
       logEntry.LogType = LogType.Result;
       stopwatch.Start();
       var cacheResult = await cacheService.GetSpkResponseFromCache(sourceName, arch, model, versionDto.Build.ToString(), isBeta);
@@ -147,8 +147,8 @@ namespace Synopackage.Model.Services
       ParametersDTO parameters = new ParametersDTO(sourceName, unique, versionDto, isBeta, keyword);
       SearchLogEntryDTO logEntry = new SearchLogEntryDTO(parameters);
       logEntry.RequestType = isSearch ? RequestType.Search : RequestType.Browse;
-      logEntry.LogType = LogType.Parameters;
-      logger.LogInformation(Utils.GetSearchLogEntryString(logEntry));
+      //logEntry.LogType = LogType.Parameters;
+      //logger.LogInformation(Utils.GetSearchLogEntryString(logEntry));
       logEntry.LogType = LogType.Result;
       var stopwatch = Stopwatch.StartNew();
       var cacheResult = await cacheService.GetSpkResponseForRepositoryFromCache(sourceName, arch, versionDto.Build.ToString(), isBeta);
