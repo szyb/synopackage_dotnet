@@ -137,7 +137,17 @@
   {
     "Active": true,
     "Name": "filebot",
-    "Url": "https://get.filebot.net/syno/"
+    "Url": "https://get.filebot.net/syno/",
+    "Www": "https://www.filebot.net/forums/viewtopic.php?t=1802",
+    "MinMajorVersion": 7
+  },
+  {
+    "Active": true,
+    "Name": "filebotdsm6",
+    "Url": "https://get.filebot.net/syno/dsm6.json",
+    "Www": "https://www.filebot.net/forums/viewtopic.php?t=1802",
+    "MinMajorVersion": 6,
+    "MaxMajorVersion": 6
   },
   {
     "Active": true,

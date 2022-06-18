@@ -227,7 +227,7 @@ namespace Synopackage.Model.Services
       {
         var expirationInHours = AppSettingsProvider.AppSettings.CacheSpkServerResponseTimeInHours.Value;
         //a temporary hack for filebot to minimize number of requests to filebot server
-        if (sourceName == "filebot")
+        if (sourceName.StartsWith("filebot"))
           expirationInHours = 24;
         var isExpired = IsCacheFileExpired(cacheFileInfo, expirationInHours);
         return new CacheSpkResponseDTO()
@@ -252,7 +252,7 @@ namespace Synopackage.Model.Services
       FileInfo cacheFileInfo = new FileInfo(fileNameByArch);
       var expirationInHours = AppSettingsProvider.AppSettings.CacheSpkServerResponseTimeInHoursForRepository;
       //a temporary hack for filebot to minimize number of requests to filebot server
-      if (sourceName == "filebot")
+      if (sourceName.StartsWith("filebot"))
         expirationInHours = 24;
       if (!IsCacheFileExpired(cacheFileInfo, expirationInHours))
       {
@@ -296,7 +296,7 @@ namespace Synopackage.Model.Services
     {
       var channelString = isBeta ? "beta" : "stable";
       //a temporary hack for filebot to minimize number of requests to filebot server
-      if (sourceName == "filebot")
+      if (sourceName.StartsWith("filebot"))
       {
         arch = "allCPUs";
         version = "allVersions";

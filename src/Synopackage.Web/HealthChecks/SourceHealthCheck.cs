@@ -34,15 +34,21 @@ namespace Synopackage.Web.HealthChecks
             lastWriteTime = fileInfo.LastWriteTime;
         }
         //a temporary hack for filebot to minimize number of requests to filebot server
-        if (_source == "filebot" && lastWriteTime.HasValue && lastWriteTime.Value.AddHours(24) < DateTime.Now)
+        if (_source.StartsWith("filebot"))
         {
-          return Task.FromResult(new HealthCheckResult(context.Registration.FailureStatus, $"Last response from server was {(DateTime.Now - lastWriteTime.Value).TotalHours:00} hours ago"));
+          if (lastWriteTime.HasValue && lastWriteTime.Value.AddHours(24) < DateTime.Now)
+            return Task.FromResult(new HealthCheckResult(context.Registration.FailureStatus, $"Last response from server was {(DateTime.Now - lastWriteTime.Value).TotalHours:00} hours ago"));
+          else if (lastWriteTime.HasValue)
+            return Task.FromResult(HealthCheckResult.Healthy());
+          else
+            return Task.FromResult(new HealthCheckResult(context.Registration.FailureStatus, $"Last response from server was never recorded"));
         }
         else if (lastWriteTime.HasValue && lastWriteTime.Value.AddHours(12) < DateTime.Now)
-        {
           return Task.FromResult(new HealthCheckResult(context.Registration.FailureStatus, $"Last response from server was {(DateTime.Now - lastWriteTime.Value).TotalHours:00} hours ago"));
-        }
-        return Task.FromResult(HealthCheckResult.Healthy());
+        else if (lastWriteTime.HasValue)
+          return Task.FromResult(HealthCheckResult.Healthy());
+        else
+          return Task.FromResult(new HealthCheckResult(context.Registration.FailureStatus, $"Last response from server was never recorded"));
       }
       catch (Exception ex)
       {
