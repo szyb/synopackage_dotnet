@@ -225,7 +225,11 @@ namespace Synopackage.Model.Services
       FileInfo cacheFileInfo = new FileInfo(fileNameByArch);
       if (cacheFileInfo.Exists)
       {
-        var isExpired = IsCacheFileExpired(cacheFileInfo, AppSettingsProvider.AppSettings.CacheSpkServerResponseTimeInHours.Value);
+        var expirationInHours = AppSettingsProvider.AppSettings.CacheSpkServerResponseTimeInHours.Value;
+        //a temporary hack for filebot to minimize number of requests to filebot server
+        if (sourceName == "filebot")
+          expirationInHours = 24;
+        var isExpired = IsCacheFileExpired(cacheFileInfo, expirationInHours);
         return new CacheSpkResponseDTO()
         {
           HasValidCache = !isExpired,
@@ -246,7 +250,11 @@ namespace Synopackage.Model.Services
     {
       var fileNameByArch = GetResponseCacheByArchFile(sourceName, arch, version, isBeta);
       FileInfo cacheFileInfo = new FileInfo(fileNameByArch);
-      if (!IsCacheFileExpired(cacheFileInfo, AppSettingsProvider.AppSettings.CacheSpkServerResponseTimeInHoursForRepository))
+      var expirationInHours = AppSettingsProvider.AppSettings.CacheSpkServerResponseTimeInHoursForRepository;
+      //a temporary hack for filebot to minimize number of requests to filebot server
+      if (sourceName == "filebot")
+        expirationInHours = 24;
+      if (!IsCacheFileExpired(cacheFileInfo, expirationInHours))
       {
         try
         {
@@ -287,6 +295,13 @@ namespace Synopackage.Model.Services
     private string GetResponseCacheByArchFile(string sourceName, string arch, string version, bool isBeta)
     {
       var channelString = isBeta ? "beta" : "stable";
+      //a temporary hack for filebot to minimize number of requests to filebot server
+      if (sourceName == "filebot")
+      {
+        arch = "allCPUs";
+        version = "allVersions";
+        channelString = "stable";
+      }
       return Path.Combine(AppSettingsProvider.AppSettings.BackendCacheFolder, Utils.CleanFileName($"{sourceName}_{arch}_{version}_{channelString}.{defaultCacheExtension}"));
     }
 

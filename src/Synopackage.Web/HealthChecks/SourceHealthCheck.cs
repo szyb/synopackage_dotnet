@@ -33,7 +33,12 @@ namespace Synopackage.Web.HealthChecks
           else if (lastWriteTime < fileInfo.LastWriteTime)
             lastWriteTime = fileInfo.LastWriteTime;
         }
-        if (lastWriteTime.HasValue && lastWriteTime.Value.AddHours(12) < DateTime.Now)
+        //a temporary hack for filebot to minimize number of requests to filebot server
+        if (_source == "filebot" && lastWriteTime.HasValue && lastWriteTime.Value.AddHours(24) < DateTime.Now)
+        {
+          return Task.FromResult(new HealthCheckResult(context.Registration.FailureStatus, $"Last response from server was {(DateTime.Now - lastWriteTime.Value).TotalHours:00} hours ago"));
+        }
+        else if (lastWriteTime.HasValue && lastWriteTime.Value.AddHours(12) < DateTime.Now)
         {
           return Task.FromResult(new HealthCheckResult(context.Registration.FailureStatus, $"Last response from server was {(DateTime.Now - lastWriteTime.Value).TotalHours:00} hours ago"));
         }
