@@ -1,5 +1,19 @@
 ﻿[
   {
+    "version": "1.0.7",
+    "date": "2022-06-20",
+    "new": [
+      "Add new source: filebot dedicated to DSM 6.x"
+    ],
+    "improved": [
+      "Show correct status for repository when never received response"
+    ],
+    "fixed": [
+      "Hot fix to mimimize number of requests to the filebot server"
+    ],
+    "removedSources": []
+  },
+  {
     "version": "1.0.6",
     "date": "2022-06-07",
     "new": [
