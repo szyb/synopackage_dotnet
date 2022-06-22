@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Synopackage.Model.Caching;
+/// <summary>
+/// Cache options 
+/// </summary>
 public class CacheOptions
 {
   /// <summary>
