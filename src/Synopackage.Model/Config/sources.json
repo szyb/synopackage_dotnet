@@ -248,5 +248,12 @@
     "Url": "https://spk.netzbaer.de/",
     "DisabledDate": "2021-05-21",
     "DisabledReason": "This repository is discountinued by vendor"
+  },
+  {
+    "Active": true,
+    "name": "sickrage",
+    "Url": "https://synology.sickrage.ca",
+    "MinMajorVersion": 6,
+    "MaxMajorVersion": 6
   }
 ]
