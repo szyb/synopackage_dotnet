@@ -27,7 +27,7 @@ namespace Synopackage.Web.HealthChecks
 
       try
       {
-        var files = Directory.GetFiles(AppSettingsProvider.AppSettings.BackendCacheFolder, $"{_source}*.cache");
+        var files = Directory.GetFiles(Path.Combine(AppSettingsProvider.AppSettings.BackendCacheFolder, _source), $"{_source}*.cache");
         foreach (string fileName in files)
         {
           FileSystemInfo fileInfo = new FileInfo(fileName);

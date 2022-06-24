@@ -23,6 +23,7 @@ using HealthChecks.UI.Core;
 using HealthChecks.UI.Client;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Synopackage.Model.Caching.DependencyInjection;
+using Synopackage.Web.HostedServices;
 
 namespace Synopackage
 {
@@ -136,6 +137,8 @@ namespace Synopackage
         services.AddSingleton<HealthCheckService, MockHealthChecksService>();
       }
       services.AddSynopackageCacheOptionsManager(configuration);
+      services.AddHostedService<StartupHostedService>();
+      services.AddScoped<StartupHostedService>();
       MapperRegistrator.Register();
     }
 

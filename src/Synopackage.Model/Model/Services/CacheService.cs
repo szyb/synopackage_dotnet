@@ -302,7 +302,7 @@ namespace Synopackage.Model.Services
       sb.Append(cacheOptionsManager.GetChannelStringForCacheFile(isBeta, sourceName));
       sb.Append(".");
       sb.Append(defaultCacheExtension);
-      return Path.Combine(AppSettingsProvider.AppSettings.BackendCacheFolder, Utils.CleanFileName(sb.ToString()));
+      return Path.Combine(AppSettingsProvider.AppSettings.BackendCacheFolder, sourceName, Utils.CleanFileName(sb.ToString()));
     }
 
     private bool ShouldStoreIcon(string sourceName, string packageName)

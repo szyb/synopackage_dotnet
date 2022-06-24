@@ -50,8 +50,8 @@ public partial class CacheOptionsManager : ICacheOptionsManager
     {
       case VersionCacheLevel.Build: return version.Build.ToString();
       case VersionCacheLevel.Major: return $"DSM{version.Major}";
-      case VersionCacheLevel.Minor: return $"DSM{version.Major}_{version.Minor}";
-      case VersionCacheLevel.Micro: return $"DSM{version.Major}_{version.Minor}_{version.Micro}";
+      case VersionCacheLevel.Minor: return $"DSM{version.Major}-{version.Minor}";
+      case VersionCacheLevel.Micro: return $"DSM{version.Major}-{version.Minor}-{version.Micro}";
       default:
         return version.Build.ToString();
     }
