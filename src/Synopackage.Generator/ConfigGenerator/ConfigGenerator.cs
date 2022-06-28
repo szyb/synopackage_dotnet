@@ -1,11 +1,12 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
+using Synopackage.Generator.ConfigGenerator.Handlers;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace Synopackage.Generator
+namespace Synopackage.Generator.ConfigGenerator
 {
   [Generator]
   public class ConfigGenerator : ISourceGenerator
@@ -17,13 +18,13 @@ namespace Synopackage.Generator
     private readonly IGeneratorHandler newsGeneratorHandler = new NewsGeneratorHandler();
     public void Execute(GeneratorExecutionContext context)
     {
-      var files = context.AdditionalFiles.Where(p => p.Path.EndsWith(".json"));
+      var files = context.AdditionalFiles.Where(p => p.Path.EndsWith(".json")).Select(p => p.Path);
       foreach (var file in files)
       {
-        var fileName = Path.GetFileNameWithoutExtension(file.Path);
-        string generatedCode = GenerateClassesFromFile(file.Path);
+        var fileName = Path.GetFileNameWithoutExtension(file);
+        string generatedCode = GenerateClassesFromFile(file);
         if (generatedCode != null)
-          context.AddSource($"{fileName.FirstCharToUpper()}Helper.cs", SourceText.From(generatedCode, Encoding.UTF8));
+          context.AddSource($"{fileName.FirstCharToUpper()}Helper.g.cs", SourceText.From(generatedCode, Encoding.UTF8));
 
       }
     }

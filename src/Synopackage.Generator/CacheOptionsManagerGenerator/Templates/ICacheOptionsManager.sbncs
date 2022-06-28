@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+
+namespace Synopackage.Model.Caching
+{
+  public partial interface ICacheOptionsManager
+  {   
+    {{~for p in properties ~}}
+    {{p.value}} Get{{p.key}}(string sourceName = null);   
+    {{~ end ~}}    
+  }
+}

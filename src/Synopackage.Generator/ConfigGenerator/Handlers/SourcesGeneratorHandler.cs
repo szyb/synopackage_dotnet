@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Synopackage.Generator
+namespace Synopackage.Generator.ConfigGenerator.Handlers
 {
   public class SourcesGeneratorHandler : GeneratorHandlerAbstract
   {
@@ -13,7 +13,7 @@ namespace Synopackage.Generator
     {
       var content = File.ReadAllText(filePath);
       var list = JsonConvert.DeserializeObject<IList<SourceDto>>(content);
-      Template template = Template.Parse(GetFromResource("Synopackage.Generator.Templates.Sources.sbncs"));
+      Template template = Template.Parse(GetFromResource("Synopackage.Generator.ConfigGenerator.Templates.Sources.sbncs"));
       FileInfo fi = new FileInfo(filePath);
       var rendered = template.Render(new
       {

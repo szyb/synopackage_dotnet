@@ -1,4 +1,4 @@
 ﻿namespace Synopackage.Model.Caching;
-public interface ICacheOptionsManager
+public partial interface ICacheOptionsManager
 {
 }
