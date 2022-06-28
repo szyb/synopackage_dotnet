@@ -552,8 +552,8 @@ public class CacheOptionsManagerTests
   [Theory]
   [InlineData(VersionCacheLevel.Build, "25556")]
   [InlineData(VersionCacheLevel.Major, "DSM6")]
-  [InlineData(VersionCacheLevel.Minor, "DSM6_2")]
-  [InlineData(VersionCacheLevel.Micro, "DSM6_2_4")]
+  [InlineData(VersionCacheLevel.Minor, "DSM6-2")]
+  [InlineData(VersionCacheLevel.Micro, "DSM6-2-4")]
   public void GetVersionStringForCacheFileFromDefaults(VersionCacheLevel versionCacheLevel, string expected)
   {
     //arrange
@@ -575,8 +575,8 @@ public class CacheOptionsManagerTests
   [Theory]
   [InlineData(VersionCacheLevel.Build, "25556")]
   [InlineData(VersionCacheLevel.Major, "DSM6")]
-  [InlineData(VersionCacheLevel.Minor, "DSM6_2")]
-  [InlineData(VersionCacheLevel.Micro, "DSM6_2_4")]
+  [InlineData(VersionCacheLevel.Minor, "DSM6-2")]
+  [InlineData(VersionCacheLevel.Micro, "DSM6-2-4")]
   public void GetVersionStringForCacheFileFromDefaultsWithNotDefinedSource(VersionCacheLevel versionCacheLevel, string expected)
   {
     //arrange

@@ -54,7 +54,6 @@ public partial class CacheOptionsManager : ICacheOptionsManager
       case VersionCacheLevel.Build:
         return version.Build.ToString();
       case VersionCacheLevel.Major:
-        return string.Join("DSM", version.Major);
         sb.Append("DSM");
         sb.Append(version.Major);
         return sb.ToString();
