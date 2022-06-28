@@ -98,7 +98,7 @@ namespace Synopackage.Web.HostedServices
         var sources = new List<SourceDTO>(Model.SourceHelper.ActiveSources);
         sources.AddRange(Model.SourceHelper.InactiveSources);
 
-        //first synnocommunity
+        //first synocommunity
         var synocommunitySourceDto = sources.Find(p => p.Name == "synocommunity");
         if (synocommunitySourceDto != null)
         {
@@ -127,14 +127,12 @@ namespace Synopackage.Web.HostedServices
             FileInfo fi = new FileInfo(Path.Combine(AppSettingsProvider.AppSettings.BackendCacheFolder, sourceFile));
             if (fi.Exists)
             {
-              if (source.Active && fi.LastWriteTime.AddDays(60) < DateTime.Today)
+              if (source.Active && fi.LastWriteTime.AddDays(60) > DateTime.Today)
                 MigrateCacheFile(source, fi.FullName, targetFolder);
               else if (!source.Active)
                 MigrateCacheFile(source, fi.FullName, targetFolder);
             }
           }
-
-
           _logger.LogInformation($"Finished processing {source.Name} source. Time elapsed {stopwatch.ElapsedMilliseconds} ms");
         }
 
@@ -143,10 +141,11 @@ namespace Synopackage.Web.HostedServices
       finally
       {
         stopwatch.Stop();
-        _logger.LogInformation($"Moving files completed in {stopwatch.ElapsedMilliseconds}ms");
+        _logger.LogInformation($"Moving files completed in {stopwatch.ElapsedMilliseconds}ms. Moved:{migrationMoved}, Deleted:{migrationDeleted}");
       }
     }
-
+    int migrationMoved = 0;
+    int migrationDeleted = 0;
     private void MigrateCacheFile(SourceDTO source, string sourceFile, string targetFolder)
     {
       try
@@ -178,9 +177,15 @@ namespace Synopackage.Web.HostedServices
 
         FileInfo fileInfo = new FileInfo(Path.Combine(targetFolder, sb.ToString()));
         if (!fileInfo.Exists)
+        {
           File.Move(sourceFile, fileInfo.FullName);
+          migrationMoved++;
+        }
         else
+        {
           File.Delete(sourceFile);
+          migrationDeleted++;
+        }
       }
       catch (Exception ex)
       {
