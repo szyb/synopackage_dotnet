@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Collections.Concurrent;
+using Synopackage.Model.Caching.Enums;
 
 
 namespace Synopackage.Model.Caching
@@ -10,21 +11,21 @@ namespace Synopackage.Model.Caching
   {
     private ConcurrentDictionary<string, CacheSettings> _combinedSettings = new ConcurrentDictionary<string, CacheSettings>();
 
-    private CacheSettings CombineCacheSettings(string sourceName, CacheSettings primary, CacheSettings secondary) 
+    private CacheSettings CombineCacheSettings(string sourceName, CacheSettings primary, CacheSettings defaults) 
     {
       if (_combinedSettings.ContainsKey(sourceName))
         return _combinedSettings[sourceName];
 
       CacheSettings result = new CacheSettings();
       {{~ for p in properties ~}}
-      result.{{p.key}} = primary.{{p.key}} ?? secondary.{{p.key}};
+      result.{{p.property_name}} = primary.{{p.property_name}} ?? defaults.{{p.property_name}};
       {{~ end ~}}
       _combinedSettings.TryAdd(sourceName, result);
       return result;
     }
 
     {{~for p in properties ~}}
-    public {{p.value}} Get{{p.key}}(string sourceName = null) => GetCacheSettings(sourceName).{{p.key}};
+    public {{p.property_type}} Get{{p.property_name}}(string sourceName = null) => GetCacheSettings(sourceName).{{p.property_name}}{{-if !p.allow_null_for_defaults-}}.Value{{-end-}};
     {{~ end ~}}
 
     

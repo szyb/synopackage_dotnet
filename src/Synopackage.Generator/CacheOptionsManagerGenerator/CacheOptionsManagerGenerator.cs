@@ -14,7 +14,6 @@ namespace Synopackage.Generator.CacheOptionsManagerGenerator
   {
     public void Initialize(GeneratorInitializationContext context)
     {
-
       //if (!Debugger.IsAttached)
       //  Debugger.Launch();
       var syntaxReceiver = new CacheSettingsSyntaxReceiver();
@@ -28,7 +27,7 @@ namespace Synopackage.Generator.CacheOptionsManagerGenerator
       Template template = Template.Parse(GetFromResource("Synopackage.Generator.CacheOptionsManagerGenerator.Templates.CacheOptionsManager.sbncs"));
       var rendered = template.Render(new
       {
-        Properties = receiver.Properties
+        Properties = receiver.Properties.Values
       });
 
       context.AddSource("CacheOptionsManager.g.cs", SourceText.From(rendered, Encoding.UTF8));
@@ -36,7 +35,7 @@ namespace Synopackage.Generator.CacheOptionsManagerGenerator
       template = Template.Parse(GetFromResource("Synopackage.Generator.CacheOptionsManagerGenerator.Templates.ICacheOptionsManager.sbncs"));
       rendered = template.Render(new
       {
-        Properties = receiver.Properties
+        Properties = receiver.Properties.Values
       });
 
       context.AddSource("ICacheOptionsManager.g.cs", SourceText.From(rendered, Encoding.UTF8));

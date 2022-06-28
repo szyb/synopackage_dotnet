@@ -7,7 +7,7 @@ namespace Synopackage.Generator.CacheOptionsManagerGenerator
 {
   public class CacheSettingsSyntaxReceiver : ISyntaxReceiver
   {
-    public Dictionary<string, string> Properties { get; } = new Dictionary<string, string>();
+    public Dictionary<string, GeneratorPropertyDescriptor> Properties { get; } = new Dictionary<string, GeneratorPropertyDescriptor>();
     public void OnVisitSyntaxNode(SyntaxNode syntaxNode)
     {
       if (syntaxNode is ClassDeclarationSyntax cds &&
@@ -17,7 +17,17 @@ namespace Synopackage.Generator.CacheOptionsManagerGenerator
         {
           if (node is PropertyDeclarationSyntax property && !Properties.ContainsKey(property.Identifier.ValueText))
           {
-            Properties.Add(property.Identifier.ValueText, property.Type.ToString());
+            bool allowNullForDefaults = false;
+            allowNullForDefaults = node.AttributeLists.Any(p => p.Attributes.Any(x => x.Name.ToString() == "AllowNullForDefaults"));
+            GeneratorPropertyDescriptor descriptor = new GeneratorPropertyDescriptor()
+            {
+              PropertyName = property.Identifier.ValueText,
+              PropertyType = property.Type.ToString(),
+              AllowNullForDefaults = allowNullForDefaults
+            };
+            if (!allowNullForDefaults && descriptor.PropertyType.EndsWith("?"))
+              descriptor.PropertyType = descriptor.PropertyType.Substring(0, descriptor.PropertyType.Length - 1);
+            Properties.Add(property.Identifier.ValueText, descriptor);
           }
         }
       }

@@ -1,3 +1,5 @@
+using System;
+
 namespace Synopackage
 {
   public class AppSettings
@@ -6,9 +8,13 @@ namespace Synopackage
     public string DefaultVersion { get; set; }
     public string FrontendCacheFolder { get; set; }
     public string BackendCacheFolder { get; set; }
+    [Obsolete("Use CacheOptionsManager")]
     public int? CacheIconExpirationInDays { get; set; }
+    [Obsolete("Use CacheOptionsManager")]
     public bool CacheSpkServerResponse { get; set; }
+    [Obsolete("Use CacheOptionsManager")]
     public int? CacheSpkServerResponseTimeInHours { get; set; }
+    [Obsolete("Use CacheOptionsManager")]
     public int CacheSpkServerResponseTimeInHoursForRepository { get; set; } = 0;
     public int DownloadTimeoutInSeconds { get; set; }
     public int DownloadTimeoutInSecondsForRepository { get; set; }
