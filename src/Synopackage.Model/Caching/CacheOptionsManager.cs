@@ -43,15 +43,35 @@ public partial class CacheOptionsManager : ICacheOptionsManager
     }
   }
 
+  public const string DsmConst = "DSM";
+
   public string GetVersionStringForCacheFile(VersionDTO version, string sourceName = null)
   {
     var versionCacheLevel = GetVersionCacheLevel(sourceName);
+    StringBuilder sb = new StringBuilder();
     switch (versionCacheLevel)
     {
-      case VersionCacheLevel.Build: return version.Build.ToString();
-      case VersionCacheLevel.Major: return $"DSM{version.Major}";
-      case VersionCacheLevel.Minor: return $"DSM{version.Major}-{version.Minor}";
-      case VersionCacheLevel.Micro: return $"DSM{version.Major}-{version.Minor}-{version.Micro}";
+      case VersionCacheLevel.Build:
+        return version.Build.ToString();
+      case VersionCacheLevel.Major:
+        return string.Join("DSM", version.Major);
+        sb.Append("DSM");
+        sb.Append(version.Major);
+        return sb.ToString();
+      case VersionCacheLevel.Minor:
+        sb.Append("DSM");
+        sb.Append(version.Major);
+        sb.Append("-");
+        sb.Append(version.Minor);
+        return sb.ToString();
+      case VersionCacheLevel.Micro:
+        sb.Append("DSM");
+        sb.Append(version.Major);
+        sb.Append("-");
+        sb.Append(version.Minor);
+        sb.Append("-");
+        sb.Append(version.Micro);
+        return sb.ToString();
       default:
         return version.Build.ToString();
     }
