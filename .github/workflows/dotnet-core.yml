@@ -2,9 +2,11 @@ name: .NET Core
 
 on:
   push:
-    branches: [ master angular_update ]
+    branches: 
+      - master
   pull_request:
-    branches: [ master angular_update]
+    branches: 
+      - master
 
 jobs:
   build:
