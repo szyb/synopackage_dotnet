@@ -9,8 +9,8 @@ WORKDIR /app
 
 
 # Setup node
-ENV NODE_VERSION 12.13.1
-ENV NODE_DOWNLOAD_SHA 074a6129da34b768b791f39e8b74c6e4ab3349d1296f1a303ef3547a7f9cf9be
+ENV NODE_VERSION 16.15.1
+ENV NODE_DOWNLOAD_SHA f78a49c0c9c2f546c3a44eb434c49a852125441422a1bcfc433dedc58d6a241c
 
 COPY ["Synopackage.Web/Synopackage.Web.csproj",  "Synopackage.Web/"]
 COPY ["Synopackage.Generator/Synopackage.Generator.csproj",  "Synopackage.Generator/"]
@@ -36,8 +36,8 @@ RUN curl -SL "https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-lin
   && tar -xzf "nodejs.tar.gz" -C /usr/local --strip-components=1 \
   && rm nodejs.tar.gz \
   && ln -s /usr/local/bin/node /usr/local/bin/nodejs\
-  && npm i -g @angular/cli@8.3.22\
-  && npm i -g yarn
+  && npm i --location=global @angular/cli@8.3.22\
+  && npm i --location=global yarn
 
 # Build frontend
 
