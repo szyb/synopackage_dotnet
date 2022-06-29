@@ -26,7 +26,7 @@ RUN true
 COPY Synopackage.Web/src/environments/environment.docker.ts src/environments
 RUN true
 
-RUN npm i --location=global @angular/cli@8.3.22
+RUN npm i --location=global @angular/cli@11.2.18
 
 RUN yarn --network-timeout 100000 \
   && cd src \
@@ -61,8 +61,6 @@ RUN true
 
 RUN dotnet publish Synopackage.Docker.sln -c Release -o out --no-restore
 
-COPY --from=build-front /app/wwwroot /app/out/wwwroot
-
 #######################
 # Build runtime image #
 #######################
@@ -70,6 +68,7 @@ COPY --from=build-front /app/wwwroot /app/out/wwwroot
 FROM base as final
 WORKDIR /app
 COPY --from=build-env /app/out .
+COPY --from=build-front /app/wwwroot wwwroot
 VOLUME /app/wwwroot/cache
 
 ENTRYPOINT ["dotnet", "Synopackage.Web.dll"]
