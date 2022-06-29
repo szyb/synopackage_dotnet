@@ -22,6 +22,8 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using HealthChecks.UI.Core;
 using HealthChecks.UI.Client;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Synopackage.Model.Caching.DependencyInjection;
+using Synopackage.Web.HostedServices;
 
 namespace Synopackage
 {
@@ -134,6 +136,9 @@ namespace Synopackage
         //mocking HealthCheckService as it not needed when HealthChecks is disabled
         services.AddSingleton<HealthCheckService, MockHealthChecksService>();
       }
+      services.AddSynopackageCacheOptionsManager(configuration);
+      services.AddHostedService<StartupHostedService>();
+      services.AddScoped<StartupHostedService>();
       MapperRegistrator.Register();
     }
 

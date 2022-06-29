@@ -1,4 +1,4 @@
-﻿namespace Synopackage.Generator
+﻿namespace Synopackage.Generator.ConfigGenerator.Handlers
 {
   public interface IGeneratorHandler
   {

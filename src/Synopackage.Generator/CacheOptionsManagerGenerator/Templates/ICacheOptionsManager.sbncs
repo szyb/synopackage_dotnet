@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using Synopackage.Model.Caching.Enums;
+
+
+namespace Synopackage.Model.Caching
+{
+  public partial interface ICacheOptionsManager
+  {   
+    {{~for p in properties ~}}
+    {{p.property_type}} Get{{p.property_name}}(string sourceName = null);   
+    {{~ end ~}}    
+  }
+}

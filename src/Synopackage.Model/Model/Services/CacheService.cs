@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using Polly;
 using Synopackage.model;
+using Synopackage.Model.Caching;
 using Synopackage.Model.DTOs;
 using Synopackage.Model.SPK;
 using System;
@@ -17,10 +18,11 @@ namespace Synopackage.Model.Services
   {
     private readonly ILogger<CacheService> logger;
     private readonly IDownloadFactory downloadFactory;
+    private readonly ICacheOptionsManager cacheOptionsManager;
     private readonly string defaultIconExtension = "png";
     private readonly string defaultCacheExtension = "cache";
 
-    public CacheService(IDownloadFactory factory, ILogger<CacheService> logger)
+    public CacheService(IDownloadFactory factory, ILogger<CacheService> logger, ICacheOptionsManager cacheOptionsManager)
     {
       if (!Directory.Exists(AppSettingsProvider.AppSettings.FrontendCacheFolder))
         Directory.CreateDirectory(AppSettingsProvider.AppSettings.FrontendCacheFolder);
@@ -28,6 +30,7 @@ namespace Synopackage.Model.Services
         Directory.CreateDirectory(AppSettingsProvider.AppSettings.BackendCacheFolder);
       this.downloadFactory = factory;
       this.logger = logger;
+      this.cacheOptionsManager = cacheOptionsManager;
     }
 
     public async Task ProcessIcons(string sourceName, List<SpkPackage> packages)
@@ -96,7 +99,7 @@ namespace Synopackage.Model.Services
       }
     }
 
-    public static bool IsCacheFileExpired(FileInfo fi, int cacheValidTimeInHours)
+    private static bool IsCacheFileExpired(FileInfo fi, int cacheValidTimeInHours)
     {
       if (!fi.Exists)
         return true;
@@ -149,14 +152,14 @@ namespace Synopackage.Model.Services
       }
     }
 
-    public bool SaveSpkResult(string sourceName, string arch, string model, string version, bool isBeta, SpkResult spkResult)
+    public bool SaveSpkResult(string sourceName, string arch, string model, VersionDTO version, bool isBeta, SpkResult spkResult)
     {
-      if (!AppSettingsProvider.AppSettings.CacheSpkServerResponse)
+      if (!cacheOptionsManager.GetCacheSpkServerResponse(sourceName))
         return false;
 
       try
       {
-        var fileNameByArch = GetResponseCacheByArchFile(sourceName, arch, version, isBeta);
+        var fileNameByArch = GetResponseCacheFile(sourceName, arch, version, isBeta);
         var serializedData = JsonConvert.SerializeObject(spkResult);
         Random rnd = new Random();
         var IORetryPolicy = Policy.Handle<Exception>()
@@ -213,22 +216,20 @@ namespace Synopackage.Model.Services
       return Path.Combine(AppSettingsProvider.AppSettings.FrontendCacheFolder, GetIconFileName(sourceName, packageName));
     }
 
-    public async Task<CacheSpkResponseDTO> GetSpkResponseFromCache(string sourceName, string arch, string model, string version, bool isBeta)
+    public async Task<CacheSpkResponseDTO> GetSpkResponseFromCache(string sourceName, string arch, string model, VersionDTO version, bool isBeta)
     {
-      if (!AppSettingsProvider.AppSettings.CacheSpkServerResponse || !AppSettingsProvider.AppSettings.CacheSpkServerResponseTimeInHours.HasValue)
+      if (!cacheOptionsManager.GetCacheSpkServerResponse(sourceName))
       {
         //cache is disabled
         return new CacheSpkResponseDTO() { HasValidCache = false };
       }
-      var fileNameByArch = GetResponseCacheByArchFile(sourceName, arch, version, isBeta);
+      var fileNameByArch = GetResponseCacheFile(sourceName, arch, version, isBeta);
 
       FileInfo cacheFileInfo = new FileInfo(fileNameByArch);
       if (cacheFileInfo.Exists)
       {
-        var expirationInHours = AppSettingsProvider.AppSettings.CacheSpkServerResponseTimeInHours.Value;
-        //a temporary hack for filebot to minimize number of requests to filebot server
-        if (sourceName.StartsWith("filebot"))
-          expirationInHours = 24;
+        var expirationInHours = cacheOptionsManager.GetCacheSpkServerResponseTimeInHours(sourceName);
+
         var isExpired = IsCacheFileExpired(cacheFileInfo, expirationInHours);
         return new CacheSpkResponseDTO()
         {
@@ -246,14 +247,11 @@ namespace Synopackage.Model.Services
 
     }
 
-    public async Task<CacheSpkResponseDTO> GetSpkResponseForRepositoryFromCache(string sourceName, string arch, string version, bool isBeta)
+    public async Task<CacheSpkResponseDTO> GetSpkResponseForRepositoryFromCache(string sourceName, string arch, VersionDTO version, bool isBeta)
     {
-      var fileNameByArch = GetResponseCacheByArchFile(sourceName, arch, version, isBeta);
+      var fileNameByArch = GetResponseCacheFile(sourceName, arch, version, isBeta);
       FileInfo cacheFileInfo = new FileInfo(fileNameByArch);
-      var expirationInHours = AppSettingsProvider.AppSettings.CacheSpkServerResponseTimeInHoursForRepository;
-      //a temporary hack for filebot to minimize number of requests to filebot server
-      if (sourceName.StartsWith("filebot"))
-        expirationInHours = 24;
+      var expirationInHours = cacheOptionsManager.GetCacheSpkServerResponseTimeInHoursForRepository(sourceName);
       if (!IsCacheFileExpired(cacheFileInfo, expirationInHours))
       {
         try
@@ -292,17 +290,19 @@ namespace Synopackage.Model.Services
       return null;
     }
 
-    private string GetResponseCacheByArchFile(string sourceName, string arch, string version, bool isBeta)
+    private string GetResponseCacheFile(string sourceName, string arch, VersionDTO version, bool isBeta)
     {
-      var channelString = isBeta ? "beta" : "stable";
-      //a temporary hack for filebot to minimize number of requests to filebot server
-      if (sourceName.StartsWith("filebot"))
-      {
-        arch = "allCPUs";
-        version = "allVersions";
-        channelString = "stable";
-      }
-      return Path.Combine(AppSettingsProvider.AppSettings.BackendCacheFolder, Utils.CleanFileName($"{sourceName}_{arch}_{version}_{channelString}.{defaultCacheExtension}"));
+      StringBuilder sb = new StringBuilder();
+      sb.Append(sourceName);
+      sb.Append("_");
+      sb.Append(cacheOptionsManager.GetArchStringForCacheFile(arch, sourceName));
+      sb.Append("_");
+      sb.Append(cacheOptionsManager.GetVersionStringForCacheFile(version, sourceName));
+      sb.Append("_");
+      sb.Append(cacheOptionsManager.GetChannelStringForCacheFile(isBeta, sourceName));
+      sb.Append(".");
+      sb.Append(defaultCacheExtension);
+      return Path.Combine(AppSettingsProvider.AppSettings.BackendCacheFolder, sourceName, Utils.CleanFileName(sb.ToString()));
     }
 
     private bool ShouldStoreIcon(string sourceName, string packageName)
@@ -311,11 +311,12 @@ namespace Synopackage.Model.Services
         return true;
       else
       {
-        if (AppSettingsProvider.AppSettings.CacheIconExpirationInDays.HasValue)
+        var cacheIconExpirationInDays = cacheOptionsManager.GetCacheIconExpirationInDays(sourceName);
+        if (cacheIconExpirationInDays.HasValue)
         {
           FileInfo fi = new FileInfo(GetIconFileNameWithCacheFolder(sourceName, packageName));
           TimeSpan ts = DateTime.Now - fi.LastWriteTime;
-          if (ts.TotalDays <= AppSettingsProvider.AppSettings.CacheIconExpirationInDays.Value)
+          if (ts.TotalDays <= cacheIconExpirationInDays.Value)
             return true;
         }
         return false;

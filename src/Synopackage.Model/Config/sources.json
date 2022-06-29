@@ -22,7 +22,7 @@
     "Url": "https://www.cphub.net",
     "SynopackageChoice": true,
     "DisabledDate": "2022-05-29",
-    "DisabledReason": "Invalid response. Looks like temporary issue"
+    "DisabledReason": "This repository is discountinued by vendor"
   },
   {
     "Active": true,
@@ -220,12 +220,12 @@
     "Url": "http://www.hildinger.us/sspks/"
   },
   {
-    "Active": false,
+    "Active": true,
     "Name": "jadahl",
     "Url": "http://www.jadahl.com/domoticz_stable_6/",
     "Www": "http://www.jadahl.com",
-    "DisabledDate": "2022-05-29",
-    "DisabledReason": "No response from server"
+    "MinMajorVersion": 6,
+    "MaxMajorVersion": 6
   },
   {
     "Active": false,
@@ -248,5 +248,12 @@
     "Url": "https://spk.netzbaer.de/",
     "DisabledDate": "2021-05-21",
     "DisabledReason": "This repository is discountinued by vendor"
+  },
+  {
+    "Active": true,
+    "name": "sickrage",
+    "Url": "https://synology.sickrage.ca",
+    "MinMajorVersion": 6,
+    "MaxMajorVersion": 6
   }
 ]

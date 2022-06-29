@@ -48,7 +48,7 @@ RUN cd Synopackage.Web \
   && ng build --configuration=docker
 
 
-RUN dotnet publish -c Release -o out
+RUN dotnet publish Synopackage.Docker.sln -c Release -o out
 
 # build runtime image
 FROM base as final

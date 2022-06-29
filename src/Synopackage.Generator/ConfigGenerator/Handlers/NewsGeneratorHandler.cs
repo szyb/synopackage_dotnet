@@ -4,7 +4,7 @@ using Synopackage.Generator.Entities;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Synopackage.Generator
+namespace Synopackage.Generator.ConfigGenerator.Handlers
 {
   public class NewsGeneratorHandler : GeneratorHandlerAbstract
   {
@@ -12,7 +12,7 @@ namespace Synopackage.Generator
     {
       var content = File.ReadAllText(filePath);
       var list = JsonConvert.DeserializeObject<List<NewsDto>>(content);
-      Template template = Template.Parse(GetFromResource("Synopackage.Generator.Templates.News.sbncs"));
+      Template template = Template.Parse(GetFromResource("Synopackage.Generator.ConfigGenerator.Templates.News.sbncs"));
       var rendered = template.Render(new
       {
         News = list

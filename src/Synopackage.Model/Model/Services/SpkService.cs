@@ -51,7 +51,7 @@ namespace Synopackage.Model.Services
       //logger.LogInformation(Utils.GetSearchLogEntryString(logEntry));
       logEntry.LogType = LogType.Result;
       stopwatch.Start();
-      var cacheResult = await cacheService.GetSpkResponseFromCache(sourceName, arch, model, versionDto.Build.ToString(), isBeta);
+      var cacheResult = await cacheService.GetSpkResponseFromCache(sourceName, arch, model, versionDto, isBeta);
       SpkResult result;
       if (!cacheResult.HasValidCache)
       {
@@ -151,7 +151,7 @@ namespace Synopackage.Model.Services
       //logger.LogInformation(Utils.GetSearchLogEntryString(logEntry));
       logEntry.LogType = LogType.Result;
       var stopwatch = Stopwatch.StartNew();
-      var cacheResult = await cacheService.GetSpkResponseForRepositoryFromCache(sourceName, arch, versionDto.Build.ToString(), isBeta);
+      var cacheResult = await cacheService.GetSpkResponseForRepositoryFromCache(sourceName, arch, versionDto, isBeta);
       if (!cacheResult.HasValidCache)
       {
         var parametersRequest = PrepareParametersForRequest(arch, unique, versionDto, isBeta, customUserAgent, out var userAgent);
@@ -232,7 +232,7 @@ namespace Synopackage.Model.Services
           result.Packages = JsonConvert.DeserializeObject<List<SpkPackage>>(responseContent, new CustomBooleanJsonConverter());
         }
         if (result != null)
-          cacheService.SaveSpkResult(sourceName, arch, modelOrUnique, versionDto.Build.ToString(), isBeta, result);
+          cacheService.SaveSpkResult(sourceName, arch, modelOrUnique, versionDto, isBeta, result);
       }
       else
       {

@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Reflection;
 
-namespace Synopackage.Generator
+namespace Synopackage.Generator.ConfigGenerator.Handlers
 {
   public abstract class GeneratorHandlerAbstract : IGeneratorHandler
   {
