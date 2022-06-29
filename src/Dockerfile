@@ -22,7 +22,9 @@ RUN rm -rf wwwroot \
   && rm global.json
 
 COPY Synopackage.Web/src/environments/environment.ts src/environments
+RUN true
 COPY Synopackage.Web/src/environments/environment.docker.ts src/environments
+RUN true
 
 RUN npm i --location=global @angular/cli@8.3.22
 
@@ -39,8 +41,11 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0.202-bullseye-slim as build-env
 WORKDIR /app
 
 COPY ["Synopackage.Web/Synopackage.Web.csproj",  "Synopackage.Web/"]
+RUN true
 COPY ["Synopackage.Generator/Synopackage.Generator.csproj",  "Synopackage.Generator/"]
+RUN true
 COPY ["Synopackage.Model/Synopackage.Model.csproj",  "Synopackage.Model/"]
+RUN true
 RUN dotnet restore "Synopackage.Web/Synopackage.Web.csproj"
 
 COPY . .
