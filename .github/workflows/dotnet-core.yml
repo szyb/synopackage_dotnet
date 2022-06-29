@@ -21,10 +21,10 @@ jobs:
         dotnet-version: 6.0.300
     - name: Install dependencies
       working-directory: ./src
-      run: dotnet restore
+      run: dotnet restore Synopackage.sln
     - name: Build
       working-directory: ./src
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build Synopackage.sln --configuration Release --no-restore
     - name: Test
       working-directory: ./src
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test Synopackage.sln --no-restore --verbosity normal
