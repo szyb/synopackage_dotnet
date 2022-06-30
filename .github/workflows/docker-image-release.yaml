@@ -42,7 +42,7 @@ jobs:
           tags: |
             szyb/synopackage_dotnet:test
           # build on feature branches, push only on master branch
-          push: ${{ github.ref == 'refs/heads/master' }}
+          push: true
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
