@@ -40,7 +40,6 @@ jobs:
           context: ./src
           # Note: tags has to be all lower-case
           tags: |
-            # szyb/synopackage_dotnet:${{tag}} #not working - need to fix somehow
             szyb/synopackage_dotnet:test
           # build on feature branches, push only on master branch
           push: ${{ github.ref == 'refs/heads/master' }}
