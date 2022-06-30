@@ -3,7 +3,7 @@ name: Build and Publish
 on:
   push:
     tags:
-      - '[0-9]+\.[0-9]+\.[0-9]+'
+      - '*'
 
 jobs:
   # define job to build and publish docker image
@@ -41,7 +41,7 @@ jobs:
           # Note: tags has to be all lower-case
           tags: |
             szyb/synopackage_dotnet:${tag}
-            szyb/synopackage_dotnet:latest            
+            # szyb/synopackage_dotnet:latest            
           # build on feature branches, push only on master branch
           push: ${{ github.ref == 'refs/heads/master' }}
 
