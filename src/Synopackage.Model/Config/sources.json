@@ -215,9 +215,11 @@
     "IsDownloadDisabled": true
   },
   {
-    "Active": true,
+    "Active": false,
     "Name": "hildinger",
-    "Url": "http://www.hildinger.us/sspks/"
+    "Url": "http://www.hildinger.us/sspks/",
+    "DisabledDate": "2022-07-03",
+    "DisabledReason": "This repository is discountinued by vendor"
   },
   {
     "Active": true,
