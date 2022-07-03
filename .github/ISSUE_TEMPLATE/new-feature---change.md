@@ -7,6 +7,6 @@ assignees: ''
 
 ---
 
-** Short description **
+**Short description**
 
-** Motivation **
+**Motivation**
