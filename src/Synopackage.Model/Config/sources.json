@@ -252,10 +252,12 @@
     "DisabledReason": "This repository is discountinued by vendor"
   },
   {
-    "Active": true,
+    "Active": false,
     "name": "sickrage",
     "Url": "https://synology.sickrage.ca",
     "MinMajorVersion": 6,
-    "MaxMajorVersion": 6
+    "MaxMajorVersion": 6,
+    "DisabledDate": "2022-07-26",
+    "DisabledReason": "No response from the server"
   }
 ]
