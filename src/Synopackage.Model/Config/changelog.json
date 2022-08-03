@@ -1,5 +1,18 @@
 ﻿[
   {
+    "version": "1.0.11",
+    "date": "2022-08-03",
+    "new": [],
+    "improved": [],
+    "fixed": [
+      "Security fixes"
+    ],
+    "removedSources": [
+      "sickrage - no response from server",
+      "imnks & imnksdms7 - both down for maintenance"
+    ]
+  },
+  {
     "version": "1.0.10",
     "date": "2022-07-18",
     "new": [
