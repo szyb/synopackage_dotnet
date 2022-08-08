@@ -197,26 +197,22 @@
     "DisabledReason": "Domain has expired"
   },
   {
-    "Active": false,
-    "Name": "imnks",
+    "Active": true,
+    "Name": "rue",
     "Url": "https://spk.imnks.com",
     "Www": "https://spk.imnks.com",
     "MaxMajorVersion": 6,
     "Info": "This source server does not allow to download packages directly from the browser. Downloading is possible only from DSM Package Center.",
-    "IsDownloadDisabled": true,
-    "DisabledDate": "2022-08-03",
-    "DisabledReason": "Down for maintenance"
+    "IsDownloadDisabled": true
   },
   {
-    "Active": false,
+    "Active": true,
     "Name": "imnksdsm7",
     "Url": "https://spk7.imnks.com",
     "Www": "https://spk7.imnks.com",
     "MinMajorVersion": 7,
     "Info": "This source server does not allow to download packages directly from the browser. Downloading is possible only from DSM Package Center.",
-    "IsDownloadDisabled": true,
-    "DisabledDate": "2022-08-03",
-    "DisabledReason": "Down for maintenance"
+    "IsDownloadDisabled": true
   },
   {
     "Active": false,
