@@ -1,5 +1,17 @@
 ﻿[
   {
+    "version": "1.0.12",
+    "date": "2022-08-08",
+    "new": [
+      "Sources: imnks & imnksdms7 - back to active"
+    ],
+    "improved": [],
+    "fixed": [
+      "Security fixes"
+    ],
+    "removedSources": []
+  },
+  {
     "version": "1.0.11",
     "date": "2022-08-03",
     "new": [],
