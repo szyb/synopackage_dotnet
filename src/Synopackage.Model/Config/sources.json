@@ -23,18 +23,22 @@
     "SynopackageChoice": true
   },
   {
-    "Active": true,
+    "Active": false,
     "Name": "digitalbox",
     "Url": "http://digital.box.free.fr/sspks/",
     "MaxMajorVersion": 6,
-    "SynopackageChoice": true
+    "SynopackageChoice": true,
+    "DisabledDate": "2022-09-30",
+    "DisabledReason": "Not a valid repository"
   },
   {
-    "Active": true,
+    "Active": false,
     "Name": "digitalboxdsm7",
     "Url": "http://digital.box.free.fr/dsm7/",
     "MinMajorVersion": 7,
-    "SynopackageChoice": true
+    "SynopackageChoice": true,
+    "DisabledDate": "2022-09-30",
+    "DisabledReason": "Not a valid repository"
   },
   {
     "Active": true,
@@ -222,12 +226,14 @@
     "DisabledReason": "This repository is discountinued by vendor"
   },
   {
-    "Active": true,
+    "Active": false,
     "Name": "jadahl",
     "Url": "http://www.jadahl.com/domoticz_stable_6/",
     "Www": "http://www.jadahl.com",
     "MinMajorVersion": 6,
-    "MaxMajorVersion": 6
+    "MaxMajorVersion": 6,
+    "DisabledDate": "2022-09-30",
+    "DisabledReason": "No response from server"
   },
   {
     "Active": false,
