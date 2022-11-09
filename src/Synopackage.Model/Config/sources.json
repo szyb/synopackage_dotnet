@@ -32,13 +32,11 @@
     "DisabledReason": "Not a valid repository"
   },
   {
-    "Active": false,
+    "Active": true,
     "Name": "digitalboxdsm7",
-    "Url": "http://digital.box.free.fr/dsm7/",
+    "Url": "https://digitalbox.go.zd.fr",
     "MinMajorVersion": 7,
-    "SynopackageChoice": true,
-    "DisabledDate": "2022-09-30",
-    "DisabledReason": "Not a valid repository"
+    "SynopackageChoice": true
   },
   {
     "Active": true,
