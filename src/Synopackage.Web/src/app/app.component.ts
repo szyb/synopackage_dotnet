@@ -49,6 +49,14 @@ export class AppComponent implements OnInit {
       `;
       document.getElementsByTagName('head')[0].appendChild(node2);
     }
+    if (environment.useGoogleAdSense) {
+      const node5 = document.createElement('script');
+      node5.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=` + environment.googleAdSense;
+      node5.type = 'text/javascript';
+      node5.async = true;
+      node5.crossOrigin = "anonymous";
+      document.getElementsByTagName('head')[0].appendChild(node5);
+    }
 
     const node4 = document.createElement('script');
     node4.src = `https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js`;
