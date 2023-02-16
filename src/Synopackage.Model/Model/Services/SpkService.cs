@@ -189,7 +189,8 @@ namespace Synopackage.Model.Services
 
       stopwatch.Stop();
       logEntry.ExecutionTime = stopwatch.ElapsedMilliseconds;
-      logger.LogInformation(Utils.GetSearchLogEntryString(logEntry));
+      if (logEntry.ResultFrom == ResultFrom.Server)
+        logger.LogInformation(Utils.GetSearchLogEntryString(logEntry));
       return result;
     }
 
