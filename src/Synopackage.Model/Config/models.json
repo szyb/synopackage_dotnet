@@ -1028,6 +1028,41 @@
     "Name": "DS3622xs+",
     "Arch": "broadwellnk",
     "Family": "x64"
+  },
+  {
+    "Name": "DS1522+",
+    "Arch": "r1000",
+    "Family": "x64"
+  },
+  {
+    "Name": "RS422+",
+    "Arch": "r1000",
+    "Family": "x64"
+  },
+  {
+    "Name": "RS822+",
+    "Arch": "v1000",
+    "Family": "x64"
+  },
+  {
+    "Name": "RS822RP+",
+    "Arch": "v1000",
+    "Family": "x64"
+  },
+  {
+    "Name": "DVA1622",
+    "Arch": "geminilake",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "DS723+",
+    "Arch": "r1000",
+    "Family": "x64"
+  },
+  {
+    "Name": "DS923+",
+    "Arch": "r1000",
+    "Family": "x64"
   }
 
 ]
