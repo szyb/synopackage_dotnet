@@ -1,5 +1,20 @@
 ﻿[
   {
+    "version": "1.0.14",
+    "date": "2023-02-18",
+    "new": [
+      "New models: DS1522+, RS422+, RS822+, RS822RP+, DVA1622, DS723+, DS923+",
+      "New DSM version: 7.1.1"
+    ],
+    "improved": [
+      "Significant decrease of logging. This should lead to better performance"
+    ],
+    "fixed": [
+      "Security fixes"
+    ],
+    "removedSources": []
+  },
+  {
     "version": "1.0.13",
     "date": "2022-11-12",
     "new": [
