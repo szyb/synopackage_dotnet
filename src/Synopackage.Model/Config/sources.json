@@ -84,9 +84,11 @@
     "DisabledReason": "This repository is discountinued by vendor"
   },
   {
-    "Active": true,
+    "Active": false,
     "Name": "acmenet",
-    "Url": "http://synology.acmenet.ru/"
+    "Url": "http://synology.acmenet.ru/",
+    "DisabledDate": "2023-05-06",
+    "DisabledReason": "Not a valid repository"
   },
   {
     "Active": false,
@@ -105,9 +107,11 @@
     "DisabledReason": "This repository is discountinued by vendor"
   },
   {
-    "Active": true,
+    "Active": false,
     "Name": "dierkse",
-    "Url": "http://syno.dierkse.nl/"
+    "Url": "http://syno.dierkse.nl/",
+    "DisabledDate": "2023-04-01",
+    "DisabledReason": "Not a valid repository"
   },
   {
     "Active": false,
