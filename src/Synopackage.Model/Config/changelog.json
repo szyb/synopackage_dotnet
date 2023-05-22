@@ -1,5 +1,19 @@
 ﻿[
   {
+    "version": "1.0.15",
+    "date": "2023-05-22",
+    "new": [
+      "New DSM version: 7.2"
+    ],
+    "improved": [
+    ],
+    "fixed": [
+    ],
+    "removedSources": [
+      "acmenet - not a valid repository"
+    ]
+  },
+  {
     "version": "1.0.14",
     "date": "2023-02-18",
     "new": [
