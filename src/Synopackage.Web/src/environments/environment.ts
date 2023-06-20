@@ -6,6 +6,8 @@ export const environment = {
   production: false,
   useGoogleAnalytics: false,
   googleAnalyticsCode: null,
+  useGTagAnalytics: false,
+  gtagCode: null,
   useGoogleAdSense: false,
   googleAdSense: null,
   restBaseUrl: 'http://localhost:58893/',

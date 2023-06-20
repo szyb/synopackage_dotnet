@@ -57,6 +57,23 @@ export class AppComponent implements OnInit {
       node5.crossOrigin = "anonymous";
       document.getElementsByTagName('head')[0].appendChild(node5);
     }
+    if (environment.useGTagAnalytics) {
+      const node6 = document.createElement('script');
+      node6.src = `https://www.googletagmanager.com/gtag/js?id=` + environment.gtagCode;
+      node6.type = 'text/javascript';
+      node6.async = true;
+      document.getElementsByTagName('head')[0].appendChild(node6);
+
+      const node7 = document.createElement('script');
+      node7.text = `window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', '`+ environment.gtagCode + `');
+      `;
+      node7.type = 'text/javascript';
+      document.getElementsByTagName('head')[0].appendChild(node7);
+    }
 
     const node4 = document.createElement('script');
     node4.src = `https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js`;
