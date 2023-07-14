@@ -25,6 +25,7 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Synopackage.Model.Caching.DependencyInjection;
 using Synopackage.Web.HostedServices;
 using Synopackage.Web.Infrastructure.Middlewares;
+using Synopackage.Model.Infrastructure;
 
 namespace Synopackage
 {
