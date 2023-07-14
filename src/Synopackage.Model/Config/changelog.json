@@ -1,5 +1,19 @@
 ﻿[
   {
+    "version": "1.1.0",
+    "date": "2023-07-14",
+    "new": [
+      "Introduced repository redirect to improve performance of the Synopackage Proxy Repository",
+      "Cphub back to the active source list"
+    ],
+    "improved": [
+    ],
+    "fixed": [
+    ],
+    "removedSources": [
+    ]
+  },
+  {
     "version": "1.0.15",
     "date": "2023-05-22",
     "new": [
