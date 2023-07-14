@@ -24,6 +24,7 @@ using HealthChecks.UI.Client;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Synopackage.Model.Caching.DependencyInjection;
 using Synopackage.Web.HostedServices;
+using Synopackage.Web.Infrastructure.Middlewares;
 
 namespace Synopackage
 {
@@ -108,6 +109,7 @@ namespace Synopackage
       var appSettingsSection = configuration.GetSection(nameof(AppSettings));
       services.Configure<AppSettings>(appSettingsSection);
       services.AddScoped(cfg => cfg.GetService<IOptionsSnapshot<AppSettings>>().Value);
+      services.Configure<RepositoryRedirectSettings>(configuration.GetSection("RepositoryRedirect"));
 
       var appSettings = new AppSettings();
       new ConfigureFromConfigurationOptions<AppSettings>(appSettingsSection)
@@ -190,6 +192,7 @@ namespace Synopackage
         app.UseHttpsRedirection();
       }
 
+      app.UseMiddleware<RepositoryRedirectMiddleware>();
       app.UseDefaultFiles();
       app.UseResponseCompression();
 
