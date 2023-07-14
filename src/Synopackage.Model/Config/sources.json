@@ -17,12 +17,10 @@
     "SynopackageChoice": true
   },
   {
-    "Active": false,
+    "Active": true,
     "Name": "cphub",
     "Url": "https://www.cphub.net",
-    "SynopackageChoice": true,
-    "DisabledDate": "2022-12-25",
-    "DisabledReason": "Not a valid repository"
+    "SynopackageChoice": true
   },
   {
     "Active": false,

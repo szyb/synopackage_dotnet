@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System;
 using Microsoft.Extensions.Options;
 using System.Web;
+using Synopackage.Model.Infrastructure;
+using System.Collections.Generic;
 
 namespace Synopackage.Web.Infrastructure.Middlewares
 {
@@ -25,8 +27,9 @@ namespace Synopackage.Web.Infrastructure.Middlewares
         await _next(httpContext).ConfigureAwait(false);
         return;
       }
-      var urls = options.Value.Urls;
-      if (!options.Value.DisallowRepositoryQueries)
+      List<string> urls = new List<string>();
+      urls.AddRange(options.Value.Urls);
+      if (!options.Value.OnlyRedirect)
         urls.Add("self");
 
       var index = rnd.Next(urls.Count);
@@ -35,11 +38,11 @@ namespace Synopackage.Web.Infrastructure.Middlewares
         await _next(httpContext).ConfigureAwait(false);
         return;
       }
-      Uri? uri;
 
-      Uri.TryCreate(new Uri(urls[index]), $"{httpContext.Request.Path}{httpContext.Request.QueryString}", out uri);
-
-      httpContext.Response.Redirect(uri.ToString(), false);
+      if (Uri.TryCreate(new Uri(urls[index]), $"{httpContext.Request.Path}{httpContext.Request.QueryString}", out var uri))
+        httpContext.Response.Redirect(uri.ToString(), false, true);
+      else
+        await _next(httpContext).ConfigureAwait(false); //just in case
 
     }
   }

@@ -1,9 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Polly;
 using Synopackage.model;
 using Synopackage.Model.Caching;
 using Synopackage.Model.DTOs;
+using Synopackage.Model.Infrastructure;
 using Synopackage.Model.SPK;
 using System;
 using System.Collections.Generic;
@@ -19,10 +21,14 @@ namespace Synopackage.Model.Services
     private readonly ILogger<CacheService> logger;
     private readonly IDownloadFactory downloadFactory;
     private readonly ICacheOptionsManager cacheOptionsManager;
+    private readonly IOptions<RepositoryRedirectSettings> options;
     private readonly string defaultIconExtension = "png";
     private readonly string defaultCacheExtension = "cache";
 
-    public CacheService(IDownloadFactory factory, ILogger<CacheService> logger, ICacheOptionsManager cacheOptionsManager)
+    public CacheService(
+      IDownloadFactory factory,
+      ILogger<CacheService> logger,
+      ICacheOptionsManager cacheOptionsManager)
     {
       if (!Directory.Exists(AppSettingsProvider.AppSettings.FrontendCacheFolder))
         Directory.CreateDirectory(AppSettingsProvider.AppSettings.FrontendCacheFolder);
@@ -35,6 +41,9 @@ namespace Synopackage.Model.Services
 
     public async Task ProcessIcons(string sourceName, List<SpkPackage> packages)
     {
+      if (!AppSettingsProvider.AppSettings.ShouldProcessIcons)
+        return;
+
       List<Task> downloadTasks = new List<Task>();
       if (packages != null)
       {
