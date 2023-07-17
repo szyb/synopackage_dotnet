@@ -117,6 +117,7 @@ namespace Synopackage
             .Configure(appSettings);
       services.AddSingleton(AppSettingsProvider.Create(appSettings));
       services.AddMemoryCache();
+      services.AddSingleton<RepositoryRedirectMiddleware>();
 
       if (appSettings.HealthChecks.Enabled)
       {
@@ -192,7 +193,7 @@ namespace Synopackage
         app.UseHsts();
         app.UseHttpsRedirection();
       }
-
+      
       app.UseMiddleware<RepositoryRedirectMiddleware>();
       app.UseDefaultFiles();
       app.UseResponseCompression();

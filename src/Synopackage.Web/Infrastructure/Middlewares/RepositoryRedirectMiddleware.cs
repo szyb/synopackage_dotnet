@@ -8,42 +8,43 @@ using Microsoft.Extensions.Options;
 using System.Web;
 using Synopackage.Model.Infrastructure;
 using System.Collections.Generic;
+using System.Net.Http;
 
 namespace Synopackage.Web.Infrastructure.Middlewares
 {
-  public class RepositoryRedirectMiddleware
+  public class RepositoryRedirectMiddleware :IMiddleware
   {
-    private readonly RequestDelegate _next;
     private readonly Random rnd;
-    public RepositoryRedirectMiddleware(RequestDelegate next)
+    private readonly List<string> _redirects;
+    private readonly bool isEnabled = false;
+    public RepositoryRedirectMiddleware(IOptions<RepositoryRedirectSettings> options)
     {
-      _next = next;
       rnd = new Random();
-    }
-    public async Task InvokeAsync(HttpContext httpContext, IOptions<RepositoryRedirectSettings> options)
-    {
-      if (!httpContext.Request.Path.StartsWithSegments(new PathString("/repository/spk")) || options == null || !options.Value.Enabled)
-      {
-        await _next(httpContext).ConfigureAwait(false);
-        return;
-      }
-      List<string> urls = new List<string>();
-      urls.AddRange(options.Value.Urls);
+      isEnabled = options.Value.Enabled;
+
+      _redirects = new List<string>(options.Value.Urls);
       if (!options.Value.OnlyRedirect)
-        urls.Add("self");
+        _redirects.Add("self");
+    }
 
-      var index = rnd.Next(urls.Count);
-      if (urls[index] == "self")
+    public async Task InvokeAsync(HttpContext context, RequestDelegate next)
+    {
+      if (!context.Request.Path.StartsWithSegments(new PathString("/repository/spk")) || !isEnabled)
       {
-        await _next(httpContext).ConfigureAwait(false);
+        await next(context).ConfigureAwait(false);
+        return;
+      }
+      var index = rnd.Next(_redirects.Count);
+      if (_redirects[index] == "self")
+      {
+        await next(context).ConfigureAwait(false);
         return;
       }
 
-      if (Uri.TryCreate(new Uri(urls[index]), $"{httpContext.Request.Path}{httpContext.Request.QueryString}", out var uri))
-        httpContext.Response.Redirect(uri.ToString(), false, true);
+      if (Uri.TryCreate(new Uri(_redirects[index]), $"{context.Request.Path}{context.Request.QueryString}", out var uri))
+        context.Response.Redirect(uri.ToString(), false, true);
       else
-        await _next(httpContext).ConfigureAwait(false); //just in case
-
+        await next(context).ConfigureAwait(false); //just in case
     }
   }
 }
