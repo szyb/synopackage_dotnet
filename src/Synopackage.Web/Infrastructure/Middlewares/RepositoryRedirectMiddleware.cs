@@ -12,7 +12,7 @@ using System.Net.Http;
 
 namespace Synopackage.Web.Infrastructure.Middlewares
 {
-  public class RepositoryRedirectMiddleware :IMiddleware
+  public class RepositoryRedirectMiddleware : IMiddleware
   {
     private readonly Random rnd;
     private readonly List<string> _redirects;
@@ -21,10 +21,15 @@ namespace Synopackage.Web.Infrastructure.Middlewares
     {
       rnd = new Random();
       isEnabled = options.Value.Enabled;
+      if (isEnabled)
+      {
+        _redirects = new List<string>(options.Value.Urls);
+        if (!options.Value.OnlyRedirect)
+          _redirects.Add("self");
+      }
+      else
+        _redirects = new List<string>();
 
-      _redirects = new List<string>(options.Value.Urls);
-      if (!options.Value.OnlyRedirect)
-        _redirects.Add("self");
     }
 
     public async Task InvokeAsync(HttpContext context, RequestDelegate next)

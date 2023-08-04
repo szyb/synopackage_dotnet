@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Synopackage.model.Model.DTOs;
@@ -22,6 +23,7 @@ namespace Synopackage.Model.Services
       string sourceInfo = null,
       bool isDownloadDisabled = false);
 
+    [Obsolete("This method was split into two: UpdateCacheOnly & GetFromValidCacheOnly")]
     Task<RawSpkResultDto> GetRawPackages(
      string sourceName,
      string url,
@@ -34,5 +36,25 @@ namespace Synopackage.Model.Services
      string keyword = null,
      bool useGetMethod = false
      );
+
+    Task<(string, bool)> UpdateCacheOnly(
+     string sourceName,
+     string url,
+     string arch,
+     string unique,
+     VersionDTO versionDto,
+     bool isBeta,
+     string customUserAgent,
+     bool isSearch,
+     string keyword = null,
+     bool useGetMethod = false);
+
+    Task<RawSpkResultDto> GetFromValidCacheOnly(
+      string sourceName,
+      string arch,
+      VersionDTO versionDto,
+      bool isBeta);
+
+
   }
 }

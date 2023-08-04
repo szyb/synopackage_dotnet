@@ -55,13 +55,14 @@ namespace Synopackage.Model.Services
       bool isBeta = string.Equals("beta", packageUpdateChannel, StringComparison.InvariantCultureIgnoreCase);
       IList<string> sources = GetSources(predefinedSources, manualSources, versionDto.Major);
 
-      IList<Task<RawSpkResultDto>> downloadTasks = new List<Task<RawSpkResultDto>>();
+      IList<Task<(string sourceName, bool cacheResult)>> downloadTasks = new List<Task<(string, bool)>>();
       SpkResult spkResult = new SpkResult();
 
       foreach (var sourceName in sources)
       {
         var sourceDto = sourceService.GetSource(sourceName);
-        var task = this.spkService.GetRawPackages(sourceName,
+
+        var task = this.spkService.UpdateCacheOnly(sourceName,
           sourceDto.Url,
           arch,
           unique,
@@ -75,11 +76,19 @@ namespace Synopackage.Model.Services
       }
       await Task.WhenAll(downloadTasks.ToArray()).ConfigureAwait(false);
 
-      foreach (var task in downloadTasks)
+      foreach (var task in downloadTasks.Where(p => p.Result.cacheResult))
       {
-        var result = await task.ConfigureAwait(false);
+        var result = await spkService.GetFromValidCacheOnly(
+          task.Result.sourceName,
+          arch,
+          versionDto,
+          isBeta
+         );
         if (result.Success && result.SpkResult?.Packages != null)
+        {
           spkResult.Packages.AddRange(result.SpkResult.Packages);
+          result.SpkResult.Packages.Clear();
+        }
       }
       return spkResult;
     }

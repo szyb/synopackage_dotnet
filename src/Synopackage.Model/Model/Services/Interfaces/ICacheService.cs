@@ -12,6 +12,7 @@ namespace Synopackage.Model.Services
     string GetIconFileNameWithCacheFolder(string sourceName, string packageName);
     Task<CacheSpkResponseDTO> GetSpkResponseFromCache(string sourceName, string arch, string model, VersionDTO version, bool isBeta);
     Task<CacheSpkResponseDTO> GetSpkResponseForRepositoryFromCache(string sourceName, string arch, VersionDTO version, bool isBeta);
+    Task<bool> IsCacheValid(string sourceName, string arch, VersionDTO version, bool isBeta);
     bool SaveSpkResult(string sourceName, string arch, string model, VersionDTO version, bool isBeta, SpkResult spkResult);
 
   }

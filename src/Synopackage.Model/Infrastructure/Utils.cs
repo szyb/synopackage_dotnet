@@ -26,7 +26,7 @@ namespace Synopackage
         sb.AppendFormat("{0}={1}&", key, parameters[key]);
       }
       string result = sb.ToString();
-      if (result.EndsWith("&"))
+      if (result.EndsWith('&'))
         result = result[0..^1];
       return result;
     }

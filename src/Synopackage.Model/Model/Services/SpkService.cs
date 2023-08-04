@@ -1,5 +1,6 @@
 ﻿using ExpressMapper.Extensions;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using Newtonsoft.Json;
 using Synopackage.model.Model.DTOs;
 using Synopackage.Model.DTOs;
@@ -130,6 +131,63 @@ namespace Synopackage.Model.Services
       }
     }
 
+    public async Task<(string, bool)> UpdateCacheOnly(
+      string sourceName,
+      string url,
+      string arch,
+      string unique,
+      VersionDTO versionDto,
+      bool isBeta,
+      string customUserAgent,
+      bool isSearch,
+      string keyword = null,
+      bool useGetMethod = false)
+    {
+      var isCacheValid = await cacheService.IsCacheValid(sourceName, arch, versionDto, isBeta).ConfigureAwait(false);
+      if (!isCacheValid)
+      {
+        ParametersDTO parameters = new ParametersDTO(sourceName, unique, versionDto, isBeta, keyword);
+        SearchLogEntryDTO logEntry = new SearchLogEntryDTO(parameters);
+        var parametersRequest = PrepareParametersForRequest(arch, unique, versionDto, isBeta, customUserAgent, out var userAgent);
+
+        IDownloadService downloadService = downloadFactory.GetDefaultDownloadService();
+        var response = await downloadService.Execute(url, parametersRequest, userAgent, useGetMethod).ConfigureAwait(false);
+
+        if (response.Success)
+        {
+          logEntry.ResultFrom = ResultFrom.Server;
+          try
+          {
+            ParseResponse(sourceName, url, arch, unique, versionDto, isBeta, response.Content);
+            return (sourceName, true);
+          }
+          catch (Exception ex)
+          {
+            logger.LogError(ex, "Could not parse response from server {url}", url);
+          }
+        }
+        else
+        {
+          logger.LogError("Could not get any data from the server {url}", url);
+        }
+        return (sourceName, false);
+      }
+      return (sourceName, true);
+    }
+
+    public async Task<RawSpkResultDto> GetFromValidCacheOnly(
+      string sourceName,
+      string arch,
+      VersionDTO versionDto,
+      bool isBeta)
+    {
+
+      var cacheResult = await cacheService.GetSpkResponseForRepositoryFromCache(sourceName, arch, versionDto, isBeta).ConfigureAwait(false);
+      if (cacheResult?.Cache?.SpkResult != null)
+        return new RawSpkResultDto(cacheResult.Cache.SpkResult, null);
+      else
+        return new RawSpkResultDto(null, "Not able to get the result from cache");
+    }
     public async Task<RawSpkResultDto> GetRawPackages(
       string sourceName,
       string url,

@@ -281,13 +281,20 @@ namespace Synopackage.Model.Services
       return new CacheSpkResponseDTO() { HasValidCache = false, Cache = null };
     }
 
+    public Task<bool> IsCacheValid(string sourceName, string arch, VersionDTO version, bool isBeta)
+    {
+      var fileNameByArch = GetResponseCacheFile(sourceName, arch, version, isBeta);
+      FileInfo cacheFileInfo = new FileInfo(fileNameByArch);
+      var expirationInHours = cacheOptionsManager.GetCacheSpkServerResponseTimeInHoursForRepository(sourceName);
+      return Task.FromResult(!IsCacheFileExpired(cacheFileInfo, expirationInHours));
+    }
+
     internal static async Task<CacheSpkDTO> GetCacheByFile(FileInfo fileInfo)
     {
       TimeSpan ts = DateTime.Now - fileInfo.LastWriteTime;
       if (fileInfo.Exists)
       {
-        var content = await File.ReadAllTextAsync(fileInfo.FullName);
-        var deserializedData = JsonConvert.DeserializeObject<SpkResult>(content);
+        var deserializedData = JsonConvert.DeserializeObject<SpkResult>(await File.ReadAllTextAsync(fileInfo.FullName));
         var result = new CacheSpkDTO()
         {
           SpkResult = deserializedData,
