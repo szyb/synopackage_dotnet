@@ -39,11 +39,13 @@
     "SynopackageChoice": true
   },
   {
-    "Active": true,
+    "Active": false,
     "Name": "beatificabytes",
     "Url": "https://www.beatificabytes.be/sspks/",
     "Www": "https://www.beatificabytes.be/",
-    "SynopackageChoice": true
+    "SynopackageChoice": true,
+    "DisabledDate": "2023-11-16",
+    "DisabledReason": "Not a valid repository"
   },
   {
     "Active": true,
