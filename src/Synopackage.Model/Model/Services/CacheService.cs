@@ -21,7 +21,6 @@ namespace Synopackage.Model.Services
     private readonly ILogger<CacheService> logger;
     private readonly IDownloadFactory downloadFactory;
     private readonly ICacheOptionsManager cacheOptionsManager;
-    private readonly IOptions<RepositoryRedirectSettings> options;
     private readonly string defaultIconExtension = "png";
     private readonly string defaultCacheExtension = "cache";
 

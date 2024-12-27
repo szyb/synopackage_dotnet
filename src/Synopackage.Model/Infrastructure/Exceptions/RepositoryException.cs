@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Synopackage
 {
   [Serializable]
-  public class RepositoryException : Exception
+  public sealed class RepositoryException : Exception
   {
     public RepositoryException()
     {
