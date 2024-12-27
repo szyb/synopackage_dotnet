@@ -1063,6 +1063,35 @@
     "Name": "DS923+",
     "Arch": "r1000",
     "Family": "x64"
+  },
+  {
+    "Name": "DS423+",
+    "Arch": "geminilake",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "DS423",
+    "Arch": "rtd1619b",
+    "Family": "armv8"
+  },
+  {
+    "Name": "DS223j",
+    "Arch": "rtd1619b",
+    "Family": "armv8"
+  },
+  {
+    "Name": "DS223",
+    "Arch": "rtd1619b",
+    "Family": "armv8"
+  },
+  {
+    "Name": "DS224+",
+    "Arch": "geminilake",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "DS124",
+    "Arch": "rtd1619b",
+    "Family": "armv8"
   }
-
 ]
