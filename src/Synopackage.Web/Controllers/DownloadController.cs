@@ -109,12 +109,12 @@ namespace Synopackage.Controllers
         fileName = fileName ?? $"{id}.spk";
 
       }
-      headers.Add(HeaderNames.ContentDisposition, $"attachment; filename=\"{fileName}\"");
+      headers.Append(HeaderNames.ContentDisposition, $"attachment; filename=\"{fileName}\"");
 
       var lengthStr = newResponse.Headers[HeaderNames.ContentLength];
       if (Int64.TryParse(lengthStr, out var length) && length > 0)
       {
-        headers.Add(HeaderNames.ContentLength, length.ToString());
+        headers.Append(HeaderNames.ContentLength, length.ToString());
       }
       return headers;
     }

@@ -18,8 +18,5 @@ namespace Synopackage
     {
     }
 
-    protected RepositoryException(SerializationInfo info, StreamingContext context) : base(info, context)
-    {
-    }
   }
 }

@@ -22,8 +22,5 @@ namespace Synopackage.Model.Caching.Exceptions
     {
     }
 
-    protected CacheConfigSectionNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context)
-    {
-    }
   }
 }

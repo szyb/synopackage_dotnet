@@ -17,9 +17,5 @@ namespace Synopackage
     public PageMissingException(string message, Exception innerException) : base(message, innerException)
     {
     }
-
-    protected PageMissingException(SerializationInfo info, StreamingContext context) : base(info, context)
-    {
-    }
   }
 }
