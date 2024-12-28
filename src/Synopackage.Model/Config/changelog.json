@@ -1,5 +1,15 @@
 ﻿[
   {
+    "version": "1.2.1",
+    "date": "2024-12-28",
+    "new": [],
+    "improved": [],
+    "fixed": [
+      "Fixed showing default model when not provided by user"
+    ],
+    "removedSources": []
+  },
+  {
     "version": "1.2.0",
     "date": "2024-12-27",
     "new": [
