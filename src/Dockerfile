@@ -2,10 +2,10 @@
 # Build runtime image #
 #######################
 
-FROM mcr.microsoft.com/dotnet/aspnet:6.0.4-bullseye-slim as base
+FROM mcr.microsoft.com/dotnet/aspnet:9.0.0-bookworm-slim as base
 WORKDIR /app
 ENV ASPNETCORE_ENVIRONMENT docker
-EXPOSE 80/tcp
+EXPOSE 5000/tcp
 
 ##################
 # Build frontend #
@@ -18,8 +18,7 @@ COPY Synopackage.Web .
 
 RUN rm -rf wwwroot \
   && rm src/environments/environment.*.ts \
-  && rm appsettings.*.json \
-  && rm global.json
+  && rm appsettings.*.json
 
 COPY Synopackage.Web/src/environments/environment.ts src/environments
 RUN true
@@ -37,7 +36,7 @@ RUN yarn --network-timeout 100000 \
 # Build backend #
 #################
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0.202-bullseye-slim as build-env
+FROM mcr.microsoft.com/dotnet/sdk:9.0.101 as build-env
 WORKDIR /app
 
 COPY ["Synopackage.Web/Synopackage.Web.csproj",  "Synopackage.Web/"]
@@ -51,8 +50,7 @@ RUN dotnet restore "Synopackage.Web/Synopackage.Web.csproj"
 COPY . .
 RUN rm -rf Synopackage.Web/wwwroot \
   && rm Synopackage.Web/src/environments/environment.*.ts \
-  && rm Synopackage.Web/appsettings.*.json \
-  && rm Synopackage.Web/global.json
+  && rm Synopackage.Web/appsettings.*.json 
 
 COPY Synopackage.Web/appsettings.json Synopackage.Web/appsettings.json
 RUN true

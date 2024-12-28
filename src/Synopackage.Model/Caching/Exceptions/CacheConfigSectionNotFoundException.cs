@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Synopackage.Model.Caching.Exceptions
 {
   [Serializable]
-  public class CacheConfigSectionNotFoundException : Exception
+  public sealed class CacheConfigSectionNotFoundException : Exception
   {
     public CacheConfigSectionNotFoundException()
     {
@@ -19,10 +19,6 @@ namespace Synopackage.Model.Caching.Exceptions
     }
 
     public CacheConfigSectionNotFoundException(string message, Exception innerException) : base(message, innerException)
-    {
-    }
-
-    protected CacheConfigSectionNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context)
     {
     }
   }

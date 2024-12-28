@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Synopackage
 {
   [Serializable]
-  public class PageMissingException : Exception
+  public sealed class PageMissingException : Exception
   {
     public PageMissingException()
     {
@@ -15,10 +15,6 @@ namespace Synopackage
     }
 
     public PageMissingException(string message, Exception innerException) : base(message, innerException)
-    {
-    }
-
-    protected PageMissingException(SerializationInfo info, StreamingContext context) : base(info, context)
     {
     }
   }

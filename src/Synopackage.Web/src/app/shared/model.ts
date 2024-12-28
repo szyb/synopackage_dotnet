@@ -2,6 +2,7 @@
 export class ParametersDTO {
   sourceName: string;
   model: string;
+  modelOrUnique: string;
   version: string;
   isBeta: boolean;
   keyword: string;

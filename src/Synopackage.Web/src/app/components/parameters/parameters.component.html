@@ -10,9 +10,9 @@
         <td class="py-0"><span>{{url}}<a href="{{www}}" target="_blank" rel="noopener noreferrer">&nbsp;<mdb-icon fas
                 icon="external-link-alt" aria-hidden="true"></mdb-icon></a></span></td>
       </tr>
-      <tr mdbTableRow *ngIf="parameters.model">
+      <tr mdbTableRow *ngIf="parameters.model || parameters.modelOrUnique">
         <td scope="row" class="px-2 py-0 captionColumn"><span>Model:</span></td>
-        <td class="py-0"><span>{{ parameters.model }}</span></td>
+        <td class="py-0"><span>{{ parameters.model != null ? parameters.model : parameters.modelOrUnique }}</span></td>
       </tr>
       <tr mdbTableRow *ngIf="parameters.version">
         <td scope="row" class="px-2 py-0 captionColumn"><span>Version:</span></td>

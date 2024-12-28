@@ -1,12 +1,37 @@
 ﻿[
   {
+    "version": "1.2.1",
+    "date": "2024-12-28",
+    "new": [],
+    "improved": [],
+    "fixed": [
+      "Fixed showing default model when not provided by user"
+    ],
+    "removedSources": []
+  },
+  {
+    "version": "1.2.0",
+    "date": "2024-12-27",
+    "new": [
+      "Add DSM version 7.2.2",
+      "Add new models: DS423+, DS423, DS223j, DS223, DS224+, DS124",
+      "Backend upgraded to .NET 9"
+    ],
+    "improved": [
+      "Removed old and unnecessary javascript code on loading page"
+    ],
+    "fixed": [
+      "Privacy policy is more accurate regarding to logging IP addresses"
+    ],
+    "removedSources": []
+  },
+  {
     "version": "1.1.2",
     "date": "2023-11-17",
     "new": [
       "Add DSM version 7.2.1"
     ],
-    "improved": [
-    ],
+    "improved": [],
     "fixed": [
       "Fixed log files location"
     ],
@@ -20,12 +45,9 @@
     "new": [
       "Memory usage optimalization"
     ],
-    "improved": [
-    ],
-    "fixed": [
-    ],
-    "removedSources": [
-    ]
+    "improved": [],
+    "fixed": [],
+    "removedSources": []
   },
   {
     "version": "1.1.0",
@@ -34,12 +56,9 @@
       "Introduced repository redirect to improve performance of the Synopackage Proxy Repository",
       "Cphub back to the active source list"
     ],
-    "improved": [
-    ],
-    "fixed": [
-    ],
-    "removedSources": [
-    ]
+    "improved": [],
+    "fixed": [],
+    "removedSources": []
   },
   {
     "version": "1.0.15",
@@ -47,10 +66,8 @@
     "new": [
       "New DSM version: 7.2"
     ],
-    "improved": [
-    ],
-    "fixed": [
-    ],
+    "improved": [],
+    "fixed": [],
     "removedSources": [
       "acmenet - not a valid repository"
     ]
@@ -122,8 +139,7 @@
     "fixed": [
       "Security fixes"
     ],
-    "removedSources": [
-    ]
+    "removedSources": []
   },
   {
     "version": "1.0.9",
@@ -356,7 +372,9 @@
   {
     "version": "0.5.12",
     "date": "2021-07-25",
-    "new": [ "Add imnks source for DSM 7" ],
+    "new": [
+      "Add imnks source for DSM 7"
+    ],
     "improved": [],
     "fixed": [],
     "removedSources": []
@@ -364,7 +382,9 @@
   {
     "version": "0.5.11",
     "date": "2021-07-20",
-    "new": [ "Hofrichter repository is back to active" ],
+    "new": [
+      "Hofrichter repository is back to active"
+    ],
     "improved": [],
     "fixed": [],
     "removedSources": [

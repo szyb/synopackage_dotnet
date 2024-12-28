@@ -193,7 +193,7 @@ namespace Synopackage
         app.UseHsts();
         app.UseHttpsRedirection();
       }
-      
+
       app.UseMiddleware<RepositoryRedirectMiddleware>();
       app.UseDefaultFiles();
       app.UseResponseCompression();
@@ -230,8 +230,8 @@ namespace Synopackage
           && !context.Request.Path.StartsWithSegments(new PathString("/notification")))
         {
           context.Request.Path = "/index.html";
-          context.Response.Headers.Add("Cache-Control", "no-store,no-cache");
-          context.Response.Headers.Add("Pragma", "no-cache");
+          context.Response.Headers.Append("Cache-Control", "no-store,no-cache");
+          context.Response.Headers.Append("Pragma", "no-cache");
           await next();
         }
         else

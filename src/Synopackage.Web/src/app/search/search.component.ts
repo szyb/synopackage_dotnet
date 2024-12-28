@@ -226,7 +226,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   generateSearchLinks(keyword: string, model: string, version: string, channel: boolean) {
     if (model === null && this.parameters != null) {
-      model = this.parameters.model;
+      model = this.parameters.model != null ? this.parameters.model : this.parameters.modelOrUnique;
     }
     if (version === null && this.parameters != null) {
       version = this.parameters.version;
