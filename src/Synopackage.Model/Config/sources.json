@@ -281,5 +281,13 @@
     "MaxMajorVersion": 6,
     "DisabledDate": "2022-07-26",
     "DisabledReason": "No response from the server"
+  },
+  {
+    "Active": true,
+    "Name": "mr-narender-immich",
+    "Url": "https://raw.githubusercontent.com/mr-narender/immich/main/packages.json",
+    "Www": "https://github.com/mr-narender/immich",
+    "MinMajorVersion": 7,
+    "UseGetMethod": true
   }
 ]
