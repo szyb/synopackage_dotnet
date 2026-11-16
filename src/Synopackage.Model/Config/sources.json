@@ -226,14 +226,25 @@
     "DisabledReason": "This repository is discountinued by vendor"
   },
   {
-    "Active": true,
+    "Active": false,
     "Name": "imnksdsm7",
     "Url": "https://spk7.imnks.com",
     "Www": "https://spk7.imnks.com",
     "MinMajorVersion": 7,
     "Info": "This source server does not allow to download packages directly from the browser. Downloading is possible only from DSM Package Center.",
     "IsDownloadDisabled": true,
-    "UseGetMethod": true
+    "UseGetMethod": true,
+    "DisabledDate": "2026-11-16",
+    "DisabledReason": "This repository is discountinued by vendor"
+  },
+  {
+    "Active": true,
+    "Name": "synopkgland",
+    "Url": "https://packages.synopkgland.com",
+    "Www": "https://synopkgland.com",
+    "MinMajorVersion": 7,
+    "UseGetMethod": true,
+    "SynopackageChoice": true
   },
   {
     "Active": false,
