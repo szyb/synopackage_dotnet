@@ -1,5 +1,18 @@
 ﻿[
   {
+    "version": "1.2.7",
+    "date": "2026-11-16",
+    "new": [
+      "Add new repo: synopkgland",
+      "Add new models: DS1525neo+, DS1823xs+, DS1825neo+, DS218, DS2419+II, DS3617xsII, DS725neo+, DS925neo+, DVA3219, DVA3221, PAS3600, PAS7700, RC18015xs+, RS11626xs+, RS2211RP+, RS2212+, RS2212RP+, RS2414+, RS2414RP+, RS2416+, RS2416RP+, RS2418+, RS2418RP+, RS2423+, RS2423RP+, RS2423RP+II, RS3411RPxs, RS3411xs, RS3412RPxs, RS3412xs, RS3614RPxs, RS3614xs, RS3617RPxs, RS3618xs, RS3626xs, RS810+, RS810RP+, RS812+, RS812RP+, RS814+, RS814RP+, RS815, RS815+, RS815RP+, RS818+, RS818RP+"
+    ],
+    "improved": [],
+    "fixed": [],
+    "removedSources": [
+      "imnksdsm7"
+    ]
+  },
+  {
     "version": "1.2.6",
     "date": "2026-07-24",
     "new": [
