@@ -1248,5 +1248,235 @@
     "Name": "RS826RP+",
     "Arch": "v1000",
     "Family": "x86_64"
+  },
+  {
+    "Name": "DS1525neo+",
+    "Arch": "v1000nk",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "DS1823xs+",
+    "Arch": "v1000",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "DS1825neo+",
+    "Arch": "v1000nk",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "DS218",
+    "Arch": "rtd1296",
+    "Family": "armv8"
+  },
+  {
+    "Name": "DS2419+II",
+    "Arch": "denverton",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "DS3617xsII",
+    "Arch": "broadwell",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "DS725neo+",
+    "Arch": "r1000nk",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "DS925neo+",
+    "Arch": "v1000nk",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "DVA3219",
+    "Arch": "denverton",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "DVA3221",
+    "Arch": "denverton",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "PAS3600",
+    "Arch": "icelaked",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "PAS7700",
+    "Arch": "epyc7003",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RC18015xs+",
+    "Arch": "bromolow",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS11626xs+",
+    "Arch": "epyc7003",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS2211RP+",
+    "Arch": "x86",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS2212+",
+    "Arch": "cedarview",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS2212RP+",
+    "Arch": "cedarview",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS2414+",
+    "Arch": "cedarview",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS2414RP+",
+    "Arch": "cedarview",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS2416+",
+    "Arch": "avoton",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS2416RP+",
+    "Arch": "avoton",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS2418+",
+    "Arch": "denverton",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS2418RP+",
+    "Arch": "denverton",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS2423+",
+    "Arch": "v1000",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS2423RP+",
+    "Arch": "v1000",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS2423RP+II",
+    "Arch": "v1000nk",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS3411RPxs",
+    "Arch": "bromolow",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS3411xs",
+    "Arch": "bromolow",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS3412RPxs",
+    "Arch": "bromolow",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS3412xs",
+    "Arch": "bromolow",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS3614RPxs",
+    "Arch": "bromolow",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS3614xs",
+    "Arch": "bromolow",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS3617RPxs",
+    "Arch": "broadwell",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS3618xs",
+    "Arch": "broadwell",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS3626xs",
+    "Arch": "icelaked",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS810+",
+    "Arch": "x86",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS810RP+",
+    "Arch": "x86",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS812+",
+    "Arch": "cedarview",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS812RP+",
+    "Arch": "cedarview",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS814+",
+    "Arch": "cedarview",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS814RP+",
+    "Arch": "cedarview",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS815",
+    "Arch": "armadaxp",
+    "Family": "armv7"
+  },
+  {
+    "Name": "RS815+",
+    "Arch": "avoton",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS815RP+",
+    "Arch": "avoton",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS818+",
+    "Arch": "avoton",
+    "Family": "x86_64"
+  },
+  {
+    "Name": "RS818RP+",
+    "Arch": "avoton",
+    "Family": "x86_64"
   }
 ]
