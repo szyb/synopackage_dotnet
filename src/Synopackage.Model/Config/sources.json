@@ -241,7 +241,7 @@
     "Active": true,
     "Name": "synopkgland",
     "Url": "https://packages.synopkgland.com",
-    "Www": "https://synopkgland.com",
+    "Www": "https://synopkgland.com/apps/?category=all",
     "MinMajorVersion": 7,
     "UseGetMethod": true,
     "SynopackageChoice": true
